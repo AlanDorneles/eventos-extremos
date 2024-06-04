@@ -1,0 +1,51 @@
+.container:nth-child(1) {
+  color: #f8bc2a;
+}
+.icon {
+  font-size: 1.3em;
+}
+.container:hover > :nth-child(1),
+.container:hover > :nth-child(2) {
+  filter: drop-shadow(1px 1px 3px #f8bc2a);
+  cursor: pointer;
+}
+
+.disabled {
+  background-color: #32323395;
+  cursor: not-allowed;
+  display: flex;
+  justify-content: center;
+  border-radius: 16px;
+  padding: 12px;
+  gap: 8px;
+  border: none;
+  color: #f8bc2a;
+}
+.container {
+  background-color: #323233;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-radius: 16px;
+  padding: 12px;
+  gap: 8px;
+  border: none;
+}
+
+.container:hover {
+  background-color: #323233;
+}
+
+.container p {
+  font-size: 1em;
+}
+.block {
+  width: 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 15%;
+  right: 2%;
+  z-index: 503;
+}

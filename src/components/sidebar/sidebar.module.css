@@ -1,0 +1,48 @@
+.navbar{
+    position: fixed;
+    background-color: #323233;
+    border-radius: 16px;
+    right: 16px;
+    top:22%;
+    z-index: 1000;
+}
+
+.navbarBrand{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbarLogo{
+    width: 24px;
+}
+
+.navbarMenu{
+    display: grid
+}
+
+.navbarStart{
+    display: grid;
+}
+.is-active{
+    color: #f8a402;
+
+}
+.navbarItem{
+    
+    display: flex;
+    color: white;
+    align-items: center;
+    padding: 8px;
+    gap: 4px;
+    font-size: 16px;
+}
+
+.navbarItem:hover {
+    color: #f8a402;
+    font-weight: 600;
+}
+
+.Icon{
+    width: 32px !important;
+}

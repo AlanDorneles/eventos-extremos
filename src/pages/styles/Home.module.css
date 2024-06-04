@@ -1,0 +1,13 @@
+.container{
+    display:flex;
+    height:100vh;
+    overflow-x:hidden
+}
+
+.menu_map{
+    width:20%;
+   
+}
+.map{
+    width:80%;
+}

@@ -1,0 +1,86 @@
+.container{
+    display: flex;
+    gap: 2em;
+    padding: 0 1em;
+}
+
+.containerButtonHours,.containerSelect{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1em 0;
+}
+.containerButtonHours{
+    width: 70%;
+}
+.containerSelect{
+    width: 10%;
+}
+.containerRadar {
+    display: grid;
+    display: 20%;
+    padding: 1em 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    text-align: center;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px; /* Ajuste o tamanho do checkbox */
+    height: 20px; /* Ajuste o tamanho do checkbox */
+    position: relative;
+    vertical-align:top;
+    border-radius: 4px; /* Ajuste o raio das bordas */
+    outline: none;
+    cursor: pointer;
+    margin-right: 8px;
+    border: 1px solid #F8A402;
+}
+
+input[type="checkbox"]:checked {
+    background-color:#F8A402; /* Cor de fundo quando estiver marcado */
+}
+
+input[type="checkbox"]::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 15px; /* Tamanho do marcador */
+    height: 15px; /* Tamanho do marcador */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 2px; /* Ajuste o raio do marcador */
+    opacity: 0; /* Torna o marcador invisível por padrão */
+}
+
+input[type="checkbox"]:checked::before {
+    opacity: 1; /* Torna o marcador visível quando o checkbox está marcado */
+}
+
+/* Estilos para o marcador de seleção padrão */
+input[type="checkbox"]::-moz-selection {
+    background: transparent;
+}
+
+input[type="checkbox"]::selection {
+    background: transparent;
+}
+
+/* Adiciona a cor ao marcador de seleção */
+input[type="checkbox"]::before {
+    content: '\2713'; /* Código unicode para o checkmark */
+    color: white; /* Cor do checkmark */
+    font-size: 14px; /* Tamanho do checkmark */
+    text-align: center;
+    line-height: 1; /* Alinha o checkmark verticalmente */
+    opacity: 1; /* Mantém o checkmark visível */
+    margin: 0 0 4px 0 ;
+}

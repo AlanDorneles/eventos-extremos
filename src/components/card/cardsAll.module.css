@@ -1,0 +1,31 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    gap:32px;
+    padding: 32px;
+
+}
+.card{
+    display: grid;
+    grid-template-columns: repeat(1, minmax(50px, 360px));
+    color: white;
+    background-color: #323233;
+    border-radius: 16px;
+    padding: 16px;
+    gap: 8px;
+
+}
+.card svg{
+    width: 24px;
+    height: 24px;
+}
+.compassRose{
+    position:relative
+}
+.indicatorContainer {
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+    
+    /* Ajuste o tamanho e outras propriedades conforme necessário */
+  }

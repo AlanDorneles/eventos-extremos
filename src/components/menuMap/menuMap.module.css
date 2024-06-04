@@ -1,0 +1,75 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 2em 1em;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+.containerItem{
+    display:flex;
+    flex-direction:column;
+    gap:2em
+}
+.containerButtonHours,
+.containerSelect {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.containerRadar,
+.containerTypeRadar {
+  display: grid;
+  gap: 8px;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px; /* Ajuste o tamanho do checkbox */
+  height: 20px; /* Ajuste o tamanho do checkbox */
+  position: relative;
+  border-radius: 4px; /* Ajuste o raio das bordas */
+  outline: none;
+  cursor: pointer;
+  margin-right: 8px;
+  border: 1px solid #f8a402;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #f8a402; /* Cor de fundo quando estiver marcado */
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 10px; /* Tamanho do marcador */
+  height: 10px; /* Tamanho do marcador */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2px; /* Ajuste o raio do marcador */
+  opacity: 0; /* Torna o marcador invisível por padrão */
+  content: "\2713"; /* Código unicode para o checkmark */
+  color: white; /* Cor do checkmark */
+  font-size: 14px; /* Tamanho do checkmark */
+  text-align: center;
+  line-height: 1; /* Alinha o checkmark verticalmente */
+  opacity: 1; /* Mantém o checkmark visível */
+  margin: 0 0 4px 0;
+}
+
+input[type="checkbox"]:checked::before {
+  opacity: 1; /* Torna o marcador visível quando o checkbox está marcado */
+}
+
+/* Estilos para o marcador de seleção padrão */
+input[type="checkbox"]::-moz-selection {
+  background: transparent;
+}
+
+input[type="checkbox"]::selection {
+  background: transparent;
+}
