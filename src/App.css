@@ -62,3 +62,36 @@ text.marker-text {
 .title:not(:last-child), .subtitle:not(:last-child) {
     margin-bottom: 0.5rem !important;}
     
+#selectAnimation {
+    border-color: #f8a402;
+}
+
+.select.is-primary::after {
+    border-color: #f8a402 !important;
+}
+
+.select.is-primary select {
+    width: 100%;
+}
+
+.tabs li {
+    width: 100%;
+}
+
+#hideMenuBtn {
+    z-index: 999;
+}
+
+#hideMenuBtn Button {
+    background-color: #00000057;
+    color: white;
+    font-weight: bolder;
+    border-radius: 10px;
+    padding: 0.5rem;
+    border: none;
+}
+
+#hideMenuBtn Button:hover {
+    background-color: pink;
+    color: white;
+}
