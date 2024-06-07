@@ -11,6 +11,7 @@ import { GiSattelite, GiRadarSweep } from "react-icons/gi";
 import { useRadarOrSatelite } from "../../contexts/RadarOrSatelite";
 import { Link } from "react-router-dom";
 import { MenuSatelite } from "../menuSatelite/MenuSatelite";
+import '../../../public/css/mystyles.css'
 
 export const MenuMap = ({ selectImage }) => {
   const { getHourScope, handleSelectChange } = useHourScope();

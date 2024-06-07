@@ -1,35 +1,41 @@
-@charset "utf-8";
-@import 'colors.scss';
-// Import a Google Font
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
-@import "../../node_modules/bulma/sass/utilities/_all.sass";
-@import "../../node_modules/bulma/sass/base/_all.sass";
-@import "../../node_modules/bulma/sass/elements/button.sass";
-@import "../../node_modules/bulma/sass/elements/container.sass";
-@import "../../node_modules/bulma/sass/elements/title.sass";
-@import "../../node_modules/bulma/sass/form/_all.sass";
-@import "../../node_modules/bulma/sass/components/navbar.sass";
-@import "../../node_modules/bulma/sass/layout/hero.sass";
-@import "../../node_modules/bulma/sass/layout/section.sass";
-@import "../../node_modules/bulma/sass/utilities/initial-variables.sass";
-@import "../../node_modules/bulma/sass/elements/title.sass";
-@import "../../node_modules/bulma/sass/form/select.sass";
+@import './colors.scss';
 
-// Update Bulma's global  variables
-$family-sans-serif: "Nunito", sans-serif;
-$grey-dark: $brown;
-$grey-light: $beige-light;
-$primary: $orange-furg;
-$link: $black;
-$widescreen-enabled: false;
-$fullhd-enabled: false;
-$turquoise: $orange-furg;
+// IDENTIDADE DA MARCA
+$purple: #8a4d76;
+$pink: #fa7c91;
+$brown: #757763;
+$beige-light: #d0d1cd;
+$beige-lighter: #eff0eb;
+
+// MUDANDO AS VARIÁVEIS PADRÕES DO BULMA
+@use "bulma/sass" with (
+  $family-primary: '"Nunito", sans-serif',
+  $grey-dark: $brown,
+  $grey-light: $beige-light,
+  $primary: $purple,
+  $link: $pink,
+  $control-border-width: 2px,
+  $input-shadow: none
+);
+
+//ADICIONANDO FONTE
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
 
 
-$body-background-color: $beige-lighter;
-$control-border-width: 2px;
-$input-border-color: transparent;
-$input-shadow: none;
-$button-focus-border-color: $orange-furg;
-$button-border-color: $grey-furg;
+/*NA PACKAGE JSON FOI CRIADO DOIS SCRIPTS 
+    "build-bulma": "sass --load-path=node_modules src/sass/mystyles.scss public/css/mystyles.css",
+    "start": "npm run build-bulma -- --watch"
+    
+RESPECTIVAMENTE, O PRIMEIRO IRÁ APLICAR AS ALTERAÇÕES GERADAS EM sass/mystyles.scss EM  public/css/mystyles.css QUE POR SUA VEZ É O NOSSO DOCUMENTO PRINCIPAL UTILIZADO EM INDEX.HTML, ESTA FORMA LEVA PARA DENTRO DE mystyles.css SOMENTE OS COMPONENTES QUE UTILIZADOS, ASSIM O DOCUMENTO FICA MENOR.
+
+PARA QUE ISSO SEJA FEITO É NECESSÁRIO QUE dependencies EM package.json ESTEJA ASSIM .
+ "dependencies": {
+    "bulma": "^1.0.0",
+    "sass": "^1.72.0"
+  },
+
+  BULMA DEVE ESTAR NA SUA VERSÃO MAIS ATUAL E O SASS DEVE ESTAR INSTALADO NA SUA VERSÃO MAIS ATUAL TAMBÉM, APLIQUE NPM INSTALL PARA GERAR AS ATUALIZAÇÕES, SE O CAMPO dependencies NÃO ESTIVER NAS VERSÕES MAIS ATUALIZADAS REESCREVA DENTRO DO ARQUIVO. PARA VERIFICAR O TUTORIAL E AS VERSÕES ATUAIS UTILIZADAS ENTRE EM : https://bulma.io/documentation/customize/with-sass/
+
+  SE TUDO ESTIVER OK, UTILIZE O COMANDO CRIADO npm run build-bulma.
+ */

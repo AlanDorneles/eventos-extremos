@@ -62,7 +62,7 @@ text.marker-text {
 .title:not(:last-child), .subtitle:not(:last-child) {
     margin-bottom: 0.5rem !important;}
     
-#selectAnimation {
+/*#selectAnimation {
     border-color: #f8a402;
 }
 
@@ -76,4 +76,4 @@ text.marker-text {
 
 .tabs li {
     width: 100%;
-}
+}*/
