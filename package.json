@@ -13,6 +13,9 @@
     "start": "npm run css-watch"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@react-google-maps/api": "^2.19.2",
     "apexcharts": "^3.45.0",
     "apexcharts-react": "^1.0.0",
@@ -20,6 +23,7 @@
     "bulma": "^0.9.4",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "framer-motion": "^11.2.10",
     "gif.js": "^0.2.0",
     "gifshot": "^0.4.5",
     "html2canvas": "^1.4.1",

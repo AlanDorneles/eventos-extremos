@@ -62,3 +62,18 @@ text.marker-text {
 .title:not(:last-child), .subtitle:not(:last-child) {
     margin-bottom: 0.5rem !important;}
     
+#selectAnimation {
+    border-color: #f8a402;
+}
+
+.select.is-primary::after {
+    border-color: #f8a402 !important;
+}
+
+.select.is-primary select {
+    width: 100%;
+}
+
+.tabs li {
+    width: 100%;
+}
