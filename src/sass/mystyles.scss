@@ -14,14 +14,7 @@
 @import "../../node_modules/bulma/sass/layout/section.sass";
 @import "../../node_modules/bulma/sass/utilities/initial-variables.sass";
 @import "../../node_modules/bulma/sass/elements/title.sass";
-
-// Set your brand colors
-$orange-furg:#f8a402;
-$black:#000000;
-$brown: #757763;
-$beige-light: #D0D1CD;
-$beige-lighter: #EFF0EB;
-
+@import "../../node_modules/bulma/sass/form/select.sass";
 
 // Update Bulma's global  variables
 $family-sans-serif: "Nunito", sans-serif;
