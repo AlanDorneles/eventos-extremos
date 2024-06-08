@@ -8,7 +8,8 @@ export const DataINMETAPI = async () => {
   const response = await fetch(
     `https://apitempo.inmet.gov.br/token/estacao/${formattedDataFinal}/${formattedDataFinal}/${codeStation}/${apiINMETKey}`
   );
-
+  var teste = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
+  console.log(new Date(teste).getMonth())
   if (!response.ok) {
     throw new Error("Não foi possível obter dados do inmet"); //Erro caso a API não dê resposta
   }
