@@ -1,168 +1,56 @@
-import { apiKeyRedeMet} from "../constants/constants";
+import { apiKeyRedeMet } from "../constants/constants";
+import formattedDataRadar from "../utils/formattedDataRadar";
+import { fetchRadarData } from "../utils/fetchRadarData"; // Assumindo que você exportou a função fetchRadarData de outro arquivo
 
 export const getImages = async (typeRadar) => {
-  console.log('radar:',typeRadar)
   const listImage = []; // array de urls
   const hoursSetting = localStorage.getItem("hourScope"); //escopo de horas selecionado pelo usuário
+
   try {
-    const currentHour = new Date().getHours() + 3; //UTC
-    let actualDay = new Date().getDate(); //DIA
-    const actualYear = new Date().getFullYear(); //ANO
-    let actualMonth = new Date().getMonth() + 1; //MES
+    const DataUTC = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
+    const currentHour = new Date(DataUTC).getHours();
     let initialHour = currentHour - hoursSetting; // HORA INICIAL
-
-    if(actualMonth<10){
-      actualMonth = "0"+ actualMonth
-    }
-
-    if (actualDay<10){
-      actualDay = "0"+actualDay
-    }
+    let actualDay = new Date(DataUTC).getDate();
+    let actualMonth = new Date(DataUTC).getMonth() + 1;
+    const actualYear = new Date(DataUTC).getFullYear();
+    const formattedData = formattedDataRadar(actualMonth, actualDay);
 
     //BUSCA COMEÇA NO DIA ATUAL
     if (initialHour > 0) {
       console.log("BUSCA INICIA NO DIA ATUAL");
       //BUSCA VAI SER FEITA EM DUAS PARTES (DIA ATUAL E DIA SEGUINTE) POR CONTA DO UTC 
       if (currentHour > 23) {
-        console.log("hora de agora maior que 23", currentHour);
-        const hourLastDay = currentHour - hoursSetting
-        console.log("hora inicial ", hourLastDay);
-        console.log('dia inicial', actualDay)
+        const hourLastDay = currentHour - hoursSetting;
 
         //percorre da hora inicial até a ultima hora do dia ATUAL em UTC ( +3horas)
         for (let h = hourLastDay; h <= 23; h++) {
-          const response = await fetch(
-            `https://api-redemet.decea.mil.br/produtos/radar/${typeRadar}?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
-          );
-          if (!response.ok) {
-            throw new Error("Não foi possível obter dados do radar");
-          }
-          const data = await response.json();
-
-          const morroDaIgreja = data.data.radar[0].find((item) => item.localidade === 'mi');
-          const cangucu = data.data.radar[0].find((item) => item.localidade === 'cn');
-          const santiago = data.data.radar[0].find((item) => item.localidade === 'sg');
-
-          if (morroDaIgreja && cangucu && santiago) {
-            listImage.push({
-              // coloca o objeto com as url's de imagem de radar em listImage
-              morroDaIgreja: morroDaIgreja.path,
-              cangucu: cangucu.path,
-            });
-          }
+          await fetchRadarData(listImage, typeRadar, apiKeyRedeMet, actualYear, formattedData, actualDay, h);
         }
 
-        const nextDay = actualDay + 1;
+        const nextDay = formattedData.Day + 1;
         const newHour = currentHour - 23;
-        console.log("hora final", newHour);
-        console.log("dia final", nextDay);
         for (let h = 0; h <= newHour; h++) {
-          //percorre da hora inicial até a hora atual
-          const response = await fetch(
-            `https://api-redemet.decea.mil.br/produtos/radar/${typeRadar}?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${nextDay}${h}`
-          );
-          if (!response.ok) {
-            throw new Error("Não foi possível obter dados do radar");
-          }
-          const data = await response.json();
-          const morroDaIgreja = data.data.radar[0].find((item) => item.localidade === 'mi');
-          const cangucu = data.data.radar[0].find((item) => item.localidade === 'cn');
-          const santiago = data.data.radar[0].find((item) => item.localidade === 'sg');
-          if (morroDaIgreja && cangucu && santiago) {
-            listImage.push({
-              // coloca o objeto com as url's de imagem de radar em listImage
-              morroDaIgreja: morroDaIgreja.path,
-              cangucu: cangucu.path,
-              santiago: santiago.path
-            });
-          }
+          await fetchRadarData(listImage, typeRadar, apiKeyRedeMet, actualYear, formattedData, nextDay, h);
         }
       } 
       //BUSCA ACONTECE NO MESMO DIA 
       else {
         for (let h = initialHour; h <= currentHour; h++) {
-
-          //percorre da hora inicial até a hora atual
-          const response = await fetch(
-            `https://api-redemet.decea.mil.br/produtos/radar/${typeRadar}?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
-          );
-          if (!response.ok) {
-            throw new Error("Não foi possível obter dados do radar");
-          }
-          const data = await response.json();
-          const morroDaIgreja = data.data.radar[0].find((item) => item.localidade === 'mi');
-          const cangucu = data.data.radar[0].find((item) => item.localidade === 'cn');
-          const santiago = data.data.radar[0].find((item) => item.localidade === 'sg');
-          if (morroDaIgreja && cangucu && santiago) {
-            listImage.push({
-              // coloca o objeto com as url's de imagem de radar em listImage
-              morroDaIgreja: morroDaIgreja.path,
-              cangucu: cangucu.path,
-              santiago:santiago.path
-            });
-          }
-          
+          await fetchRadarData(listImage, typeRadar, apiKeyRedeMet, actualYear, formattedData, actualDay, h);
         }
       }
     }
     //BUSCA ACONTECE NO DIA ANTERIOR
     if (initialHour < 0) {
-      const previousDay = actualDay - 1; //Dia anterior
-      console.log(initialHour)
+      const previousDay = formattedData.Day - 1; //Dia anterior
       initialHour = 24 + initialHour; // Hora inicial do dia anterior
-      console.log('hora inicial:',initialHour)
-      console.log('dia inicial:', previousDay)
 
-      //percorre da hora inicial até a ultima hora do dia ANTERIOR em UTC ( +3horas)
       for (let h = initialHour; h <= 23; h++) {
-        
-        const response = await fetch(
-          `https://api-redemet.decea.mil.br/produtos/radar/${typeRadar}?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${previousDay}${h}`
-        );
-        if (!response.ok) {
-          throw new Error("Não foi possível obter dados do radar");
-        }
-        const data = await response.json();
-        const morroDaIgreja = data.data.radar[0].find((item) => item.localidade === 'mi');
-        const cangucu = data.data.radar[0].find((item) => item.localidade === 'cn');
-        const santiago = data.data.radar[0].find((item) => item.localidade === 'sg');
-        
-
-
-        if (morroDaIgreja && cangucu && santiago) {
-          console.log('ok')
-          listImage.push({
-            morroDaIgreja: morroDaIgreja.path,
-            cangucu: cangucu.path,
-            santiago: santiago.path
-
-          });
-        }
+        await fetchRadarData(listImage, typeRadar, apiKeyRedeMet, actualYear, formattedData, previousDay, h);
       }
-
-      
-      //percorre da hora inicial até a ultima hora do dia ATUAL em UTC ( +3horas)
+     //percorre da hora inicial até a ultima hora do dia ATUAL em UTC ( +3horas)
       for (let h = 0; h <= currentHour; h++) {
-        console.log('hora final:',currentHour)
-        console.log('dia inicial:', actualDay)
-        const response = await fetch(
-          `https://api-redemet.decea.mil.br/produtos/radar/${typeRadar}?api_key=${apiKeyRedeMet}&data=${actualYear}${actualMonth}${actualDay}${h}`
-        );
-        if (!response.ok) {
-          throw new Error("Não foi possível obter dados do radar");
-        }
-        const data = await response.json();
-        const morroDaIgreja = data.data.radar[0].find((item) => item.localidade === 'mi');
-        const cangucu = data.data.radar[0].find((item) => item.localidade === 'cn');
-        const santiago = data.data.radar[0].find((item) => item.localidade === 'sg');
-
-        if (morroDaIgreja && cangucu && santiago) {
-          listImage.push({
-            morroDaIgreja: morroDaIgreja.path,
-            cangucu: cangucu.path,
-            santiago: santiago.path
-          });
-        }
+        await fetchRadarData(listImage, typeRadar, apiKeyRedeMet, actualYear, formattedData, actualDay, h);
       }
     }
 
