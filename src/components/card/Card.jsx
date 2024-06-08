@@ -52,31 +52,31 @@ export const Card = () => {
               {item.station} - {item.name[0]}
             </span>
             <span>
-              <WiBarometer /> Pressão {item.pressure[item.pressure.length -1]} bar
+              <WiBarometer /> Pressão: {(item.pressure[item.pressure.length -1] === null ? "Sem dados" :item.pressure[item.pressure.length -1] + " bar" )}
             </span>
             <span>
-              <WiThermometerExterior /> Temp. Miníma {item.tempMin[item.tempMin.length -1]} ºC
+              <WiThermometerExterior /> Temp. Miníma: {(item.tempMin[item.tempMin.length -1] === null ? "Sem dados" : item.pressure[item.pressure.length -1] +" ºC")}
             </span>
             <span>
-              <WiThermometer /> Temp. Máxima {item.tempMax[item.tempMax.length -1]} ºC
+              <WiThermometer /> Temp. Máxima: {(item.tempMax[item.tempMax.length -1] === null ? "Sem dados" :item.tempMax[item.tempMax.length -1]  +" ºC")} 
             </span>
             <span>
-              <WiRainMix /> Chuva {item.rain[item.rain.length -1]} mm
+              <WiRainMix /> Chuva: {(item.rain[item.rain.length -1] === null ? "Sem dados" :item.rain[item.rain.length -1] +" mm") } 
             </span>
             <span>
-              <WiHumidity /> Umidade {item.humidity[item.humidity.length -1]} %{" "}
+              <WiHumidity /> Umidade: {(item.humidity[item.humidity.length -1]=== null ? "Sem dados" : item.humidity[item.humidity.length -1] +" %")} 
             </span>
             <span>
-              <WiWindy /> Raj. Vento {item.windBurst[item.windBurst.length -1]} m/s
+              <WiWindy /> Raj. Vento: {(item.windBurst[item.windBurst.length -1] === null ? "Sem dados" : item.windBurst[item.windBurst.length -1]+ "m/s")} 
             </span>
             <span>
-              <WiStrongWind /> Veloc. Vento {item.windSpeed[item.windSpeed.length -1]} m/s
+              <WiStrongWind /> Veloc. Vento: {(item.windSpeed[item.windSpeed.length -1] === null ? "Sem dados" : item.windBurst[item.windBurst.length -1]+ "m/s")} 
             </span>
             <span>
-              <WiWindDeg /> Direc. Vento {item.windDirection[item.windDirection.length -1]}
+              <WiWindDeg /> Direc. Vento: {(item.windSpeed[item.windDirection.length -1] === null ? "Sem dados" : item.windDirection[item.windDirection.length -1])}
             </span>
             <span>
-              <WiTime5 /> Hora {item.hour[item.hour.length -1]} horas
+              <WiTime5 /> Hora: {(item.hour[item.hour.length -1] === null ? 0 :item.hour[item.hour.length -1]) } horas
             </span>
 
           </div>

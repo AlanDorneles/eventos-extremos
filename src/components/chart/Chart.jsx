@@ -13,6 +13,8 @@ export const Graphic = () => {
     const storageCodeStation = localStorage.getItem('codeStation')
     const [trigger,setTrigger] = useState(false)
     const [nameVariable, setNameVariable] = useState('Pressão')
+
+    console.log(codeStation)
     
 
     useEffect(() => {
