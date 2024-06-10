@@ -73,3 +73,7 @@ input[type="checkbox"]::-moz-selection {
 input[type="checkbox"]::selection {
   background: transparent;
 }
+
+ul li {
+  width: 100%;
+}
