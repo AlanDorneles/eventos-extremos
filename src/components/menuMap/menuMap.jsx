@@ -16,7 +16,7 @@ import '../../../public/css/mystyles.css'
 export const MenuMap = ({ selectImage }) => {
   const { getHourScope, handleSelectChange } = useHourScope();
   const actualHour = new Date().getHours();
-  const [initHour, setInitHour] = useState(11);
+  const [initHour, setInitHour] = useState(actualHour - 6);
 
   const [clickedButtonId, setClickedButtonId] = useState();
   const {
