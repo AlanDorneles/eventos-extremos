@@ -2,7 +2,7 @@ export const CPPMETImages = () => {
   const listImage = []; // array de urls
   const hoursSetting = localStorage.getItem("hourScope"); //escopo de horas selecionado pelo usuário
   try {
-    const currentHour = new Date().getHours() + 3; //UTC
+    const currentHour = new Date().getHours() + 2; //UTC
     let actualDay = new Date().getDate(); //DIA
     const actualYear = new Date().getFullYear(); //ANO
     let actualMonth = new Date().getMonth() + 1; //MES
