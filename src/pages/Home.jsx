@@ -98,11 +98,17 @@ export default function Home() {
     setCurrentImageIndex(indexImage + 1);
   };
 
+  const [isMenuVisible, setIsMenuVisible] = useState(true);
+
+  const toggleMenuVisibility = () => {
+    setIsMenuVisible(!isMenuVisible);
+    document.getElementById("windy").style.width = isMenuVisible ? "100vw" : "80vw";
+  };
 
   return (
     <>
-      <main className={styles.container}>
-        <section className={styles.menu_map}>
+      <main className={`${styles.container} ${!isMenuVisible ? styles.fullWidth : ''}`}>
+        <section className={`${styles.menu_map} ${!isMenuVisible ? styles.hidden : ''}`}>
           <HourScopeProvider>
             <MenuMap selectImage={handleSelectImage} ref={containerRef}/>
           </HourScopeProvider>
@@ -132,6 +138,7 @@ export default function Home() {
       </section>
         <DownloadGif disabledButton={disabledButton}/>
       </main>
+      <button className={styles.toggleBtn} onClick={toggleMenuVisibility}>Menu</button>
     </>
   );
 }

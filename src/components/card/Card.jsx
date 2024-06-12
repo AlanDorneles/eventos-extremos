@@ -41,7 +41,6 @@ export const Card = () => {
 
     fetchData();
   }, [trigger]);
-  console.log(data);
 
   return (
     <div className={styles.container}>

@@ -17,7 +17,6 @@ export const getImages = async (typeRadar) => {
 
     //BUSCA COMEÇA NO DIA ATUAL
     if (initialHour > 0) {
-      console.log("BUSCA INICIA NO DIA ATUAL");
       //BUSCA VAI SER FEITA EM DUAS PARTES (DIA ATUAL E DIA SEGUINTE) POR CONTA DO UTC 
       if (currentHour > 23) {
         const hourLastDay = currentHour - hoursSetting;
@@ -54,7 +53,6 @@ export const getImages = async (typeRadar) => {
       }
     }
 
-    console.log(listImage);
     return listImage;
   } catch (error) {
     console.error("Erro ao obter os dados do radar:", error);

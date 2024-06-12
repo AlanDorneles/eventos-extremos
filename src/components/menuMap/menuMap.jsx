@@ -144,7 +144,7 @@ export const MenuMap = ({ selectImage }) => {
                         return (
                           <>
                             <button
-                              className=" button is-small"
+                              className="button is-small"
                               onClick={() => {
                                 selectIndex(index);
                               }}

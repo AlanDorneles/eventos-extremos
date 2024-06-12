@@ -4,7 +4,7 @@ import { CPPMETImages } from "../services/cpmetUFPEL.js";
 //import { MapContainer, TileLayer, ImageOverlay} from "react-leaflet";
 //import { getImagesFromSatellite } from "../services/sattelite.js";
 //import { divIcon } from "leaflet";
-
+import styles from "./styles/Home.module.css";
 
 export default function Satellite() {
   const imagesCPP = CPPMETImages();
@@ -20,7 +20,6 @@ export default function Satellite() {
     setImage(imagesCPP[index])
   },10000)
 
-  console.log(index)
 /*  const bounds = [
     [-56, -100],
     [12.52, -25.24],
@@ -53,7 +52,6 @@ export default function Satellite() {
     };
     data();
   }, []);*/
-   
   return (
     <>
       <MenuSatelite
@@ -62,9 +60,9 @@ export default function Satellite() {
       />
      
       <div>
-        <img src={image}/>
+        <iframe id="windy" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=°C&metricWind=m/s&zoom=7&overlay=satellite&product=satellite&level=surface&lat=-32.077&lon=-52.354" ></iframe>
+        {/* <img src={image}/> */}
       </div>
-
 
 
       {/*<MapContainer

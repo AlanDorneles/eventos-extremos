@@ -34,6 +34,5 @@ export const CPPMETImages = () => {
     console.error("Erro ao obter os dados do radar:", error);
     throw error;
   }
-  console.log(listImage)
   return listImage
 };
