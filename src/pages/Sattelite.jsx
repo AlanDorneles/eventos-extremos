@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { CPPMETImages } from "../services/cpmetUFPEL.js";
+import styles from "./styles/Satellite.module.css";
 
 export default function Satellite() {
   const imagesCPP = CPPMETImages();
@@ -19,7 +20,7 @@ export default function Satellite() {
 
   return (
     <>
-      <div>
+      <div className={styles.imageContainer}>
         <img src={image} alt={`Image ${index + 1}`} />
       </div>
     </>
