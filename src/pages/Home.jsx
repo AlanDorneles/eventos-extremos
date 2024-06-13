@@ -3,7 +3,7 @@ import { useEffect, useState,useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import { MenuMap } from "../components/menuMap/menuMap.jsx";
 import { Player } from "../components/player/player.jsx";
-import { HourScopeProvider, useHourScope } from "../contexts/hourAnimation.jsx";
+import { HourScopeProvider, useHourScope, useHourScopeSatelite } from "../contexts/hourAnimation.jsx";
 import { getImages } from "../services/images.js";
 import { UseRadarIsChecked } from "../contexts/radarIsChecked.jsx";
 import { UsePreviousAndNextImage } from "../contexts/previousAndNextImage.jsx";
@@ -22,7 +22,8 @@ export default function Home() {
     UseRadarIsChecked();
   const { indexImage, handleNextImage, handlePreviousImage } =
     UsePreviousAndNextImage();
-  const { getHourScope } = useHourScope();
+  const { getHourScopeRadar } = useHourScope();
+  const { getHourScopeSatelite } = useHourScopeSatelite();
   const { typeRadar } = useFilterTypeRadarContext();
   const [dataINMET, setDataINMET] = useState([]);
   const [disabledButton, setDisabledButton] = useState(false)
@@ -87,7 +88,8 @@ export default function Home() {
   const previousImage = () => {
     handlePreviousImage(count);
     if (count <= 0) {
-      setCount(getHourScope);
+      setCount(getHourScopeRadar);
+      setCount(getHourScopeSatelite)
     } else {
       setCount(count - 1);
       setCurrentImageIndex(count - 1); ///GATILHO PARA MUDANÇA DE IMAGEM

@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 const HourScopeContext = createContext();
 
 export const HourScopeProvider = ({ children }) => {
-  const [getHourScope, setHourScope] = useState(6);
+  const [getHourScopeRadar, setHourScopeRadar] = useState(6);
+  const [getHourScopeSatelite, setHourScopeSatelite] = useState(1);
 
 
   const handleSelectChange = (selectedValue) => {
-    setHourScope(selectedValue);
+    setHourScopeRadar(selectedValue);
+    setHourScopeSatelite(selectedValue);
   };
-  localStorage.setItem("hourScope", getHourScope)
+  localStorage.setItem("hourScopeRadar", getHourScopeRadar)
+  localStorage.setItem("hourScopeSatelite", getHourScopeSatelite)
 
 
   return (
-    <HourScopeContext.Provider value={{ getHourScope, handleSelectChange }}>
+    <HourScopeContext.Provider value={{ getHourScopeRadar, getHourScopeSatelite, handleSelectChange }}>
       {children}
     </HourScopeContext.Provider>
   );
@@ -23,6 +26,10 @@ export const useHourScope = () => {
   return useContext(HourScopeContext);
 };
 
+export const useHourScopeSatelite = () => {
+  return useContext(HourScopeContext);
+};
+
 HourScopeProvider.propTypes = {
-    children: PropTypes.any
+  children: PropTypes.any
 }

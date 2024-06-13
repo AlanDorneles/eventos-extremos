@@ -1,14 +1,14 @@
 export const CPPMETImages = () => {
   const listImage = []; // array de urls
   let hoursSetting = 1; // Valor padrão para hoursSetting
-  const storedHourScope = localStorage.getItem("hourScope");
+  const storedHourScope = localStorage.getItem("hourScopeSatelite");
 
   if (storedHourScope !== null) {
     hoursSetting = parseInt(storedHourScope); // Atualiza hoursSetting com o valor do localStorage
   }
 
   try {
-    const currentHour = new Date().getHours() + 2; //UTC
+    const currentHour = new Date().getHours() + 3; //UTC
     let actualDay = new Date().getDate(); //DIA
     const actualYear = new Date().getFullYear(); //ANO
     let actualMonth = new Date().getMonth() + 1; //MES
@@ -29,11 +29,14 @@ export const CPPMETImages = () => {
 
         //percorre da hora inicial até a ultima hora do dia ATUAL em UTC ( +3horas)
         for (let h = hour; h <= currentHour; h++) {
-            listImage.push(`https://cppmet.ufpel.edu.br/site/dados/GOES/C02//GOES16_Canal_C02_${actualYear}_${actualMonth}_${actualDay}_${h}_00_zoom.png`);
-            listImage.push(`https://cppmet.ufpel.edu.br/site/dados/GOES/C02//GOES16_Canal_C02_${actualYear}_${actualMonth}_${actualDay}_${h}_30_zoom.png`);
-          }
+          listImage.push(`https://cppmet.ufpel.edu.br/site/dados/GOES/C02//GOES16_Canal_C02_${actualYear}_${actualMonth}_${actualDay}_${h}_00_zoom.png`);
+          listImage.push(`https://cppmet.ufpel.edu.br/site/dados/GOES/C02//GOES16_Canal_C02_${actualYear}_${actualMonth}_${actualDay}_${h}_30_zoom.png`);
         }
-      } 
+      }
+    }
+    if (currentHour >= 0 && currentHour < 7) {
+      listImage.push(`https://www.tekportal.net/wp-content/uploads/2018/12/ops.png`);
+    }
 
   } catch (error) {
     console.error("Erro ao obter os dados do radar:", error);
