@@ -15,7 +15,7 @@ import '../../../public/css/mystyles.css'
 
 export const MenuMap = ({ selectImage }) => {
   const { getHourScopeRadar, handleSelectChange } = useHourScope();
-  const { getHourScopeSatelite, handleSelectRadarChange } = useHourScopeSatelite();
+  const { getHourScopeSatelite, handleSelectSatelliteChange } = useHourScopeSatelite();
   const actualHour = new Date().getHours();
   const [initHour, setInitHour] = useState(actualHour - 6);
 
@@ -45,7 +45,7 @@ export const MenuMap = ({ selectImage }) => {
   const handleChange = (event) => {
     const selectedValue = parseInt(event.target.value, 10);
     handleSelectChange(selectedValue);
-    handleSelectRadarChange(selectedValue);
+    handleSelectSatelliteChange(selectedValue);
     const initIndex = actualHour - selectedValue;
 
     if (initIndex < 0) {

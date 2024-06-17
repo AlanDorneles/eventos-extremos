@@ -7,10 +7,13 @@ export const PhenomenaProvider = ({ children }) => {
   const handleSelectChange = (selectedValue) => {
     setPhenomena(selectedValue);
   };
+  const handleSelectSatelliteChange = (selectedValue) => {
+    setPhenomena(selectedValue);
+  }
   localStorage.setItem("phenomena", phenomena)
 
   return (
-    <PhenomenaContext.Provider value={{ phenomena, handleSelectChange }}>
+    <PhenomenaContext.Provider value={{ phenomena, handleSelectChange, handleSelectSatelliteChange }}>
       {children}
     </PhenomenaContext.Provider>
   );

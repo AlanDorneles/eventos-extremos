@@ -9,6 +9,8 @@ export const HourScopeProvider = ({ children }) => {
 
   const handleSelectChange = (selectedValue) => {
     setHourScopeRadar(selectedValue);
+  };
+  const handleSelectSatelliteChange = (selectedValue) => {
     setHourScopeSatelite(selectedValue);
   };
   localStorage.setItem("hourScopeRadar", getHourScopeRadar)
@@ -16,7 +18,7 @@ export const HourScopeProvider = ({ children }) => {
 
 
   return (
-    <HourScopeContext.Provider value={{ getHourScopeRadar, getHourScopeSatelite, handleSelectChange }}>
+    <HourScopeContext.Provider value={{ getHourScopeRadar, getHourScopeSatelite, handleSelectChange, handleSelectSatelliteChange }}>
       {children}
     </HourScopeContext.Provider>
   );
