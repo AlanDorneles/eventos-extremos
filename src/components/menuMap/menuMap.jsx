@@ -11,13 +11,14 @@ import { GiSattelite, GiRadarSweep } from "react-icons/gi";
 import { useRadarOrSatelite } from "../../contexts/RadarOrSatelite";
 import { Link } from "react-router-dom";
 import { MenuSatelite } from "../menuSatelite/MenuSatelite";
-import '../../../public/css/mystyles.css'
+import '../../../public/css/mystyles.css';
 
 export const MenuMap = ({ selectImage }) => {
   const { getHourScopeRadar, handleSelectChange } = useHourScope();
   const { getHourScopeSatelite, handleSelectSatelliteChange } = useHourScopeSatelite();
   const actualHour = new Date().getHours();
   const [initHour, setInitHour] = useState(actualHour - 6);
+  const [setInitHourSatellite] = useState(actualHour - 1);
 
   const [clickedButtonId, setClickedButtonId] = useState();
   const {
@@ -45,15 +46,27 @@ export const MenuMap = ({ selectImage }) => {
   const handleChange = (event) => {
     const selectedValue = parseInt(event.target.value, 10);
     handleSelectChange(selectedValue);
-    handleSelectSatelliteChange(selectedValue);
     const initIndex = actualHour - selectedValue;
-
     if (initIndex < 0) {
       initIndex * -1;
       setInitHour(initIndex);
     }
     
     setInitHour(initIndex);
+  
+    selectIndex(0);
+  };
+
+  const handleChangeSatallite = (event) => {
+    const selectedValueSatellite = parseInt(event.target.value, 10);
+    handleSelectSatelliteChange(selectedValueSatellite);
+    const initIndexSatellite = actualHour - selectedValueSatellite;
+    if (initIndexSatellite < 0) {
+      initIndexSatellite * -1;
+      setInitHourSatellite(initIndexSatellite);
+    }
+    
+    setInitHourSatellite(initIndexSatellite);
   
     selectIndex(0);
   };
@@ -272,7 +285,7 @@ export const MenuMap = ({ selectImage }) => {
                 <div className="select is-primary">
                   <select
                     id="selectAnimation"
-                    onChange={handleChange}
+                    onChange={handleChangeSatallite}
                     value={getHourScopeSatelite}
                   >
                     <option value={1}>1 hora</option>

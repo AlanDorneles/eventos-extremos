@@ -7,8 +7,8 @@ export const PhenomenaProvider = ({ children }) => {
   const handleSelectChange = (selectedValue) => {
     setPhenomena(selectedValue);
   };
-  const handleSelectSatelliteChange = (selectedValue) => {
-    setPhenomena(selectedValue);
+  const handleSelectSatelliteChange = (selectedValueSatellite) => {
+    setPhenomena(selectedValueSatellite);
   }
   localStorage.setItem("phenomena", phenomena)
 

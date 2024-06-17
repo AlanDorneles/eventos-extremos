@@ -2,12 +2,11 @@ import styles from './MenuStation.module.css'
 import { usePhenomenaContext } from "../../contexts/Phenomena"
 
 export const MenuStation = () =>{
-    const {phenomena, handleSelectChange, handleSelectSatelliteChange} = usePhenomenaContext()
+    const {phenomena, handleSelectChange} = usePhenomenaContext()
 
     const handlePhenomena = () => {
         const selectedValue = event.target.value;
         handleSelectChange(selectedValue);
-        handleSelectSatelliteChange(selectedValue);
     }
 
     return (

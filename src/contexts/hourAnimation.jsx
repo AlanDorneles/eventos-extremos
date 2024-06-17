@@ -10,8 +10,8 @@ export const HourScopeProvider = ({ children }) => {
   const handleSelectChange = (selectedValue) => {
     setHourScopeRadar(selectedValue);
   };
-  const handleSelectSatelliteChange = (selectedValue) => {
-    setHourScopeSatelite(selectedValue);
+  const handleSelectSatelliteChange = (selectedValueSatellite) => {
+    setHourScopeSatelite(selectedValueSatellite);
   };
   localStorage.setItem("hourScopeRadar", getHourScopeRadar)
   localStorage.setItem("hourScopeSatelite", getHourScopeSatelite)
