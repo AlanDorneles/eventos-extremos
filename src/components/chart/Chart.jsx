@@ -14,7 +14,6 @@ export const Graphic = () => {
     const [trigger,setTrigger] = useState(false)
     const [nameVariable, setNameVariable] = useState('Pressão')
 
-    console.log(codeStation)
     
 
     useEffect(() => {
@@ -32,7 +31,6 @@ export const Graphic = () => {
             setVariable(dataMeteorologic[0][phenomena]);
             setHour(dataMeteorologic[0].hour)
             setNameVariable(variablesPT[phenomena])
-            console.log('aqui', dataMeteorologic[0])
 
           } catch (error) {
             console.error("Erro ao obter informações do radar:", error);

@@ -8,7 +8,6 @@ export const useDataINMETEffect = () => {
     try {
       const dataINMETResult = await DataINMETAPI();
       setDataINMET(dataINMETResult);
-      console.log('novo:', dataINMETResult)
     } catch (error) {
       console.error("Erro ao obter informações do radar:", error);
     }

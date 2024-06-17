@@ -27,7 +27,6 @@ export const CardPressure = () => {
         const numbersWind = numbers.map(Number);
 
         const sum = numbersWind.reduce((acc, current) => acc + current, 0);
-        console.log(sum)
         const average = sum / numbers.length;
         return average.toFixed(2);
     };
