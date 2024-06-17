@@ -1,10 +1,10 @@
 import { apiKeyRedeMet } from "../constants/constants";
 import formattedDataRadar from "../utils/formattedDataRadar";
-import { fetchRadarData } from "../utils/fetchRadarData"; // Assumindo que você exportou a função fetchRadarData de outro arquivo
+import { fetchRadarData } from "../utils/fetchRadarData"; 
 
 export const getImages = async (typeRadar) => {
   const listImage = []; // array de urls
-  const hoursSetting = localStorage.getItem("hourScope"); //escopo de horas selecionado pelo usuário
+  const hoursSetting = localStorage.getItem("hourScopeRadar"); //escopo de horas selecionado pelo usuário
   const cachedImages = localStorage.getItem(`images-${typeRadar}-${hoursSetting}-hours`)
 
   //SE JÁ EXISTIR O CONJUNTO DE IMAGENS NO LOCALSTORAGE
@@ -50,7 +50,7 @@ export const getImages = async (typeRadar) => {
         }
       }
     }
-    
+
     //BUSCA ACONTECE NO DIA ANTERIOR
     if (initialHour < 0) {
       const previousDay = formattedData.Day - 1; //Dia anterior

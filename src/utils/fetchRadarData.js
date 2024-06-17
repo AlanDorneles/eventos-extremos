@@ -27,4 +27,5 @@ export const fetchRadarData = async (
       santiago: santiago.path,
     })
   }
+  c
 };
