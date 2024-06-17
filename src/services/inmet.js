@@ -3,13 +3,11 @@ import { formattedDataFinal } from "../utils/formattedData";
 import { windDegreesToDirection } from "../utils/windDegreesToDirection";
 
 export const DataINMETAPI = async () => {
-  console.log(localStorage.getItem("codeStation"))
   const codeStation = localStorage.getItem("codeStation");
   const response = await fetch(
     `https://apitempo.inmet.gov.br/token/estacao/${formattedDataFinal}/${formattedDataFinal}/${codeStation}/${apiINMETKey}`
   );
   var teste = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
-  console.log(new Date(teste).getMonth())
   if (!response.ok) {
     throw new Error("Não foi possível obter dados do inmet"); //Erro caso a API não dê resposta
   }

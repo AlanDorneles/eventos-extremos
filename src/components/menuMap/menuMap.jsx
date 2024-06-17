@@ -1,6 +1,6 @@
 import { useFilterTypeRadarContext } from "../../contexts/typeRadar";
 import { useState,useEffect} from "react";
-import { useHourScope } from "../../contexts/hourAnimation";
+import { useHourScope, useHourScopeSatelite } from "../../contexts/hourAnimation";
 import styles from "./menuMap.module.css";
 import { buttonStyle } from "../../constants/constants"; 
 import PropTypes from "prop-types";
@@ -14,10 +14,11 @@ import { MenuSatelite } from "../menuSatelite/MenuSatelite";
 import '../../../public/css/mystyles.css'
 
 export const MenuMap = ({ selectImage }) => {
-  const { getHourScope, handleSelectChange } = useHourScope();
+  const { getHourScopeRadar, handleSelectChange } = useHourScope();
+  const { getHourScopeSatelite, handleSelectRadarChange } = useHourScopeSatelite();
   const actualHour = new Date().getHours();
-  const [initHour, setInitHour] = useState(6);
-  
+  const [initHour, setInitHour] = useState(actualHour - 6);
+
   const [clickedButtonId, setClickedButtonId] = useState();
   const {
     handleCangucuChange,
@@ -44,6 +45,7 @@ export const MenuMap = ({ selectImage }) => {
   const handleChange = (event) => {
     const selectedValue = parseInt(event.target.value, 10);
     handleSelectChange(selectedValue);
+    handleSelectRadarChange(selectedValue);
     const initIndex = actualHour - selectedValue;
 
     if (initIndex < 0) {
@@ -120,7 +122,7 @@ export const MenuMap = ({ selectImage }) => {
                   <select
                     id="selectAnimation"
                     onChange={handleChange}
-                    value={getHourScope}
+                    value={getHourScopeRadar}
                   >
                     <option value={6}>6 horas</option>
                     <option value={12}>12 horas</option>
@@ -144,7 +146,7 @@ export const MenuMap = ({ selectImage }) => {
                         return (
                           <>
                             <button
-                              className=" button is-small"
+                              className="button is-small"
                               onClick={() => {
                                 selectIndex(index);
                               }}
@@ -271,7 +273,7 @@ export const MenuMap = ({ selectImage }) => {
                   <select
                     id="selectAnimation"
                     onChange={handleChange}
-                    value={getHourScope}
+                    value={getHourScopeSatelite}
                   >
                     <option value={1}>1 hora</option>
                     <option value={2}>2 horas</option>
