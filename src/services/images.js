@@ -5,15 +5,25 @@ import { fetchRadarData } from "../utils/fetchRadarData"; // Assumindo que você
 export const getImages = async (typeRadar) => {
   const listImage = []; // array de urls
   const hoursSetting = localStorage.getItem("hourScope"); //escopo de horas selecionado pelo usuário
+  const cachedImages = localStorage.getItem(`images-${typeRadar}-${hoursSetting}-hours`)
 
+  //SE JÁ EXISTIR O CONJUNTO DE IMAGENS NO LOCALSTORAGE
+  if(cachedImages){
+    return JSON.parse(cachedImages)
+  }
+
+
+  //SE O CONJUNTO DE IMAGENS AINDA NÃO EXISTIR (PRIMEIRO ACESSO)
   try {
     const DataUTC = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
-    const currentHour = new Date(DataUTC).getHours();
+    const currentHour = new Date(DataUTC).getHours(); //HORA UTC(+3 HORAS)
     let initialHour = currentHour - hoursSetting; // HORA INICIAL
-    let actualDay = new Date(DataUTC).getDate();
-    let actualMonth = new Date(DataUTC).getMonth() + 1;
-    const actualYear = new Date(DataUTC).getFullYear();
+    let actualDay = new Date(DataUTC).getDate(); //DIA ATUAL
+    let actualMonth = new Date(DataUTC).getMonth() + 1; //MÊS ATUAL
+    const actualYear = new Date(DataUTC).getFullYear(); //ANO ATUAL
     const formattedData = formattedDataRadar(actualMonth, actualDay);
+    
+    
 
     //BUSCA COMEÇA NO DIA ATUAL
     if (initialHour > 0) {
@@ -40,11 +50,12 @@ export const getImages = async (typeRadar) => {
         }
       }
     }
+    
     //BUSCA ACONTECE NO DIA ANTERIOR
     if (initialHour < 0) {
       const previousDay = formattedData.Day - 1; //Dia anterior
       initialHour = 24 + initialHour; // Hora inicial do dia anterior
-
+     
       for (let h = initialHour; h <= 23; h++) {
         await fetchRadarData(listImage, typeRadar, apiKeyRedeMet, actualYear, formattedData, previousDay, h);
       }
@@ -54,7 +65,7 @@ export const getImages = async (typeRadar) => {
       }
     }
 
-    console.log(listImage);
+    localStorage.setItem(`images-${typeRadar}-${listImage.length-1}-hours`, JSON.stringify(listImage))  
     return listImage;
   } catch (error) {
     console.error("Erro ao obter os dados do radar:", error);
