@@ -1,9 +1,14 @@
 import { DataINMETAPI } from "../services/inmet.js";
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useLocation } from 'react-router-dom';
 import "leaflet/dist/leaflet.css";
 import { MenuMap } from "../components/menuMap/menuMap.jsx";
 import { Player } from "../components/player/player.jsx";
-import { HourScopeProvider, useHourScope, useHourScopeSatelite } from "../contexts/hourAnimation.jsx";
+import {
+  HourScopeProvider,
+  useHourScope,
+  useHourScopeSatelite,
+} from "../contexts/hourAnimation.jsx";
 import { getImages } from "../services/images.js";
 import { UseRadarIsChecked } from "../contexts/radarIsChecked.jsx";
 import { UsePreviousAndNextImage } from "../contexts/previousAndNextImage.jsx";
@@ -12,6 +17,8 @@ import { Map } from "../components/map/Map.jsx";
 import styles from "./styles/Home.module.css";
 import { DownloadGif } from "../components/download/gif.jsx";
 import Satellite from "./Sattelite.jsx";
+import Windy from "./Windy.jsx";
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const [handlerSrc, setHandlerSrc] = useState(false);
@@ -26,8 +33,11 @@ export default function Home() {
   const { getHourScopeSatelite } = useHourScopeSatelite();
   const { typeRadar } = useFilterTypeRadarContext();
   const [dataINMET, setDataINMET] = useState([]);
-  const [disabledButton, setDisabledButton] = useState(false)
+  const [disabledButton, setDisabledButton] = useState(false);
   const containerRef = useRef(null);
+  const [isMenuVisible, setIsMenuVisible] = useState(true);
+  const [showWindy, setShowWindy] = useState(false);
+  const navigate = useNavigate();
 
   const handlerSrcFunc = () => {
     if (handlerSrc === false) {
@@ -54,7 +64,7 @@ export default function Home() {
     const images = await getImages(typeRadar);
     setImages(images);
 
-    setDisabledButton(true)
+    setDisabledButton(true);
 
     let currentIndex = 0; // Use o índice atual de imagem como ponto de partida
     handlerSrcFunc();
@@ -71,7 +81,7 @@ export default function Home() {
   const pauseGif = () => {
     setHandlerSrc(false);
     setCurrentImageIndex(0);
-    setDisabledButton(false)
+    setDisabledButton(false);
   };
 
   const nextImage = () => {
@@ -89,7 +99,7 @@ export default function Home() {
     handlePreviousImage(count);
     if (count <= 0) {
       setCount(getHourScopeRadar);
-      setCount(getHourScopeSatelite)
+      setCount(getHourScopeSatelite);
     } else {
       setCount(count - 1);
       setCurrentImageIndex(count - 1); ///GATILHO PARA MUDANÇA DE IMAGEM
@@ -100,19 +110,37 @@ export default function Home() {
     setCurrentImageIndex(indexImage + 1);
   };
 
-  const [isMenuVisible, setIsMenuVisible] = useState(true);
-
   const toggleMenuVisibility = () => {
     setIsMenuVisible(!isMenuVisible);
-    document.getElementById("windy").style.width = isMenuVisible ? "100vw" : "80vw";
+  };
+
+  const showWindyComponent = () => {
+    setIsMenuVisible(!isMenuVisible);
+    setShowWindy(!showWindy);
+
+    if (!showWindy) {
+      document.getElementById("windy").style.bottom = "50%";
+      navigate('/windy');
+    } else {
+      document.getElementById("windy").style.bottom = "37%";
+      navigate('/');
+    }
   };
 
   return (
     <>
-      <main className={`${styles.container} ${!isMenuVisible ? styles.fullWidth : ''}`}>
-        <section className={`${styles.menu_map} ${!isMenuVisible ? styles.hidden : ''}`}>
+      <main
+        className={`${styles.container} ${
+          !isMenuVisible ? styles.fullWidth : ""
+        }`}
+      >
+        <section
+          className={`${styles.menu_map} ${
+            !isMenuVisible ? styles.hidden : ""
+          }`}
+        >
           <HourScopeProvider>
-            <MenuMap selectImage={handleSelectImage} ref={containerRef}/>
+            <MenuMap selectImage={handleSelectImage} ref={containerRef} />
           </HourScopeProvider>
         </section>
         <Player
@@ -122,25 +150,29 @@ export default function Home() {
           nextImage={nextImage}
           previousImage={previousImage}
         />
-      
-    
-        {location.pathname === "/" && 
-        <section className={styles.map}>
-          <Map
-            cangucuChecked={cangucuChecked}
-            santiagoChecked={santiagoChecked}
-            morroDaIgrejaChecked={morroDaIgrejaChecked}
-            handlerSrc={handlerSrc}
-            images={images}
-            currentImageIndex={currentImageIndex}
-          />
-        </section>}
-        <section> 
-        {location.pathname === "/satelite" && <Satellite />}
-      </section>
-        <DownloadGif disabledButton={disabledButton}/>
+
+        {location.pathname === "/" && (
+          <section className={styles.map}>
+            <Map
+              cangucuChecked={cangucuChecked}
+              santiagoChecked={santiagoChecked}
+              morroDaIgrejaChecked={morroDaIgrejaChecked}
+              handlerSrc={handlerSrc}
+              images={images}
+              currentImageIndex={currentImageIndex}
+            />
+          </section>
+        )}
+        <section>{location.pathname === "/satelite" && <Satellite />}</section>
+        <DownloadGif disabledButton={disabledButton} />
       </main>
-      <button className={styles.toggleBtn} onClick={toggleMenuVisibility}>Menu</button>
+      <button className={styles.toggleBtn} onClick={toggleMenuVisibility}>
+        Menu
+      </button>
+      <section>{location.pathname === '/windy' && <Windy />}</section>
+      <button id="windy" className={styles.windy} onClick={showWindyComponent}>
+        Windy
+      </button>
     </>
   );
 }
