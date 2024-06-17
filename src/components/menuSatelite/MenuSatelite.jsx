@@ -6,7 +6,6 @@ export const MenuSatelite = ({ selectedOption, onOptionChange}) => {
   const handleRadioButtonChange = (event) => {
     const { value } = event.target;
     onOptionChange(value);
-    console.log(value);
   };
 
   return (

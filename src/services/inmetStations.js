@@ -15,7 +15,6 @@ export const DataStationsAPI = async () => {
     }
 
     const data = await response.json();
-    console.log(data);
 
     const filteredData = data.filter(
       (item) => item !== null && item.PRE_INS !== null

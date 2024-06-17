@@ -1,22 +1,17 @@
-
-@import './colors.scss';
-
-// IDENTIDADE DA MARCA
-$purple: #8a4d76;
-$pink: #fa7c91;
-$brown: #757763;
-$beige-light: #d0d1cd;
-$beige-lighter: #eff0eb;
+$orange-furg: #de790f;
+$grey-furg: #222222;
+$red-furg:#c00a25;
+$grey-furg-40:#32323340;
 
 // MUDANDO AS VARIÁVEIS PADRÕES DO BULMA
-@use "bulma/sass" with (
-  $family-primary: '"Nunito", sans-serif',
-  $grey-dark: $brown,
-  $grey-light: $beige-light,
-  $primary: $purple,
-  $link: $pink,
-  $control-border-width: 2px,
-  $input-shadow: none
+@use "bulma/sass" with (   
+  $family-primary: '"Nunito", sans-serif',   
+  $grey-dark: $grey-furg,   
+  $grey-light: $red-furg,   
+  $primary: $orange-furg,   
+  $link: $red-furg,   
+  $control-border-width: 2px,   
+  $input-shadow: none 
 );
 
 //ADICIONANDO FONTE

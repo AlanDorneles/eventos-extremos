@@ -8,6 +8,7 @@ export const Root = () => {
         <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/satelite" element={<Home/>}/>
+            <Route path="/windy" element={<Home/>}/>
         </Routes>
     </BrowserRouter>
     )

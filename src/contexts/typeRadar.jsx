@@ -8,7 +8,6 @@ export const FilterTypeRadarProvider = ({ children }) => {
 
   const handleTypeRadar = (selectedValue) => {
     setTypeRadar(selectedValue);
-    console.log(selectedValue)
   };
 
   return (
