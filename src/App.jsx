@@ -7,15 +7,14 @@ import { CombinedProviders } from "./contexts/_ContextProviders";
 
 function App() {
   return (
+   
     <main className="container" style={{ maxWidth: "100vw" }}>
-      <MenuPrincipal className="menu"/>
+      <MenuPrincipal  id="menu" className='is-fixed-top'/>
       <CombinedProviders>
           <Root />
-      </CombinedProviders>
-      
-                  
-              
+      </CombinedProviders>         
     </main>
+
   );
 }
 export default App;
