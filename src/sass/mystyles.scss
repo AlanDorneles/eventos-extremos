@@ -11,11 +11,14 @@ $grey-furg-40:#32323340;
   $primary: $orange-furg,   
   $link: $red-furg,   
   $control-border-width: 2px,   
-  $input-shadow: none 
+  $input-shadow: none, 
+  $navbar-height:4rem,
+  $navbar-item-img-max-height:3rem
 );
 
 //ADICIONANDO FONTE
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+
 
 
 /*NA PACKAGE JSON FOI CRIADO DOIS SCRIPTS 
