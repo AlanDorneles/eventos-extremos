@@ -315,10 +315,10 @@ export const MenuMap = ({ selectImage }) => {
               </label>
               <div>
                 <label className={styles.toggle}>
-                  <span className={styles.toggleFirstLabel}>INPE</span>
+                  <span className={styles.toggleFirstLabel}>GOES16 CH 14</span>
                   <input className={styles.toggleCheckbox} type="checkbox" checked={!UFPEL} onChange={toggleUFPEL} />
                     <div className={styles.toggleSwitch}></div>
-                    <span className={styles.toggleLabel}>UFPEL</span>
+                    <span className={styles.toggleLabel}>CPMet UFPEL</span>
                 </label>
               </div>
             </div>
