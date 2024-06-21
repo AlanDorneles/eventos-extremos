@@ -66,3 +66,12 @@ text.marker-text {
 .select.is-primary select {
     width: 100%;
 }
+#menu-configuration{
+    position:fixed;
+    z-index:4000;
+    width:20vw;
+    height:100vh;
+    top:0;
+    right:0;
+    background-color:white
+}
