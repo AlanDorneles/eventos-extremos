@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { CPPMETImages } from "../services/cpmetUFPEL.js";
+import { CPTECImages } from "../services/cptecINPE.js";
+import { ButtonSatContext } from "../contexts/buttonSat.jsx";
 import styles from "./styles/Satellite.module.css";
 
 export default function Satellite() {
@@ -18,10 +20,32 @@ export default function Satellite() {
     setImage(imagesCPP[index]);
   }, [index, imagesCPP]);
 
+  const imagesCPTEC = CPTECImages();
+  const [indexINPE, setIndexINPE] = useState(0);
+  const [imageINPE, setImageINPE] = useState(imagesCPTEC[0]);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIndexINPE(prevIndex => (prevIndex + 1) % imagesCPTEC.length);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [imagesCPTEC.length]);
+
+  useEffect(() => {
+    setImageINPE(imagesCPTEC[indexINPE]);
+  }, [indexINPE, imagesCPTEC]);
+
+  const { UFPEL } = useContext(ButtonSatContext);
+
   return (
     <>
-      <div className={styles.imageContainer}>
-        <img src={image} alt={`Image ${index + 1}`} />
+      <div className={styles.container}>
+        <div id="UFPEL" className={styles.imageContainer} style={{ display: UFPEL ? 'none' : '' }}>
+          <img src={image} alt={`Image ${index + 1} CPMET UFPEL`} />
+        </div>
+        <div id="INPE" className={styles.imageINPE} style={{ display: UFPEL ? '' : 'none' }}>
+          <img src={imageINPE} alt={`Image ${indexINPE + 1} CPTEC INPE`} />
+        </div>
       </div>
     </>
   );

@@ -7,6 +7,7 @@ import { CodeStationsProvider } from "./codeStation.jsx";
 import { FilterTypeRadarProvider } from "./typeRadar.jsx";
 import { RadarOrSateliteProvider } from './RadarOrSatelite.jsx';
 import { PhenomenaProvider } from './Phenomena.jsx';
+import { ButtonSatProvider } from './buttonSat.jsx';
 
 interface CombinedProvidersProps {
   children: ReactNode;
@@ -14,22 +15,24 @@ interface CombinedProvidersProps {
 
 export function CombinedProviders({ children }: CombinedProvidersProps) {
   return (
-    <HourScopeProvider>
-      <RadarIsCheckedProvider>
-        <PreviousAndNextImageProvider>
-          <StationsVisibleProvider>
-            <CodeStationsProvider>
-              <FilterTypeRadarProvider>
-                <PhenomenaProvider>
-                  <RadarOrSateliteProvider>
-                    {children}
-                  </RadarOrSateliteProvider>
-                </PhenomenaProvider>
-              </FilterTypeRadarProvider>
-            </CodeStationsProvider>
-          </StationsVisibleProvider>
-        </PreviousAndNextImageProvider>
-      </RadarIsCheckedProvider>
-    </HourScopeProvider>
+    <ButtonSatProvider>
+      <HourScopeProvider>
+        <RadarIsCheckedProvider>
+          <PreviousAndNextImageProvider>
+            <StationsVisibleProvider>
+              <CodeStationsProvider>
+                <FilterTypeRadarProvider>
+                  <PhenomenaProvider>
+                    <RadarOrSateliteProvider>
+                      {children}
+                    </RadarOrSateliteProvider>
+                  </PhenomenaProvider>
+                </FilterTypeRadarProvider>
+              </CodeStationsProvider>
+            </StationsVisibleProvider>
+          </PreviousAndNextImageProvider>
+        </RadarIsCheckedProvider>
+      </HourScopeProvider>
+    </ButtonSatProvider>
   );
 }

@@ -1,5 +1,5 @@
 import { useFilterTypeRadarContext } from "../../contexts/typeRadar";
-import { useState,useEffect} from "react";
+import { useContext,useState,useEffect} from "react";
 import { useHourScope, useHourScopeSatelite } from "../../contexts/hourAnimation";
 import styles from "./menuMap.module.css";
 import { buttonStyle } from "../../constants/constants"; 
@@ -11,7 +11,9 @@ import { GiSattelite, GiRadarSweep } from "react-icons/gi";
 import { useRadarOrSatelite } from "../../contexts/RadarOrSatelite";
 import { Link } from "react-router-dom";
 import { MenuSatelite } from "../menuSatelite/MenuSatelite";
+import { ButtonSatContext } from "../../contexts/buttonSat";
 import '../../../public/css/mystyles.css';
+import { Checkbox } from "@chakra-ui/react";
 
 export const MenuMap = ({ selectImage }) => {
   const { getHourScopeRadar, handleSelectChange } = useHourScope();
@@ -83,6 +85,10 @@ export const MenuMap = ({ selectImage }) => {
     setIsChecked(checked);
     setStationsVisible(isChecked);
   };
+
+  const { UFPEL, setUFPEL} = useContext(ButtonSatContext);
+
+  const toggleUFPEL = () => setUFPEL(!UFPEL);
 
   const toggleTabs = () => {
     setSelectTab((prevState) => ({
@@ -307,6 +313,14 @@ export const MenuMap = ({ selectImage }) => {
                 <input type="radio" name="answer" />
                 GOES16 - Day Cloud Phase
               </label>
+              <div>
+                <label className={styles.toggle}>
+                  <span className={styles.toggleFirstLabel}>INPE</span>
+                  <input className={styles.toggleCheckbox} type="checkbox" checked={!UFPEL} onChange={toggleUFPEL} />
+                    <div className={styles.toggleSwitch}></div>
+                    <span className={styles.toggleLabel}>UFPEL</span>
+                </label>
+              </div>
             </div>
           )}
         </div>
