@@ -4,7 +4,7 @@ export default function MenuPrincipal() {
     const [hidden, setHidden] = useState({
         ButtonFurgHovered: true,
         ButtonWindyHovered: true,
-        IsHidden :'is-hidden',
+        IsHidden :'is-hidden'
     });
 
     const hiddenButtonEnterWindy = () => {
@@ -62,7 +62,7 @@ export default function MenuPrincipal() {
                             onMouseEnter={hiddenButtonEnterFurg}
                             onMouseLeave={hiddenButtonLeaveFurg}>
                                 {hidden.ButtonFurgHovered ?
-                                <figure className="image is-24x24">
+                                <figure className="image is-24x24"  style={{opacity:location.pathname ==='/windy' ? 0.7 : 1}}>
                                     <img src="../../public/logo-furg.png" alt="" />
                                 </figure> : ''}
                                 {!hidden.ButtonFurgHovered && (
@@ -80,7 +80,7 @@ export default function MenuPrincipal() {
                                 href="/windy"
                             >
                                 {hidden.ButtonWindyHovered ?
-                                <figure className="image is-24x24 ">
+                                <figure className="image is-24x24" style={{opacity:location.pathname ==='/' ? 0.7 : 1}}>
                                     <img src="../../public/windy.png" alt="" />
                                 </figure>:''}
                                 {!hidden.ButtonWindyHovered && (
