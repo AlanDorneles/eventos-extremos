@@ -38,6 +38,10 @@ export const Navbar = () => {
           <GiSattelite className={styles.Icon}/>
             Satélite
           </Link>
+          <Link to="/station" className={styles.navbarItem}>
+          <GiSattelite className={styles.Icon}/>
+            
+          </Link>
         </div>
       </div>
     </nav>

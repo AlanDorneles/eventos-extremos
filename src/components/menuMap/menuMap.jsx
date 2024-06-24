@@ -10,8 +10,9 @@ import { useStationsVisible } from "../../contexts/radarFilter";
 import { GiSattelite, GiRadarSweep } from "react-icons/gi";
 import { useRadarOrSatelite } from "../../contexts/RadarOrSatelite";
 import { Link } from "react-router-dom";
-import { MenuSatelite } from "../menuSatelite/MenuSatelite";
 import { ButtonSatContext } from "../../contexts/buttonSat";
+import { RiBaseStationLine } from "react-icons/ri";
+
 
 export const MenuMap = ({ selectImage }) => {
   const { getHourScopeRadar, handleSelectChange } = useHourScope();
@@ -21,6 +22,7 @@ export const MenuMap = ({ selectImage }) => {
   const [setInitHourSatellite] = useState(actualHour - 1);
 
   const [clickedButtonId, setClickedButtonId] = useState();
+
   const {
     handleCangucuChange,
     handleMorroDaIgrejaChange,
@@ -29,18 +31,24 @@ export const MenuMap = ({ selectImage }) => {
     morroDaIgrejaChecked,
     santiagoChecked,
   } = UseRadarIsChecked();
+
+
   const { setClickHoursIndexImage, indexImage } = UsePreviousAndNextImage();
   const [isChecked, setIsChecked] = useState(false);
   const { setStationsVisible } = useStationsVisible();
   const [selectedOption, setSelectedOption] = useState("maxcappi");
   const { handleTypeRadar } = useFilterTypeRadarContext();
-  const [selectTab, setSelectTab] = useState({ radar: true, sattelite: false});
+  const [selectedTab, setSelectTab] = useState('radar');
   const { handleTypeMecanism } = useRadarOrSatelite()
 
   const handleRadioButtonChange = (event) => {
     const { value } = event.target;
     setSelectedOption(value);
     handleTypeRadar(value);
+  };
+
+  const handleTabClick = (tab) => {
+    setSelectTab(tab);
   };
 
   const handleChange = (event) => {
@@ -57,7 +65,7 @@ export const MenuMap = ({ selectImage }) => {
     selectIndex(0);
   };
 
-  const handleChangeSatallite = (event) => {
+  const handleChangeSatellite = (event) => {
     const selectedValueSatellite = parseInt(event.target.value, 10);
     handleSelectSatelliteChange(selectedValueSatellite);
     const initIndexSatellite = actualHour - selectedValueSatellite;
@@ -88,16 +96,9 @@ export const MenuMap = ({ selectImage }) => {
 
   const toggleUFPEL = () => setUFPEL(!UFPEL);
 
-  const toggleTabs = () => {
-    setSelectTab((prevState) => ({
-      radar: !prevState.radar,
-      sattelite: !prevState.sattelite,
-    }));};
-
     useEffect(() => {
-      const selectedMecanism = selectTab.radar ? 'radar' : 'satelite';
-      handleTypeMecanism(selectedMecanism);
-    }, [selectTab, handleTypeMecanism]);
+      handleTypeMecanism(selectedTab);
+    }, [selectedTab, handleTypeMecanism]);
 
   return ( 
     <>
@@ -106,8 +107,8 @@ export const MenuMap = ({ selectImage }) => {
           <div className={`tabs ${styles.containerTabs}`}>
             <ul>
               <li
-                className={`${selectTab.radar ? "is-active" : ""}`}
-                onClick={toggleTabs}
+                 className={`${selectedTab === 'radar' ? "is-active" : ""}`}
+                 onClick={() => handleTabClick('radar')}
               >
                 <Link to='/'>
                   <span className="icon is-small">
@@ -117,8 +118,8 @@ export const MenuMap = ({ selectImage }) => {
                 </Link>
               </li>
               <li
-                className={`${selectTab.sattelite ? "is-active" : ""}`}
-                onClick={toggleTabs}
+                className={`${selectedTab === 'satellite' ? "is-active" : ""}`}
+                onClick={() => handleTabClick('satellite')}
               >
                 <Link to='/satelite'>
                   <span className="icon is-small">
@@ -127,16 +128,22 @@ export const MenuMap = ({ selectImage }) => {
                   <span>Satélite</span>
                 </Link>
               </li>
-              
 
-              <li>
+              <li  className={`${selectedTab === 'station' ? "is-active" : ""}`}
+          onClick={() => handleTabClick('station')}>
+                    <Link to='/estacoes'>
+                  <span className="icon is-small">
+                    <RiBaseStationLine className={styles.Icon} />
+                  </span>
+                  <span>Estações</span>
+                </Link>
 
               </li>
             </ul>
           </div>
         </div>
         <div className={styles.containerItem}>
-          {selectTab.radar ? (
+          {selectedTab === 'radar' && (
             <>
               <div className={styles.containerSelect}>
                 <h6 className="title is-6">Horas</h6>
@@ -287,14 +294,15 @@ export const MenuMap = ({ selectImage }) => {
                 </label>
               </div>
             </>
-          ) : (
+          )} 
+          {selectedTab ==='satellite' && (
             <div className={styles.containerRadar}>
               <div className={styles.containerSelect}>
                 <h6 className="title is-6">Horas</h6>
                 <div className="select is-primary">
                   <select
                     id="selectAnimation"
-                    onChange={handleChangeSatallite}
+                    onChange={handleChangeSatellite}
                     value={getHourScopeSatelite}
                   >
                     <option value={1}>1 hora</option>
@@ -313,6 +321,12 @@ export const MenuMap = ({ selectImage }) => {
                 CPMet UFPEL
               </label>
             </div>
+          )}
+          {selectedTab ==='station' && (
+            <div>
+              MENU STATION
+            </div>
+
           )}
         </div>
       </div>
