@@ -18,10 +18,9 @@
     width: 70vw;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .imageINPE img {
-    height: 55rem;
-    width: 55rem;
+    height: 50rem;
+    width: 50rem;
 }
