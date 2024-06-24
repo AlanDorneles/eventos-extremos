@@ -1,6 +1,5 @@
 import { DataINMETAPI } from "../services/inmet.js";
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from 'react-router-dom';
 import "leaflet/dist/leaflet.css";
 import { MenuMap } from "../components/menuMap/menuMap.jsx";
 import { Player } from "../components/player/player.jsx";

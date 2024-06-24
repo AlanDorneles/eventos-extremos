@@ -12,9 +12,6 @@ import { useRadarOrSatelite } from "../../contexts/RadarOrSatelite";
 import { Link } from "react-router-dom";
 import { MenuSatelite } from "../menuSatelite/MenuSatelite";
 import { ButtonSatContext } from "../../contexts/buttonSat";
-import '../../../public/css/mystyles.css';
-import { Checkbox } from "@chakra-ui/react";
-
 export const MenuMap = ({ selectImage }) => {
   const { getHourScopeRadar, handleSelectChange } = useHourScope();
   const { getHourScopeSatelite, handleSelectSatelliteChange } = useHourScopeSatelite();
@@ -128,6 +125,11 @@ export const MenuMap = ({ selectImage }) => {
                   </span>
                   <span>Satélite</span>
                 </Link>
+              </li>
+              
+
+              <li>
+
               </li>
             </ul>
           </div>
