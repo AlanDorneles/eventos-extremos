@@ -12,6 +12,7 @@ import { useRadarOrSatelite } from "../../contexts/RadarOrSatelite";
 import { Link } from "react-router-dom";
 import { MenuSatelite } from "../menuSatelite/MenuSatelite";
 import { ButtonSatContext } from "../../contexts/buttonSat";
+
 export const MenuMap = ({ selectImage }) => {
   const { getHourScopeRadar, handleSelectChange } = useHourScope();
   const { getHourScopeSatelite, handleSelectSatelliteChange } = useHourScopeSatelite();
