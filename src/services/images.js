@@ -12,7 +12,6 @@ export const getImages = async (typeRadar) => {
     return JSON.parse(cachedImages)
   }
 
-
   //SE O CONJUNTO DE IMAGENS AINDA NÃO EXISTIR (PRIMEIRO ACESSO)
   try {
     const DataUTC = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
@@ -23,8 +22,6 @@ export const getImages = async (typeRadar) => {
     const actualYear = new Date(DataUTC).getFullYear(); //ANO ATUAL
     const formattedData = formattedDataRadar(actualMonth, actualDay);
     
-    
-
     //BUSCA COMEÇA NO DIA ATUAL
     if (initialHour > 0) {
       //BUSCA VAI SER FEITA EM DUAS PARTES (DIA ATUAL E DIA SEGUINTE) POR CONTA DO UTC 

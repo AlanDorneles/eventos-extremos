@@ -17,7 +17,7 @@ import styles from "./styles/Home.module.css";
 import { DownloadGif } from "../components/download/gif.jsx";
 import Satellite from "./Sattelite.jsx";
 import Windy from "./Windy.jsx";
-import { useNavigate } from 'react-router-dom';
+
 
 export default function Home() {
   const [handlerSrc, setHandlerSrc] = useState(false);
@@ -35,8 +35,6 @@ export default function Home() {
   const [disabledButton, setDisabledButton] = useState(false);
   const containerRef = useRef(null);
   const [isMenuVisible, setIsMenuVisible] = useState(true);
-  const [showWindy, setShowWindy] = useState(false);
-  const navigate = useNavigate();
 
   const handlerSrcFunc = () => {
     if (handlerSrc === false) {
@@ -113,19 +111,6 @@ export default function Home() {
     setIsMenuVisible(!isMenuVisible);
   };
 
-  const showWindyComponent = () => {
-    setIsMenuVisible(!isMenuVisible);
-    setShowWindy(!showWindy);
-
-    if (!showWindy) {
-      document.getElementById("windy").style.bottom = "50%";
-      navigate('/windy');
-    } else {
-      document.getElementById("windy").style.bottom = "37%";
-      navigate('/');
-    }
-  };
-
   return (
     <>
       <main
@@ -169,9 +154,6 @@ export default function Home() {
         Menu
       </button>
       <section>{location.pathname === '/windy' && <Windy />}</section>
-      <button id="windy" className={styles.windy} onClick={showWindyComponent}>
-        Windy
-      </button>
     </>
   );
 }

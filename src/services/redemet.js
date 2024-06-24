@@ -26,7 +26,6 @@ export const getRadarInformation = async () => {
       const morroDaIgreja = data.data.radar[0].find(item => item.localidade === 'mi');
       const cangucu = data.data.radar[0].find(item => item.localidade === 'cn')
       const santiago = data.data.radar[0].find( item=> item.localidade === 'sg')
-
       
     return {cangucu,morroDaIgreja, santiago}
     
