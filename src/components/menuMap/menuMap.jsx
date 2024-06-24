@@ -1,5 +1,5 @@
 import { useFilterTypeRadarContext } from "../../contexts/typeRadar";
-import { useState,useEffect} from "react";
+import { useContext,useState,useEffect} from "react";
 import { useHourScope, useHourScopeSatelite } from "../../contexts/hourAnimation";
 import styles from "./menuMap.module.css";
 import { buttonStyle } from "../../constants/constants"; 
@@ -10,8 +10,8 @@ import { useStationsVisible } from "../../contexts/radarFilter";
 import { GiSattelite, GiRadarSweep } from "react-icons/gi";
 import { useRadarOrSatelite } from "../../contexts/RadarOrSatelite";
 import { Link } from "react-router-dom";
-import '../../../public/css/mystyles.css';
-
+import { MenuSatelite } from "../menuSatelite/MenuSatelite";
+import { ButtonSatContext } from "../../contexts/buttonSat";
 export const MenuMap = ({ selectImage }) => {
   const { getHourScopeRadar, handleSelectChange } = useHourScope();
   const { getHourScopeSatelite, handleSelectSatelliteChange } = useHourScopeSatelite();
@@ -82,6 +82,10 @@ export const MenuMap = ({ selectImage }) => {
     setIsChecked(checked);
     setStationsVisible(isChecked);
   };
+
+  const { UFPEL, setUFPEL} = useContext(ButtonSatContext);
+
+  const toggleUFPEL = () => setUFPEL(!UFPEL);
 
   const toggleTabs = () => {
     setSelectTab((prevState) => ({
@@ -311,6 +315,14 @@ export const MenuMap = ({ selectImage }) => {
                 <input type="radio" name="answer" />
                 GOES16 - Day Cloud Phase
               </label>
+              <div>
+                <label className={styles.toggle}>
+                  <span className={styles.toggleFirstLabel}>GOES16 CH 14</span>
+                  <input className={styles.toggleCheckbox} type="checkbox" checked={!UFPEL} onChange={toggleUFPEL} />
+                    <div className={styles.toggleSwitch}></div>
+                    <span className={styles.toggleLabel}>CPMet UFPEL</span>
+                </label>
+              </div>
             </div>
           )}
         </div>

@@ -8,7 +8,7 @@ export const CPPMETImages = () => {
   }
 
   try {
-    const currentHour = new Date().getHours() + 3; //UTC
+    const currentHour = new Date().getHours() + 2; //UTC
     let actualDay = new Date().getDate(); //DIA
     const actualYear = new Date().getFullYear(); //ANO
     let actualMonth = new Date().getMonth() + 1; //MES

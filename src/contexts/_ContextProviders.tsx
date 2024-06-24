@@ -5,7 +5,8 @@ import { PreviousAndNextImageProvider } from "./previousAndNextImage.jsx";
 import { StationsVisibleProvider } from "./radarFilter.jsx";
 import { CodeStationsProvider } from "./codeStation.jsx";
 import { FilterTypeRadarProvider } from "./typeRadar.jsx";
-import { RadarOrSateliteProvider } from "./RadarOrSatelite.jsx";
+import { RadarOrSateliteProvider } from './RadarOrSatelite.jsx';
+import { ButtonSatProvider } from './buttonSat.jsx';
 import { PhenomenaProvider } from "./Phenomena.jsx";
 import { ShowMenuConfigurationProvider } from "./showMenu.jsx";
 
@@ -15,8 +16,11 @@ interface CombinedProvidersProps {
 
 export function CombinedProviders({ children }: CombinedProvidersProps) {
   return (
-    <HourScopeProvider>
+    
+      <HourScopeProvider>
+    
       <ShowMenuConfigurationProvider>
+        <ButtonSatProvider>
         <RadarIsCheckedProvider>
           <PreviousAndNextImageProvider>
             <StationsVisibleProvider>
@@ -32,7 +36,8 @@ export function CombinedProviders({ children }: CombinedProvidersProps) {
             </StationsVisibleProvider>
           </PreviousAndNextImageProvider>
         </RadarIsCheckedProvider>
-      </ShowMenuConfigurationProvider>
+    </ButtonSatProvider>
+    </ShowMenuConfigurationProvider>
     </HourScopeProvider>
   );
 }
