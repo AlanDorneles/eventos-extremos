@@ -305,25 +305,13 @@ export const MenuMap = ({ selectImage }) => {
               </div>
               <h6 className="title is-6">Satélite</h6>
               <label className="radio">
-                <input type="radio" name="answer" />
-                GOES16 - True Color
+                <input type="radio" name="answer" checked={UFPEL} onChange={toggleUFPEL} />
+                GOES16 - CH 14
               </label>
               <label className="radio">
-                <input type="radio" name="answer" />
-                GOES16 - Canal 13
+                <input type="radio" name="answer" checked={!UFPEL} onChange={toggleUFPEL} />
+                CPMet UFPEL
               </label>
-              <label className="radio">
-                <input type="radio" name="answer" />
-                GOES16 - Day Cloud Phase
-              </label>
-              <div>
-                <label className={styles.toggle}>
-                  <span className={styles.toggleFirstLabel}>GOES16 CH 14</span>
-                  <input className={styles.toggleCheckbox} type="checkbox" checked={!UFPEL} onChange={toggleUFPEL} />
-                    <div className={styles.toggleSwitch}></div>
-                    <span className={styles.toggleLabel}>CPMet UFPEL</span>
-                </label>
-              </div>
             </div>
           )}
         </div>
