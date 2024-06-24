@@ -24,12 +24,13 @@
 .container {
   background-color: #323233;
   align-items: center;
-  display: flex;
+  display: none;
   justify-content: center;
   border-radius: 16px;
   padding: 12px;
   gap: 8px;
   border: none;
+
 }
 
 .container:hover {
@@ -41,7 +42,7 @@
 }
 .block {
   width: 128px;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   position: fixed;
