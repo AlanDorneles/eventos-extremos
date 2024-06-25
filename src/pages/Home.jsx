@@ -1,7 +1,7 @@
 import { DataINMETAPI } from "../services/inmet.js";
 import { useEffect, useState, useRef } from "react";
 import "leaflet/dist/leaflet.css";
-import { MenuMap } from "../components/menuMap/menuMap.jsx";
+import MenuMap  from "../components/menuMap/menuMap.tsx";
 import { Player } from "../components/player/player.jsx";
 import {
   HourScopeProvider,
@@ -17,6 +17,7 @@ import styles from "./styles/Home.module.css";
 import { DownloadGif } from "../components/download/gif.jsx";
 import Satellite from "./Sattelite.jsx";
 import Windy from "./Windy.jsx";
+import Estacao from "./Estacao.jsx";
 
 
 export default function Home() {
@@ -127,14 +128,7 @@ export default function Home() {
             <MenuMap selectImage={handleSelectImage} ref={containerRef} />
           </HourScopeProvider>
         </section>
-        <Player
-          playGif={playImages}
-          onClick={handlerSrcFunc}
-          pauseGif={pauseGif}
-          nextImage={nextImage}
-          previousImage={previousImage}
-        />
-
+        
         {location.pathname === "/" && (
           <section className={styles.map}>
             <Map
@@ -147,13 +141,26 @@ export default function Home() {
             />
           </section>
         )}
-        <section>{location.pathname === "/satelite" && <Satellite />}</section>
-        <DownloadGif disabledButton={disabledButton} />
+
+        {location.pathname === "/satelite" && <Satellite />}
+        {location.pathname === '/estacoes' && <Estacao />}
+      
       </main>
       <button className={styles.toggleBtn} onClick={toggleMenuVisibility}>
         Menu
       </button>
       <section>{location.pathname === '/windy' && <Windy />}</section>
+     
+
+      <Player
+          playGif={playImages}
+          onClick={handlerSrcFunc}
+          pauseGif={pauseGif}
+          nextImage={nextImage}
+          previousImage={previousImage}
+        />
+
+        <DownloadGif disabledButton={disabledButton} />
     </>
   );
 }
