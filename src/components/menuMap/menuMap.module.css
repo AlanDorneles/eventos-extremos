@@ -77,3 +77,8 @@ input[type="checkbox"]::selection {
 ul li {
   width: 100%;
 }
+.containerOptionsStations{
+  display:flex;
+  flex-direction:column;
+  gap:8px
+}
