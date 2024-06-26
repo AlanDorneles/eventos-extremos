@@ -1,72 +1,20 @@
 .container{
     display:flex;
-    height:100vh;
-    overflow-x:hidden;
+    height:100%;
+    overflow:hidden;
     transition: all .3s ease;
 }
 
 .menu_map{
-    width:30%;
+    width:20%;
     transition: all .3s ease;
 }
 .map{
     width:70%;
 }
 
-.fullWidth {
-    width: 100%;
-}
-
 .hidden {
     display: none;
-}
-
-.toggleBtn {
-    width: 128px;
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 27%;
-    right: 2%;
-    background-color: #000000c2;
-    color: #f8a402;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    border-radius: 16px;
-    transition: all .5s ease;
-    z-index: 500;
-}
-
-.toggleBtn:hover {
-    background-color: #f8a402;
-    color: white;
-}
-
-.windy {
-    width: 128px;
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 37%;
-    right: 2%;
-    background-color: #000000c2;
-    color: #f8a402;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    border-radius: 16px;
-    transition: all .5s ease;
-    z-index: 1000;
-}
-
-.windy:hover {
-    background-color: #f8a402;
-    color: white;
 }
 
 .windyContainer {
@@ -77,10 +25,38 @@
     height: calc(100% - 80px);
     display: flex;
     background-color: white;
-    z-index: 1000;
+    z-index: 9000;
 }
 
 iframe {
     width: 100vw;
-    height: 100vh;
+    height: 92vh;
+}
+
+.btnMenu {
+    position: absolute;
+    width: 8rem;
+    height: 4.5rem;
+    margin-left: 3rem;
+    margin-top: .5rem;
+    border-radius: 24px;
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: transform .5s ease-in-out;
+    z-index: 9000;
+}
+
+.btnMenu:hover, .btnMenu:focus {
+    transform: scale(1.1); 
+}
+
+.menuVisible {
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    opacity: 1;
+    visibility: visible;
+}
+
+.menuHidden {
+    transition: opacity 0.5s ease-in-out, visibility 0s ease-in-out 0.5s;
+    opacity: 0;
+    visibility: hidden;
 }
