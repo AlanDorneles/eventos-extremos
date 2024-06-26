@@ -18,7 +18,9 @@ import { DownloadGif } from "../components/download/gif.jsx";
 import Satellite from "./Sattelite.jsx";
 import Windy from "./Windy.jsx";
 import Estacao from "./Estacao.jsx";
-
+import { Link } from 'react-router-dom';
+import { GiRadarSweep, GiSattelite } from 'react-icons/gi';
+import { RiBaseStationLine } from 'react-icons/ri';
 
 export default function Home() {
   const [handlerSrc, setHandlerSrc] = useState(false);
@@ -35,7 +37,8 @@ export default function Home() {
   const [dataINMET, setDataINMET] = useState([]);
   const [disabledButton, setDisabledButton] = useState(false);
   const containerRef = useRef(null);
-  const [isMenuVisible, setIsMenuVisible] = useState(true);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
   const handlerSrcFunc = () => {
     if (handlerSrc === false) {
@@ -108,27 +111,87 @@ export default function Home() {
     setCurrentImageIndex(indexImage + 1);
   };
 
-  const toggleMenuVisibility = () => {
-    setIsMenuVisible(!isMenuVisible);
+  const handleMouseEnterButton = () => {
+    setIsMenuVisible(true);
+    setIsMouseOver(true);
   };
+
+  const handleMouseLeaveButton = () => {
+    setIsMouseOver(false);
+    setTimeout(() => {
+      if (!isMouseOver) {
+        setIsMenuVisible(false);
+      }
+    }, 100);
+  };
+
+  const handleMouseEnterMenu = () => {
+    setIsMouseOver(true);
+  };
+
+  const handleMouseLeaveMenu = () => {
+    setIsMouseOver(false);
+    setIsMenuVisible(false);
+  };
+
+  const renderLinkBasedOnPath = (pathname) => {
+    switch (pathname) {
+      case "/":
+        return (
+          <Link to="/">
+            <span className="icon is-small">
+              <GiRadarSweep />
+            </span>
+            <span>Radar</span>
+          </Link>
+        );
+      case "/satelite":
+        return (
+          <Link to="/satelite">
+            <span className="icon is-small">
+              <GiSattelite className={styles.Icon} />
+            </span>
+            <span>Satélite</span>
+          </Link>
+        );
+      case "/estacoes":
+        return (
+          <Link to="/estacoes">
+            <span className="icon is-small">
+              <RiBaseStationLine className={styles.Icon} />
+            </span>
+            <span>Estações</span>
+          </Link>
+        );
+      default:
+        return null;
+    }
+  };
+  console.log(renderLinkBasedOnPath);
 
   return (
     <>
-      <main
-        className={`${styles.container} ${
-          !isMenuVisible ? styles.fullWidth : ""
-        }`}
-      >
+      <main className={`${styles.container}`}>
         <section
-          className={`${styles.menu_map} ${
-            !isMenuVisible ? styles.hidden : ""
-          }`}
+          className={`${styles.menu_map} ${isMenuVisible ? styles.visible : styles.hidden}`}
+          onMouseEnter={handleMouseEnterMenu}
+          onMouseLeave={handleMouseLeaveMenu}
         >
           <HourScopeProvider>
             <MenuMap selectImage={handleSelectImage} ref={containerRef} />
           </HourScopeProvider>
         </section>
-        
+
+        {!isMenuVisible && (
+          <button
+            className={styles.btnMenu}
+            onMouseOver={handleMouseEnterButton}
+            onMouseLeave={handleMouseLeaveButton}
+          >
+            {renderLinkBasedOnPath(location.pathname)}
+          </button>
+        )}
+
         {location.pathname === "/" && (
           <section className={styles.map}>
             <Map
@@ -144,13 +207,9 @@ export default function Home() {
 
         {location.pathname === "/satelite" && <Satellite />}
         {location.pathname === '/estacoes' && <Estacao />}
-      
+
       </main>
-      <button className={styles.toggleBtn} onClick={toggleMenuVisibility}>
-        Menu
-      </button>
       <section>{location.pathname === '/windy' && <Windy />}</section>
-     
 
       <Player
           playGif={playImages}
