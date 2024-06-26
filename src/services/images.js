@@ -16,6 +16,8 @@ export const getImages = async (typeRadar) => {
   try {
     const DataUTC = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
     const currentHour = new Date(DataUTC).getHours(); //HORA UTC(+3 HORAS)
+    
+
     let initialHour = currentHour - hoursSetting; // HORA INICIAL
     let actualDay = new Date(DataUTC).getDate(); //DIA ATUAL
     let actualMonth = new Date(DataUTC).getMonth() + 1; //MÊS ATUAL

@@ -14,7 +14,6 @@ import { useStationsVisible } from '../../contexts/radarFilter';
 import { useRadarOrSatelite } from '../../contexts/RadarOrSatelite';
 import { ButtonSatContext } from '../../contexts/buttonSat';
 import { buttonStyle } from '../../constants/constants';
-
 import styles from './menuMap.module.css';
 
 interface MenuMapProps {
@@ -30,12 +29,11 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
   const { handleTypeRadar } = useFilterTypeRadarContext();
   const { handleTypeMecanism } = useRadarOrSatelite();
   const { UFPEL, setUFPEL } = useContext(ButtonSatContext);
-
   const actualHour = new Date().getHours();
   const [initHour, setInitHour] = useState<number>(actualHour - 6);
   const [initHourSatellite, setInitHourSatellite] = useState<number>(actualHour - 1);
   const [clickedButtonId, setClickedButtonId] = useState<number | null>(null);
-  const [checkeds, setCheckeds] = useState<{ [key: string]: boolean }>({});
+  const [checkeds, setCheckeds] = useState<{[key: string]: boolean }>({});
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("maxcappi");
   const [selectedTab, setSelectTab] = useState<string>("radar");
@@ -62,7 +60,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
     handleSelectChange(selectedValue);
     const initIndex = actualHour - selectedValue;
     if (initIndex < 0) {
-      setInitHour(initIndex * -1);
+      setInitHour( initIndex);
     } else {
       setInitHour(initIndex);
     }
@@ -74,7 +72,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
     handleSelectSatelliteChange(selectedValueSatellite);
     const initIndexSatellite = actualHour - selectedValueSatellite;
     if (initIndexSatellite < 0) {
-      setInitHourSatellite(initIndexSatellite * -1);
+      setInitHourSatellite(initIndexSatellite * - 1);
     } else {
       setInitHourSatellite(initIndexSatellite);
     }
@@ -160,6 +158,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
             handleCheckBoxChange={handleCheckBoxChange}
           />
         )}
+
         {selectedTab === "satellite" && (
           <SatelliteMenu
             getHourScopeSatelite={getHourScopeSatelite}
@@ -168,11 +167,12 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
             toggleUFPEL={toggleUFPEL}
           />
         )}
+
         {selectedTab === "station" && (
           <StationsMenu
             checkeds={checkeds}
             handleCheckedStation={handleCheckedStation}
-            stations={stations as Station[]} // Cast para o tipo Station[]
+            stations={stations as Station[]}
           />
         )}
       </div>
