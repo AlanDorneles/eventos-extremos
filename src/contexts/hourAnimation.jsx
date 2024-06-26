@@ -6,7 +6,6 @@ export const HourScopeProvider = ({ children }) => {
   const [getHourScopeRadar, setHourScopeRadar] = useState(6);
   const [getHourScopeSatelite, setHourScopeSatelite] = useState(1);
 
-
   const handleSelectChange = (selectedValue) => {
     setHourScopeRadar(selectedValue);
   };

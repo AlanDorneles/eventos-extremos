@@ -1,3 +1,4 @@
+import { useHourScope } from '../../contexts/hourAnimation';
 import styles from './menuMap.module.css';
 import React from 'react';
 
@@ -40,8 +41,11 @@ interface RadarMenuProps {
     handleRadioButtonChange,
     isChecked,
     handleCheckBoxChange,
+  
   }) => {
+
     return (
+
       <>
         <div className={styles.containerSelect}>
           <h6 className="title is-6">Horas</h6>
@@ -62,7 +66,8 @@ interface RadarMenuProps {
           <h6 className="title is-6">Mapa de horas</h6>
           <div style={{ display: "flex" }}>
             <div className="buttons" id="buttons">
-              {Array.from({ length: actualHour - initHour }, (_, index) => {
+
+              {Array.from({ length: getHourScopeRadar }, (_, index) => {
                 const hour = index + initHour + 1;
                 const isClicked = clickedButtonId === index;
                 return (

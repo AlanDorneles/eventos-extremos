@@ -3,8 +3,8 @@ export const fetchRadarData = async (
   typeRadar,
   apiKeyRedeMet,
   actualYear,
-  formattedData,
   day,
+  formattedData,
   h,
 ) => {
   const response = await fetch(
