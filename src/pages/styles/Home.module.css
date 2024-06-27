@@ -2,12 +2,10 @@
     display:flex;
     height:100%;
     overflow:hidden;
-    transition: all .3s ease;
 }
 
 .menu_map{
     width:30%;
-    transition: all .3s ease;
 }
 
 .map{
@@ -42,22 +40,5 @@ iframe {
     margin-top: .5rem;
     border-radius: 24px;
     background-color: rgba(255, 255, 255, 0.7);
-    transition: transform .5s ease-in-out;
     z-index: 9000;
-}
-
-.btnMenu:hover, .btnMenu:focus {
-    transform: scale(1.1); 
-}
-
-.menuVisible {
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-    opacity: 1;
-    visibility: visible;
-}
-
-.menuHidden {
-    transition: opacity 0.5s ease-in-out, visibility 0s ease-in-out 0.5s;
-    opacity: 0;
-    visibility: hidden;
 }
