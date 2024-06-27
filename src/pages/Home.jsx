@@ -167,8 +167,7 @@ export default function Home() {
         return null;
     }
   };
-  console.log(renderLinkBasedOnPath);
-
+  
   return (
     <>
       <main className={`${styles.container}`}>
