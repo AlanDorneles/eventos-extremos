@@ -3,8 +3,8 @@ export const fetchRadarData = async (
   typeRadar,
   apiKeyRedeMet,
   actualYear,
-  day,
   formattedData,
+  day,
   h,
 ) => {
   const response = await fetch(
@@ -20,6 +20,7 @@ export const fetchRadarData = async (
   const santiago = data.data.radar[0].find((item) => item.localidade === "sg");
 
   if (morroDaIgreja && cangucu && santiago) {
+    //console.log(morroDaIgreja, cangucu, santiago)
     listImage.push(   
       {
       morroDaIgreja: morroDaIgreja.path,

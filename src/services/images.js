@@ -23,6 +23,7 @@ export const getImages = async (typeRadar) => {
     let actualMonth = new Date(DataUTC).getMonth() + 1; //MÊS ATUAL
     const actualYear = new Date(DataUTC).getFullYear(); //ANO ATUAL
     const formattedData = formattedDataRadar(actualMonth, actualDay);
+    console.log(actualMonth, actualDay)
     
     //BUSCA COMEÇA NO DIA ATUAL
     if (initialHour > 0) {
@@ -66,7 +67,7 @@ export const getImages = async (typeRadar) => {
     localStorage.setItem(`images-${typeRadar}-${listImage.length-1}-hours`, JSON.stringify(listImage))  
     return listImage;
   } catch (error) {
-    console.error("Erro ao obter os dados do radar:", error);
+    console.error("Erro ao obter os dados do radar84:", error);
     throw error;
   }
 };
