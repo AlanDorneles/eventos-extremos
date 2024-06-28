@@ -80,7 +80,7 @@ const Sobre = () => {
                             <textarea className="textarea" id="message" name="message" rows="4" placeholder="Escreva sua mensagem" />
                         </div>
 
-                        <button type="submit">ENVIAR</button>
+                        <button className={styles.enviarForm} type="submit">ENVIAR</button>
                     </form>
                 </div>
             </div>
