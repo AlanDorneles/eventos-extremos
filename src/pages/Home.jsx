@@ -211,15 +211,16 @@ export default function Home() {
       </main>
       <section>{location.pathname === '/windy' && <Windy />}</section>
       <section>{location.pathname === '/sobre' && <Sobre />}</section>
-
-      <Player
-          playGif={playImages}
-          onClick={handlerSrcFunc}
-          pauseGif={pauseGif}
-          nextImage={nextImage}
-          previousImage={previousImage}
-        />
-
+      
+      {!isMenuVisible && location.pathname !== "/windy" && location.pathname !== "/sobre" && (
+        <Player
+            playGif={playImages}
+            onClick={handlerSrcFunc}
+            pauseGif={pauseGif}
+            nextImage={nextImage}
+            previousImage={previousImage}
+          />
+      )}
         <DownloadGif disabledButton={disabledButton} />
     </>
   );
