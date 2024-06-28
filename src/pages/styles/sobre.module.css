@@ -66,6 +66,33 @@ button {
     border-radius: 8px;
 }
 
+ul li {
+    display: flex;
+    flex-direction: row;
+}
+
+ul li img {
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+}
+
+ul li p {
+    margin-left: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.researcher {
+    font-size: 20px;
+}
+
+.researcherAbout {
+    font-size: 12px;
+    color: rgb(83, 83, 83);
+}
+
 .column {
     float: left;
     width: 50%;

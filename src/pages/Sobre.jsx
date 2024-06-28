@@ -22,7 +22,43 @@ const Sobre = () => {
                 <div className={`${styles.team} ${styles.column}`}>
                     <p className={styles.title}>Equipe</p>
 
-                    
+                    <ul className={styles.imageList}>
+                        <li>
+                            <img src="https://www.delas.pt/files/2018/05/shutterstock_246796558-1200x675_c.jpg" alt="Image 1" />
+                            <div>
+                                <p className={styles.researcher}>Pesquisador 1</p>
+                                <p className={styles.researcherAbout}>Especialista em pesquisar</p>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="https://www.delas.pt/files/2018/05/shutterstock_246796558-1200x675_c.jpg" alt="Image 2" />
+                            <div>
+                                <p className={styles.researcher}>Pesquisador 1</p>
+                                <p className={styles.researcherAbout}>Especialista em pesquisar</p>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="https://www.delas.pt/files/2018/05/shutterstock_246796558-1200x675_c.jpg" alt="Image 3" />
+                            <div>
+                                <p className={styles.researcher}>Pesquisador 1</p>
+                                <p className={styles.researcherAbout}>Especialista em pesquisar</p>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="https://www.delas.pt/files/2018/05/shutterstock_246796558-1200x675_c.jpg" alt="Image 3" />
+                            <div>
+                                <p className={styles.researcher}>Pesquisador 1</p>
+                                <p className={styles.researcherAbout}>Especialista em pesquisar</p>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="https://www.delas.pt/files/2018/05/shutterstock_246796558-1200x675_c.jpg" alt="Image 3" />
+                            <div>
+                                <p className={styles.researcher}>Pesquisador 1</p>
+                                <p className={styles.researcherAbout}>Especialista em pesquisar</p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
                 <div className={`${styles.mail} ${styles.column}`}>
