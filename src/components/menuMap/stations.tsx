@@ -20,7 +20,7 @@ const StationsMenu = React.FC<StationProps> = ({
           <input
             type="checkbox"
             value={station.id}
-            checked={checkeds[station.id] || false}
+            checked={checkeds[station.id] || false }
             onChange={(event) => handleCheckedStation(station.id, event.target.checked)}
           />
           {station.name}

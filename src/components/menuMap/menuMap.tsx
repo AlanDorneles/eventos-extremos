@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { GiSattelite, GiRadarSweep } from 'react-icons/gi';
 import { RiBaseStationLine } from 'react-icons/ri';
-import RadarMenu from './radar';
+import RadarMenu from './radar.tsx';
 import SatelliteMenu from './satellite';
 import StationsMenu from './stations';
 import stations, {Station}  from './listStations';
@@ -89,8 +89,9 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
 
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;
+    console.log(checked)
     setIsChecked(checked);
-    setStationsVisible(checked);
+    setStationsVisible(!checked);
   };
 
   const toggleUFPEL = () => setUFPEL(!UFPEL);
