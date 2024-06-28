@@ -18,6 +18,7 @@ import { DownloadGif } from "../components/download/gif.jsx";
 import Satellite from "./Sattelite.jsx";
 import Windy from "./Windy.jsx";
 import Estacao from "./Estacao.jsx";
+import Sobre from "./Sobre.jsx";
 import { Link } from 'react-router-dom';
 import { GiRadarSweep, GiSattelite } from 'react-icons/gi';
 import { RiBaseStationLine } from 'react-icons/ri';
@@ -181,7 +182,7 @@ export default function Home() {
           </HourScopeProvider>
         </section>
 
-        {!isMenuVisible && (
+        {!isMenuVisible && location.pathname !== "/windy" && location.pathname !== "/sobre" && (
           <button
             className={styles.btnMenu}
             onMouseOver={handleMouseEnterButton}
@@ -209,6 +210,7 @@ export default function Home() {
 
       </main>
       <section>{location.pathname === '/windy' && <Windy />}</section>
+      <section>{location.pathname === '/sobre' && <Sobre />}</section>
 
       <Player
           playGif={playImages}

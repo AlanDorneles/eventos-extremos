@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    width: 70rem;
+    height: 100%;
+    margin: 5rem auto;
+}
+
+.initText {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.initText p{
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.hasDottedList {
+    list-style-type: none;
+    padding-left: 1.5rem;
+}
+
+.hasDottedList li {
+    position: relative;
+}
+
+.hasDottedList li::before {
+    content: "\2022";
+    position: absolute;
+    left: -1rem;
+}
+
+.contact {
+    margin-top: 5rem;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    display: flex;
+    margin-bottom: 1rem;
+    flex-direction: column;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 12rem;
+    height: 2.5rem;
+    color: white;
+    background-color: rgb(255, 102, 0);
+    border-radius: 8px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+}

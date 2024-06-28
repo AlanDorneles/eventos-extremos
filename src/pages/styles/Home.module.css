@@ -24,7 +24,6 @@
     height: calc(100% - 80px);
     display: flex;
     background-color: white;
-    z-index: 9000;
 }
 
 iframe {
