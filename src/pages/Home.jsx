@@ -19,6 +19,7 @@ import Satellite from "./Sattelite.jsx";
 import Windy from "./Windy.jsx";
 import Estacao from "./Estacao.jsx";
 import Sobre from "./Sobre.jsx";
+import Boletins from "./Boletins.jsx";
 import { Link } from 'react-router-dom';
 import { GiRadarSweep, GiSattelite } from 'react-icons/gi';
 import { RiBaseStationLine } from 'react-icons/ri';
@@ -182,7 +183,7 @@ export default function Home() {
           </HourScopeProvider>
         </section>
 
-        {!isMenuVisible && location.pathname !== "/windy" && location.pathname !== "/sobre" && (
+        {!isMenuVisible && location.pathname !== "/windy" && location.pathname !== "/sobre" && location.pathname !== "/boletins" && (
           <button
             className={styles.btnMenu}
             onMouseOver={handleMouseEnterButton}
@@ -207,12 +208,13 @@ export default function Home() {
 
         {location.pathname === "/satelite" && <Satellite />}
         {location.pathname === '/estacoes' && <Estacao />}
+        {location.pathname === '/boletins' && <Boletins />}
 
       </main>
       <section>{location.pathname === '/windy' && <Windy />}</section>
       <section>{location.pathname === '/sobre' && <Sobre />}</section>
       
-      {!isMenuVisible && location.pathname !== "/windy" && location.pathname !== "/sobre" && (
+      {!isMenuVisible && location.pathname !== "/windy" && location.pathname !== "/sobre" && location.pathname !== "/boletins" && (
         <Player
             playGif={playImages}
             onClick={handlerSrcFunc}
