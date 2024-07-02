@@ -17,7 +17,7 @@ const Sobre = () => {
                 </ul>
 
             </div>
-
+{/* 
             <div className={styles.contact}>
                 <div className={`${styles.team} ${styles.column}`}>
                     <p className={styles.title}>Equipe</p>
@@ -60,7 +60,7 @@ const Sobre = () => {
                         </li>
                     </ul>
                 </div>
-
+                <div id="line" className={`${styles.line} ${styles.column}`} />
                 <div className={`${styles.mail} ${styles.column}`}>
                     <p className={styles.title}>Nos envie uma mensagem</p>
 
@@ -83,7 +83,7 @@ const Sobre = () => {
                         <button className={styles.enviarForm} type="submit">ENVIAR</button>
                     </form>
                 </div>
-            </div>
+            </div> */}
 
         </div>
     );
