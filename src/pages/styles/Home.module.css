@@ -41,3 +41,9 @@ iframe {
     background-color: rgba(255, 255, 255, 0.7);
     z-index: 9000;
 }
+
+.centerSat {
+    display: block;
+    width: 70%;
+    margin: 0 auto;
+}

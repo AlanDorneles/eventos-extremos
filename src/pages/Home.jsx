@@ -214,8 +214,11 @@ export default function Home() {
           </section>
         )}
 
-        {location.pathname === "/satelite" && <Satellite />}
-        {location.pathname === "/estacoes" && <Estacao />}
+        {location.pathname === "/satelite" && (
+          <section className={`${isMenuVisible ? styles.centerSat : ''}`}>
+            <Satellite />
+          </section>
+        )}        {location.pathname === "/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
       </main>
       <section>{location.pathname === "/windy" && <Windy />}</section>
