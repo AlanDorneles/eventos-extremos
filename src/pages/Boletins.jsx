@@ -204,7 +204,7 @@ const Boletins = () => {
         </li>
         <li>
           <a
-            href="/arquivos/Informes_da_Reitoria/2024/1006-Boletim-21-furg.pdf"
+            href="https://furg.br/arquivos/Informes_da_Reitoria/2024/1006-Boletim-21-furg.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -1,7 +1,7 @@
 import { DataINMETAPI } from "../services/inmet.js";
 import { useEffect, useState, useRef } from "react";
 import "leaflet/dist/leaflet.css";
-import MenuMap  from "../components/menuMap/menuMap.tsx";
+import MenuMap from "../components/menuMap/menuMap.tsx";
 import { Player } from "../components/player/player.jsx";
 import {
   HourScopeProvider,
@@ -20,9 +20,9 @@ import Windy from "./Windy.jsx";
 import Estacao from "./Estacao.jsx";
 import Sobre from "./Sobre.jsx";
 import Boletins from "./Boletins.jsx";
-import { Link } from 'react-router-dom';
-import { GiRadarSweep, GiSattelite } from 'react-icons/gi';
-import { RiBaseStationLine } from 'react-icons/ri';
+import { Link } from "react-router-dom";
+import { GiRadarSweep, GiSattelite } from "react-icons/gi";
+import { RiBaseStationLine } from "react-icons/ri";
 
 export default function Home() {
   const [handlerSrc, setHandlerSrc] = useState(false);
@@ -169,12 +169,20 @@ export default function Home() {
         return null;
     }
   };
-  
+
+  const hideItFrom =
+    !isMenuVisible &&
+    location.pathname !== "/windy" &&
+    location.pathname !== "/sobre" &&
+    location.pathname !== "/boletins";
+
   return (
     <>
       <main className={`${styles.container}`}>
         <section
-          className={`${styles.menu_map} ${isMenuVisible ? styles.visible : styles.hidden}`}
+          className={`${styles.menu_map} ${
+            isMenuVisible ? styles.visible : styles.hidden
+          }`}
           onMouseEnter={handleMouseEnterMenu}
           onMouseLeave={handleMouseLeaveMenu}
         >
@@ -183,7 +191,7 @@ export default function Home() {
           </HourScopeProvider>
         </section>
 
-        {!isMenuVisible && location.pathname !== "/windy" && location.pathname !== "/sobre" && location.pathname !== "/boletins" && (
+        {hideItFrom && (
           <button
             className={styles.btnMenu}
             onMouseOver={handleMouseEnterButton}
@@ -206,24 +214,26 @@ export default function Home() {
           </section>
         )}
 
-        {location.pathname === "/satelite" && <Satellite />}
-        {location.pathname === '/estacoes' && <Estacao />}
-        {location.pathname === '/boletins' && <Boletins />}
-
+        {location.pathname === "/satelite" && (
+          <section className={`${isMenuVisible ? styles.centerSat : ''}`}>
+            <Satellite />
+          </section>
+        )}        {location.pathname === "/estacoes" && <Estacao />}
+        {location.pathname === "/boletins" && <Boletins />}
       </main>
-      <section>{location.pathname === '/windy' && <Windy />}</section>
-      <section>{location.pathname === '/sobre' && <Sobre />}</section>
-      
-      {!isMenuVisible && location.pathname !== "/windy" && location.pathname !== "/sobre" && location.pathname !== "/boletins" && (
+      <section>{location.pathname === "/windy" && <Windy />}</section>
+      <section>{location.pathname === "/sobre" && <Sobre />}</section>
+
+      {hideItFrom && location.pathname !== "/satelite" && (
         <Player
-            playGif={playImages}
-            onClick={handlerSrcFunc}
-            pauseGif={pauseGif}
-            nextImage={nextImage}
-            previousImage={previousImage}
-          />
+          playGif={playImages}
+          onClick={handlerSrcFunc}
+          pauseGif={pauseGif}
+          nextImage={nextImage}
+          previousImage={previousImage}
+        />
       )}
-        <DownloadGif disabledButton={disabledButton} />
+      <DownloadGif disabledButton={disabledButton} />
     </>
   );
 }
