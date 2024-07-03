@@ -90,7 +90,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;
     setIsChecked(checked);
-    setStationsVisible(checked);
+    setStationsVisible(!checked);
   };
 
   const toggleUFPEL = () => setUFPEL(!UFPEL);
