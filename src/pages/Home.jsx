@@ -224,7 +224,7 @@ export default function Home() {
       <section>{location.pathname === "/windy" && <Windy />}</section>
       <section>{location.pathname === "/sobre" && <Sobre />}</section>
 
-      {hideItFrom && location.pathname !== "/satelite" && (
+      {hideItFrom && location.pathname !== "/satelite" && location.pathname !== "/estacoes" && (
         <Player
           playGif={playImages}
           onClick={handlerSrcFunc}
