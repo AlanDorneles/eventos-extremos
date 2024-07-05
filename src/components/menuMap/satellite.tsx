@@ -9,10 +9,6 @@ interface SatelliteProps {
   handleChangeSatellite: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   UFPEL: boolean;
   toggleUFPEL: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  initHour: number;
-  clickedButtonId: number | null;
-  selectIndex: (index: number) => void;
-  buttonStyle: React.CSSProperties;
 }
 
 interface ImageButtonProps {
@@ -24,10 +20,6 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
   handleChangeSatellite,
   UFPEL,
   toggleUFPEL,
-  initHour,
-  clickedButtonId,
-  selectIndex,
-  buttonStyle,
 }) => {
   
   const extractDateTime = (url: string): string => {
@@ -85,8 +77,7 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
               <button
                 key={index}
                 className="button is-small"
-                onClick={() => handleImageClick(0)}
-                // onClick={() => handleImageClick(index)}
+                onClick={() => handleImageClick(index)}
               >
                 {extractDateTime(imageUrl)}
               </button>
