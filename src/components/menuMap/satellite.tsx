@@ -9,6 +9,8 @@ interface SatelliteProps {
   handleChangeSatellite: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   UFPEL: boolean;
   toggleUFPEL: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  buttonStyle: React.CSSProperties;
+  clickedButtonId: number | null;
 }
 
 interface ImageButtonProps {
@@ -20,6 +22,8 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
   handleChangeSatellite,
   UFPEL,
   toggleUFPEL,
+  buttonStyle,
+  clickedButtonId,
 }) => {
   
   const extractDateTime = (url: string): string => {
@@ -44,13 +48,13 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
 
   const images: string[] = UFPEL ? CPTECImages() : CPPMETImages();
   const { updateImage } = useImageContext();
-  
+
   const handleImageClick = (index: number) => {
     const imageUrl = images[index].toString();
     const dateTime = extractDateTime(imageUrl);
     console.log(`Hora da imagem: ${dateTime}`);
     updateImage(imageUrl);
-    window.open(imageUrl, '_blank');
+    //window.open(imageUrl, '_blank');
   };
 
   return (
@@ -73,15 +77,20 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
         <h6 className="title is-6">Seleção de Imagem</h6>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           <div className="button-group" id="imageSelectors">
-            {images.map((imageUrl, index) => (
+          {images.map((imageUrl, index) => {
+            const isClicked = clickedButtonId === index;
+            return (
               <button
-                key={index}
+                key={index.toString()}
                 className="button is-small"
                 onClick={() => handleImageClick(index)}
+                id={index.toString()}
+                style={{ ...(isClicked && buttonStyle) }}
               >
                 {extractDateTime(imageUrl)}
               </button>
-            ))}
+            );
+          })}
           </div>
         </div>
       </div>

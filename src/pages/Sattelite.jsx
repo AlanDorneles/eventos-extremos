@@ -41,17 +41,25 @@ export default function Satellite() {
 
   return (
     <>
-      <div className={styles.container}>
-        <div id="UFPEL" className={styles.imageContainer} style={{ display: UFPEL ? 'none' : '' }}>
+    <div className={styles.container}>
+      {!image && !UFPEL && (
+        <div id="UFPEL" className={styles.imageContainer}>
           <img src={imageCPMET} alt={`Image ${index + 1} CPMET UFPEL`} />
         </div>
-        {/* <div>
-          {image && <img src={image} alt="Imagem sobreposta" style={{ position: 'absolute' }} />}
-        </div> */}
-        <div id="INPE" className={styles.imageINPE} style={{ display: UFPEL ? '' : 'none' }}>
+      )}
+
+      {!image && UFPEL && (
+        <div id="INPE" className={styles.imageINPE}>
           <img src={imageINPE} alt={`Image ${indexINPE + 1} CPTEC INPE`} />
         </div>
-      </div>
-    </>
+      )}
+
+      {image && (
+        <div id="SELECIONADA" className={styles.selected}>
+          <img src={image} alt="Imagem selecionada" />
+        </div>
+      )}
+    </div>
+  </>
   );
 }
