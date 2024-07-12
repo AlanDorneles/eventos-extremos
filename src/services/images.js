@@ -23,7 +23,7 @@ export const getImages = async (typeRadar) => {
     let actualMonth = new Date(DataUTC).getMonth() + 1; //MÊS ATUAL
     const actualYear = new Date(DataUTC).getFullYear(); //ANO ATUAL
     const formattedData = formattedDataRadar(actualMonth, actualDay);
-    console.log(actualMonth, actualDay)
+
     
     //BUSCA COMEÇA NO DIA ATUAL
     if (initialHour > 0) {

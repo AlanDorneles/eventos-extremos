@@ -9,8 +9,7 @@ import { useMenuContext } from "./contexts/MenuContext";
 function Container() {
 
 const {showMenu} = useMenuContext()
-console.log(showMenu)
-
+    
     return(
       <>
           <MenuPrincipal  id="menu" />

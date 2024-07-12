@@ -9,6 +9,7 @@ import { RadarOrSateliteProvider } from './RadarOrSatelite.jsx';
 import { ButtonSatProvider } from './buttonSat.jsx';
 import { PhenomenaProvider } from "./Phenomena.jsx";
 import { ShowMenuConfigurationProvider } from "./showMenu.jsx";
+import { CheckedsProvider } from "./Checkeds.jsx";
 
 interface CombinedProvidersProps {
   children: ReactNode;
@@ -18,7 +19,7 @@ export function CombinedProviders({ children }: CombinedProvidersProps) {
   return (
     
       <HourScopeProvider>
-    
+      <CheckedsProvider>
       <ShowMenuConfigurationProvider>
         <ButtonSatProvider>
         <RadarIsCheckedProvider>
@@ -38,6 +39,7 @@ export function CombinedProviders({ children }: CombinedProvidersProps) {
         </RadarIsCheckedProvider>
     </ButtonSatProvider>
     </ShowMenuConfigurationProvider>
+    </CheckedsProvider>
     </HourScopeProvider>
   );
 }

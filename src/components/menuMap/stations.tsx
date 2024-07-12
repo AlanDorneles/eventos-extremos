@@ -1,30 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from "./menuMap.module.css";
-import { Station } from './listStations';
+import { stations } from '../../constants/stations';
+import { useCheckedsContext } from '../../contexts/Checkeds';
 
-interface StationProps {
-  checkeds: { [key: string]: string };
-  handleCheckedStation: (id:string, checked:boolean) => void;
-  stations: Station[]
-}
+const StationsMenu: React.FC = () => {
+  const { checkeds, setCheckeds} = useCheckedsContext();
 
-const StationsMenu = React.FC<StationProps> = ({
-  checkeds,
-  handleCheckedStation,
-  stations
-}) => {
+  const handleCheckedStation = (id: string, checked: boolean) => {
+    setCheckeds(prevCheckeds => 
+      checked ? [...prevCheckeds, id] : prevCheckeds.filter(checkedId => checkedId !== id)
+    );
+  };
+
   return (
-    <div className={styles.containerOptionsStations}>
-       {stations.map(station => (
-        <label key={station.id} className="checkbox">
-          <input
-            type="checkbox"
-            value={station.id}
-            checked={checkeds[station.id] || false}
-            onChange={(event) => handleCheckedStation(station.id, event.target.checked)}
-          />
-          {station.name}
-        </label>
+    <div className={styles.menu}>
+      {stations.map((station) => (
+        <div key={station.id}>
+          <label>
+            <input
+              type="checkbox"
+              checked={checkeds.includes(station.id)}
+              onChange={(e) => {handleCheckedStation(station.id, e.target.checked)}}
+            />
+            {station.name}
+          </label>
+        </div>
       ))}
     </div>
   );

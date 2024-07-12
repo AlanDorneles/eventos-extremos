@@ -1,36 +1,35 @@
 import { useState } from "react";
-import { useShowMenuConfiguration } from "../../contexts/showMenu";
+//import { useShowMenuConfiguration } from "../../contexts/showMenu";
 
 export default function MenuPrincipal() {
-  const { showMenu, setShowMenu } = useShowMenuConfiguration();
+  //const { showMenu, setShowMenu } = useShowMenuConfiguration();
   const [hidden, setHidden] = useState({
     ButtonFurgHovered: true,
     ButtonWindyHovered: true,
     IsHidden: "is-hidden",
   });
 
-  const handleShowMenu = () => {
+  /*const handleShowMenu = () => {
     setShowMenu(!showMenu)
-  }
+  }*/
 
   const hiddenButtonEnterWindy = () => {
     setHidden((prevState) => ({ ...prevState, ButtonWindyHovered: false }));
-    console.log("enter");
+    ("enter");
   };
 
   const hiddenButtonLeaveWindy = () => {
     setHidden((prevState) => ({ ...prevState, ButtonWindyHovered: true }));
-    console.log("leave");
+
   };
 
   const hiddenButtonEnterFurg = () => {
     setHidden((prevState) => ({ ...prevState, ButtonFurgHovered: false }));
-    console.log("enter");
   };
 
   const hiddenButtonLeaveFurg = () => {
     setHidden((prevState) => ({ ...prevState, ButtonFurgHovered: true }));
-    console.log("leave");
+
   };
 
   return (
@@ -129,11 +128,11 @@ export default function MenuPrincipal() {
               </a>
 
               
-                <button className="button is-rounded is-text mr-4" onClick={handleShowMenu}>
+                {/*<button className="button is-rounded is-text mr-4" onClick={handleShowMenu}>
                   <figure className="image is-24x24">
                     <img src="../../public/setting.svg" alt="" />
                   </figure>
-                </button>
+                </button>*/}
              
             </div>
           </div>

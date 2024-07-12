@@ -1,13 +1,14 @@
 import { apiINMETKey } from "../constants/constants";
-import { formattedDataInit, formattedDataFinal } from "../utils/formattedData";
-import { weatherStations } from "../constants/constants";
+import { formattedDataFinal } from "../utils/formattedData";
 import { windDegreesToDirection } from "../utils/windDegreesToDirection";
 
-export const DataStationsAPI = async () => {
-  const codeStation = weatherStations;
-  for (let i = 0; i < weatherStations.length; i++) {
+export const DataStationsAPI = async (stations) => {
+
+  const dataArray = []; // Array para armazenar os dados de cada estação
+
+  for (let i = 0; i < stations.length; i++) {
     const response = await fetch(
-      `https://apitempo.inmet.gov.br/token/estacao/${formattedDataInit}/${formattedDataFinal}/${codeStation[i]}/${apiINMETKey}`
+      `https://apitempo.inmet.gov.br/token/estacao/${formattedDataFinal}/${formattedDataFinal}/${stations[i]}/${apiINMETKey}`
     );
 
     if (!response.ok) {
@@ -16,15 +17,8 @@ export const DataStationsAPI = async () => {
 
     const data = await response.json();
 
-    const filteredData = data.filter(
-      (item) => item !== null && item.PRE_INS !== null
-    );
-
-    if (filteredData.length === 0) {
-      throw new Error("Não há dados válidos disponíveis"); //Erro caso a API retorne valores vazios
-    }
     var DataINMET = {
-      station: codeStation,
+      station: stations[i],
       pressure: [],
       hour: [],
       windDirection: [],
@@ -38,7 +32,7 @@ export const DataStationsAPI = async () => {
       degree: [],
     };
 
-    filteredData.forEach((item) => {
+    data.forEach((item) => {
       DataINMET.pressure.push(item.PRE_INS);
       DataINMET.hour.push(
         `${item.HR_MEDICAO.slice(0, 2)}:${item.HR_MEDICAO.slice(2, 4)}` //HR_MEDICAO de XXXX para XX:XX
@@ -53,6 +47,9 @@ export const DataStationsAPI = async () => {
       DataINMET.name.push(item.DC_NOME);
       DataINMET.degree.push(item.VEN_DIR);
     });
+
+    dataArray.push(DataINMET); // Adicionar DataINMET ao array
   }
-  return DataINMET;
+
+  return dataArray; // Retornar o array com os dados de todas as estações
 };
