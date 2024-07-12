@@ -138,15 +138,6 @@ export default function Home() {
 
   const renderLinkBasedOnPath = (pathname) => {
     switch (pathname) {
-      case "/":
-        return (
-          <Link to="/">
-            <span className="icon is-small">
-              <GiRadarSweep />
-            </span>
-            <span>Radar</span>
-          </Link>
-        );
       case "/satelite":
         return (
           <Link to="/satelite">
@@ -181,7 +172,7 @@ export default function Home() {
       <main className={`${styles.container}`}>
         <section
           className={`${styles.menu_map} ${
-            isMenuVisible ? styles.visible : styles.hidden
+            isMenuVisible || location.pathname==="/" ? styles.visible : styles.hidden
           }`}
           onMouseEnter={handleMouseEnterMenu}
           onMouseLeave={handleMouseLeaveMenu}
@@ -191,7 +182,7 @@ export default function Home() {
           </HourScopeProvider>
         </section>
 
-        {hideItFrom && (
+        {hideItFrom && location.pathname !== "/" && (
           <button
             className={styles.btnMenu}
             onMouseOver={handleMouseEnterButton}
@@ -224,7 +215,7 @@ export default function Home() {
       <section>{location.pathname === "/windy" && <Windy />}</section>
       <section>{location.pathname === "/sobre" && <Sobre />}</section>
 
-      {hideItFrom && location.pathname !== "/satelite" && (
+      {hideItFrom && location.pathname !== "/satelite" && location.pathname !== "/estacoes" && (
         <Player
           playGif={playImages}
           onClick={handlerSrcFunc}

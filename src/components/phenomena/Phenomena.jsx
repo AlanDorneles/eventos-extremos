@@ -19,7 +19,7 @@ export const Phenomena = ({handleCloseModal}) => {
             </div>
             <div className={styles.close}>
             <button
-                className="button is-danger"
+                className="button is-link is-inverted is-rounded is-large"
                 onClick={handleCloseModal}
             >
                 <MdClose />
