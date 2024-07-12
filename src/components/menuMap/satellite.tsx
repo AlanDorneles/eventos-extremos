@@ -44,9 +44,10 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
 
   const images: string[] = UFPEL ? CPTECImages() : CPPMETImages();
   const { updateImage } = useImageContext();
-  
+  const filteredImages = images.filter(image => !image.includes('cdn'));
+
   const handleImageClick = (index: number) => {
-    const imageUrl = images[index].toString();
+    const imageUrl = filteredImages[index].toString();
     const dateTime = extractDateTime(imageUrl);
     console.log(`Hora da imagem: ${dateTime}`);
     updateImage(imageUrl);
@@ -73,7 +74,7 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
         <h6 className="title is-6">Seleção de Imagem</h6>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           <div className="button-group" id="imageSelectors">
-            {images.map((imageUrl, index) => (
+            {filteredImages.map((imageUrl, index) => (
               <button
                 key={index}
                 className="button is-small"
