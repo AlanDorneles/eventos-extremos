@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 const ImageContext = createContext();
 
 export const ImageProvider = ({ children }) => {
-  const [image, setImage] = useState(null);
+  const [image, shuffleImage] = useState(null);
 
   const updateImage = (newImage) => {
-    setImage(newImage);
+    shuffleImage(newImage);
   };
 
   return (

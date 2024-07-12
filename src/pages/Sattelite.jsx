@@ -37,7 +37,7 @@ export default function Satellite() {
   }, [indexINPE, imagesCPTEC]);
 
   const { UFPEL } = useContext(ButtonSatContext);
-  const { image } = useImageContext();
+  const { image, shuffleImage } = useImageContext();
 
   return (
     <>
@@ -56,6 +56,7 @@ export default function Satellite() {
 
       {image && (
         <div id="SELECIONADA" className={styles.selected}>
+          <p className={styles.pause}>IMAGEM PAUSADA</p>
           <img src={image} alt="Imagem selecionada" />
         </div>
       )}
