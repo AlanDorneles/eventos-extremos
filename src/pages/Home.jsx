@@ -17,7 +17,7 @@ import styles from "./styles/Home.module.css";
 import { DownloadGif } from "../components/download/gif.jsx";
 import Satellite from "./Sattelite.jsx";
 import Windy from "./Windy.jsx";
-import Estacao from "./Estacao.jsx";
+import Estacao from "./Estacao.tsx";
 import Sobre from "./Sobre.jsx";
 import Boletins from "./Boletins.jsx";
 import { Link } from "react-router-dom";
@@ -91,7 +91,7 @@ export default function Home() {
     handleNextImage(count);
     setCount(count + 1);
 
-    if (count >= images.length - 2) {
+    if (count >=  images.length - 2) {
       setCount(0);
     }
     localStorage.setItem("imageId", count);

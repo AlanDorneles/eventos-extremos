@@ -9,6 +9,7 @@ import { RadarOrSateliteProvider } from './RadarOrSatelite.jsx';
 import { ButtonSatProvider } from './buttonSat.jsx';
 import { PhenomenaProvider } from "./Phenomena.jsx";
 import { ShowMenuConfigurationProvider } from "./showMenu.jsx";
+import { CheckedsProvider } from "./Checkeds.jsx";
 import { ImageProvider } from "./satImageUpdate.jsx";
 
 interface CombinedProvidersProps {
