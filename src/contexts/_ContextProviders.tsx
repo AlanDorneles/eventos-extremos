@@ -19,6 +19,7 @@ interface CombinedProvidersProps {
 export function CombinedProviders({ children }: CombinedProvidersProps) {
   return (
     <HourScopeProvider>
+      <CheckedsProvider>
       <ImageProvider>
         <ShowMenuConfigurationProvider>
           <ButtonSatProvider>
@@ -40,6 +41,7 @@ export function CombinedProviders({ children }: CombinedProvidersProps) {
           </ButtonSatProvider>
         </ShowMenuConfigurationProvider>
       </ImageProvider>
+      </CheckedsProvider>
     </HourScopeProvider>
   );
 }
