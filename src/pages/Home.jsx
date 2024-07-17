@@ -167,12 +167,14 @@ export default function Home() {
     location.pathname !== "/sobre" &&
     location.pathname !== "/boletins";
 
+  const dontHideItFrom = location.pathname==="/" || location.pathname==="/estacoes";
+
   return (
     <>
       <main className={`${styles.container}`}>
         <section
           className={`${styles.menu_map} ${
-            isMenuVisible || location.pathname==="/" ? styles.visible : styles.hidden
+            isMenuVisible || dontHideItFrom ? styles.visible : styles.hidden
           }`}
           onMouseEnter={handleMouseEnterMenu}
           onMouseLeave={handleMouseLeaveMenu}
@@ -182,7 +184,7 @@ export default function Home() {
           </HourScopeProvider>
         </section>
 
-        {hideItFrom && location.pathname !== "/" && (
+        {hideItFrom && location.pathname !== "/" && location.pathname !== "/estacoes" &&(
           <button
             className={styles.btnMenu}
             onMouseOver={handleMouseEnterButton}
