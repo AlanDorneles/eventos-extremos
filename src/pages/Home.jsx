@@ -91,7 +91,7 @@ export default function Home() {
     handleNextImage(count);
     setCount(count + 1);
 
-    if (count >=  images.length - 2) {
+    if (count >= images.length - 2) {
       setCount(0);
     }
     localStorage.setItem("imageId", count);
@@ -138,18 +138,18 @@ export default function Home() {
 
   const renderLinkBasedOnPath = (pathname) => {
     switch (pathname) {
-      case "/satelite":
+      case "/produtos/satelite":
         return (
-          <Link to="/satelite">
+          <Link to="/produtos/satelite">
             <span className="icon is-small">
               <GiSattelite className={styles.Icon} />
             </span>
             <span>Satélite</span>
           </Link>
         );
-      case "/estacoes":
+      case "/produtos/estacoes":
         return (
-          <Link to="/estacoes">
+          <Link to="/produtos/estacoes">
             <span className="icon is-small">
               <RiBaseStationLine className={styles.Icon} />
             </span>
@@ -164,10 +164,11 @@ export default function Home() {
   const hideItFrom =
     !isMenuVisible &&
     location.pathname !== "/windy" &&
-    location.pathname !== "/sobre" &&
+    location.pathname !== "/" &&
     location.pathname !== "/boletins";
 
-  const dontHideItFrom = location.pathname==="/" || location.pathname==="/estacoes";
+  const dontHideItFrom =
+     location.pathname === "/produtos/estacoes" || location.pathname === "/produtos/radar" || location.pathname === "/produtos/satelite";
 
   return (
     <>
@@ -184,17 +185,26 @@ export default function Home() {
           </HourScopeProvider>
         </section>
 
-        {hideItFrom && location.pathname !== "/" && location.pathname !== "/estacoes" &&(
-          <button
-            className={styles.btnMenu}
-            onMouseOver={handleMouseEnterButton}
-            onMouseLeave={handleMouseLeaveButton}
-          >
-            {renderLinkBasedOnPath(location.pathname)}
-          </button>
+        {hideItFrom &&
+          location.pathname !== "/produtos/radar" &&
+          location.pathname !== "/produtos/estacoes" &&
+          location.pathname !== "/produtos/satelite" && (
+            <button
+              className={styles.btnMenu}
+              onMouseOver={handleMouseEnterButton}
+              onMouseLeave={handleMouseLeaveButton}
+            >
+              {renderLinkBasedOnPath(location.pathname)}
+            </button>
+          )}
+
+        {location.pathname === "/produtos/satelite" && (
+          <section className={`${isMenuVisible ? styles.centerSat : ""}`}>
+            <Satellite />
+          </section>
         )}
 
-        {location.pathname === "/radar" && (
+        {location.pathname === "/produtos/radar" && (
           <section className={styles.map}>
             <Map
               cangucuChecked={cangucuChecked}
@@ -207,25 +217,24 @@ export default function Home() {
           </section>
         )}
 
-        {location.pathname === "/" && (
-          <section className={`${isMenuVisible ? styles.centerSat : ''}`}>
-            <Satellite />
-          </section>
-        )}        {location.pathname === "/estacoes" && <Estacao />}
+        {location.pathname === "/produtos/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
       </main>
       <section>{location.pathname === "/windy" && <Windy />}</section>
-      <section>{location.pathname === "/sobre" && <Sobre />}</section>
+      <section>{location.pathname === "/" && <Sobre />}</section>
 
-      {hideItFrom && location.pathname !== "/satelite" && location.pathname !== "/estacoes" && (
-        <Player
-          playGif={playImages}
-          onClick={handlerSrcFunc}
-          pauseGif={pauseGif}
-          nextImage={nextImage}
-          previousImage={previousImage}
-        />
-      )}
+      {hideItFrom &&
+        location.pathname !== "/produtos/satelite" &&
+        location.pathname !== "/produtos/estacoes" &&
+        location.pathname !== "/produtos/radar" && (
+          <Player
+            playGif={playImages}
+            onClick={handlerSrcFunc}
+            pauseGif={pauseGif}
+            nextImage={nextImage}
+            previousImage={previousImage}
+          />
+        )}
       <DownloadGif disabledButton={disabledButton} />
     </>
   );

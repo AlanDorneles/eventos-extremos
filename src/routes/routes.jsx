@@ -7,11 +7,11 @@ export const Root = () => {
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/radar" element={<Home />}/>
-            <Route path="/windy" element={<Home/>}/>
-            <Route path="/estacoes" element={<Home/>}/>
-            <Route path="/sobre" element={<Home/>}/>
+            <Route path="/produtos/radar" element={<Home />}/>
+            <Route path="/produtos/satelite" element={<Home/>}/>
+            <Route path="/produtos/estacoes" element={<Home/>}/>
             <Route path="/boletins" element={<Home/>}/>
+            <Route path="/windy" element={<Home/>}/>
         </Routes>
     </BrowserRouter>
     )
