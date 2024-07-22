@@ -59,8 +59,8 @@ export default function MenuPrincipal() {
             Início
           </a>
 
-          <a className="navbar-item" href="/sobre">
-            Sobre
+          <a className="navbar-item" href="/produtos/satelite">
+            Produtos
           </a>
 
           <a className="navbar-item" href="/boletins">

@@ -106,7 +106,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
         <div className={`tabs ${styles.containerTabs}`}>
           <ul>
           <li className={`${selectedTab === "satellite" ? "is-active" : ""}`} onClick={() => handleTabClick("satellite")}>
-              <Link to="/">
+              <Link to="/produtos/satelite">
                 <span className="icon is-small">
                   <GiSattelite className={styles.Icon} />
                 </span>
@@ -114,7 +114,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
               </Link>
             </li>
             <li className={`${selectedTab === "radar" ? "is-active" : ""}`} onClick={() => handleTabClick("radar")}>
-              <Link to="/radar">
+              <Link to="/produtos/radar">
                 <span className="icon is-small">
                   <GiRadarSweep />
                 </span>
@@ -123,7 +123,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
             </li>
            
             <li className={`${selectedTab === "station" ? "is-active" : ""}`} onClick={() => handleTabClick("station")}>
-              <Link to="/estacoes">
+              <Link to="/produtos/estacoes">
                 <span className="icon is-small">
                   <RiBaseStationLine className={styles.Icon} />
                 </span>
