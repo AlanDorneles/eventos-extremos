@@ -121,7 +121,7 @@ interface RadarMenuProps {
           </label>
         </div>
         <div className={styles.containerRadar}>
-          <h6 className="title is-6">Tipo de Radar</h6>
+          <h6 className="title is-6">Captação</h6>
           <label className="radio">
             <input
               name="typeRadio"

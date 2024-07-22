@@ -36,7 +36,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
   const [checkeds, setCheckeds] = useState<{[key: string]: boolean }>({});
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("maxcappi");
-  const [selectedTab, setSelectTab] = useState<string>("radar");
+  const [selectedTab, setSelectTab] = useState<string>("satellite");
 
   const handleCheckedStation = (id: string, checked: boolean) => {
     setCheckeds((prev) => ({
@@ -105,22 +105,23 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
         {/* TABS */}
         <div className={`tabs ${styles.containerTabs}`}>
           <ul>
-            <li className={`${selectedTab === "radar" ? "is-active" : ""}`} onClick={() => handleTabClick("radar")}>
+          <li className={`${selectedTab === "satellite" ? "is-active" : ""}`} onClick={() => handleTabClick("satellite")}>
               <Link to="/">
-                <span className="icon is-small">
-                  <GiRadarSweep />
-                </span>
-                <span>Radar</span>
-              </Link>
-            </li>
-            <li className={`${selectedTab === "satellite" ? "is-active" : ""}`} onClick={() => handleTabClick("satellite")}>
-              <Link to="/satelite">
                 <span className="icon is-small">
                   <GiSattelite className={styles.Icon} />
                 </span>
                 <span>Satélite</span>
               </Link>
             </li>
+            <li className={`${selectedTab === "radar" ? "is-active" : ""}`} onClick={() => handleTabClick("radar")}>
+              <Link to="/radar">
+                <span className="icon is-small">
+                  <GiRadarSweep />
+                </span>
+                <span>Radar</span>
+              </Link>
+            </li>
+           
             <li className={`${selectedTab === "station" ? "is-active" : ""}`} onClick={() => handleTabClick("station")}>
               <Link to="/estacoes">
                 <span className="icon is-small">
@@ -134,9 +135,20 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
       </div>
 
       {/* MENUS */}
-
-      {/* RADAR */}
       <div className={styles.containerItem}>
+
+      {/* SATELLITE */}
+      {selectedTab === "satellite" && (
+          <SatelliteMenu
+            getHourScopeSatelite={getHourScopeSatelite}
+            handleChangeSatellite={handleChangeSatellite}
+            UFPEL={UFPEL}
+            toggleUFPEL={toggleUFPEL}
+          />
+        )}
+
+
+        {/* RADAR */}
         {selectedTab === "radar" && (
           <RadarMenu
             getHourScopeRadar={getHourScopeRadar}
@@ -159,15 +171,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
           />
         )}
 
-        {selectedTab === "satellite" && (
-          <SatelliteMenu
-            getHourScopeSatelite={getHourScopeSatelite}
-            handleChangeSatellite={handleChangeSatellite}
-            UFPEL={UFPEL}
-            toggleUFPEL={toggleUFPEL}
-          />
-        )}
-
+        {/* ESTAÇÕES */}
         {selectedTab === "station" && (
           <StationsMenu
             checkeds={checkeds}
