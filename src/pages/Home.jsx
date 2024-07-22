@@ -194,7 +194,7 @@ export default function Home() {
           </button>
         )}
 
-        {location.pathname === "/" && (
+        {location.pathname === "/radar" && (
           <section className={styles.map}>
             <Map
               cangucuChecked={cangucuChecked}
@@ -207,7 +207,7 @@ export default function Home() {
           </section>
         )}
 
-        {location.pathname === "/satelite" && (
+        {location.pathname === "/" && (
           <section className={`${isMenuVisible ? styles.centerSat : ''}`}>
             <Satellite />
           </section>

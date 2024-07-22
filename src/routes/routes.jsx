@@ -6,8 +6,8 @@ export const Root = () => {
     return(
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Home />}/>
-            <Route path="/satelite" element={<Home/>}/>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/radar" element={<Home />}/>
             <Route path="/windy" element={<Home/>}/>
             <Route path="/estacoes" element={<Home/>}/>
             <Route path="/sobre" element={<Home/>}/>
