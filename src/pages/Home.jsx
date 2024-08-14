@@ -20,6 +20,7 @@ import Windy from "./Windy.jsx";
 import Estacao from "./Estacao.tsx";
 import Sobre from "./Sobre.jsx";
 import Boletins from "./Boletins.jsx";
+import WRF from "./WRF.jsx";
 import { Link } from "react-router-dom";
 import { GiRadarSweep, GiSattelite } from "react-icons/gi";
 import { RiBaseStationLine } from "react-icons/ri";
@@ -165,7 +166,8 @@ export default function Home() {
     !isMenuVisible &&
     location.pathname !== "/windy" &&
     location.pathname !== "/" &&
-    location.pathname !== "/boletins";
+    location.pathname !== "/boletins" &&
+    location.pathname !== "/wrf";
 
   const dontHideItFrom =
      location.pathname === "/produtos/estacoes" || location.pathname === "/produtos/radar" || location.pathname === "/produtos/satelite";
@@ -222,6 +224,7 @@ export default function Home() {
       </main>
       <section>{location.pathname === "/windy" && <Windy />}</section>
       <section>{location.pathname === "/" && <Sobre />}</section>
+      <section>{location.pathname === "/wrf" && <WRF />}</section>
 
       {hideItFrom &&
         location.pathname !== "/produtos/satelite" &&
