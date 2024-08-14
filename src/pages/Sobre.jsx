@@ -3,7 +3,8 @@ import styles from "./styles/sobre.module.css";
 const Sobre = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.initText}>
+      <h1>LABORATORIO DE METEREOLOGIA</h1>
+      {/* <div className={styles.initText}>
         <h4 className="title is-5">CONHEÇA O COMITÊ</h4>
         <p>
           O Comitê de Avaliação e Prognóstico de Eventos Extremos da FURG é um
@@ -82,7 +83,7 @@ const Sobre = () => {
           <li>CPPMET - Imagens de satélite ( GOES-16 - CH 2 )</li>
           <li>CPTEC - Imagens de satélite ( GOES-16 - CH 14 )</li>
         </ul>
-      </div>
+      </div> */}
       {/* 
             <div className={styles.contact}>
                 <div className={`${styles.team} ${styles.column}`}>
