@@ -229,6 +229,15 @@ const Boletins = () => {
             Boletim de Evento Extremo - 23 - 26/06
           </a>
         </li>
+        <li>
+          <a
+            href="https://www.furg.br/noticias/noticias-institucional/boletim-de-numero-24-destaca-tendencia-de-diminuicao-no-nivel-na-regiao-sul-da-lagoa-dos-patos"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Boletim de Evento Extremo - 24 - 04/07
+          </a>
+        </li>
       </ul>
     </div>
   );
