@@ -66,6 +66,9 @@ export default function MenuPrincipal() {
           <a className="navbar-item" href="/boletins">
             Boletins
           </a>
+          <a className="navbar-item" href="/wrf">
+            WRF
+          </a>
         </div>
 
         <div className="navbar-end">
