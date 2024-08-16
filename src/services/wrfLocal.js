@@ -16,16 +16,18 @@ export const wrfLocal = () => {
 
       const dateWRF = actualYear + "" + actualMonth + "" + actualDay;
 
-      //BUSCA COMEÇA NO DIA ATUAL
-    if (currentHour <= 23) {
+    if (currentHour) {
+        let h = 0;
 
-        for (let h = 0; h < hoursSetting; h++) {
+        setInterval(() => {
+            // Garante que h varia entre 0 e 23
             const paddedHour = h.toString().padStart(2, '0');
-            console.log(paddedHour)
             listImage.push(
-                `../../public/wrf/${dateWRF - 1}/maxdbz_+_PNM_wrfout_${dateWRF - 1}_fcst_d01_${actualYear}-${actualMonth}-${actualDay}_${paddedHour}_00_00.png`,
+                `../../public/wrf/${dateWRF}/maxdbz_+_PNM_wrfout_${dateWRF}_fcst_d01_${actualYear}-${actualMonth}-${actualDay}_${paddedHour}_00_00.png`,
             );
-        }
+        
+            h = (h + 1) % 24;
+        }, 1000);        
     }
   
     } catch (error) {
