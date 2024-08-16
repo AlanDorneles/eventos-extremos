@@ -16,18 +16,16 @@ export const wrfLocal = () => {
 
       const dateWRF = actualYear + "" + actualMonth + "" + actualDay;
 
+    let h = 0;
+    
     if (currentHour) {
-        let h = 0;
-
-        setInterval(() => {
-            // Garante que h varia entre 0 e 23
-            const paddedHour = h.toString().padStart(2, '0');
-            listImage.push(
-                `../../public/wrf/${dateWRF}/maxdbz_+_PNM_wrfout_${dateWRF}_fcst_d01_${actualYear}-${actualMonth}-${actualDay}_${paddedHour}_00_00.png`,
-            );
-        
-            h = (h + 1) % 24;
-        }, 1000);        
+        // Garante que h varia entre 0 e 23
+        const paddedHour = h.toString().padStart(2, '0');
+        listImage.push(
+            `../../public/wrf/${dateWRF - 1}/maxdbz_+_PNM_wrfout_${dateWRF - 1}_fcst_d01_${actualYear}-${actualMonth}-${actualDay}_${paddedHour}_00_00.png`,
+        );
+    
+        h = (h + 1) % 24;
     }
   
     } catch (error) {
