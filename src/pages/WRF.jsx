@@ -1,33 +1,36 @@
-import { useState } from "react";
-import styles from "./styles/wrf.module.css";
+import { useState, useEffect, useContext } from "react";
+import { wrfLocal } from "../services/wrfLocal.js";
+import styles from "./styles/Satellite.module.css";
+import { useImageContext } from "../contexts/satImageUpdate";
 
-const WRF = () => {
-  const [imagens, setImagens] = useState([]);
+export default function WRF() {
+  const imagesWRF = wrfLocal();
+  const [indexWRF, setIndexWRF] = useState(0);
+  const [imageWRF, setImageWRF] = useState(imagesWRF[0]);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIndexWRF(prevIndex => (prevIndex + 1) % imagesWRF.length);
+    }, 1000);
 
-  const currentDate = new Date();
-  const year = currentDate.getFullYear().toString();
-  const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-  const day = currentDate.getDate().toString().padStart(2, "0");
-  const formattedDate = `${year}${month}${day}`;
+    return () => clearInterval(intervalId);
+  }, [imagesWRF.length]);
 
-const carregarImagens = async () => {
-  try {
-    const response = await fetch(`http://localhost:3001/${formattedDate}/`);
-    const data = await response.json();
-    setImagens(data);
-  } catch (error) {
-    console.error("Erro ao carregar imagens:", error);
-  }
-};
+  useEffect(() => {
+    setImageWRF(imagesWRF[indexWRF]);
+  }, [indexWRF, imagesWRF]);
+
+  const { image } = useImageContext();
 
   return (
-    <div>
-      <button onClick={carregarImagens}>Carregar Imagens</button>
-      {imagens.map((imagem, index) => (
-        <img key={index} src={imagem} className={styles.imge} alt="Imagem" />
-      ))}
-    </div>
+    <>
+      <div className={styles.container}>
+        {/* <div>
+          {image && <img src={image} alt="Imagem sobreposta" style={{ position: 'absolute' }} />}
+        </div> */}
+        <div id="WRF" className={styles.imageWRF}>
+          <img src={imageWRF} alt={`Image ${indexWRF + 1} WRF`} />
+        </div>
+      </div>
+    </>
   );
-};
-
-export default WRF;
+}
