@@ -16,19 +16,19 @@ export const wrfLocal = () => {
 
       const dateWRF = actualYear + "" + actualMonth + "" + actualDay;
 
-    let h = 0;
+      let h = 0;
 
-    if (currentHour) {
-        const paddedHour = h.toString().padStart(2, '0');
+      for (h = 0; h < 0 + 24; h++) {
+        const paddedHour = (h % 24).toString().padStart(2, '0');
         listImage.push(
-            `../../public/wrf/${dateWRF - 1}/maxdbz_+_PNM_wrfout_${dateWRF - 1}_fcst_d01_${actualYear}-${actualMonth}-${actualDay}_${paddedHour}_00_00.png`,
+          `../../public/wrf/${dateWRF}/maxdbz_+_PNM_wrfout_${dateWRF}_fcst_d01_${actualYear}-${actualMonth}-${actualDay}_${paddedHour}_00_00.png`
         );
-
-        h = (h + 1) % 24;
+      }
     }
 
-    } catch (error) {
+    catch (error) {
       console.error("Erro ao obter os dados do radar:", error);
       throw error;
     }
-    return listImage;  };
+    return listImage;
+  };
