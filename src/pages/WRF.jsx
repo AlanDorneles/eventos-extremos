@@ -1,40 +1,47 @@
 import { useState, useEffect } from "react";
 import { wrfLocal } from "../services/wrfLocal";
 import styles from "./styles/Satellite.module.css";
+import nomeDasPastas from '../../nomes_das_pastas.json';
 
 export default function WRF() {
   const [selectedDate, setSelectedDate] = useState("");
   const [imagesWRF, setImagesWRF] = useState([]);
   const [indexWRF, setIndexWRF] = useState(0);
-  const hoje = new Date();
-  const dataFormatada = hoje.toISOString().split('T')[0]; // Formato AAAA-MM-DD
-  const formattedDate = hoje.toLocaleDateString('pt-BR');
   const oneDayAgo = new Date();
   oneDayAgo.setDate(oneDayAgo.getDate() - 1);
-  const oneDayAgoFormatted = oneDayAgo.toISOString().split('T')[0]; // Formato AAAA-MM-DD
+  const [datesOptions, setDatesOptions] = useState([]);
 
-  const formattedOneDayAgo = oneDayAgo.toLocaleDateString('pt-BR');
-
-  const [datesOptions, setDatesOptions] = useState([
-    { name: formattedDate, date: dataFormatada },
-    { name: formattedOneDayAgo, date: oneDayAgoFormatted },
-  ]);
+  useEffect(() => {
+    const formattedFolders = nomeDasPastas.folders.map(folder => {
+      const formattedDate = `${folder.slice(0, 4)}-${folder.slice(4, 6)}-${folder.slice(6, 8)}`;
+      return { name: formattedDate, date: folder };
+    });
+    setDatesOptions(formattedFolders);
+  }, []);
 
   useEffect(() => {
     if (selectedDate) {
       const images = wrfLocal(selectedDate);
       setImagesWRF(images);
-      setIndexWRF(0); // Reinicia o índice ao mudar a data
+      setIndexWRF(0);
     }
   }, [selectedDate]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setIndexWRF(prevIndex => (prevIndex + 1) % imagesWRF.length);
+    const interval = setInterval(() => {
+      setIndexWRF(prevIndex => {
+        if (isNaN(prevIndex)) {
+          console.error("Index WRF é NaN, passando para 0.");
+          return (imagesWRF.length - 1) % imagesWRF.length;
+        }
+        return (prevIndex + 1) % imagesWRF.length;
+      });
     }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [imagesWRF.length]);
+  
+    return () => {
+      clearInterval(interval);
+    };
+  });
 
   const handleDateChange = (event) => {
     const selectedOption = datesOptions.find(option => option.name === event.target.value);
@@ -50,7 +57,7 @@ export default function WRF() {
             <option key={index} value={option.name}>{option.name}</option>
           ))}
         </select>
-        {imagesWRF.length > 0 && (
+        {imagesWRF.length > 0 && !isNaN(indexWRF + 1) && (
           <img src={imagesWRF[indexWRF]} alt={`Imagem WRF ${indexWRF + 1}`} />
         )}
       </div>

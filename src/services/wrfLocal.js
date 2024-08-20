@@ -1,18 +1,25 @@
 function wrfLocal(selectedDate) {
   let listImage = [];
-  // Converte a data selecionada para o formato necessário
+  if (/^\d{4}-\d{2}-\d{2}$/.test(selectedDate)) {
+    // Formato já está correto, não faz nada
+  } else if (/^\d{8}$/.test(selectedDate)) {
+    selectedDate = `${selectedDate.substring(0, 4)}-${selectedDate.substring(4, 6)}-${selectedDate.substring(6, 8)}`;
+  } else {
+    console.error("Formato de data inválido:", selectedDate);
+    return [];
+  }
+
   const dateParts = selectedDate.split("-");
-  const dateWRF = `${dateParts[0]}${dateParts[1]}${dateParts[2]}`;
+  const year = dateParts[0];
+  const month = dateParts[1];
+  const day = dateParts[2];
+  const dateWRF = `${year}${month}${day}`;
 
   try {
-    const actualYear = dateParts[0];
-    const actualMonth = dateParts[1];
-    const actualDay = dateParts[2];
-
     for (let h = 0; h < 24; h++) {
       const paddedHour = h.toString().padStart(2, '0');
       listImage.push(
-        `../../public/wrf/${dateWRF}/maxdbz_+_PNM_wrfout_${dateWRF}_fcst_d01_${actualYear}-${actualMonth}-${actualDay}_${paddedHour}_00_00.png`
+        `../../public/wrf/${dateWRF}/maxdbz_+_PNM_wrfout_${dateWRF}_fcst_d01_${year}-${month}-${day}_${paddedHour}_00_00.png`
       );
     }
   } catch (error) {
