@@ -4,11 +4,15 @@
 DIR_TO_MONITOR="public/wrf/"
 
 # Caminho para o arquivo JSON de saída
-OUTPUT_JSON="nomes_das_pastas.json"
+OUTPUT_JSON="pastasWRF.json"
 
 # Função para listar os diretórios e escrever no arquivo JSON
 write_folders_to_json() {
-  ls -d $DIR_TO_MONITOR*/ | xargs -n 1 basename | jq -R . | jq -s '{folders: .}' > $OUTPUT_JSON
+  ls -d $DIR_TO_MONITOR*/ | while read -r folder; do
+    if [ "$(ls -A "$folder")" ]; then
+      echo "$folder"
+    fi
+  done | xargs -n 1 basename | sort | jq -R . | jq -s '{folders: .}' > $OUTPUT_JSON
 }
 
 # Inicialmente escreve os nomes das pastas existentes no arquivo JSON

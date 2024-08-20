@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 public/wrf/**
-nomes_das_pastas.json
+pastasWRF.json
 
 # Editor directories and files
 .vscode/*
