@@ -13,10 +13,7 @@ export default function WRF() {
 
   useEffect(() => {
     const formattedFolders = nomeDasPastas.folders.map((folder) => {
-      const formattedDate = `${folder.slice(6, 8)}/${folder.slice(
-        4,
-        6
-      )}/${folder.slice(0, 4)}`;
+      const formattedDate = `${folder.slice(6, 8)}/${folder.slice(4, 6)}/${folder.slice(0, 4)}`;
       return { name: formattedDate, date: folder };
     });
     setDatesOptions(formattedFolders);

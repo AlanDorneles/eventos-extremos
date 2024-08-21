@@ -21,6 +21,9 @@ function wrfLocal(selectedDate) {
       listImage.push(
         `../../public/wrf/${dateWRF}/maxdbz_+_PNM_wrfout_${dateWRF}_fcst_d01_${year}-${month}-${day}_${paddedHour}_00_00.png`
       );
+      // listImage.push(
+      //   `../../public/wrf/${dateWRF}/maxdbz_+_PNM_wrfout_${dateWRF}_fcst_d02_${year}-${month}-${day}_${paddedHour}_00_00.png`
+      // );
     }
   } catch (error) {
     console.error("Erro ao obter os dados do WRF:", error);
