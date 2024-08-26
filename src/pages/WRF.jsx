@@ -7,8 +7,6 @@ export default function WRF() {
   const [selectedDate, setSelectedDate] = useState("");
   const [imagesWRF, setImagesWRF] = useState([]);
   const [indexWRF, setIndexWRF] = useState(0);
-  const oneDayAgo = new Date();
-  oneDayAgo.setDate(oneDayAgo.getDate() - 1);
   const [datesOptions, setDatesOptions] = useState([]);
 
   useEffect(() => {
@@ -21,7 +19,7 @@ export default function WRF() {
 
   useEffect(() => {
     if (selectedDate) {
-      const images = wrfLocal(selectedDate);
+      const images = wrfLocal(selectedDate); // Assume que wrfLocal retorna um array de URLs de imagens
       setImagesWRF(images);
       setIndexWRF(0);
     }
@@ -50,9 +48,20 @@ export default function WRF() {
     setSelectedDate(selectedOption ? selectedOption.date : "");
   };
 
+  const handleImageClick = (imageUrl) => {
+    window.open(imageUrl, '_blank');
+  };
+
+  const extractTimeFromFileName = (fileName) => {
+    const baseName = fileName.split('.')[0];
+    const parts = baseName.split('_');
+    const [hour, minute, second] = parts.slice(-3);
+    return `${hour}:${minute}`;
+  };
+
   return (
-    <>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <div className={styles.menu}>
         <select
           onChange={handleDateChange}
           value={
@@ -67,10 +76,31 @@ export default function WRF() {
             </option>
           ))}
         </select>
-        {imagesWRF.length > 0 && !isNaN(indexWRF + 1) && (
-          <img src={imagesWRF[indexWRF]} alt={`Imagem WRF ${indexWRF + 1}`} />
+        <div className={styles.buttonContainer}>
+          {imagesWRF.map((image, index) => (
+            <button 
+              key={index} 
+              onClick={() => {
+                setIndexWRF(index);
+                handleImageClick(image);
+              }}
+              className={`${styles.imageButton} ${index === indexWRF ? styles.activeButton : ''}`}
+            >
+              {extractTimeFromFileName(image.split('/').pop())}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className={styles.imageContainer}>
+        {imagesWRF.length > 0 && (
+          <img 
+            src={imagesWRF[indexWRF]} 
+            alt={`Imagem WRF ${extractTimeFromFileName(imagesWRF[indexWRF].split('/').pop())}`} 
+            className={styles.currentImage} 
+            onClick={() => handleImageClick(imagesWRF[indexWRF])}
+          />
         )}
       </div>
-    </>
+    </div>
   );
 }
