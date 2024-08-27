@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { wrfLocal } from "../services/wrfLocal";
-import styles from "./styles/Satellite.module.css";
+import styles from "./styles/wrf.module.css";
 import nomeDasPastas from "../../pastasWRF.json";
 
 export default function WRF() {
