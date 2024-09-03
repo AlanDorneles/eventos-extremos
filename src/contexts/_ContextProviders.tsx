@@ -12,6 +12,7 @@ import { ShowMenuConfigurationProvider } from "./showMenu.jsx";
 import { CheckedsProvider } from "./Checkeds.jsx";
 import { ImageProvider } from "./satImageUpdate.jsx";
 
+
 interface CombinedProvidersProps {
   children: ReactNode;
 }

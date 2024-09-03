@@ -9,6 +9,8 @@ export default function MenuPrincipal() {
     IsHidden: "is-hidden",
   });
 
+
+
   /*const handleShowMenu = () => {
     setShowMenu(!showMenu)
   }*/
@@ -160,7 +162,8 @@ export default function MenuPrincipal() {
                    
                     {" "}
                   </a>
-                  <a className="dropdown-item">  Perfil </a>
+                    <a className="dropdown-item"  href="/profile">  Perfil </a>
+                  
                   <a href="#" className="dropdown-item ">
                     {" "}
                     Sair{" "}

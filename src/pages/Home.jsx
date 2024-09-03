@@ -23,6 +23,7 @@ import Boletins from "./Boletins.jsx";
 import { Link } from "react-router-dom";
 import { GiRadarSweep, GiSattelite } from "react-icons/gi";
 import { RiBaseStationLine } from "react-icons/ri";
+import Profile from "./Profile.jsx";
 
 export default function Home() {
   const [handlerSrc, setHandlerSrc] = useState(false);
@@ -165,7 +166,8 @@ export default function Home() {
     !isMenuVisible &&
     location.pathname !== "/windy" &&
     location.pathname !== "/" &&
-    location.pathname !== "/boletins";
+    location.pathname !== "/boletins" &&
+    location.pathname !== "/profile";
 
   const dontHideItFrom =
      location.pathname === "/produtos/estacoes" || location.pathname === "/produtos/radar" || location.pathname === "/produtos/satelite";
@@ -219,6 +221,7 @@ export default function Home() {
 
         {location.pathname === "/produtos/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
+        {location.pathname === "/profile" && <Profile/>}
       </main>
       <section>{location.pathname === "/windy" && <Windy />}</section>
       <section>{location.pathname === "/" && <Sobre />}</section>
@@ -226,7 +229,8 @@ export default function Home() {
       {hideItFrom &&
         location.pathname !== "/produtos/satelite" &&
         location.pathname !== "/produtos/estacoes" &&
-        location.pathname !== "/produtos/radar" && (
+        location.pathname !== "/produtos/radar" &&
+        location.pathname !== "/profile" && (
           <Player
             playGif={playImages}
             onClick={handlerSrcFunc}
