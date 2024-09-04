@@ -130,6 +130,15 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
                 <span>Estações</span>
               </Link>
             </li>
+
+            <li className={`${selectedTab === "wrf" ? "is-active" : ""}`} onClick={() => handleTabClick("wrf")}>
+              <Link to="/produtos/wrf">
+                <span className="icon is-small">
+                  <RiBaseStationLine className={styles.Icon} />
+                </span>
+                <span>WRF</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

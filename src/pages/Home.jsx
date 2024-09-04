@@ -164,13 +164,11 @@ export default function Home() {
 
   const hideItFrom =
     !isMenuVisible &&
-    location.pathname !== "/windy" &&
     location.pathname !== "/" &&
-    location.pathname !== "/boletins" &&
-    location.pathname !== "/wrf";
+    location.pathname !== "/boletins"
 
   const dontHideItFrom =
-     location.pathname === "/produtos/estacoes" || location.pathname === "/produtos/radar" || location.pathname === "/produtos/satelite";
+     location.pathname === "/produtos/estacoes" || location.pathname === "/produtos/radar" || location.pathname === "/produtos/satelite" || location.pathname === "/produtos/wrf";
 
   return (
     <>
@@ -190,7 +188,8 @@ export default function Home() {
         {hideItFrom &&
           location.pathname !== "/produtos/radar" &&
           location.pathname !== "/produtos/estacoes" &&
-          location.pathname !== "/produtos/satelite" && (
+          location.pathname !== "/produtos/satelite" &&
+          location.pathname !== "/produtos/wrf" && (
             <button
               className={styles.btnMenu}
               onMouseOver={handleMouseEnterButton}
@@ -222,9 +221,8 @@ export default function Home() {
         {location.pathname === "/produtos/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
       </main>
-      <section>{location.pathname === "/windy" && <Windy />}</section>
       <section>{location.pathname === "/" && <Sobre />}</section>
-      <section>{location.pathname === "/wrf" && <WRF />}</section>
+      <section>{location.pathname === "/produtos/wrf" && <WRF />}</section>
 
       {hideItFrom &&
         location.pathname !== "/produtos/satelite" &&

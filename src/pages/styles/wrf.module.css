@@ -7,8 +7,8 @@
   
 .menu {
     position: absolute;
-    left: 10px;
     height: 100vh;
+    width: 30%;
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,6 @@
     background: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
   
 select {
@@ -50,12 +49,6 @@ select {
     background: rgb(255, 102, 0);
 }
 
-/* .activeButton::before {
-    display: flex;
-    flex-direction: column;
-    content: 'AQUI';
-} */
-  
 .imageContainer {
     display: flex;
     justify-content: center;
