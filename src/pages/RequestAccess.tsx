@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import axios from 'axios'
 
 export default function RequestAccess() {
   const [isValid, setIsValid] = useState({
@@ -78,9 +79,11 @@ export default function RequestAccess() {
     }
   };
 
-  const sendData = async () => {
+  const sendData = async (e) => {
+    e.preventDefault();
+    console.log(e)
     const allFieldsValid = Object.values(isValid).every(field => field.validation);
-
+  
     if (allFieldsValid) {
       const data: DataAccess = {
         name: isValid.name.content,
@@ -90,34 +93,33 @@ export default function RequestAccess() {
         institute: isValid.institute.content,
         role: isValid.role.content
       };
-
+  
       try {
-        const response = await fetch('http://localhost:3000/request-access', {
-          method: 'POST',
+        const response = await axios.post('http://localhost:3000/access', data, {
           headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
+            'Content-Type': 'application/json',
+            'x-api-key': 'SUA_CHAVE_DE_AUTENTICACAO'
+          }
         });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const result = await response.json();
-        console.log('Success:', result);
+  
+        console.log('Response Status:', response.status);
+        console.log('Response Data:', response.data);
+  
         // Aqui você pode fazer algo com o resultado, como mostrar uma mensagem de sucesso
       } catch (error) {
-        console.error('Error:', error);
+        if (axios.isAxiosError(error)) {
+          console.error('Axios Error:', error.response?.data || error.message);
+        } else {
+          console.error('Error:', error);
+        }
         // Aqui você pode mostrar uma mensagem de erro
       }
     } else {
       console.log('Por favor, preencha todos os campos corretamente.');
     }
   };
-
   return (
-    <form style={{ maxWidth: "360px", overflow: "auto" }}>
+    <form style={{ maxWidth: "360px", overflow: "auto" }} onSubmit={sendData}>
       <div className="field">
         <label className="label">Nome</label>
         <div className="control">
