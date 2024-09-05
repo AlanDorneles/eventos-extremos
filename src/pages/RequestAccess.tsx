@@ -1,6 +1,10 @@
 
 import React, { useState } from "react";
 import axios from 'axios'
+import { DataAccess } from "../interfaces/DataAccess";
+import { validateName, validateEmail, validateInstitute, validatePassword } from "../utils/validatorsRequestAccess";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function RequestAccess() {
   const [isValid, setIsValid] = useState({
@@ -13,21 +17,7 @@ export default function RequestAccess() {
     role: { validation: false, content: '' },
   });
 
-  interface DataAccess {
-    name: string;
-    lastName: string;
-    email: string;
-    password: string;
-    institute: string;
-    role: string;
-  }
-
-  const validateName = (value: string): boolean => value.length > 3;
-  const validateEmail = (value: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  const validatePassword = (password: string, repeatPassword: string): boolean => {
-    return password.length > 6 && password === repeatPassword;
-  };
-  const validateInstitute = (value: string): boolean => value.length > 0;
+  const notify = (msg:string) => toast.error(msg);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value, type, checked, multiple } = event.target as HTMLInputElement | HTMLSelectElement;
@@ -36,6 +26,8 @@ export default function RequestAccess() {
       switch (name) {
         case 'name':
           return validateName(value);
+        case 'lastName':
+          return validateName(value)
         case 'email':
           return validateEmail(value);
         case 'password':
@@ -83,6 +75,7 @@ export default function RequestAccess() {
     e.preventDefault();
     console.log(e)
     const allFieldsValid = Object.values(isValid).every(field => field.validation);
+
   
     if (allFieldsValid) {
       const data: DataAccess = {
@@ -98,21 +91,17 @@ export default function RequestAccess() {
         const response = await axios.post('http://localhost:3000/access', data, {
           headers: {
             'Content-Type': 'application/json',
-            'x-api-key': 'SUA_CHAVE_DE_AUTENTICACAO'
           }
         });
-  
-        console.log('Response Status:', response.status);
-        console.log('Response Data:', response.data);
-  
-        // Aqui você pode fazer algo com o resultado, como mostrar uma mensagem de sucesso
+        console.log('Success:', response.data);
       } catch (error) {
         if (axios.isAxiosError(error)) {
           console.error('Axios Error:', error.response?.data || error.message);
+          notify(error.response?.data.error)
+          
         } else {
           console.error('Error:', error);
         }
-        // Aqui você pode mostrar uma mensagem de erro
       }
     } else {
       console.log('Por favor, preencha todos os campos corretamente.');
@@ -131,7 +120,7 @@ export default function RequestAccess() {
             value={isValid.name.content}
             onChange={handleChange}
           />
-          {!isValid.name.validation && <p className="help is-danger">Por favor, insira um nome válido.</p>}
+          {!isValid.name.validation && <p className="help is-danger">Nome deve ter mais que 3 caracteres.</p>}
         </div>
       </div>
       <div className="field">
@@ -145,7 +134,7 @@ export default function RequestAccess() {
             value={isValid.lastName.content}
             onChange={handleChange}
           />
-          {!isValid.lastName.validation && <p className="help is-danger">Por favor, insira um sobrenome válido.</p>}
+          {!isValid.lastName.validation && <p className="help is-danger">Sobrenome deve ter mais que 3 caracteres</p>}
         </div>
       </div>
       <div className="field">
@@ -236,7 +225,7 @@ export default function RequestAccess() {
         </label>
       </div>
 
-      <button type="button" className="button is-primary" onClick={sendData}>
+      <button type="submit" className="button is-primary" >
         PEDIR ACESSO
       </button>
     </form>

@@ -6,6 +6,7 @@ import { Root } from "./routes/routes";
 import { CombinedProviders } from "./contexts/_ContextProviders";
 import MenuConfiguration from "./components/menuConfiguration/menuConfiguration";
 import { AuthProvider, useAuth } from './contexts/AuthContext.tsx';
+import { ToastContainer } from "react-toastify";
 
 // Componente para controlar a renderização condicional
 const AppContent = () => {
@@ -24,6 +25,7 @@ function App() {
   return (
     <AuthProvider>
       <CombinedProviders>
+        <ToastContainer />
         <AppContent />
       </CombinedProviders>
     </AuthProvider>
