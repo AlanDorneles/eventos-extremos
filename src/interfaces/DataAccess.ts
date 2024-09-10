@@ -1,4 +1,4 @@
-interface DataAccess {
+export interface DataAccess {
     name: string;
     lastName: string;
     email: string;
@@ -6,4 +6,3 @@ interface DataAccess {
     institute: string;
     role: string;
   }
-  

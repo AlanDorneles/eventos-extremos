@@ -1,16 +1,19 @@
+// src/auth/ProtectedRoute.tsx
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext'; // Ajuste o caminho conforme necessário
 
 interface ProtectedRouteProps {
-  element: React.ReactElement;
+  element: JSX.Element ;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const isAuthenticated = (): boolean => {
-    return !!localStorage.getItem('token');
-  };
-
-  return isAuthenticated() ? element : <Navigate to="/login" />;
+  const { isAuthenticated } = useAuth();
+  const token = localStorage.getItem('authToken');
+  console.log(isAuthenticated)
+  
+  return token ? element : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
+

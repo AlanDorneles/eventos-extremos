@@ -33,7 +33,7 @@ export default function HubLogin() {
       <section
         style={{
           flex: 1,
-          background: "url(../../public/cover.png) no-repeat center center",
+          background: "url(/cover.png) no-repeat center center",
           backgroundSize: "cover",
         }}
       >
@@ -55,10 +55,10 @@ export default function HubLogin() {
         </div>
         <div className="is-flex is-justify-content-space-evenly">
             <figure className="image is-64x64">
-                <img src="../../public/gepra-logo.png" />
+                <img src="/gepra-logo.png" />
             </figure>
             <figure className="image is-64x64">
-                <img src="../../public/logotipo-furg.jpeg" />
+                <img src="/logotipo-furg.jpeg" />
             </figure>
         </div>
         {/* Renderiza o formulário correspondente ao estado atual */}

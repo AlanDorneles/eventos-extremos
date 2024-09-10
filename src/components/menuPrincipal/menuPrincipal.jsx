@@ -1,21 +1,14 @@
 import { useState } from "react";
-//import { useShowMenuConfiguration } from "../../contexts/showMenu";
-
+import { useAuth } from "../../contexts/AuthContext";
 export default function MenuPrincipal() {
-  //const { showMenu, setShowMenu } = useShowMenuConfiguration();
+  const {logout,user} = useAuth()
   const [hidden, setHidden] = useState({
     ButtonFurgHovered: true,
     ButtonWindyHovered: true,
     IsHidden: "is-hidden",
   });
 
-
-
-  /*const handleShowMenu = () => {
-    setShowMenu(!showMenu)
-  }*/
-  const [isActive, setIsActive] = useState(false);
-    
+  const [isActive, setIsActive] = useState(false);    
   const toggleDropdown = () => {
         setIsActive(!isActive);
       };
@@ -41,8 +34,8 @@ export default function MenuPrincipal() {
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
-          {/*<img src="../../public/Logo.png" alt="logo_comite_eventos_extremos"/>*/}
-          <img src="../../public/Logo.png" alt="" />
+          {/*<img src="/Logo.png" alt="logo_comite_eventos_extremos"/>*/}
+          <img src="/Logo.png" alt="" />
         </a>
         <a
           role="button"
@@ -89,7 +82,7 @@ export default function MenuPrincipal() {
                       opacity: location.pathname === "/windy" ? 0.7 : 1,
                     }}
                   >
-                    <img src="../../public/logo-furg.png" alt="" />
+                    <img src="/logo-furg.png" alt="" />
                   </figure>
                 ) : (
                   ""
@@ -97,7 +90,7 @@ export default function MenuPrincipal() {
                 {!hidden.ButtonFurgHovered && (
                   <button className="button is-primary has-text-white">
                     <figure className="image is-24x24">
-                      <img src="../../public/logo-furg.png" alt="" />
+                      <img src="/logo-furg.png" alt="" />
                     </figure>
                     <p className="ml-2">IR PARA FURG</p>
                   </button>
@@ -114,7 +107,7 @@ export default function MenuPrincipal() {
                     className="image is-24x24"
                     style={{ opacity: location.pathname === "/" ? 0.7 : 1 }}
                   >
-                    <img src="../../public/windy.png" alt="" />
+                    <img src="/windy.png" alt="" />
                   </figure>
                 ) : (
                   ""
@@ -125,7 +118,7 @@ export default function MenuPrincipal() {
                     style={{ backgroundColor: "#A51E25" }}
                   >
                     <figure className="image is-24x24">
-                      <img src="../../public/windy.png" alt="" />
+                      <img src="/windy.png" alt="" />
                     </figure>
                     <p className="ml-2"> IR PARA WINDY</p>
                   </button>
@@ -134,7 +127,7 @@ export default function MenuPrincipal() {
 
               {/*<button className="button is-rounded is-text mr-4" onClick={handleShowMenu}>
                   <figure className="image is-24x24">
-                    <img src="../../public/setting.svg" alt="" />
+                    <img src="/setting.svg" alt="" />
                   </figure>
                 </button>*/}
             </div>
@@ -153,7 +146,7 @@ export default function MenuPrincipal() {
                     />
                   </figure>
                 </button>
-                <p>Nome</p>
+                <p>{user.nome}</p>
               </div>
               <div className="dropdown-menu" id="dropdown-menu" role="menu">
                 <div className="dropdown-content">
@@ -164,7 +157,7 @@ export default function MenuPrincipal() {
                   </a>
                     <a className="dropdown-item"  href="/profile">  Perfil </a>
                   
-                  <a href="#" className="dropdown-item ">
+                  <a href="#" className="dropdown-item " onClick={logout}>
                     {" "}
                     Sair{" "}
                   </a>

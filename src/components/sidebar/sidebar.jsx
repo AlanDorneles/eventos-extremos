@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logoFurg from "../../public/logo-furg.png";
+import logoFurg from "/logo-furg.png";
 import { IoHomeOutline } from "react-icons/io5";
 import { GiSattelite } from "react-icons/gi";
 import '../sass/navbar.scss'
