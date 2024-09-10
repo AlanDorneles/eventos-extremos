@@ -17,6 +17,7 @@ function validateToken() {
       return false;
     }
     return true;
+
   } catch (error) {
     console.error('Erro ao validar o token:', error);
     localStorage.removeItem('authToken');
@@ -25,7 +26,6 @@ function validateToken() {
   }
 }
 
-// Exemplo de uso
 if (validateToken()) {
   // Redirecione para a página protegida ou continue com a lógica
   window.location.href = '/protected-route';

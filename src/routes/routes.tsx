@@ -10,13 +10,48 @@ export const Root: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<HubLogin />} />
-        <Route path="/" element={<ProtectedRoute element={<Home />} />} />
-        <Route path="/produtos/radar" element={<ProtectedRoute element={<Home />} />} />
-        <Route path="/produtos/satelite" element={<ProtectedRoute element={<Home />} />} />
-        <Route path="/produtos/estacoes" element={<ProtectedRoute element={<Home />} />} />
-        <Route path="/boletins" element={<ProtectedRoute element={<Home />} />} />
-        <Route path="/windy" element={<ProtectedRoute element={<Home />} />} />
-        <Route path="/profile" element={<ProtectedRoute element={<Home />} />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute element={<Home />} />
+          }
+        />
+        <Route
+          path="/produtos/radar"
+          element={
+            <ProtectedRoute element={<Home />} />
+          }
+        />
+        <Route
+          path="/produtos/satelite"
+          element={
+            <ProtectedRoute element={<Home />} />
+          }
+        />
+        <Route
+          path="/produtos/estacoes"
+          element={
+            <ProtectedRoute element={<Home />} />
+          }
+        />
+        <Route
+          path="/boletins"
+          element={
+            <ProtectedRoute element={<Home />} />
+          }
+        />
+        <Route
+          path="/windy"
+          element={
+            <ProtectedRoute element={<Home />} />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute element={<Home />} />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

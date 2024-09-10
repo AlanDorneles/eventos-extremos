@@ -8,12 +8,15 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const { isAuthenticated } = useAuth();
-  const token = localStorage.getItem('authToken');
-  console.log(isAuthenticated)
-  
-  return token ? element : <Navigate to="/login" />;
+  const { isAuthenticated, token } = useAuth();
+  console.log(token)
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+
+  return element;
 };
+
 
 export default ProtectedRoute;
 
