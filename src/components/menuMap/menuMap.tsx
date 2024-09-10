@@ -6,6 +6,7 @@ import RadarMenu from './radar';
 import SatelliteMenu from './satellite';
 import StationsMenu from './stations';
 import stations, {Station}  from './listStations';
+import WrfMenu from './wrf';
 import { useHourScope, useHourScopeSatelite } from '../../contexts/hourAnimation';
 import { useFilterTypeRadarContext } from '../../contexts/typeRadar';
 import { UseRadarIsChecked } from '../../contexts/radarIsChecked';
@@ -13,6 +14,7 @@ import { UsePreviousAndNextImage } from '../../contexts/previousAndNextImage';
 import { useStationsVisible } from '../../contexts/radarFilter';
 import { useRadarOrSatelite } from '../../contexts/RadarOrSatelite';
 import { ButtonSatContext } from '../../contexts/buttonSat';
+import { WrfImageContext } from '../../contexts/WrfImage';
 import { buttonStyle } from '../../constants/constants';
 import styles from './menuMap.module.css';
 
@@ -37,6 +39,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("maxcappi");
   const [selectedTab, setSelectTab] = useState<string>("satellite");
+  const { selectedImage, setSelectedImage } = React.useContext(WrfImageContext);
 
   const handleCheckedStation = (id: string, checked: boolean) => {
     setCheckeds((prev) => ({
@@ -186,6 +189,14 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
             checkeds={checkeds}
             handleCheckedStation={handleCheckedStation}
             stations={stations as Station[]}
+          />
+        )}
+
+        {/* WRF */}
+        {selectedTab === "wrf" && (
+          <WrfMenu 
+            selectedImage={selectedImage}
+            setSelectedImage={setSelectedImage}
           />
         )}
       </div>

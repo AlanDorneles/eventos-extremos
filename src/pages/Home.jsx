@@ -1,5 +1,5 @@
 import { DataINMETAPI } from "../services/inmet.js";
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import MenuMap from "../components/menuMap/menuMap.tsx";
 import { Player } from "../components/player/player.jsx";
@@ -12,11 +12,11 @@ import { getImages } from "../services/images.js";
 import { UseRadarIsChecked } from "../contexts/radarIsChecked.jsx";
 import { UsePreviousAndNextImage } from "../contexts/previousAndNextImage.jsx";
 import { useFilterTypeRadarContext } from "../contexts/typeRadar.jsx";
+import { WrfImageContext } from '../contexts/WrfImage';
 import { Map } from "../components/map/Map.jsx";
 import styles from "./styles/Home.module.css";
 import { DownloadGif } from "../components/download/gif.jsx";
 import Satellite from "./Sattelite.jsx";
-import Windy from "./Windy.jsx";
 import Estacao from "./Estacao.tsx";
 import Sobre from "./Sobre.jsx";
 import Boletins from "./Boletins.jsx";
@@ -42,6 +42,7 @@ export default function Home() {
   const containerRef = useRef(null);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isMouseOver, setIsMouseOver] = useState(false);
+  const { selectedImage, setSelectedImage } = React.useContext(WrfImageContext);
 
   const handlerSrcFunc = () => {
     if (handlerSrc === false) {
@@ -218,11 +219,18 @@ export default function Home() {
           </section>
         )}
 
+        {location.pathname === "/produtos/wrf" && (
+          <section>
+            <WRF
+              selectedImage={selectedImage}
+              setSelectedImage={setSelectedImage}
+            />
+          </section>
+        )}
         {location.pathname === "/produtos/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
       </main>
       <section>{location.pathname === "/" && <Sobre />}</section>
-      <section>{location.pathname === "/produtos/wrf" && <WRF />}</section>
 
       {hideItFrom &&
         location.pathname !== "/produtos/satelite" &&
