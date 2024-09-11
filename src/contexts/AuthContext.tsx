@@ -1,18 +1,10 @@
 import React, { useState, useEffect, useContext, createContext, ReactNode } from 'react';
-
-interface AuthContextProps {
-  isAuthenticated: boolean;
-  login: (token: string, user: object) => void;
-  logout: () => void;
-  token: string | null;
-  user: object | null;
-}
+import { AuthContextProps } from '../interfaces/AuthContexts';
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
-
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [tokenAuth, setTokenAuth] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => !!localStorage.getItem('authToken'));
+  const [tokenAuth, setTokenAuth] = useState<string | null>(() => localStorage.getItem('authToken'));
   const [user, setUser] = useState<object | null>(null);
 
   useEffect(() => {

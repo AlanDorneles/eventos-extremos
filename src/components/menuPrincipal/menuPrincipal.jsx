@@ -10,7 +10,7 @@ export default function MenuPrincipal() {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" to="/">
+        <a className="navbar-item" href="/">
           <img src="/Logo.png" alt="" />
         </a>
         <a
@@ -29,20 +29,20 @@ export default function MenuPrincipal() {
 
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <a className="navbar-item" to="/">
+          <a className="navbar-item" href="/">
             Início
           </a>
 
-          <a className="navbar-item" to="/produtos/satelite">
+          <a className="navbar-item" href="/produtos/satelite">
             Produtos
           </a>
 
-          <a className="navbar-item" to="/boletins">
+          <a className="navbar-item" href="/boletins">
             Boletins
           </a>
         </div>
 
-        <div className="navbar-end">
+        <div className="navbar-end mr-6">
           <div className={`dropdown ${isActive ? "is-active" : ""} mr-6`}>
             <div className="dropdown-trigger is-flex is-justify-content-space-between is-align-items-center">
               <button
@@ -60,7 +60,7 @@ export default function MenuPrincipal() {
                   />
                 </figure>
               </button>
-              <p>{user.nome}</p>
+              <p>{user?.nome}</p>
             </div>
             <div className="dropdown-menu" id="dropdown-menu" role="menu">
               <div className="dropdown-content">

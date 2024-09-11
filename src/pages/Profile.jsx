@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 
 export default function Profile() {
   const [keys, setKeys] = useState([]);
-  const fetchKeys = async (id = 1) => {
+  //const {user} = useAuth()
+
+  const fetchKeys = async (id) => {
     try {
       const response = await fetch(`http://localhost:3000/api/${id}`);
       if (!response.ok) {

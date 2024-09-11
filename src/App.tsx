@@ -10,12 +10,12 @@ import { AuthProvider, useAuth } from './contexts/AuthContext.tsx';
 import { ToastContainer } from "react-toastify";
 
 const AppContent: React.FC = () => {
-  const { isAuthenticated } = useAuth();
-  console.log(isAuthenticated)
+  const { isAuthenticated, token } = useAuth();
+  console.log('isAuthenticated:', isAuthenticated)
 
   return (
     <main className="container" style={{ maxWidth: "100vw" }}>
-      {isAuthenticated && <MenuPrincipal id="menu" className='is-fixed-top' />}
+      {isAuthenticated && token && <MenuPrincipal id="menu" className='is-fixed-top' />}
     
       <Root />
       <MenuConfiguration />

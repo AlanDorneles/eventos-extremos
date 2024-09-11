@@ -11,7 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const navigate = useNavigate()
-  const { login } = useAuth();
+  const { login, isAuthenticated, token } = useAuth();
   const notify = (msg: string) => toast.error(msg);
   
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +36,7 @@ export default function Login() {
         }
       });
       login(response.data.token, response.data.user);
+      console.log(isAuthenticated,token)
 
       navigate('/');
     } catch (error) {
