@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext, createContext, ReactNode } from 'react';
-import { AuthContextProps } from '../interfaces/AuthContexts';
+import { AuthContextProps} from '../interfaces/AuthContexts';
+import { User } from '../interfaces/User';
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => !!localStorage.getItem('authToken'));
   const [tokenAuth, setTokenAuth] = useState<string | null>(() => localStorage.getItem('authToken'));
-  const [user, setUser] = useState<object | null>(null);
-
+  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('authUser'); 
@@ -17,7 +17,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }, []);
 
-  const login = (token: string, user: object) => {
+  const login = (token: string, user: User) => {
     localStorage.setItem('authToken', token);
     localStorage.setItem('authUser', JSON.stringify(user));
     setTokenAuth(token);

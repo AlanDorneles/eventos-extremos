@@ -23,7 +23,7 @@ import Boletins from "./Boletins.jsx";
 import { Link } from "react-router-dom";
 import { GiRadarSweep, GiSattelite } from "react-icons/gi";
 import { RiBaseStationLine } from "react-icons/ri";
-import Profile from "./Profile.jsx";
+import Profile from "./Profile.tsx";
 
 export default function Home() {
   const [handlerSrc, setHandlerSrc] = useState(false);

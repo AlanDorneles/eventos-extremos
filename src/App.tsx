@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import "../node_modules/bulma/css/bulma.min.css";
-import MenuPrincipal from "./components/menuPrincipal/menuPrincipal.jsx";
+import MenuPrincipal from "./components/menuPrincipal/menuPrincipal.tsx";
 import "./sass/navbar.scss";
 import { Root } from "./routes/routes.tsx";
 import { CombinedProviders } from "./contexts/_ContextProviders.tsx";
@@ -14,7 +14,7 @@ const AppContent: React.FC = () => {
   console.log('isAuthenticated:', isAuthenticated)
 
   return (
-    <main className="container" style={{ maxWidth: "100vw" }}>
+    <main className="container" style={{ maxWidth: "100vw",marginTop:'80px' }}>
       {isAuthenticated && token && <MenuPrincipal id="menu" className='is-fixed-top' />}
     
       <Root />

@@ -1,17 +1,20 @@
-import { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-export default function MenuPrincipal() {
+import React, { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext.tsx";
+import { MenuPrincipalProps } from "../../interfaces/App.ts";
+
+const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
   const { logout, user } = useAuth();
   const [isActive, setIsActive] = useState(false);
+  
   const toggleDropdown = () => {
     setIsActive(!isActive);
   };
 
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav id={id} className={`navbar ${className}`} role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
-          <img src="/Logo.png" alt="" />
+          <img src="/Logo.png" alt="Logo" />
         </a>
         <a
           role="button"
@@ -83,4 +86,6 @@ export default function MenuPrincipal() {
       </div>
     </nav>
   );
-}
+};
+
+export default MenuPrincipal;
