@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import "../node_modules/bulma/css/bulma.min.css";
-import MenuPrincipal from "./components/menuPrincipal/menuPrincipal.tsx";
 import "./sass/navbar.scss";
 import { Root } from "./routes/routes.tsx";
 import { CombinedProviders } from "./contexts/_ContextProviders.tsx";
@@ -10,13 +9,11 @@ import { AuthProvider, useAuth } from './contexts/AuthContext.tsx';
 import { ToastContainer } from "react-toastify";
 
 const AppContent: React.FC = () => {
-  const { isAuthenticated, token } = useAuth();
+  const { isAuthenticated } = useAuth();
   console.log('isAuthenticated:', isAuthenticated)
 
   return (
-    <main className="container" style={{ maxWidth: "100vw",marginTop:'80px' }}>
-      {isAuthenticated && token && <MenuPrincipal id="menu" className='is-fixed-top' />}
-    
+    <main className="container" style={{ maxWidth: "100vw" }}>
       <Root />
       <MenuConfiguration />
     </main>
