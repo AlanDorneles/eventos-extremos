@@ -23,11 +23,11 @@ const WRFImageViewer = () => {
     }, [currentIndex, imagesWRF, setSelectedWrfImage]);
 
     if (imagesWRF.length === 0) {
-        return <div>No images available.</div>;
+        return <div>Selecione a data.</div>;
     }
 
     if (!selectedWrfImage) {
-        return <div>No image selected.</div>;
+        return <div>Imagem não selecionada.</div>;
     }
 
     const handleImageClick = (imageUrl) => {
@@ -37,6 +37,7 @@ const WRFImageViewer = () => {
     return (
         <div className={styles.imageContainer}>
             <img
+                className={styles.currentImage}
                 src={selectedWrfImage}
                 alt="WRF Image"
                 className={styles.image}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { wrfLocal } from '../../services/wrfLocal';
 import nomeDasPastas from '../../../pastasWRF.json';
 import { useWrfImageProvider } from '../../contexts/WrfImage';
@@ -8,6 +8,19 @@ const WRFmenu = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [datesOptions, setDatesOptions] = useState([]);
     const { setSelectedWrfImage, setImagesWRF } = useWrfImageProvider();
+    const [imageTimes, setImageTimes] = useState([]);
+
+    const extractTime = (imagePath) => {
+        const regex = /_(\d{2})_(\d{2})_00\.png$/;
+        const match = imagePath.match(regex);
+
+        if (match) {
+            const hour = match[1];
+            const minute = match[2];
+            return { time: `${hour}:${minute}`, imagePath };
+        }
+        return { time: 'Hora não encontrada', imagePath: null };
+    };
 
     useEffect(() => {
         const formattedFolders = nomeDasPastas.folders.map(folder => {
@@ -20,9 +33,12 @@ const WRFmenu = () => {
     useEffect(() => {
         if (selectedDate) {
             const images = wrfLocal(selectedDate);
-            setImagesWRF(images); // Armazena todas as imagens no contexto
+            setImagesWRF(images);
+
             if (images.length > 0) {
-                setSelectedWrfImage(images[0]); // Define a primeira imagem disponível
+                setSelectedWrfImage(images[0]);
+                const times = images.map(image => extractTime(image));
+                setImageTimes(times);
             }
         }
     }, [selectedDate, setImagesWRF, setSelectedWrfImage]);
@@ -40,6 +56,18 @@ const WRFmenu = () => {
                     <option key={index} value={option.name}>{option.name}</option>
                 ))}
             </select>
+
+            <div className={styles.imageList}>
+                {imageTimes.length > 0 && imageTimes.map(({ time, imagePath }, index) => (
+                    <div key={index} className={styles.imageTime}>
+                        {imagePath &&
+                            <a href={imagePath} target="_blank" rel="noopener noreferrer">
+                                <p>{time}</p>
+                            </a>
+                        }
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
