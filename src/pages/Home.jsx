@@ -235,7 +235,8 @@ export default function Home() {
       {hideItFrom &&
         location.pathname !== "/produtos/satelite" &&
         location.pathname !== "/produtos/estacoes" &&
-        location.pathname !== "/produtos/radar" && (
+        location.pathname !== "/produtos/radar" &&
+        location.pathname !== "/produtos/wrf" && (
           <Player
             playGif={playImages}
             onClick={handlerSrcFunc}
