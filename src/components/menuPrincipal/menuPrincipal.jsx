@@ -5,7 +5,7 @@ export default function MenuPrincipal() {
   //const { showMenu, setShowMenu } = useShowMenuConfiguration();
   const [hidden, setHidden] = useState({
     ButtonFurgHovered: true,
-    ButtonWindyHovered: true,
+    // ButtonWindyHovered: true,
     IsHidden: "is-hidden",
   });
 
@@ -18,14 +18,15 @@ export default function MenuPrincipal() {
         setIsActive(!isActive);
       };
 
-  const hiddenButtonEnterWindy = () => {
-    setHidden((prevState) => ({ ...prevState, ButtonWindyHovered: false }));
-    ("enter");
-  };
+  // const hiddenButtonEnterWindy = () => {
+  //   setHidden((prevState) => ({ ...prevState, ButtonWindyHovered: false }));
+  //   ("enter");
+  // };
 
-  const hiddenButtonLeaveWindy = () => {
-    setHidden((prevState) => ({ ...prevState, ButtonWindyHovered: true }));
-  };
+  // const hiddenButtonLeaveWindy = () => {
+  //   setHidden((prevState) => ({ ...prevState, ButtonWindyHovered: true }));
+
+  // };
 
   const hiddenButtonEnterFurg = () => {
     setHidden((prevState) => ({ ...prevState, ButtonFurgHovered: false }));
@@ -101,7 +102,7 @@ export default function MenuPrincipal() {
                   </button>
                 )}
               </a>
-              <a
+              {/* <a
                 className="button-is-rounded mr-6"
                 onMouseEnter={hiddenButtonEnterWindy}
                 onMouseLeave={hiddenButtonLeaveWindy}
@@ -128,7 +129,7 @@ export default function MenuPrincipal() {
                     <p className="ml-2"> IR PARA WINDY</p>
                   </button>
                 )}
-              </a>
+              </a> */}
 
               {/*<button className="button is-rounded is-text mr-4" onClick={handleShowMenu}>
                   <figure className="image is-24x24">
