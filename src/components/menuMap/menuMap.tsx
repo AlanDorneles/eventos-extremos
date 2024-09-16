@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { GiSattelite, GiRadarSweep } from 'react-icons/gi';
+import { GiSattelite, GiRadarSweep, GiEarthAmerica } from 'react-icons/gi';
 import { RiBaseStationLine } from 'react-icons/ri';
 import RadarMenu from './radar';
 import SatelliteMenu from './satellite';
@@ -137,7 +137,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
             <li className={`${selectedTab === "wrf" ? "is-active" : ""}`} onClick={() => handleTabClick("wrf")}>
               <Link to="/produtos/wrf">
                 <span className="icon is-small">
-                  <RiBaseStationLine className={styles.Icon} />
+                  <GiEarthAmerica className={styles.Icon} />
                 </span>
                 <span>WRF</span>
               </Link>
