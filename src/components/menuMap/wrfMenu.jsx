@@ -59,13 +59,13 @@ const WRFmenu = () => {
 
             <div className={styles.imageList}>
                 {imageTimes.length > 0 && imageTimes.map(({ time, imagePath }, index) => (
-                    <div key={index} className={styles.imageTime}>
-                        {imagePath &&
-                            <a href={imagePath} target="_blank" rel="noopener noreferrer">
+                    <a key={index} href={imagePath} target="_blank" rel="noopener noreferrer">
+                        <div className={styles.imageTime}>
+                            {imagePath &&
                                 <p>{time}</p>
-                            </a>
-                        }
-                    </div>
+                            }
+                        </div>
+                    </a>
                 ))}
             </div>
         </div>

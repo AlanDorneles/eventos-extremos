@@ -6,7 +6,7 @@ import RadarMenu from './radar';
 import SatelliteMenu from './satellite';
 import StationsMenu from './stations';
 import stations, {Station}  from './listStations';
-import WrfMenu from './wrf';
+import WrfMenu from './wrfMenu';
 import { useHourScope, useHourScopeSatelite } from '../../contexts/hourAnimation';
 import { useFilterTypeRadarContext } from '../../contexts/typeRadar';
 import { UseRadarIsChecked } from '../../contexts/radarIsChecked';
