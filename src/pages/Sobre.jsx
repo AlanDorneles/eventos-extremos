@@ -4,7 +4,7 @@ const Sobre = () => {
   return (
     <div className={styles.container}>
       <div className={styles.initText}>
-        <h4 className="title is-5">CONHEÇA O COMITÊ</h4>
+        {/* <h4 className="title is-5">CONHEÇA O COMITÊ</h4>
         <p>
           O Comitê de Avaliação e Prognóstico de Eventos Extremos da FURG é um
           órgão integrante do Programa Institucional de Avaliação, Prognóstico e
@@ -62,7 +62,7 @@ const Sobre = () => {
           Dr. Leandro Bugoni (ICB) - Área de atuação: Biologia. Atualmente é
           Diretor de Pesquisa na Pró-reitoria de Pesquisa e pós-graduação da
           Universidade Federal do Rio Grande - FURG.{" "}
-        </p>
+        </p> */}
 
         <h2 className="title is-5">NOSSOS DADOS</h2>
 

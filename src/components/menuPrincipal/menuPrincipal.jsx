@@ -12,6 +12,11 @@ export default function MenuPrincipal() {
   /*const handleShowMenu = () => {
     setShowMenu(!showMenu)
   }*/
+  const [isActive, setIsActive] = useState(false);
+    
+  const toggleDropdown = () => {
+        setIsActive(!isActive);
+      };
 
   // const hiddenButtonEnterWindy = () => {
   //   setHidden((prevState) => ({ ...prevState, ButtonWindyHovered: false }));
@@ -29,7 +34,6 @@ export default function MenuPrincipal() {
 
   const hiddenButtonLeaveFurg = () => {
     setHidden((prevState) => ({ ...prevState, ButtonFurgHovered: true }));
-
   };
 
   return (
@@ -69,8 +73,8 @@ export default function MenuPrincipal() {
         </div>
 
         <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
+          <div className="navbar-item  is-flex-direction-row is-justify-content-center is-align-items-center">
+            <div className="buttons mb-0">
               <a
                 className="button-is-rounded mr-1"
                 href="/"
@@ -127,13 +131,43 @@ export default function MenuPrincipal() {
                 )}
               </a> */}
 
-              
-                {/*<button className="button is-rounded is-text mr-4" onClick={handleShowMenu}>
+              {/*<button className="button is-rounded is-text mr-4" onClick={handleShowMenu}>
                   <figure className="image is-24x24">
                     <img src="../../public/setting.svg" alt="" />
                   </figure>
                 </button>*/}
-             
+            </div>
+            <div className={`dropdown ${isActive ? "is-active" : ""} mr-6`}>
+              <div className="dropdown-trigger is-flex is-justify-content-space-between is-align-items-center">
+                <button
+                  className="button"
+                  aria-haspopup="true"
+                  aria-controls="dropdown-menu"
+                  onClick={toggleDropdown}
+                >
+                  <figure className="image is-32x32"  >
+                    <img
+                      className="is-rounded"
+                      src="https://bulma.io/assets/images/placeholders/128x128.png" aria-hidden="true"  alt="Profile"
+                    />
+                  </figure>
+                </button>
+                <p>Nome</p>
+              </div>
+              <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                <div className="dropdown-content">
+                  <a href="#" className="dropdown-item">
+                    {" "}
+                   
+                    {" "}
+                  </a>
+                  <a className="dropdown-item">  Perfil </a>
+                  <a href="#" className="dropdown-item ">
+                    {" "}
+                    Sair{" "}
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
