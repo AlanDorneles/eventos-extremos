@@ -51,11 +51,9 @@ export default function Profile() {
           }
         }
       );
-      console.log('Chave enviada com sucesso', response.data);
       fetchKeys(user?.id ?? 0); // Recarrega as chaves após enviar uma nova
       setModalActive(false); // Fecha o modal após enviar
     } catch (error) {
-      console.log(origin, user?.id)
       console.error('Erro ao enviar a chave', error);
     }
   };

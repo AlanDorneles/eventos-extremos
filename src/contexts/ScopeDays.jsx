@@ -5,8 +5,6 @@ export const ScopeDaysContext = createContext();
 
 export const ScopeDaysProvider = ({ children }) => {
   const [scopeDays, setScopeDays] = useState(24)
-
-  console.log(scopeDays)
   
   return (
     <ScopeDaysContext.Provider value={{ scopeDays,setScopeDays}}>

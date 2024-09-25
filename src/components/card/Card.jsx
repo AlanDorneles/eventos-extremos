@@ -27,12 +27,11 @@ export const Card = () => {
 
   useEffect(() => {
     const inmetData = JSON.parse(localStorage.getItem("dataStation"));
-    console.log(inmetData);
 
-    if (inmetData && typeof inmetData[codeStation] === 'object') {
+    if (inmetData && typeof inmetData[codeStation] === "object") {
       setData(inmetData[codeStation]);
     } else {
-      setData(null); 
+      setData(null);
     }
   }, [trigger, codeStation]);
 
@@ -89,7 +88,8 @@ export const Card = () => {
           </span>
           <span>
             <WiWindDeg /> Direc. Vento:{" "}
-            {data.windDirection[data.windDirection.length - currentHour] === null
+            {data.windDirection[data.windDirection.length - currentHour] ===
+            null
               ? "Sem dados"
               : data.windDirection[data.windDirection.length - currentHour]}
           </span>
@@ -98,7 +98,7 @@ export const Card = () => {
           </span>
         </div>
       ) : (
-        <p>Carregando dados...</p> // Mostra uma mensagem enquanto os dados não são carregados
+        <p>Carregando dados...</p>
       )}
     </div>
   );

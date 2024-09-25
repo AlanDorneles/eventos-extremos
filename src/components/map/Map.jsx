@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 export const Map = ({cangucuChecked, santiagoChecked,morroDaIgrejaChecked, handlerSrc,images,currentImageIndex}) => {
   const { typeRadar } = useFilterTypeRadarContext(); 
   const [clicked, setClicked] = useState(false);
-    const { codeStation, setCodeStation } = useCodeStation();
+    const { setCodeStation } = useCodeStation();
     const { stationsVisible } = useStationsVisible();
     const [morroDaIgreja, setMorroDaIgreja] = useState("");
     const [cangucu, setCangucu] = useState("");

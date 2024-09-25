@@ -36,7 +36,6 @@ export default function Login() {
         }
       });
       login(response.data.token, response.data.user);
-      console.log(isAuthenticated,token)
 
       navigate('/');
     } catch (error) {
