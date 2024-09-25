@@ -5,13 +5,13 @@ import { PreviousAndNextImageProvider } from "./previousAndNextImage.jsx";
 import { StationsVisibleProvider } from "./radarFilter.jsx";
 import { CodeStationsProvider } from "./codeStation.jsx";
 import { FilterTypeRadarProvider } from "./typeRadar.jsx";
-import { RadarOrSateliteProvider } from './RadarOrSatelite.jsx';
-import { ButtonSatProvider } from './buttonSat.jsx';
+import { RadarOrSateliteProvider } from "./RadarOrSatelite.jsx";
+import { ButtonSatProvider } from "./buttonSat.jsx";
 import { PhenomenaProvider } from "./Phenomena.jsx";
 import { ShowMenuConfigurationProvider } from "./showMenu.jsx";
 import { CheckedsProvider } from "./Checkeds.jsx";
 import { ImageProvider } from "./satImageUpdate.jsx";
-
+import { ScopeDaysProvider } from "./ScopeDays.jsx";
 
 interface CombinedProvidersProps {
   children: ReactNode;
@@ -21,27 +21,29 @@ export function CombinedProviders({ children }: CombinedProvidersProps) {
   return (
     <HourScopeProvider>
       <CheckedsProvider>
-      <ImageProvider>
-        <ShowMenuConfigurationProvider>
-          <ButtonSatProvider>
-            <RadarIsCheckedProvider>
-              <PreviousAndNextImageProvider>
-                <StationsVisibleProvider>
-                  <CodeStationsProvider>
-                    <FilterTypeRadarProvider>
-                      <PhenomenaProvider>
-                        <RadarOrSateliteProvider>
-                          {children}
-                        </RadarOrSateliteProvider>
-                      </PhenomenaProvider>
-                    </FilterTypeRadarProvider>
-                  </CodeStationsProvider>
-                </StationsVisibleProvider>
-              </PreviousAndNextImageProvider>
-            </RadarIsCheckedProvider>
-          </ButtonSatProvider>
-        </ShowMenuConfigurationProvider>
-      </ImageProvider>
+        <ScopeDaysProvider>
+          <ImageProvider>
+            <ShowMenuConfigurationProvider>
+              <ButtonSatProvider>
+                <RadarIsCheckedProvider>
+                  <PreviousAndNextImageProvider>
+                    <StationsVisibleProvider>
+                      <CodeStationsProvider>
+                        <FilterTypeRadarProvider>
+                          <PhenomenaProvider>
+                            <RadarOrSateliteProvider>
+                              {children}
+                            </RadarOrSateliteProvider>
+                          </PhenomenaProvider>
+                        </FilterTypeRadarProvider>
+                      </CodeStationsProvider>
+                    </StationsVisibleProvider>
+                  </PreviousAndNextImageProvider>
+                </RadarIsCheckedProvider>
+              </ButtonSatProvider>
+            </ShowMenuConfigurationProvider>
+          </ImageProvider>
+        </ScopeDaysProvider>
       </CheckedsProvider>
     </HourScopeProvider>
   );

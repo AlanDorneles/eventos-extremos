@@ -8,7 +8,7 @@ export default function Profile() {
   const { user } = useAuth();
   const [modalActive, setModalActive] = useState(false);
   const [apiKey, setApiKey] = useState('');
-  const [origin, setOrigin] = useState('');
+  const [origin, setOrigin] = useState('INMET');
 
   type NewKey = Pick<Key, 'chave' | 'origem'>;
 
@@ -39,10 +39,11 @@ export default function Profile() {
     event.preventDefault(); // Previne o comportamento padrão de submissão do formulário
 
     const newKey: NewKey = { chave: apiKey, origem: origin };
+    
 
     try {
       const response = await axios.post(
-        `http://localhost:3000/keys/${user?.id}`, // Substitua :id com user.id se necessário
+        `http://localhost:3000/keys/${user?.id}`,
         newKey,
         {
           headers: {
@@ -54,6 +55,7 @@ export default function Profile() {
       fetchKeys(user?.id ?? 0); // Recarrega as chaves após enviar uma nova
       setModalActive(false); // Fecha o modal após enviar
     } catch (error) {
+      console.log(origin, user?.id)
       console.error('Erro ao enviar a chave', error);
     }
   };

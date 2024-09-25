@@ -1,6 +1,6 @@
 import ReactApexChart from "react-apexcharts";
-import { useEffect, useState} from 'react';
-import { DataINMETAPI } from '../../services/inmet';
+import { useEffect, useState} from 'react'
+import { DataINMETAPI } from '../../services/inmet.js';
 import { useCodeStation } from "../../contexts/codeStation";
 import { usePhenomenaContext } from "../../contexts/Phenomena";
 import { variablesPT } from "./variablesPT";
@@ -13,8 +13,6 @@ export const Graphic = () => {
     const storageCodeStation = localStorage.getItem('codeStation')
     const [trigger,setTrigger] = useState(false)
     const [nameVariable, setNameVariable] = useState('Pressão')
-
-    
 
     useEffect(() => {
       if (codeStation !== storageCodeStation) {

@@ -13,8 +13,8 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
   return (
     <nav id={id} className={`navbar ${className}`} role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="/">
-          <img src="/Logo.png" alt="Logo" />
+        <a className="navbar-item ml-4" href="/">
+          <img src="/gepra-logo.png" alt="Logo" />
         </a>
         <a
           role="button"
@@ -30,7 +30,7 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
         </a>
       </div>
 
-      <div id="navbarBasicExample" className="navbar-menu">
+      <div id="navbarBasicExample" className="navbar-menu ml-6">
         <div className="navbar-start">
           <a className="navbar-item" href="/">
             Início
