@@ -39,6 +39,12 @@ export const Root: React.FC = () => {
           }
         />
         <Route
+          path="/produtos/wrf"
+          element={
+            <ProtectedRoute element={<Home />} />
+          }
+        />
+        <Route
           path="/boletins"
           element={
             <ProtectedRoute element={<Home />} />
