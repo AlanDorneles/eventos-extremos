@@ -5,12 +5,13 @@ import { PreviousAndNextImageProvider } from "./previousAndNextImage.jsx";
 import { StationsVisibleProvider } from "./radarFilter.jsx";
 import { CodeStationsProvider } from "./codeStation.jsx";
 import { FilterTypeRadarProvider } from "./typeRadar.jsx";
-import { RadarOrSateliteProvider } from './RadarOrSatelite.jsx';
-import { ButtonSatProvider } from './buttonSat.jsx';
+import { RadarOrSateliteProvider } from "./RadarOrSatelite.jsx";
+import { ButtonSatProvider } from "./buttonSat.jsx";
 import { PhenomenaProvider } from "./Phenomena.jsx";
 import { ShowMenuConfigurationProvider } from "./showMenu.jsx";
 import { CheckedsProvider } from "./Checkeds.jsx";
 import { ImageProvider } from "./satImageUpdate.jsx";
+import { ScopeDaysProvider } from "./ScopeDays.jsx";
 import { WrfImageProvider } from "./WrfImage.jsx";
 
 interface CombinedProvidersProps {
@@ -19,32 +20,34 @@ interface CombinedProvidersProps {
 
 export function CombinedProviders({ children }: CombinedProvidersProps) {
   return (
-    <WrfImageProvider>
-      <HourScopeProvider>
-        <CheckedsProvider>
-          <ImageProvider>
-            <ShowMenuConfigurationProvider>
-              <ButtonSatProvider>
-                <RadarIsCheckedProvider>
-                  <PreviousAndNextImageProvider>
-                    <StationsVisibleProvider>
-                      <CodeStationsProvider>
-                        <FilterTypeRadarProvider>
-                          <PhenomenaProvider>
-                            <RadarOrSateliteProvider>
-                              {children}
-                            </RadarOrSateliteProvider>
-                          </PhenomenaProvider>
-                        </FilterTypeRadarProvider>
-                      </CodeStationsProvider>
-                    </StationsVisibleProvider>
-                  </PreviousAndNextImageProvider>
-                </RadarIsCheckedProvider>
-              </ButtonSatProvider>
-            </ShowMenuConfigurationProvider>
-          </ImageProvider>
-        </CheckedsProvider>
-      </HourScopeProvider>
-    </WrfImageProvider>
+    <HourScopeProvider>
+      <ScopeDaysProvider>
+        <WrfImageProvider>
+          <CheckedsProvider>
+            <ImageProvider>
+              <ShowMenuConfigurationProvider>
+                <ButtonSatProvider>
+                  <RadarIsCheckedProvider>
+                    <PreviousAndNextImageProvider>
+                      <StationsVisibleProvider>
+                        <CodeStationsProvider>
+                          <FilterTypeRadarProvider>
+                            <PhenomenaProvider>
+                              <RadarOrSateliteProvider>
+                                {children}
+                              </RadarOrSateliteProvider>
+                            </PhenomenaProvider>
+                          </FilterTypeRadarProvider>
+                        </CodeStationsProvider>
+                      </StationsVisibleProvider>
+                    </PreviousAndNextImageProvider>
+                  </RadarIsCheckedProvider>
+                </ButtonSatProvider>
+              </ShowMenuConfigurationProvider>
+            </ImageProvider>
+          </CheckedsProvider>
+        </WrfImageProvider>
+      </ScopeDaysProvider>
+    </HourScopeProvider>
   );
 }

@@ -22,10 +22,14 @@ import Sobre from "./Sobre.jsx";
 import Boletins from "./Boletins.jsx";
 import WRF from "./WRF.jsx";
 import { Link } from "react-router-dom";
-import { GiRadarSweep, GiSattelite } from "react-icons/gi";
+import { GiSattelite } from "react-icons/gi";
 import { RiBaseStationLine } from "react-icons/ri";
+import Profile from "./Profile.tsx";
+import MenuPrincipal from "../components/menuPrincipal/menuPrincipal.tsx";
+import { useAuth } from "../contexts/AuthContext.tsx";
 
 export default function Home() {
+  const { isAuthenticated, token } = useAuth();
   const [handlerSrc, setHandlerSrc] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState([]);
@@ -166,14 +170,17 @@ export default function Home() {
   const hideItFrom =
     !isMenuVisible &&
     location.pathname !== "/" &&
-    location.pathname !== "/boletins"
+    location.pathname !== "/boletins" &&
+    location.pathname !== "/profile";
 
   const dontHideItFrom =
      location.pathname === "/produtos/estacoes" || location.pathname === "/produtos/radar" || location.pathname === "/produtos/satelite" || location.pathname === "/produtos/wrf";
 
   return (
     <>
+      {isAuthenticated && token && <MenuPrincipal id="menu" className='is-fixed-top' />}
       <main className={`${styles.container}`}>
+        
         <section
           className={`${styles.menu_map} ${
             isMenuVisible || dontHideItFrom ? styles.visible : styles.hidden
@@ -229,6 +236,8 @@ export default function Home() {
         )}
         {location.pathname === "/produtos/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
+        {location.pathname === "/profile" && <Profile/>}
+       
       </main>
       <section>{location.pathname === "/" && <Sobre />}</section>
 
@@ -246,6 +255,7 @@ export default function Home() {
           />
         )}
       <DownloadGif disabledButton={disabledButton} />
+      
     </>
   );
 }

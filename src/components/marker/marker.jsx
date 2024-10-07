@@ -2,8 +2,8 @@ import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIconRetina from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-import logoFurg from '../../../public/logo-furg.png'
-import station from '../../../public/circle.svg'
+import logoFurg from '/logo-furg.png'
+import station from '/circle.svg'
 
 
 export const customMarkerIcon = L.icon({
