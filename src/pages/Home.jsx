@@ -29,7 +29,7 @@ import MenuPrincipal from "../components/menuPrincipal/menuPrincipal.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
 
 export default function Home() {
-  const { isAuthenticated, token } = useAuth();
+  const { isAuthenticated, enterSemLogin} = useAuth();
   const [handlerSrc, setHandlerSrc] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState([]);
@@ -178,7 +178,7 @@ export default function Home() {
 
   return (
     <>
-      {isAuthenticated && token && <MenuPrincipal id="menu" className='is-fixed-top' />}
+      { <MenuPrincipal id="menu" className='is-fixed-top' /> }
       <main className={`${styles.container}`}>
         
         <section

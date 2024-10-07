@@ -33,8 +33,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setIsAuthenticated(false);
   };
 
+  const enterSemLogin = () => {
+    setIsAuthenticated(true);
+  }
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, user, logout, token: tokenAuth }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, user, logout, token: tokenAuth, enterSemLogin }}>
       {children}
     </AuthContext.Provider>
   );

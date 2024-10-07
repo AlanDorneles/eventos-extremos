@@ -14,7 +14,7 @@ const {showMenu} = useMenuContext()
       <>
           <MenuPrincipal  id="menu" />
           <Root />
-          <MenuConfiguration style={{display: showMenu ? '' : 'none' }}/>   
+          <MenuConfiguration style={{display: showMenu ? '' : 'none' }}/>
           </>
     ) 
 
