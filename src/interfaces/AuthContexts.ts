@@ -6,4 +6,5 @@ export interface AuthContextProps {
     logout: () => void;
     token: string | null;
     user: User | null;
+    enterSemLogin: () => void;
   }
