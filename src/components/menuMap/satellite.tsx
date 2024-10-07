@@ -22,7 +22,7 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
   toggleUFPEL,
 }) => {
   
-  /*const extractDateTime = (url: string): string => {
+  const extractDateTime = (url: string): string => {
     const regexINPE = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})/;
     const regexUFPEL = /(\d{4})_(\d{2})_(\d{2})_(\d{2})_(\d{2})/;
     let match = UFPEL ? url.match(regexUFPEL) : url.match(regexINPE);
@@ -106,7 +106,7 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
         CPMet UFPEL
       </label>
     </div>
-  );*/
+  );
 };
 
 export default SatelliteMenu;
