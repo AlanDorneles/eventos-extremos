@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { GiSattelite, GiRadarSweep } from 'react-icons/gi';
+import { GiSattelite, GiRadarSweep, GiEarthAmerica } from 'react-icons/gi';
 import { RiBaseStationLine } from 'react-icons/ri';
 import RadarMenu from './radar';
 import SatelliteMenu from './satellite';
 import StationsMenu from './stations';
 import stations, {Station}  from './listStations';
+import WrfMenu from './wrfMenu';
 import { useHourScope, useHourScopeSatelite } from '../../contexts/hourAnimation';
 import { useFilterTypeRadarContext } from '../../contexts/typeRadar';
 import { UseRadarIsChecked } from '../../contexts/radarIsChecked';
@@ -13,6 +14,7 @@ import { UsePreviousAndNextImage } from '../../contexts/previousAndNextImage';
 import { useStationsVisible } from '../../contexts/radarFilter';
 import { useRadarOrSatelite } from '../../contexts/RadarOrSatelite';
 import { ButtonSatContext } from '../../contexts/buttonSat';
+import { WrfImageContext } from '../../contexts/WrfImage';
 import { buttonStyle } from '../../constants/constants';
 import styles from './menuMap.module.css';
 
@@ -37,6 +39,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("maxcappi");
   const [selectedTab, setSelectTab] = useState<string>("satellite");
+  const { selectedImage, setSelectedImage } = React.useContext(WrfImageContext);
 
   const handleCheckedStation = (id: string, checked: boolean) => {
     setCheckeds((prev) => ({
@@ -130,6 +133,15 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
                 <span>Estações</span>
               </Link>
             </li>
+
+            <li className={`${selectedTab === "wrf" ? "is-active" : ""}`} onClick={() => handleTabClick("wrf")}>
+              <Link to="/produtos/wrf">
+                <span className="icon is-small">
+                  <GiEarthAmerica className={styles.Icon} />
+                </span>
+                <span>WRF</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
@@ -177,6 +189,14 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
             checkeds={checkeds}
             handleCheckedStation={handleCheckedStation}
             stations={stations as Station[]}
+          />
+        )}
+
+        {/* WRF */}
+        {selectedTab === "wrf" && (
+          <WrfMenu 
+            selectedImage={selectedImage}
+            setSelectedImage={setSelectedImage}
           />
         )}
       </div>
