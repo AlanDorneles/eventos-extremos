@@ -178,7 +178,7 @@ export default function Home() {
 
   return (
     <>
-      { <MenuPrincipal id="menu" className='is-fixed-top' /> }
+      {<MenuPrincipal id="menu" className='is-fixed-top' /> }
       <main className={`${styles.container}`}>
         
         <section

@@ -92,7 +92,7 @@ export default function Login() {
           className={`button ${styles.btnLoginSemConta}`} 
           onClick={handleNoLoginClick}
         >
-          Entrar sem fazer login
+          Continuar sem fazer login
         </button>
       </div>
     </form>

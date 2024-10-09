@@ -8,12 +8,14 @@ import { useAuth } from '../contexts/AuthContext';
 
 export const Root: React.FC = () => {
   const {isAuthenticated} = useAuth();
-  //console.log('isAuthenticated:',isAuthenticated)
   return (
     <BrowserRouter>
       <Routes>
 
-        <Route path="/login" element={isAuthenticated ? <Navigate to='/'/> : <HubLogin />} />
+        <Route
+          path="/login" 
+          element={isAuthenticated ? <Navigate to='/'/> : <HubLogin />}
+        />
         <Route
           path="/"
           element={<Home />}

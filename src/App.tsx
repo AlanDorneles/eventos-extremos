@@ -9,8 +9,6 @@ import { AuthProvider, useAuth } from './contexts/AuthContext.tsx';
 import { ToastContainer } from "react-toastify";
 
 const AppContent: React.FC = () => {
-  const { isAuthenticated } = useAuth();
-  console.log('isAuthenticated:', isAuthenticated)
 
   return (
     <main className="container" style={{ maxWidth: "100vw" }}>
