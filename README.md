@@ -14,4 +14,4 @@ Currently, two official plugins are available:
 - [ ] Rafactor Radar ![](https://via.placeholder.com/15/f03c15/000000?text=)
 - [ ] Upload boletins in backend
 - [ ] Change in homepage group name
-- [ ] Create enviroment without login ![](https://via.placeholder.com/15/f03c15/000000?text=)
+- [x] Create enviroment without login ![](https://via.placeholder.com/15/f03c15/000000?text=)
