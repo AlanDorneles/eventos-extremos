@@ -19,7 +19,14 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
     >
       <div className="navbar-brand">
         <a className="navbar-item ml-4" href="/">
-          <img src="/gepra-logo.png" alt="Logo" />
+          <figure className="image is-48x48">
+            <img src="/logo_furg_stexto.png" alt="Logo" />
+          </figure>
+        </a>
+        <a className="navbar-item ml-1" href="/">
+          <figure className="image is-48x48">
+            <img src="/logo_IO_stexto.png" alt="Logo" />
+          </figure>
         </a>
         <a
           role="button"
@@ -35,7 +42,7 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
         </a>
       </div>
 
-      <div id="navbarBasicExample" className="navbar-menu ml-6">
+      <div id="navbarBasicExample" className="navbar-menu ml-4">
         <div className="navbar-start">
           <a className="navbar-item" href="/">
             Início
