@@ -171,7 +171,8 @@ export default function Home() {
     !isMenuVisible &&
     location.pathname !== "/" &&
     location.pathname !== "/boletins" &&
-    location.pathname !== "/profile";
+    location.pathname !== "/profile" &&
+    location.pathname !== "/sobre";
 
   const dontHideItFrom =
     location.pathname === "/produtos/estacoes" ||
@@ -239,8 +240,8 @@ export default function Home() {
         {location.pathname === "/produtos/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
         {location.pathname === "/profile" && <Profile />}
+        {location.pathname === "/sobre" && <Sobre />}
       </main>
-      <section>{location.pathname === "/" && <Sobre />}</section>
 
       {hideItFrom &&
         location.pathname !== "/produtos/satelite" &&

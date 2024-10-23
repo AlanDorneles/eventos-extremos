@@ -17,8 +17,12 @@ export const Root: React.FC = () => {
           element={isAuthenticated ? <Navigate to='/'/> : <HubLogin />}
         />
         <Route
-          path="/"
+          path="/sobre"
           element={<Home />}
+        />
+        <Route
+          path="/"
+          element={<Home /> ? <Navigate to='/produtos/satelite' /> : <Home />}
         />
         <Route
           path="/produtos/radar"

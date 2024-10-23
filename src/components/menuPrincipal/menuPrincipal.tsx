@@ -48,6 +48,10 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
           <a className="navbar-item" href="/boletins">
             Boletins
           </a>
+
+          <a className="navbar-item" href="/sobre">
+            Sobre
+          </a>
         </div>
 
         <div className="navbar-end mr-6">
@@ -93,7 +97,7 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
             </div>
           ) : (
             <a className="button is-primary m-auto" href="/login">
-              ENTRAR
+              LOGIN
             </a>
           )}
         </div>
