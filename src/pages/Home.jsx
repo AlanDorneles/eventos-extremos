@@ -13,7 +13,7 @@ import { UseRadarIsChecked } from "../contexts/radarIsChecked.jsx";
 import { UsePreviousAndNextImage } from "../contexts/previousAndNextImage.jsx";
 import { useFilterTypeRadarContext } from "../contexts/typeRadar.jsx";
 import { WrfImageContext } from '../contexts/WrfImage';
-import { Map } from "../components/map/Map.jsx";
+import { Map } from "../components/map/Map.tsx";
 import styles from "./styles/Home.module.css";
 import { DownloadGif } from "../components/download/gif.jsx";
 import Satellite from "./Sattelite.jsx";
@@ -27,6 +27,7 @@ import { RiBaseStationLine } from "react-icons/ri";
 import Profile from "./Profile.tsx";
 import MenuPrincipal from "../components/menuPrincipal/menuPrincipal.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
+import { getRadarInformation } from "../services/redemet.js";
 
 export default function Home() {
   const { isAuthenticated, token } = useAuth();
@@ -47,6 +48,7 @@ export default function Home() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isMouseOver, setIsMouseOver] = useState(false);
   const { selectedImage, setSelectedImage } = React.useContext(WrfImageContext);
+  getRadarInformation()
 
   const handlerSrcFunc = () => {
     if (handlerSrc === false) {

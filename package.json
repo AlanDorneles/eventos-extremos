@@ -23,6 +23,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@react-google-maps/api": "^2.19.2",
+    "@types/leaflet": "^1.9.14",
     "apexcharts": "^3.45.0",
     "apexcharts-react": "^1.0.0",
     "axios": "^1.7.7",

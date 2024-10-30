@@ -1,4 +1,10 @@
-export const bounds = {
+type LatLngTuple = [number, number];
+type Bounds = {
+  [key: string]: [LatLngTuple, LatLngTuple];
+};
+
+
+export const bounds: Bounds =  {
   morroDaIgreja: [
     [-24.5, -53.5],
     [-31.7, -45.5],

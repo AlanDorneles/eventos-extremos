@@ -6,12 +6,12 @@ import logoFurg from '/logo-furg.png'
 import station from '/circle.svg'
 
 
-export const customMarkerIcon = L.icon({
+export const customMarkerIcon = new L.icon({
   iconUrl: logoFurg,
   iconSize: [20, 20],
 });
 
-export const iconStation = L.icon({
+export const iconStation = new L.icon({
   iconUrl : station,
   iconSize:[8,8]
 })
