@@ -13,6 +13,7 @@ const StationsMenu: React.FC = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className={styles.menu}>
       {stations.map((station) => (
         <div key={station.id}>
@@ -25,6 +26,19 @@ const StationsMenu: React.FC = () => {
             {station.name}
           </label>
         </div>
+=======
+    <div className={styles.containerOptionsStations}>
+       {stations.map(station => (
+        <label key={station.id} className="checkbox">
+          <input
+            type="checkbox"
+            value={station.id}
+            checked={checkeds[station.id] || false }
+            onChange={(event) => handleCheckedStation(station.id, event.target.checked)}
+          />
+          {station.name}
+        </label>
+>>>>>>> 37e708fadd32d4676da5c6e0f48978de633286f6
       ))}
     </div>
   );
