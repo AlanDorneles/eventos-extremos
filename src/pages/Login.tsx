@@ -37,7 +37,7 @@ export default function Login() {
         }
       });
       login(response.data.token, response.data.user);
-      navigate('/');
+      navigate('/produtos/radar');
     } catch (error) {
       notify('CREDENCIAIS INCORRETAS');
       console.error("Erro ao fazer login:", error);

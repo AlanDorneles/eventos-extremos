@@ -171,7 +171,8 @@ export default function Home() {
     !isMenuVisible &&
     location.pathname !== "/" &&
     location.pathname !== "/boletins" &&
-    location.pathname !== "/profile";
+    location.pathname !== "/profile" &&
+    location.pathname !== "/sobre";
 
   const dontHideItFrom =
      location.pathname === "/produtos/estacoes" || location.pathname === "/produtos/radar" || location.pathname === "/produtos/satelite" || location.pathname === "/produtos/wrf";
@@ -237,14 +238,13 @@ export default function Home() {
         {location.pathname === "/produtos/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
         {location.pathname === "/profile" && <Profile/>}
+        {location.pathname === "/sobre" && <Sobre />}
        
       </main>
-      <section>{location.pathname === "/" && <Sobre />}</section>
 
       {hideItFrom &&
         location.pathname !== "/produtos/satelite" &&
         location.pathname !== "/produtos/estacoes" &&
-        location.pathname !== "/produtos/radar" &&
         location.pathname !== "/produtos/wrf" && (
           <Player
             playGif={playImages}

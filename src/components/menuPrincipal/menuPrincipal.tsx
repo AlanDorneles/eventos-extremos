@@ -19,7 +19,14 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
     >
       <div className="navbar-brand">
         <a className="navbar-item ml-4" href="/">
-          <img src="/gepra-logo.png" alt="Logo" />
+          <figure className="image is-48x48">
+            <img src="/logo-furg.png" alt="Logo" />
+          </figure>
+        </a>
+        <a className="navbar-item ml-1" href="/">
+          <figure className="image is-48x48">
+            <img src="/logo_IO.png" alt="Logo" />
+          </figure>
         </a>
         <a
           role="button"
@@ -37,9 +44,9 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
 
       <div id="navbarBasicExample" className="navbar-menu ml-6">
         <div className="navbar-start">
-          <a className="navbar-item" href="/">
+          {/* <a className="navbar-item" href="/produtos/satelite">
             Início
-          </a>
+          </a> */}
 
           <a className="navbar-item" href="/produtos/satelite">
             Produtos
@@ -47,6 +54,10 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
 
           <a className="navbar-item" href="/boletins">
             Boletins
+          </a>
+
+          <a className="navbar-item" href="/sobre">
+            Sobre
           </a>
         </div>
 
@@ -93,7 +104,7 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
             </div>
           ) : (
             <a className="button is-primary m-auto" href="/login">
-              ENTRAR
+              LOGIN
             </a>
           )}
         </div>

@@ -54,12 +54,12 @@ export default function HubLogin() {
           </ul>
         </div>
         <div className="is-flex is-justify-content-space-evenly">
-            <figure className="image is-64x64">
-                <img src="/gepra-logo.png" />
-            </figure>
-            <figure className="image is-64x64">
-                <img src="/logotipo-furg.jpeg" />
-            </figure>
+          <figure className="image is-48x48">
+            <img src="/logo_IO.png" />
+          </figure>
+          <figure className="image is-48x48">
+            <img src="/logo-furg.png" />
+          </figure>
         </div>
         {/* Renderiza o formulário correspondente ao estado atual */}
         {renderForm()}
