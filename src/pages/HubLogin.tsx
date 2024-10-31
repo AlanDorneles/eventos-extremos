@@ -60,6 +60,7 @@ export default function HubLogin() {
           <figure className="image is-48x48">
             <img src="/logo-furg.png" />
           </figure>
+
         </div>
         {/* Renderiza o formulário correspondente ao estado atual */}
         {renderForm()}

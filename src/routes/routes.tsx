@@ -25,6 +25,10 @@ export const Root: React.FC = () => {
           element={<Home />}
         />
         <Route
+          path="/"
+          element={<Home /> ? <Navigate to='/produtos/satelite' /> : <Home />}
+        />
+        <Route
           path="/produtos/radar"
           element={<Home />}
         />

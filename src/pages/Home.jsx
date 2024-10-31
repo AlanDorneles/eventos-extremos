@@ -12,7 +12,7 @@ import { getImages } from "../services/images.js";
 import { UseRadarIsChecked } from "../contexts/radarIsChecked.jsx";
 import { UsePreviousAndNextImage } from "../contexts/previousAndNextImage.jsx";
 import { useFilterTypeRadarContext } from "../contexts/typeRadar.jsx";
-import { WrfImageContext } from '../contexts/WrfImage';
+import { WrfImageContext } from "../contexts/WrfImage";
 import { Map } from "../components/map/Map.jsx";
 import styles from "./styles/Home.module.css";
 import { DownloadGif } from "../components/download/gif.jsx";
@@ -29,7 +29,7 @@ import MenuPrincipal from "../components/menuPrincipal/menuPrincipal.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
 
 export default function Home() {
-  const { isAuthenticated, enterSemLogin} = useAuth();
+  const { isAuthenticated, enterSemLogin } = useAuth();
   const [handlerSrc, setHandlerSrc] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState([]);
@@ -175,13 +175,15 @@ export default function Home() {
     location.pathname !== "/sobre";
 
   const dontHideItFrom =
-     location.pathname === "/produtos/estacoes" || location.pathname === "/produtos/radar" || location.pathname === "/produtos/satelite" || location.pathname === "/produtos/wrf";
+    location.pathname === "/produtos/estacoes" ||
+    location.pathname === "/produtos/radar" ||
+    location.pathname === "/produtos/satelite" ||
+    location.pathname === "/produtos/wrf";
 
   return (
     <>
-      {<MenuPrincipal id="menu" className='is-fixed-top' /> }
+      {<MenuPrincipal id="menu" className="is-fixed-top" />}
       <main className={`${styles.container}`}>
-        
         <section
           className={`${styles.menu_map} ${
             isMenuVisible || dontHideItFrom ? styles.visible : styles.hidden
@@ -237,9 +239,8 @@ export default function Home() {
         )}
         {location.pathname === "/produtos/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
-        {location.pathname === "/profile" && <Profile/>}
+        {location.pathname === "/profile" && <Profile />}
         {location.pathname === "/sobre" && <Sobre />}
-       
       </main>
 
       {hideItFrom &&
@@ -255,7 +256,6 @@ export default function Home() {
           />
         )}
       <DownloadGif disabledButton={disabledButton} />
-      
     </>
   );
 }
