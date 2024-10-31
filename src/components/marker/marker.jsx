@@ -2,7 +2,7 @@ import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIconRetina from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-import logoFurg from '/logo-furg.png'
+import logoFurg from '/logo_furg_stexto.png'
 import station from '/circle.svg'
 
 
