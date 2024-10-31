@@ -20,7 +20,7 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
       <div className="navbar-brand">
         <a className="navbar-item ml-4" href="/">
           <figure className="image is-48x48">
-            <img src="/logo-furg.png" alt="Logo" />
+            <img src="/logo_furg_stexto.png" alt="Logo" />
           </figure>
         </a>
         <a className="navbar-item ml-1" href="/">

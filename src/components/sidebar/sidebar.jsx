@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import logoFurg from "/logo-furg.png";
+import logoFurg from "/logo_furg_stexto.png";
 import { IoHomeOutline } from "react-icons/io5";
 import { GiSattelite } from "react-icons/gi";
-import '../sass/navbar.scss'
-import styles from './sidebar.module.css'
+import "../sass/navbar.scss";
+import styles from "./sidebar.module.css";
 import { useState } from "react";
 
 export const Navbar = () => {
@@ -22,18 +22,17 @@ export const Navbar = () => {
         <div
           className={`${styles.navbarBurguer} ${isActive ? "is-active" : ""}`}
           onClick={toggleMenu}
-        >
-        </div>
+        ></div>
       </div>
 
       <div className={`${styles.navbarMenu} ${isActive ? "is-active" : ""}`}>
         <div className={styles.navbarStart}>
           <Link to="/" className={styles.navbarItem}>
             <IoHomeOutline className={styles.Icon} />
-              Home
+            Home
           </Link>
           <Link to="/satelite" className={styles.navbarItem}>
-          <GiSattelite className={styles.Icon}/>
+            <GiSattelite className={styles.Icon} />
             Satélite
           </Link>
         </div>

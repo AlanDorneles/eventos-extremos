@@ -6,7 +6,7 @@ import RecoveryPassword from "./RecoveryPassword";
 export default function HubLogin() {
   type StateLogin = "login" | "requestAccess" | "recoveryPassword";
   const [actionLogin, setActionLogin] = useState<StateLogin>("login");
-  const [activeTab, setActiveTab] = useState<boolean[]>([true,false,false])
+  const [activeTab, setActiveTab] = useState<boolean[]>([true, false, false]);
 
   const handleTabClick = (tab: StateLogin, index: number) => {
     setActionLogin(tab);
@@ -20,7 +20,7 @@ export default function HubLogin() {
       case "login":
         return <Login />;
       case "requestAccess":
-     return <RequestAccess />;
+        return <RequestAccess />;
       case "recoveryPassword":
         return <RecoveryPassword />;
       default:
@@ -29,7 +29,7 @@ export default function HubLogin() {
   };
 
   return (
-    <main style={{ display: "flex", flexDirection: "row", height: "100vh"}}>
+    <main style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
       <section
         style={{
           flex: 1,
@@ -39,16 +39,36 @@ export default function HubLogin() {
       >
         {/* Place your illustration here */}
       </section>
-      <div className="p-5" style={{height:"100vh",maxHeight:"100vh", overflowY:"auto"}}>
+      <div
+        className="p-5"
+        style={{ height: "100vh", maxHeight: "100vh", overflowY: "auto" }}
+      >
         <div className="tabs is-centered">
           <ul>
-            <li onClick={() => {setActionLogin("login"), handleTabClick("login", 0)}} className={activeTab[0] ? "is-active" : ""}>
+            <li
+              onClick={() => {
+                setActionLogin("login"), handleTabClick("login", 0);
+              }}
+              className={activeTab[0] ? "is-active" : ""}
+            >
               <a>Login</a>
             </li>
-            <li onClick={() => {setActionLogin("requestAccess"),handleTabClick("requestAccess", 1)}} className={activeTab[1] ? "is-active" : ""}>
+            <li
+              onClick={() => {
+                setActionLogin("requestAccess"),
+                  handleTabClick("requestAccess", 1);
+              }}
+              className={activeTab[1] ? "is-active" : ""}
+            >
               <a>Pedir acesso</a>
             </li>
-            <li onClick={() => {setActionLogin("recoveryPassword"),handleTabClick("recoveryPassword", 2)}} className={activeTab[2] ? "is-active" : ""}>
+            <li
+              onClick={() => {
+                setActionLogin("recoveryPassword"),
+                  handleTabClick("recoveryPassword", 2);
+              }}
+              className={activeTab[2] ? "is-active" : ""}
+            >
               <a>Recuperar senha</a>
             </li>
           </ul>
@@ -58,9 +78,8 @@ export default function HubLogin() {
             <img src="/logo_IO.png" />
           </figure>
           <figure className="image is-48x48">
-            <img src="/logo-furg.png" />
+            <img src="/logo_furg_stexto.png" />
           </figure>
-
         </div>
         {/* Renderiza o formulário correspondente ao estado atual */}
         {renderForm()}
