@@ -14,7 +14,11 @@ export const Root: React.FC = () => {
 
         <Route
           path="/login" 
-          element={isAuthenticated ? <Navigate to='/'/> : <HubLogin />}
+          element={isAuthenticated ? <Navigate to='/produtos/satelite'/> : <HubLogin />}
+        />
+        <Route 
+          path="/"
+          element={<Navigate to='/produtos/satelite' />}
         />
         <Route
           path="/sobre"

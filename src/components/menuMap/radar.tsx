@@ -152,7 +152,7 @@ interface RadarMenuProps {
             />
             07km
           </label>
-          {/*<label className="radio">
+          {/* <label className="radio">
             <input
               name="typeRadio"
               type="radio"
@@ -161,7 +161,7 @@ interface RadarMenuProps {
               onChange={handleRadioButtonChange}
             />
             05km
-          </label>*/}
+          </label> */}
           <label className="radio">
             <input
               name="typeRadio"

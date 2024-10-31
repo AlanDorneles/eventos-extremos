@@ -20,12 +20,12 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
       <div className="navbar-brand">
         <a className="navbar-item ml-4" href="/">
           <figure className="image is-48x48">
-            <img src="/logo_furg_stexto.png" alt="Logo" />
+            <img src="/logo-furg.png" alt="Logo" />
           </figure>
         </a>
         <a className="navbar-item ml-1" href="/">
           <figure className="image is-48x48">
-            <img src="/logo_IO_stexto.png" alt="Logo" />
+            <img src="/logo_IO.png" alt="Logo" />
           </figure>
         </a>
         <a
@@ -44,9 +44,9 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
 
       <div id="navbarBasicExample" className="navbar-menu ml-4">
         <div className="navbar-start">
-          <a className="navbar-item" href="/">
+          {/* <a className="navbar-item" href="/produtos/satelite">
             Início
-          </a>
+          </a> */}
 
           <a className="navbar-item" href="/produtos/satelite">
             Produtos

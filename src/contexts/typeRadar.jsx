@@ -13,9 +13,7 @@ export const FilterTypeRadarProvider = ({ children }) => {
   };
 
   return (
-    <FilterTypeRadarContext.Provider
-      value={{ typeRadar, setTypeRadar, handleTypeRadar, radarLocalStorage }}
-    >
+    <FilterTypeRadarContext.Provider value={{ typeRadar, setTypeRadar, handleTypeRadar, radarLocalStorage }}>
       {children}
     </FilterTypeRadarContext.Provider>
   );
@@ -25,5 +23,5 @@ export const useFilterTypeRadarContext = () => {
   return useContext(FilterTypeRadarContext);
 };
 FilterTypeRadarProvider.propTypes = {
-  children: PropTypes.any,
-};
+  children: PropTypes.any
+}
