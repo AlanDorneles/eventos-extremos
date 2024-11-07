@@ -1117,7 +1117,7 @@ export const Map = ({
                     : bounds.cangucuNotMaxCappi
                 }
                 url={
-                  handlerSrc ? images[currentImageIndex].cangucu : cangucu[23]
+                  handlerSrc ? images[currentImageIndex].cangucu : cangucu[2]
                 }
               />
             )}{" "}
@@ -1136,7 +1136,7 @@ export const Map = ({
                 url={
                   handlerSrc
                     ? images[currentImageIndex].morroDaIgreja
-                    : morroDaIgreja[23]
+                    : morroDaIgreja[2]
                 }
               />
             )}
@@ -1153,7 +1153,7 @@ export const Map = ({
                     : bounds.santiagoNotMaxCappi
                 }
                 url={
-                  handlerSrc ? images[currentImageIndex].santiago : santiago[23]
+                  handlerSrc ? images[currentImageIndex].santiago : santiago[2]
                 }
               />
             )}{" "}
