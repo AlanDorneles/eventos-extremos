@@ -48,7 +48,7 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
             Início
           </a> */}
 
-          <a className="navbar-item" href="/produtos/satelite">
+          <a className="navbar-item" href="/produtos/radar">
             Produtos
           </a>
 

@@ -14,19 +14,15 @@ export const Root: React.FC = () => {
 
         <Route
           path="/login" 
-          element={isAuthenticated ? <Navigate to='/produtos/satelite'/> : <HubLogin />}
+          element={isAuthenticated ? <Navigate to='/produtos/radar'/> : <HubLogin />}
         />
         <Route 
           path="/"
-          element={<Navigate to='/produtos/satelite' />}
+          element={<Navigate to='/produtos/radar' />}
         />
         <Route
           path="/sobre"
           element={<Home />}
-        />
-        <Route
-          path="/"
-          element={<Home /> ? <Navigate to='/produtos/satelite' /> : <Home />}
         />
         <Route
           path="/produtos/radar"

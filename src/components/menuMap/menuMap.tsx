@@ -38,7 +38,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
   const [checkeds, setCheckeds] = useState<{[key: string]: boolean }>({});
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("maxcappi");
-  const [selectedTab, setSelectTab] = useState<string>("satellite");
+  const [selectedTab, setSelectTab] = useState<string>("radar");
   const { selectedImage, setSelectedImage } = React.useContext(WrfImageContext);
 
   const handleCheckedStation = (id: string, checked: boolean) => {
@@ -108,20 +108,21 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
         {/* TABS */}
         <div className={`tabs ${styles.containerTabs}`}>
           <ul>
+          <li className={`${selectedTab === "radar" ? "is-active" : ""}`} onClick={() => handleTabClick("radar")}>
+              <Link to="/produtos/radar">
+                <span className="icon is-small">
+                  <GiRadarSweep />
+                </span>
+                <span>Radar</span>
+              </Link>
+          </li>
+
           <li className={`${selectedTab === "satellite" ? "is-active" : ""}`} onClick={() => handleTabClick("satellite")}>
               <Link to="/produtos/satelite">
                 <span className="icon is-small">
                   <GiSattelite className={styles.Icon} />
                 </span>
                 <span>Satélite</span>
-              </Link>
-            </li>
-            <li className={`${selectedTab === "radar" ? "is-active" : ""}`} onClick={() => handleTabClick("radar")}>
-              <Link to="/produtos/radar">
-                <span className="icon is-small">
-                  <GiRadarSweep />
-                </span>
-                <span>Radar</span>
               </Link>
             </li>
            
