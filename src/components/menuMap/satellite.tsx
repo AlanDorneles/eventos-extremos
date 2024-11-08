@@ -49,7 +49,6 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
   const handleImageClick = (index: number) => {
     const imageUrl = filteredImages[index].toString();
     const dateTime = extractDateTime(imageUrl);
-    console.log(`Hora da imagem: ${dateTime}`);
     updateImage(imageUrl);
     window.open(imageUrl, '_blank');
   };

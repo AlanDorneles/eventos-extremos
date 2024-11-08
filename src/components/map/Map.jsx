@@ -37,14 +37,12 @@ export const Map = ({
     setClicked(false);
   };
   const [radiusRadar, setRadiusRadar] = useState();
-
   useEffect(() => {
     if (typeRadar !== "maxcappi") {
       setRadiusRadar(radius[1]);
     } else {
       setRadiusRadar(radius[0]);
     }
-    console.log(typeRadar);
   }, [typeRadar]);
 
   const handleClickModal = () => {
@@ -76,6 +74,12 @@ export const Map = ({
     setCangucu(cangucuLinks);
     setSantiago(santiagoLinks);
   }, [radarLocalStorage, typeRadar]);
+
+  const inicialImage = JSON.parse(localStorage.getItem("redemet-images"));
+  // console.log("imagens atuais");
+  // console.log("cangucu:", inicialImage[typeRadar][23].cangucu);
+  // console.log("morro da igreja:", inicialImage[typeRadar][23].morroDaIgreja);
+  // console.log("santiago:", inicialImage[typeRadar][23].santiago);
 
   return (
     <>
@@ -1117,7 +1121,9 @@ export const Map = ({
                     : bounds.cangucuNotMaxCappi
                 }
                 url={
-                  handlerSrc ? images[currentImageIndex].cangucu : cangucu[2]
+                  handlerSrc
+                    ? images[typeRadar][currentImageIndex].cangucu
+                    : inicialImage[typeRadar][23].cangucu
                 }
               />
             )}{" "}
@@ -1135,8 +1141,8 @@ export const Map = ({
                 }
                 url={
                   handlerSrc
-                    ? images[currentImageIndex].morroDaIgreja
-                    : morroDaIgreja[2]
+                    ? images[typeRadar][currentImageIndex].morroDaIgreja
+                    : inicialImage[typeRadar][23].morroDaIgreja
                 }
               />
             )}
@@ -1153,7 +1159,9 @@ export const Map = ({
                     : bounds.santiagoNotMaxCappi
                 }
                 url={
-                  handlerSrc ? images[currentImageIndex].santiago : santiago[2]
+                  handlerSrc
+                    ? images[typeRadar][currentImageIndex].santiago
+                    : inicialImage[typeRadar][23].santiago
                 }
               />
             )}{" "}
@@ -1172,6 +1180,6 @@ Map.propTypes = {
   santiagoChecked: PropTypes.bool.isRequired,
   morroDaIgrejaChecked: PropTypes.bool.isRequired,
   handlerSrc: PropTypes.bool.isRequired,
-  images: PropTypes.array.isRequired,
+  images: PropTypes.object.isRequired,
   currentImageIndex: PropTypes.number.isRequired,
 };

@@ -29,11 +29,12 @@ import MenuPrincipal from "../components/menuPrincipal/menuPrincipal.tsx";
 import { useAuth } from "../contexts/AuthContext.tsx";
 
 export default function Home() {
+  const userSelect = localStorage.getItem("hourScopeRadar");
   const { isAuthenticated, enterSemLogin } = useAuth();
   const [handlerSrc, setHandlerSrc] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(23);
   const [images, setImages] = useState([]);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(24 - userSelect);
   const { cangucuChecked, morroDaIgrejaChecked, santiagoChecked } =
     UseRadarIsChecked();
   const { indexImage, handleNextImage, handlePreviousImage } =
@@ -70,19 +71,20 @@ export default function Home() {
   }, []);
 
   const playImages = async () => {
-    const images = await getImages(typeRadar);
+    const images = JSON.parse(localStorage.getItem("redemet-images"));
     setImages(images);
-
     setDisabledButton(true);
-
-    let currentIndex = 0; // Use o índice atual de imagem como ponto de partida
+    let incrementCount = 0;
+    let currentIndex = 24 - userSelect; // Use o índice atual de imagem como ponto de partida
     handlerSrcFunc();
-
     const intervalId = setInterval(() => {
       setCurrentImageIndex(currentIndex);
-      currentIndex = (currentIndex + 1) % images.length;
-      if (currentIndex === currentImageIndex) {
-        clearInterval(intervalId);
+      if (incrementCount < userSelect) {
+        incrementCount += 1;
+        currentIndex += 1;
+        if (currentIndex === 23) {
+          clearInterval(intervalId);
+        }
       }
     }, 400);
   };
@@ -97,8 +99,8 @@ export default function Home() {
     handleNextImage(count);
     setCount(count + 1);
 
-    if (count >= images.length - 2) {
-      setCount(0);
+    if (count === 23) {
+      setCount(24 - userSelect);
     }
     localStorage.setItem("imageId", count);
     setCurrentImageIndex(count); //GATILHO PARA MUDANÇA DE IMAGEM
@@ -106,9 +108,9 @@ export default function Home() {
 
   const previousImage = () => {
     handlePreviousImage(count);
-    if (count <= 0) {
-      setCount(getHourScopeRadar);
-      setCount(getHourScopeSatelite);
+
+    if (count <= 24 - userSelect) {
+      setCount(23);
     } else {
       setCount(count - 1);
       setCurrentImageIndex(count - 1); ///GATILHO PARA MUDANÇA DE IMAGEM

@@ -18,13 +18,10 @@ export const Graphic = () => {
   useEffect(() => {
     if (codeStation !== storageCodeStation) {
       setTrigger((prevTrigger) => !prevTrigger);
-      console.log('mudou de estação')
     }
   }, [codeStation, storageCodeStation]);
   useEffect(() => {
     const dataMeteorologic = JSON.parse(localStorage.getItem("dataStation"));
-    console.log(dataMeteorologic)
-    console.log(codeStation,phenomena)
     setVariable(dataMeteorologic[codeStation][phenomena].slice(-scopeDays));
     setHour(dataMeteorologic[codeStation]['hour'].slice(-scopeDays));
     setNameVariable(variablesPT[phenomena]);
