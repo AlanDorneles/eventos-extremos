@@ -82,7 +82,7 @@ export default function Home() {
       if (incrementCount < userSelect) {
         incrementCount += 1;
         currentIndex += 1;
-        if (currentIndex === 23) {
+        if (currentIndex === 24) {
           clearInterval(intervalId);
         }
       }
