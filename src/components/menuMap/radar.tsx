@@ -1,26 +1,8 @@
 import { useHourScope } from "../../contexts/hourAnimation";
 import styles from "./menuMap.module.css";
 import React from "react";
-
-interface RadarMenuProps {
-  getHourScopeRadar: number;
-  handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  actualHour: number;
-  initHour: number;
-  clickedButtonId: number | null;
-  selectIndex: (index: number) => void;
-  buttonStyle: React.CSSProperties;
-  cangucuChecked: boolean;
-  handleCangucuChange: (checked: boolean) => void;
-  morroDaIgrejaChecked: boolean;
-  handleMorroDaIgrejaChange: (checked: boolean) => void;
-  santiagoChecked: boolean;
-  handleSantiagoChange: (checked: boolean) => void;
-  selectedOption: string;
-  handleRadioButtonChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isChecked: boolean;
-  handleCheckBoxChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { RadarMenuProps } from "../../interfaces/RadarMenu";
+import { number } from "prop-types";
 
 const RadarMenu: React.FC<RadarMenuProps> = ({
   getHourScopeRadar,
@@ -64,10 +46,15 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
           <div className="buttons" id="buttons">
             {Array.from({ length: getHourScopeRadar }, (_, index) => {
               const hour = index + initHour + 2;
-              const isClicked = clickedButtonId === index;
+              const imagemID = localStorage.getItem("imageId");
+              const isClicked =
+                clickedButtonId == index + (23 - getHourScopeRadar);
+              index += 23 - getHourScopeRadar;
+              console.log("index:", index);
+
               return (
                 <button
-                  key={index}
+                  key={index.toString()}
                   className="button is-small"
                   onClick={() => selectIndex(index)}
                   id={index.toString()}

@@ -77,6 +77,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
     const selectedValue = parseInt(event.target.value, 10);
     handleSelectChange(selectedValue);
     const initIndex = actualHour - selectedValue;
+   
     if (initIndex < 0) {
       setInitHour(initIndex);
     } else {
@@ -101,6 +102,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
 
   const selectIndex = (index: number) => {
     setClickHoursIndexImage(index);
+  
     if (selectImage) {
       selectImage();
     }

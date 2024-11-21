@@ -76,6 +76,7 @@ export default function Home() {
     setDisabledButton(true);
     let incrementCount = 0;
     let currentIndex = 24 - userSelect; // Use o índice atual de imagem como ponto de partida
+
     handlerSrcFunc();
     const intervalId = setInterval(() => {
       setCurrentImageIndex(currentIndex);
