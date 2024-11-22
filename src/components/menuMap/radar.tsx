@@ -50,7 +50,7 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
               const isClicked =
                 clickedButtonId == index + (23 - getHourScopeRadar);
               index += 23 - getHourScopeRadar;
-              console.log("index:", index);
+              // console.log("index:", index);
 
               return (
                 <button

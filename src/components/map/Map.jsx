@@ -131,10 +131,9 @@ export const Map = ({
             />
           </Pane>
         ) : null}
-
         {stationsVisible == false ? (
           <>
-            <Marker
+            {/* <Marker
               position={[-33.74, -53.37]}
               icon={iconStation}
               className="iconStation"
@@ -144,9 +143,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>{" "}
+            ></Marker>{" "} */}
             {/* CHUÍ */}
-            <Marker
+            {/* <Marker
               position={[-29.7, -53.68]}
               icon={iconStation}
               className="iconStation"
@@ -156,7 +155,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>{" "}
+            ></Marker>{" "} */}
             {/* SANTA MARIA */}
             <Marker
               position={[-29.84, -57.08]}
@@ -194,7 +193,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* JAGUARÃO */}
-            <Marker
+            {/* <Marker
               position={[-31.96, -53.49]}
               icon={iconStation}
               className="iconStation"
@@ -204,9 +203,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* HERVAL */}
-            <Marker
+            {/* <Marker
               position={[-31.8, -52.51]}
               icon={iconStation}
               className="iconStation"
@@ -216,9 +215,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* PELOTAS */}
-            <Marker
+            {/* <Marker
               position={[-31.67, -53.1]}
               icon={iconStation}
               className="iconStation"
@@ -228,9 +227,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* PIRATINI */}
-            <Marker
+            {/* <Marker
               position={[-31.5, -53.51]}
               icon={iconStation}
               className="iconStation"
@@ -240,9 +239,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* PINHEIRO MACHADO */}
-            <Marker
+            {/* <Marker
               position={[-31.39, -53.93]}
               icon={iconStation}
               className="iconStation"
@@ -252,7 +251,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* HULHA NEGRA */}
             <Marker
               position={[-31.35, -54.01]}
@@ -290,7 +289,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* SANTANA DO LIVRAMENTO*/}
-            <Marker
+            {/* <Marker
               position={[-29.16, -56.55]}
               icon={iconStation}
               className="iconStation"
@@ -300,9 +299,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* ITAQUI*/}
-            <Marker
+            {/* <Marker
               position={[-29.21, -56.35]}
               icon={iconStation}
               className="iconStation"
@@ -312,9 +311,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* ITAQUI VMAER*/}
-            <Marker
+            {/* <Marker
               position={[-29.13, -56.02]}
               icon={iconStation}
               className="iconStation"
@@ -324,7 +323,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* MACAMBARÁ*/}
             <Marker
               position={[-29.71, -55.53]}
@@ -338,7 +337,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* ALEGRETE*/}
-            <Marker
+            {/* <Marker
               position={[-30.26, -54.84]}
               icon={iconStation}
               className="iconStation"
@@ -348,7 +347,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* ROSÁRIO DO SUL*/}
             <Marker
               position={[-30.34, -54.31]}
@@ -362,7 +361,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* SÃO GABRIEL*/}
-            <Marker
+            {/* <Marker
               position={[-30.34, -54.26]}
               icon={iconStation}
               className="iconStation"
@@ -372,9 +371,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* SÃO GABRIEL*/}
-            <Marker
+            {/* <Marker
               position={[-30.72, -53.96]}
               icon={iconStation}
               className="iconStation"
@@ -384,9 +383,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* LAVRAS DO SUL*/}
-            <Marker
+            {/* <Marker
               position={[-30.9, -53.43]}
               icon={iconStation}
               className="iconStation"
@@ -396,9 +395,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* CAÇAPAVA DO SUL (MINAS DO CAMAQUÃ)*/}
-            <Marker
+            {/* <Marker
               position={[-30.94, -52.74]}
               icon={iconStation}
               className="iconStation"
@@ -408,7 +407,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* CANGUÇU OLIVAL CAPOLIVO*/}
             <Marker
               position={[-31.4, -52.7]}
@@ -422,7 +421,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* CANGUÇU*/}
-            <Marker
+            {/* <Marker
               position={[-31.36, -52.27]}
               icon={iconStation}
               className="iconStation"
@@ -432,7 +431,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* SÃO LOURENÇO DO SUL*/}
             <Marker
               position={[-30.81, -51.83]}
@@ -446,7 +445,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* CAMAQUÃ*/}
-            <Marker
+            {/* <Marker
               position={[-30.57, -51.53]}
               icon={iconStation}
               className="iconStation"
@@ -456,9 +455,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* BARRA DO RIBEIRO*/}
-            <Marker
+            {/* <Marker
               position={[-30.55, -52.41]}
               icon={iconStation}
               className="iconStation"
@@ -468,7 +467,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* ENCRUZILHADA DO SUL*/}
             <Marker
               position={[-30.55, -53.47]}
@@ -482,7 +481,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* CAÇAPAVA DO SUL*/}
-            <Marker
+            {/* <Marker
               position={[-30.41, -53.45]}
               icon={iconStation}
               className="iconStation"
@@ -492,9 +491,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* CAÇAPAVA DO SUL (COSTI OLIVOS)*/}
-            <Marker
+            {/* <Marker
               position={[-30.37, -53.51]}
               icon={iconStation}
               className="iconStation"
@@ -504,7 +503,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* SÃO SEPÉ*/}
             <Marker
               position={[-29.19, -54.89]}
@@ -518,7 +517,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* SANTIAGO*/}
-            <Marker
+            {/* <Marker
               position={[-29.48, -54.73]}
               icon={iconStation}
               className="iconStation"
@@ -528,7 +527,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* JAGUARI ( MIRANTE MINUZZI)*/}
             <Marker
               position={[-29.7, -54.69]}
@@ -542,7 +541,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* SÃO VICENTE DO SUL*/}
-            <Marker
+            {/* <Marker
               position={[-30.22, -52.94]}
               icon={iconStation}
               className="iconStation"
@@ -552,9 +551,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* CACHOEIRA DO SUL (CAPANE)*/}
-            <Marker
+            {/* <Marker
               position={[-29.94, -52.78]}
               icon={iconStation}
               className="iconStation"
@@ -564,7 +563,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* CACHOEIRA DO SUL (CASA AZUL)*/}
             <Marker
               position={[-29.87, -52.38]}
@@ -578,7 +577,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* RIO PARDO*/}
-            <Marker
+            {/* <Marker
               position={[-30.03, -52.13]}
               icon={iconStation}
               className="iconStation"
@@ -588,9 +587,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* MINAS DO LEÃO*/}
-            <Marker
+            {/* <Marker
               position={[-29.79, -51.83]}
               icon={iconStation}
               className="iconStation"
@@ -600,9 +599,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* TAQUARI*/}
-            <Marker
+            {/* <Marker
               position={[-29.72, -51.48]}
               icon={iconStation}
               className="iconStation"
@@ -612,9 +611,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* MONTENEGRO*/}
-            <Marker
+            {/* <Marker
               position={[-29.55, -52.23]}
               icon={iconStation}
               className="iconStation"
@@ -624,9 +623,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* VENÂNCIO AIRES*/}
-            <Marker
+            {/* <Marker
               position={[-29.4, -52.99]}
               icon={iconStation}
               className="iconStation"
@@ -636,9 +635,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* SOBRADINHO*/}
-            <Marker
+            {/* <Marker
               position={[-29.18, -53.69]}
               icon={iconStation}
               className="iconStation"
@@ -648,7 +647,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* JULIO DE CASTILHOS*/}
             <Marker
               position={[-29.09, -53.83]}
@@ -662,7 +661,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* TUPANCIRETÃ*/}
-            <Marker
+            {/* <Marker
               position={[-28.69, -54.92]}
               icon={iconStation}
               className="iconStation"
@@ -672,7 +671,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* BOSSOROCA*/}
             <Marker
               position={[-28.42, -54.96]}
@@ -686,7 +685,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* SÃO LUIZ GONZAGA*/}
-            <Marker
+            {/* <Marker
               position={[-28.76, -56.05]}
               icon={iconStation}
               className="iconStation"
@@ -696,9 +695,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* SÃO BORJA ( TERRA DO SOL)*/}
-            <Marker
+            {/* <Marker
               position={[-28.69, -55.96]}
               icon={iconStation}
               className="iconStation"
@@ -708,7 +707,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* SÃO BORJA ( DDPA)*/}
             <Marker
               position={[-28.65, -56.02]}
@@ -722,7 +721,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* SÃO BORJA */}
-            <Marker
+            {/* <Marker
               position={[-28.14, -54.76]}
               icon={iconStation}
               className="iconStation"
@@ -732,9 +731,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* CERRO LARGO */}
-            <Marker
+            {/* <Marker
               position={[-28.27, -54.22]}
               icon={iconStation}
               className="iconStation"
@@ -744,7 +743,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* SANTO ÂNGELO */}
             <Marker
               position={[-28.6, -53.67]}
@@ -782,7 +781,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* SOLEDADE */}
-            <Marker
+            {/* <Marker
               position={[-28.94, -52.05]}
               icon={iconStation}
               className="iconStation"
@@ -792,7 +791,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* ILÓPOLIS(IBRAMATE) */}
             <Marker
               position={[-29.45, -51.82]}
@@ -818,7 +817,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* BENTO GONÇALVES */}
-            <Marker
+            {/* <Marker
               position={[-28.89, -51.54]}
               icon={iconStation}
               className="iconStation"
@@ -828,7 +827,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* VERANÓPOLIS */}
             <Marker
               position={[-28.7, -51.87]}
@@ -842,7 +841,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* SERAFINA CORRÊA */}
-            <Marker
+            {/* <Marker
               position={[-29.14, -50.99]}
               icon={iconStation}
               className="iconStation"
@@ -852,9 +851,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* CAXIAS DO SUL  */}
-            <Marker
+            {/* <Marker
               position={[-28.94, -50.61]}
               icon={iconStation}
               className="iconStation"
@@ -864,7 +863,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* SÃO FRANCISCO DE PAULA */}
             <Marker
               position={[-29.37, -50.83]}
@@ -890,7 +889,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* CAMPO BOM  */}
-            <Marker
+            {/* <Marker
               position={[-29.85, -51.19]}
               icon={iconStation}
               className="iconStation"
@@ -900,9 +899,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* ESTEIO  */}
-            <Marker
+            {/* <Marker
               position={[-27.74, -54.88]}
               icon={iconStation}
               className="iconStation"
@@ -912,7 +911,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* PORTO VERA CRUZ  */}
             <Marker
               position={[-27.85, -53.79]}
@@ -938,7 +937,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* PALMEIRAS DAS MISSÕES */}
-            <Marker
+            {/* <Marker
               position={[-27.86, -53.04]}
               icon={iconStation}
               className="iconStation"
@@ -948,7 +947,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* SARANDI  */}
             <Marker
               position={[-27.4, -53.43]}
@@ -962,7 +961,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* FREDERICO WESTPHALEN */}
-            <Marker
+            {/* <Marker
               position={[-27.89, -52.21]}
               icon={iconStation}
               className="iconStation"
@@ -972,9 +971,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* GETULIO VARGAS  */}
-            <Marker
+            {/* <Marker
               position={[-28.45, -50.95]}
               icon={iconStation}
               className="iconStation"
@@ -984,7 +983,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* VACARIA  */}
             <Marker
               position={[-28.51, -50.88]}
@@ -998,7 +997,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* VACARIA  */}
-            <Marker
+            {/* <Marker
               position={[-29.95, -51.12]}
               icon={iconStation}
               className="iconStation"
@@ -1008,9 +1007,9 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* CACHOEIRINHA  */}
-            <Marker
+            {/* <Marker
               position={[-30.03, -51.02]}
               icon={iconStation}
               className="iconStation"
@@ -1020,7 +1019,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* VIAMÃO  */}
             <Marker
               position={[-30.19, -51.18]}
@@ -1070,7 +1069,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* TORRES */}
-            <Marker
+            {/* <Marker
               position={[-29.66, -50.21]}
               icon={iconStation}
               className="iconStation"
@@ -1080,7 +1079,7 @@ export const Map = ({
                     handleClickModal();
                 },
               }}
-            ></Marker>
+            ></Marker> */}
             {/* MAQUINÉ */}
             <Marker
               position={[-30.01, -50.14]}
@@ -1110,7 +1109,7 @@ export const Map = ({
         <Marker
           position={[-29.8262, -50.5179]}
           icon={customMarkerIcon}
-        ></Marker>
+        ></Marker>{" "}
         {cangucuChecked ? (
           <>
             {cangucu && (
@@ -1123,13 +1122,14 @@ export const Map = ({
                 url={
                   handlerSrc
                     ? images[typeRadar][currentImageIndex].cangucu
-                    : inicialImage[typeRadar][23].cangucu
+                    : inicialImage[typeRadar][23].cangucu ??
+                      "../../../public/no-data.png"
                 }
               />
             )}{" "}
           </>
-        ) : null}
-
+        ) : null}{" "}
+        */
         {morroDaIgrejaChecked ? (
           <>
             {morroDaIgreja && (
@@ -1142,13 +1142,13 @@ export const Map = ({
                 url={
                   handlerSrc
                     ? images[typeRadar][currentImageIndex].morroDaIgreja
-                    : inicialImage[typeRadar][23].morroDaIgreja
+                    : inicialImage[typeRadar][23].morroDaIgreja ??
+                      "../../../public/no-data.png"
                 }
               />
             )}
           </>
         ) : null}
-
         {santiagoChecked ? (
           <>
             {santiago && (
@@ -1161,13 +1161,13 @@ export const Map = ({
                 url={
                   handlerSrc
                     ? images[typeRadar][currentImageIndex].santiago
-                    : inicialImage[typeRadar][23].santiago
+                    : inicialImage[typeRadar][23].santiago ??
+                      "../../../public/no-data.png"
                 }
               />
             )}{" "}
           </>
         ) : null}
-
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       </MapContainer>
       <div>{clicked && <Phenomena handleCloseModal={handleCloseModal} />}</div>

@@ -9,7 +9,7 @@ function setupWebSocket() {
     const data = JSON.parse(event.data);
     if (data.newCache) {
       console.log(
-        `NOVO CACHE DISPONÍVEL ${new Date().getUTCHours()}:${new Date().getUTCMinutes()}`
+        `NOVO CACHE DISPONÍVEL PARA DADOS DE RADAR : ${new Date().getUTCHours()}:${new Date().getUTCMinutes()}`
       );
       updateDataFromAPI();
     }
@@ -25,7 +25,9 @@ function setupWebSocket() {
 
 export const getRadarInformation = async () => {
   try {
-    const response = await fetch(`http://localhost:3000/get-images-redemet-free`);
+    const response = await fetch(
+      `http://localhost:3000/get-images-redemet-free`
+    );
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem("redemet-images", JSON.stringify(data.data));
