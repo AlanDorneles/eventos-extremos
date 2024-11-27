@@ -12,6 +12,7 @@ function setupWebSocket() {
         `NOVO CACHE DISPONÍVEL PARA DADOS DE RADAR : ${new Date().getUTCHours()}:${new Date().getUTCMinutes()}`
       );
       updateDataFromAPI();
+      localStorage.setItem("redemet-images", JSON.stringify(data.data));
     }
   };
 
