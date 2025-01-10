@@ -52,7 +52,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("maxcappi");
   const [selectedTab, setSelectTab] = useState<string>("radar");
-  const { selectedImage, setSelectedImage } = React.useContext(WrfImageContext);
+ // const { selectedImage, setSelectedImage } = React.useContext(WrfImageContext);
 
   const handleCheckedStation = (id: string, checked: boolean) => {
     setCheckeds((prev) => ({
@@ -163,7 +163,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
               </Link>
             </li>
 
-            <li
+            {/* <li
               className={`${selectedTab === "wrf" ? "is-active" : ""}`}
               onClick={() => handleTabClick("wrf")}
             >
@@ -173,7 +173,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
                 </span>
                 <span>WRF</span>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
@@ -223,12 +223,12 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
         )}
 
         {/* WRF */}
-        {selectedTab === "wrf" && (
+        {/* {selectedTab === "wrf" && (
           <WrfMenu
             selectedImage={selectedImage}
             setSelectedImage={setSelectedImage}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

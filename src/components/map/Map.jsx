@@ -75,6 +75,7 @@ export const Map = ({
     setSantiago(santiagoLinks);
   }, [radarLocalStorage, typeRadar]);
 
+  getRadarInformation();
   const inicialImage = JSON.parse(localStorage.getItem("redemet-images"));
   // console.log("imagens atuais");
   // console.log("cangucu:", inicialImage[typeRadar][23].cangucu);
@@ -1123,7 +1124,7 @@ export const Map = ({
                   handlerSrc
                     ? images[typeRadar][currentImageIndex].cangucu
                     : inicialImage[typeRadar][23].cangucu ??
-                      "../../../public/no-data.png"
+                      "../../../public/no-data1.png"
                 }
               />
             )}{" "}
@@ -1143,7 +1144,7 @@ export const Map = ({
                   handlerSrc
                     ? images[typeRadar][currentImageIndex].morroDaIgreja
                     : inicialImage[typeRadar][23].morroDaIgreja ??
-                      "../../../public/no-data.png"
+                      "../../../public/no-data1.png"
                 }
               />
             )}
@@ -1162,7 +1163,7 @@ export const Map = ({
                   handlerSrc
                     ? images[typeRadar][currentImageIndex].santiago
                     : inicialImage[typeRadar][23].santiago ??
-                      "../../../public/no-data.png"
+                      "../../../public/no-data1.png"
                 }
               />
             )}{" "}

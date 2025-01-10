@@ -32,7 +32,7 @@ export async function DataINMETAPI() {
 
     const data = await response.json();
     localStorage.setItem("dataStation", JSON.stringify(data.data));
-    console.log("Dados armazenados no localStorage:", data.data);
+    console.log("Dados INMET armazenados no localStorage:", data.data);
     console.log(data.data);
   } catch (error) {
     console.error(error);
