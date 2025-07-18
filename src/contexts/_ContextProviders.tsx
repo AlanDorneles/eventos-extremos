@@ -1,18 +1,18 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { HourScopeProvider } from "./hourAnimation.jsx";
 import { RadarIsCheckedProvider } from "./radarIsChecked.jsx";
 import { PreviousAndNextImageProvider } from "./previousAndNextImage.jsx";
 import { StationsVisibleProvider } from "./radarFilter.jsx";
 import { CodeStationsProvider } from "./codeStation.jsx";
-import { FilterTypeRadarProvider } from "./typeRadar.jsx";
+import { FilterTypeRadarProvider } from "./typeRadarContext.js";
 import { RadarOrSateliteProvider } from "./RadarOrSatelite.jsx";
-import { ButtonSatProvider } from "./buttonSat.jsx";
+import { ButtonSatProvider } from "./buttonSat";
 import { PhenomenaProvider } from "./Phenomena.jsx";
 import { ShowMenuConfigurationProvider } from "./showMenu.jsx";
 import { CheckedsProvider } from "./Checkeds.jsx";
-import { ImageProvider } from "./satImageUpdate.jsx";
+import { ImageProvider } from "./satImageUpdate.js";
 import { ScopeDaysProvider } from "./ScopeDays.jsx";
-import { WrfImageProvider } from "./WrfImage.jsx";
+import { WrfImageProvider } from "./WrfImage";
 
 interface CombinedProvidersProps {
   children: ReactNode;

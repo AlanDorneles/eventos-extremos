@@ -1,10 +1,10 @@
-import { DataINMETAPI } from "./inmet";
+import { DataINMETAPI } from "./inmet.ts";
 
 export const DataStationsAPI = async (stationCodes) => {
   let stationsData = JSON.parse(localStorage.getItem("stationsData")) || {}; // SELECIONADOS
   const dataStation = JSON.parse(localStorage.getItem("dataStation")); // DADOS DO BACKEND
   if (!dataStation) {
-    DataINMETAPI()
+    DataINMETAPI();
   }
 
   const handlerKeys = Object.keys(stationsData);
@@ -18,16 +18,14 @@ export const DataStationsAPI = async (stationCodes) => {
     );
     removedStations.forEach((stationCode) => {
       delete stationsData[stationCode];
-      
     });
   } else {
     newStationCodes.forEach((stationCode) => {
       const data = dataStation[stationCode];
-    
+
       if (data) {
         stationsData[stationCode] = data;
-       
-      } 
+      }
     });
   }
   localStorage.setItem("stationsData", JSON.stringify(stationsData));

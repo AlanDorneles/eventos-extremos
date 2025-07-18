@@ -1,56 +1,55 @@
-#root{
-    font-family: "Lato Regular", sans-serif;
-    min-height: 100vh;
-    
-}
-body{
-    padding: 0;
-    margin: 0;
-    min-height: 100vh;
+#root {
+  font-family: "Lato Regular", sans-serif;
+  min-height: 100vh;
 }
 
-hr{
-    background-color: #fddd8b !important;
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  max-height: 100vh;
+}
+
+hr {
+  background-color: #fddd8b !important;
 }
 label.radio {
-    margin:0 !important;
-    display:flex;
-    gap:0.5em
+  margin: 0 !important;
+  display: flex;
+  gap: 0.5em;
 }
 
 text.marker-text {
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    fill: black;
-    text-anchor: middle;
-    alignment-baseline: middle;
-    pointer-events: none; /* Isso impede que o texto interfira com a interatividade do gráfico */
-    position: absolute;
-    z-index:5000
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  fill: black;
+  text-anchor: middle;
+  alignment-baseline: middle;
+  pointer-events: none; /* Isso impede que o texto interfira com a interatividade do gráfico */
+  position: absolute;
+  z-index: 5000;
 }
 
-.apexcharts-tooltip-marker{
-    background-color:black !important;
-    border:1px solid
+.apexcharts-tooltip-marker {
+  background-color: black !important;
+  border: 1px solid;
 }
 
 .apexcharts-marker {
-    background-color: black !important;
-    fill:#f8a402 !important;
-    content: "a" !important;
-    color:white !important
-
+  background-color: black !important;
+  fill: #f8a402 !important;
+  content: "a" !important;
+  color: white !important;
 }
-#SvgjsCircle5961{
-    background-color: black !important;
-    fill: black;
-    content:"n";
-    color: white
-
+#SvgjsCircle5961 {
+  background-color: black !important;
+  fill: black;
+  content: "n";
+  color: white;
 }
 .apexcharts-marker .no-pointer-events {
-    background-color: black !important;
-    fill:black;
+  background-color: black !important;
+  fill: black;
 }
 /*.leaflet-layer,
 .leaflet-control-zoom-in,
@@ -58,19 +57,20 @@ text.marker-text {
 .leaflet-control-attribution {
   filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }*/
-.title:not(:last-child), .subtitle:not(:last-child) {
-    margin-bottom: 0.5rem !important;}
-    
+.title:not(:last-child),
+.subtitle:not(:last-child) {
+  margin-bottom: 0.5rem !important;
+}
 
 .select.is-primary select {
-    width: 100%;
+  width: 100%;
 }
-#menu-configuration{
-    position:fixed;
-    z-index:4000;
-    width:20vw;
-    height:100vh;
-    top:0;
-    right:0;
-    background-color:white
-}
+/*#menu-configuration {
+  position: fixed;
+  z-index: 4000;
+  width: 20vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  background-color: white;
+}*/

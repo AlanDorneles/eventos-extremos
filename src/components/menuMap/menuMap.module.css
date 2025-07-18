@@ -6,17 +6,21 @@
   overflow-y: auto;
   max-height: 100vh;
 }
-.containerItem{
-  display:flex;
-  flex-direction:column;
-  gap:2em
+
+.containerItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 100%;
 }
+
 .containerButtonHours,
 .containerSelect {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
+
 .containerRadar,
 .containerTypeRadar {
   display: grid;
@@ -77,8 +81,9 @@ input[type="checkbox"]::selection {
 ul li {
   width: 100%;
 }
-.containerOptionsStations{
-  display:flex;
-  flex-direction:column;
-  gap:8px
+.containerOptionsStations {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
+

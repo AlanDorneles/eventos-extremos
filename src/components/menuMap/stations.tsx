@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import styles from "./menuMap.module.css";
 import { stations } from '../../constants/stations';
 import { useCheckedsContext } from '../../contexts/Checkeds';

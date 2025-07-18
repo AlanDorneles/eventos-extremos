@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { GiSattelite, GiRadarSweep, GiEarthAmerica } from "react-icons/gi";
 import { RiBaseStationLine } from "react-icons/ri";
@@ -6,20 +6,21 @@ import RadarMenu from "./radar";
 import SatelliteMenu from "./satellite";
 import StationsMenu from "./stations";
 import stations, { Station } from "./listStations";
-import WrfMenu from "./wrfMenu";
+//import WrfMenu from "./wrfMenu";
 import {
   useHourScope,
   useHourScopeSatelite,
 } from "../../contexts/hourAnimation";
-import { useFilterTypeRadarContext } from "../../contexts/typeRadar";
+import { useFilterTypeRadarContext } from "../../contexts/typeRadarContext";
 import { UseRadarIsChecked } from "../../contexts/radarIsChecked";
 import { UsePreviousAndNextImage } from "../../contexts/previousAndNextImage";
 import { useStationsVisible } from "../../contexts/radarFilter";
 import { useRadarOrSatelite } from "../../contexts/RadarOrSatelite";
 import { ButtonSatContext } from "../../contexts/buttonSat";
-import { WrfImageContext } from "../../contexts/WrfImage";
+import { WrfImageContext } from "../../contexts/WrfImage.tsx";
 import { buttonStyle } from "../../constants/constants";
 import styles from "./menuMap.module.css";
+import { useLocation } from "react-router-dom";
 
 interface MenuMapProps {
   selectImage?: () => void;
@@ -41,7 +42,6 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
   const { setStationsVisible } = useStationsVisible();
   const { handleTypeRadar } = useFilterTypeRadarContext();
   const { handleTypeMecanism } = useRadarOrSatelite();
-  const { UFPEL, setUFPEL } = useContext(ButtonSatContext);
   const actualHour = new Date().getHours();
   const [initHour, setInitHour] = useState<number>(actualHour - 6);
   const [initHourSatellite, setInitHourSatellite] = useState<number>(
@@ -51,8 +51,20 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
   const [checkeds, setCheckeds] = useState<{ [key: string]: boolean }>({});
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("maxcappi");
-  const [selectedTab, setSelectTab] = useState<string>("radar");
-  const { selectedImage, setSelectedImage } = React.useContext(WrfImageContext);
+  const location = useLocation();
+
+  const getTabFromPath = (pathname: string): string => {
+    if (pathname.includes("satelite")) return "satellite";
+    if (pathname.includes("estacoes")) return "station";
+    if (pathname.includes("wrf")) return "wrf";
+    return "radar";
+  };
+
+  const [selectedTab, setSelectTab] = useState<string>(
+    getTabFromPath(location.pathname)
+  );
+  //const { selectedImage, setSelectedImage } = React.useContext(WrfImageContext);
+  const [source, setSource] = useState<"CPPMET" | "INPE">("INPE");
 
   const handleCheckedStation = (id: string, checked: boolean) => {
     setCheckeds((prev) => ({
@@ -69,15 +81,20 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
     handleTypeRadar(value);
   };
 
+  useEffect(() => {
+    setSelectTab(getTabFromPath(location.pathname));
+  }, [location.pathname]);
+
   const handleTabClick = (tab: string) => {
     setSelectTab(tab);
   };
+  console.log(selectedTab);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = parseInt(event.target.value, 10);
     handleSelectChange(selectedValue);
     const initIndex = actualHour - selectedValue;
-   
+
     if (initIndex < 0) {
       setInitHour(initIndex);
     } else {
@@ -102,7 +119,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
 
   const selectIndex = (index: number) => {
     setClickHoursIndexImage(index);
-  
+
     if (selectImage) {
       selectImage();
     }
@@ -114,8 +131,6 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
     setIsChecked(checked);
     setStationsVisible(!checked);
   };
-
-  const toggleUFPEL = () => setUFPEL(!UFPEL);
 
   useEffect(() => {
     handleTypeMecanism(selectedTab);
@@ -163,7 +178,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
               </Link>
             </li>
 
-            <li
+            {/*<li
               className={`${selectedTab === "wrf" ? "is-active" : ""}`}
               onClick={() => handleTabClick("wrf")}
             >
@@ -173,23 +188,13 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
                 </span>
                 <span>WRF</span>
               </Link>
-            </li>
+            </li>*/}
           </ul>
         </div>
       </div>
 
       {/* MENUS */}
       <div className={styles.containerItem}>
-        {/* SATELLITE */}
-        {selectedTab === "satellite" && (
-          <SatelliteMenu
-            getHourScopeSatelite={getHourScopeSatelite}
-            handleChangeSatellite={handleChangeSatellite}
-            UFPEL={UFPEL}
-            toggleUFPEL={toggleUFPEL}
-          />
-        )}
-
         {/* RADAR */}
         {selectedTab === "radar" && (
           <RadarMenu
@@ -219,6 +224,19 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
             checkeds={checkeds}
             handleCheckedStation={handleCheckedStation}
             stations={stations as Station[]}
+          />
+        )}
+
+        {/* SATELLITE */}
+        {selectedTab === "satellite" && (
+          <SatelliteMenu
+            getHourScopeSatelite={getHourScopeSatelite}
+            handleChangeSatellite={handleChangeSatellite}
+            source={source}
+            toggleSource={(value) => setSource(value)}
+            clickedButtonId={clickedButtonId}
+            selectIndex={selectIndex}
+            buttonStyle={buttonStyle}
           />
         )}
 

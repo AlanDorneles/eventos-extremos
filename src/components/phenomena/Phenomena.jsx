@@ -11,19 +11,19 @@ export const Phenomena = ({handleCloseModal}) => {
 
         <div className={styles.container}>
             <div className={styles.containerCard}>
-            <Card className={styles.Card} />
+                <Card className={styles.Card} />
             </div>
             <div className={styles.containerGraphic}>
-            <MenuStation/>
-            <Graphic className={styles.GraphicPressure}/>
+                <MenuStation/>
+                <Graphic className={styles.GraphicPressure}/>
             </div>
             <div className={styles.close}>
-            <button
-                className="button is-link is-inverted is-rounded is-large"
-                onClick={handleCloseModal}
-            >
-                <MdClose />
-            </button>
+                <button
+                    className="button is-link is-inverted is-rounded is-large"
+                    onClick={handleCloseModal}
+                >
+                    <MdClose />
+                </button>
             </div>
         </div>
         )

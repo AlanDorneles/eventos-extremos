@@ -1,58 +1,62 @@
-.container{
-    display:flex;
-    margin-top:80px;
-    overflow:hidden;
+.container {
+  display: flex;
+  overflow: hidden;
+  top: 80px;
+  position: fixed;
+  width: 100%;
 }
 
-.menu_map{
-    width:30%;
+.menu_map {
+  width: 30%;
+  max-width: 30%;
+  min-width: 30%;
 }
 
-.map{
-    width:70%;
+.map {
+  width: 70%;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
-.windyContainer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 80px);
-    display: flex;
-    background-color: white;
-}
+/*.windyContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 40px);
+  display: flex;
+  background-color: white;
+}*/
 
 iframe {
-    width: 100vw;
-    height: 92vh;
+  width: 100vw;
+  height: 92vh;
 }
 
 .btnMenu {
-    position: absolute;
-    width: 8rem;
-    height: 4.5rem;
-    margin-left: 3rem;
-    margin-top: .5rem;
-    border-radius: 24px;
-    background-color: rgba(255, 255, 255, 0.7);
-    z-index: 9000;
+  position: absolute;
+  width: 8rem;
+  height: 4.5rem;
+  margin-left: 3rem;
+  margin-top: 0.5rem;
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 9000;
 }
 
 .centerSat {
-    display: block;
-    width: 70%;
-    margin: 0 auto;
+  display: block;
+  width: 70%;
+  margin: 0 auto;
 }
 
-.teste {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
-}
+/*.teste {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}*/

@@ -1,60 +1,48 @@
-import React, { useState } from 'react';
-import styles from './menuMap.module.css';
-import { CPPMETImages } from '../../services/cpmetUFPEL';
-import { CPTECImages } from '../../services/cptecINPE';
+import { useEffect } from "react";
+import styles from "./menuMap.module.css";
+import { addMinutes } from "date-fns";
+import { SatelliteMenuProps } from "../../interfaces/SatelliteMenu";
 import { useImageContext } from "../../contexts/satImageUpdate";
+import { useButtonSat } from "../../contexts/buttonSat"; // IMPORTANTE
 
-interface SatelliteProps {
-  getHourScopeSatelite: number;
-  handleChangeSatellite: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  UFPEL: boolean;
-  toggleUFPEL: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-interface ImageButtonProps {
-  imageUrl: string;
-}
-
-const SatelliteMenu: React.FC<SatelliteProps> = ({
+const SatelliteMenu: React.FC<
+  Omit<SatelliteMenuProps, "source" | "toggleSource">
+> = ({
   getHourScopeSatelite,
   handleChangeSatellite,
-  UFPEL,
-  toggleUFPEL,
+  clickedButtonId,
+  selectIndex,
+  buttonStyle,
 }) => {
-  
-  const extractDateTime = (url: string): string => {
-    const regexINPE = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})/;
-    const regexUFPEL = /(\d{4})_(\d{2})_(\d{2})_(\d{2})_(\d{2})/;
-    let match = UFPEL ? url.match(regexUFPEL) : url.match(regexINPE);
-  
-    if (url.includes('ufpel')) {
-      match = url.match(regexUFPEL);
-      const [, , , , hour, minute] = match;
-      return `${hour}:${minute}`;
-    }
+  const { setImageIndex } = useImageContext();
+  const { CPPMET, toggleSource } = useButtonSat();
 
-    if (url.includes('inpe')) {
-      match = url.match(regexINPE);
-      const [, , , , hour, minute] = match;
-      return `${hour}:${minute}`;
-    }
-  
-    return 'Data/Hora não encontrada';
-  };
+  const source = CPPMET ? "CPPMET" : "INPE";
 
-  const images: string[] = UFPEL ? CPTECImages() : CPPMETImages();
-  const { updateImage } = useImageContext();
-  const filteredImages = images.filter(image => !image.includes('cdn'));
+  useEffect(() => {
+    const stepsPerHour = source === "INPE" ? 6 : 2;
+    const intervalMinutes = 60 / stepsPerHour;
+    const maxIndex = source === "INPE" ? 143 : 47;
 
-  const handleImageClick = (index: number) => {
-    const imageUrl = filteredImages[index].toString();
-    const dateTime = extractDateTime(imageUrl);
-    updateImage(imageUrl);
-    window.open(imageUrl, '_blank');
-  };
+    const now = addMinutes(new Date(), 150); // UTC +2h30
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+
+    let currentIndex =
+      hour * stepsPerHour + Math.floor(minute / intervalMinutes);
+    //console.log("estado inicial", currentIndex);
+    currentIndex = Math.min(maxIndex, currentIndex);
+
+    setImageIndex(currentIndex);
+    /*console.log(
+      `[${source}] Índice atual da imagem (useEffect):`,
+      currentIndex
+    );*/
+  }, [source, setImageIndex]);
 
   return (
     <div className={styles.containerRadar}>
+      {/* Seletor de Horas */}
       <div className={styles.containerSelect}>
         <h6 className="title is-6">Horas</h6>
         <div className="select is-primary">
@@ -63,46 +51,95 @@ const SatelliteMenu: React.FC<SatelliteProps> = ({
             onChange={handleChangeSatellite}
             value={getHourScopeSatelite}
           >
-            <option value={1}>1 hora</option>
-            <option value={2}>2 horas</option>
-            <option value={3}>3 horas</option>
+            {[1, 2, 3, 4, 5].map((h) => (
+              <option key={h} value={h}>
+                {h} hora{h > 1 && "s"}
+              </option>
+            ))}
           </select>
         </div>
       </div>
+
+      {/* Botões de Seleção de Imagem */}
       <div className={styles.containerImageSelectors}>
         <h6 className="title is-6">Seleção de Imagem</h6>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-          <div className="button-group" id="imageSelectors">
-            {filteredImages.map((imageUrl, index) => (
-              <button
-                key={index}
-                className="button is-small"
-                onClick={() => handleImageClick(index)}
-              >
-                {extractDateTime(imageUrl)}
-              </button>
-            ))}
+          <div className="buttons" id="buttons">
+            {(() => {
+              const stepsPerHour = source === "INPE" ? 6 : 2;
+              const intervalMinutes = 60 / stepsPerHour;
+              const totalButtons = getHourScopeSatelite * stepsPerHour;
+
+              const now = addMinutes(new Date(), 150); // UTC +2h30min
+              const currentHour = now.getHours();
+              const currentMinute = now.getMinutes();
+
+              let currentIndex =
+                currentHour * stepsPerHour +
+                Math.floor(currentMinute / intervalMinutes);
+              const maxIndex = source === "INPE" ? 143 : 47;
+              currentIndex = Math.min(maxIndex, currentIndex);
+
+              const startIndex = Math.max(0, currentIndex - totalButtons + 1);
+              //console.log(startIndex);
+
+              return Array.from({ length: totalButtons }, (_, i) => {
+                const index = startIndex + i;
+                const hour = Math.floor(index / stepsPerHour);
+                const minute = (index % stepsPerHour) * intervalMinutes;
+
+                const displayMinuteOffset =
+                  hour * 60 + minute + intervalMinutes;
+                const displayHour = Math.floor(displayMinuteOffset / 60);
+                const displayMinute = displayMinuteOffset % 60;
+
+                const displayTime = `${String(displayHour).padStart(
+                  2,
+                  "0"
+                )}:${String(displayMinute).padStart(2, "0")}`;
+                const isClicked = clickedButtonId === index;
+
+                return (
+                  <button
+                    key={index}
+                    id={index.toString()}
+                    className="button is-small"
+                    onClick={() => {
+                      selectIndex(index);
+                      setImageIndex(index);
+                    }}
+                    style={{ ...(isClicked && buttonStyle) }}
+                  >
+                    {displayTime}
+                  </button>
+                );
+              });
+            })()}
           </div>
         </div>
       </div>
+
+      {/* Seletor de Satélite */}
       <h6 className="title is-6">Satélite</h6>
       <label className="radio">
         <input
           type="radio"
-          name="answer"
-          checked={UFPEL}
-          onChange={toggleUFPEL}
+          name="source"
+          value="INPE"
+          checked={source === "INPE"}
+          onChange={() => toggleSource("INPE")}
         />
-        GOES16 - CH 14
+        GOES19 - CH 16 (INPE)
       </label>
       <label className="radio">
         <input
           type="radio"
-          name="answer"
-          checked={!UFPEL}
-          onChange={toggleUFPEL}
+          name="source"
+          value="CPPMET"
+          checked={source === "CPPMET"}
+          onChange={() => toggleSource("CPPMET")}
         />
-        CPMet UFPEL
+        CPPMet UFPEL
       </label>
     </div>
   );

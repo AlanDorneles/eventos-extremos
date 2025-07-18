@@ -1,8 +1,6 @@
 export interface RadarMenuProps {
     getHourScopeRadar: number;
     handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-    actualHour: number;
-    initHour: number;
     clickedButtonId: number | null;
     selectIndex: (index: number) => void;
     buttonStyle: React.CSSProperties;

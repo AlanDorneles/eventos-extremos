@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DataStationsAPI } from "../services/inmetStations";
 import ReactApexChart from "react-apexcharts";
 import { MenuStation } from "../components/menuStation/MenuStation";
@@ -9,36 +9,35 @@ import { usePhenomenaContext } from "../contexts/Phenomena";
 import { variablesPT } from "../components/chart/variablesPT";
 import stations from "../components/menuMap/listStations";
 import { useScopeDaysContext } from "../contexts/ScopeDays";
+import { ApexOptions } from "apexcharts";
 
 const Estacao: React.FC = () => {
   const { checkeds } = useCheckedsContext();
-  const [ dataset, setDataset ] = useState<Record<string, StationData>>({});
+  const [dataset, setDataset] = useState<Record<string, StationData>>({});
   const { phenomena } = usePhenomenaContext();
-  const { scopeDays } = useScopeDaysContext()
-  const allStations =  stations.map( station => station.id)
+  const { scopeDays } = useScopeDaysContext();
+  const allStations = stations.map((station) => station.id);
 
   useEffect(() => {
     const fetchData = async () => {
-        try {
-          const data = await DataStationsAPI(checkeds);
-          setDataset(data);
-  
-        } catch (error) {
-          console.error("Erro ao obter informações das estações:", error);
-        }
+      try {
+        const data = await DataStationsAPI(checkeds);
+        setDataset(data);
+      } catch (error) {
+        console.error("Erro ao obter informações das estações:", error);
       }
+    };
     fetchData();
   }, [checkeds]);
-  
-  
+
   const series = Object.keys(dataset).map((stationCode) => {
     const data = dataset[stationCode];
     const length = data.hour.length;
 
-    const startIndex = Math.max(length - scopeDays, 0); 
-    
+    const startIndex = Math.max(length - scopeDays, 0);
+
     const slicedData = data.hour.slice(startIndex).map((hour, index) => ({
-      x: `${data.data[startIndex + index]} - ${hour}`, 
+      x: `${data.data[startIndex + index]} - ${hour}`,
       y: data[`${phenomena}`][startIndex + index],
     }));
 
@@ -48,7 +47,7 @@ const Estacao: React.FC = () => {
     };
   });
 
-  const options = {
+  const options: ApexOptions = {
     title: {
       text: `${variablesPT[phenomena]}`,
       align: "center",
@@ -60,29 +59,35 @@ const Estacao: React.FC = () => {
     chart: {
       id: "chart-line",
     },
-    
+
     grid: {
       show: true,
     },
+
     xaxis: {
       categories: dataset,
-      type: "string",
+      type: "category",
       tickAmount: 4,
     },
     stroke: {
       curve: "smooth",
-      width:2
+      width: 2,
     },
     markers: {
       size: 0,
-      content: "A",
+      //content: "A",
     },
   };
 
   return (
     <div className={styles.containerGraphic}>
       <MenuStation />
-      <ReactApexChart options={options} series={series} type="line" />
+      <ReactApexChart
+        options={options}
+        series={series}
+        type={phenomena === "rain" ? "bar" : "line"}
+        height={"100%"}
+      />
     </div>
   );
 };

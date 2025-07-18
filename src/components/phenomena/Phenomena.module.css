@@ -9,7 +9,7 @@
   left: 0;
   position: fixed;
   background-color: white;
-  
+  top: 80px;
 }
 
 .containerCard {
@@ -21,14 +21,14 @@
   margin-right: 10px;
 }
 
-.close{
-  position:absolute;
-  top:2%;
-  right:5%;
+.close {
+  position: absolute;
+  top: 2%;
+  right: 5%;
 }
 
 .containerGraphic {
-  width: 60%;
+  width: 42%;
   height: 100%;
 }
 .GraphicPressure {

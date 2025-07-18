@@ -1,14 +1,11 @@
-import { useHourScope } from "../../contexts/hourAnimation";
+//import { useHourScope } from "../../contexts/hourAnimation";
 import styles from "./menuMap.module.css";
-import React from "react";
 import { RadarMenuProps } from "../../interfaces/RadarMenu";
-import { number } from "prop-types";
+import { addMinutes } from "date-fns";
 
 const RadarMenu: React.FC<RadarMenuProps> = ({
   getHourScopeRadar,
   handleChange,
-  actualHour,
-  initHour,
   clickedButtonId,
   selectIndex,
   buttonStyle,
@@ -33,37 +30,67 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
             onChange={handleChange}
             value={getHourScopeRadar}
           >
-            <option value={6}>6 horas</option>
-            <option value={12}>12 horas</option>
-            <option value={18}>18 horas</option>
-            <option value={24}>24 horas</option>
+            <option value={1}>1 hora</option>
+            <option value={2}>2 horas</option>
+            <option value={3}>3 horas</option>
           </select>
         </div>
       </div>
       <div className={styles.containerButtonHours}>
         <h6 className="title is-6">Mapa de horas</h6>
         <div style={{ display: "flex" }}>
-          <div className="buttons" id="buttons">
-            {Array.from({ length: getHourScopeRadar }, (_, index) => {
-              const hour = index + initHour + 2;
-              const imagemID = localStorage.getItem("imageId");
-              const isClicked =
-                clickedButtonId == index + (23 - getHourScopeRadar);
-              index += 23 - getHourScopeRadar;
-              // console.log("index:", index);
+          <div style={{ display: "flex" }}>
+            <div style={{ display: "flex" }}>
+              <div className="buttons" id="buttons">
+                {(() => {
+                  const totalButtons = getHourScopeRadar * 6; // 6 imagens por hora
+                  const now = addMinutes(new Date(), 150); // ⏰ Adiciona 2h30min (UTC + 2h30)
 
-              return (
-                <button
-                  key={index.toString()}
-                  className="button is-small"
-                  onClick={() => selectIndex(index)}
-                  id={index.toString()}
-                  style={{ ...(isClicked && buttonStyle) }}
-                >
-                  {hour < 0 ? `${(-24 - hour) * -1}:00 Dia Ant.` : `${hour}:00`}
-                </button>
-              );
-            })}
+                  const currentHour = now.getHours();
+                  const currentMinute = now.getMinutes();
+
+                  // Índice da imagem mais recente
+                  let currentIndex =
+                    currentHour * 6 + Math.floor(currentMinute / 10);
+                  currentIndex = Math.min(143, currentIndex); // Máximo 144 imagens por dia (0–143)
+
+                  const startIndex = Math.max(
+                    0,
+                    currentIndex - totalButtons + 1
+                  );
+
+                  return Array.from({ length: totalButtons }, (_, i) => {
+                    const index = startIndex + i;
+
+                    const hour = Math.floor(index / 6);
+                    const minute = (index % 6) * 10;
+
+                    // ⏱️ Exibe +10 minutos no botão (imagem prevista)
+                    const displayMinuteOffset = hour * 60 + minute + 10;
+                    const displayHour = Math.floor(displayMinuteOffset / 60);
+                    const displayMinute = displayMinuteOffset % 60;
+                    const displayTime = `${String(displayHour).padStart(
+                      2,
+                      "0"
+                    )}:${String(displayMinute).padStart(2, "0")}`;
+
+                    const isClicked = clickedButtonId === index;
+
+                    return (
+                      <button
+                        key={index}
+                        id={index.toString()}
+                        className="button is-small"
+                        onClick={() => selectIndex(index)}
+                        style={{ ...(isClicked && buttonStyle) }}
+                      >
+                        {displayTime}
+                      </button>
+                    );
+                  });
+                })()}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -128,7 +155,7 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
           />
           07km
         </label>
-        {/* <label className="radio">
+        <label className="radio">
             <input
               name="typeRadio"
               type="radio"
@@ -137,7 +164,7 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
               onChange={handleRadioButtonChange}
             />
             05km
-          </label> */}
+          </label>
         <label className="radio">
           <input
             name="typeRadio"

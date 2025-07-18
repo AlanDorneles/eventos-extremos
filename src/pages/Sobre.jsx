@@ -69,19 +69,51 @@ const Sobre = () => {
         <p>
           O grupo de Monitoramento de Eventos Extremos não se responsabiliza
           pela divulgação dos dados da página em outros meios. O intuito da
-          página é apenas demonstração visual de dados e centralização dos dados
+          página é apenas demonstração visual e centralização dos dados
           meteorológicos afim de diminuir o tempo de busca de dados por parte
           dos meteorologistas na criação de suas previsões.
         </p>
 
-        <p>Nossos dados coletados:</p>
-        <ul className={styles.hasDottedList}>
-          <li>INMET - Dados de estações meteorológicas</li>
-          <li>RedeMET - Imagens de Radar</li>
-          {/* <li>Windy - iFrame</li> */}
-          <li>CPPMET - Imagens de satélite ( GOES-16 - CH 2 )</li>
-          <li>CPTEC - Imagens de satélite ( GOES-16 - CH 14 )</li>
-        </ul>
+        <div className="is-flex is-justify-content-space-evenly">
+          <div>
+            <p>Nossos dados coletados:</p>
+            <ul className={styles.hasDottedList}>
+              <li>INMET - Dados de estações meteorológicas</li>
+              <li>RedeMET - Imagens de Radar</li>
+              {/* <li>Windy - iFrame</li> */}
+              <li>CPPMET - Imagens de satélite ( GOES-16 - CH 2 )</li>
+              <li>CPTEC - Imagens de satélite ( GOES-19 - CH 16 )</li>
+            </ul>
+          </div>
+
+          <div
+            className="fixed-grid has-2-cols"
+            style={{ height: "20em", width: "20em" }}
+          >
+            <div className="grid">
+              <div className={styles.cell}>
+                <img
+                  className={styles.imgNotSquared}
+                  src="/cptec.jpeg"
+                  alt=""
+                />
+              </div>
+              <div className={styles.cell}>
+                <img className={styles.img} src="/inmet2.png" alt="" />
+              </div>
+              <div className={styles.cell}>
+                <img
+                  className={styles.imgNotSquared}
+                  src="/redemet.png"
+                  alt=""
+                />
+              </div>
+              <div className={styles.cell}>
+                <img className={styles.img} src="/cppmet.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       {/* 
             <div className={styles.contact}>

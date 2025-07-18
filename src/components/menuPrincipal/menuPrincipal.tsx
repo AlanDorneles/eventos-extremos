@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext.tsx";
-import { MenuPrincipalProps } from "../../interfaces/App.ts";
+import { useState } from "react";
+//import { useAuth } from "../../contexts/AuthContext.tsx";
+//import { MenuPrincipalProps } from "../../interfaces/App.ts";
 
 const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
-  const { logout, user, token } = useAuth();
+  //const { logout, user, token } = useAuth();
   const [isActive, setIsActive] = useState(false);
 
   const toggleDropdown = () => {
@@ -18,16 +18,16 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
       aria-label="main navigation"
     >
       <div className="navbar-brand">
-        <a className="navbar-item ml-4" href="/">
+        <a className="navbar-item ml-1" href="/">
+          <figure className="image is-56x56">
+            <img src="/LIAO2.png" alt="Logo" />
+          </figure>
+        </a>
+        {/*<a className="navbar-item ml-4" href="/">
           <figure className="image is-48x48">
             <img src="/logo_furg_stexto.png" alt="Logo" />
           </figure>
-        </a>
-        <a className="navbar-item ml-1" href="/">
-          <figure className="image is-48x48">
-            <img src="/logo_IO.png" alt="Logo" />
-          </figure>
-        </a>
+        </a>*/}
         <a
           role="button"
           className="navbar-burger"
@@ -61,7 +61,7 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
           </a>
         </div>
 
-        <div className="navbar-end mr-6">
+        {/*<div className="navbar-end mr-6">
           {token ? (
             <div className={`dropdown ${isActive ? "is-active" : ""} mr-6`}>
               <div className="dropdown-trigger is-flex is-justify-content-space-between is-align-items-center">
@@ -107,7 +107,7 @@ const MenuPrincipal: React.FC<MenuPrincipalProps> = ({ id, className }) => {
               LOGIN
             </a>
           )}
-        </div>
+        </div> */}
       </div>
     </nav>
   );

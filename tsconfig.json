@@ -1,0 +1,9 @@
+{
+  "include": ["src", "global.d.ts"],
+  "compilerOptions": {
+    "jsx": "react-jsx", // ou "react" dependendo da versão
+    "module": "esnext",
+    "target": "es6",
+    "moduleResolution": "node"
+  }
+}

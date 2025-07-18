@@ -14,9 +14,21 @@ import { useStationsVisible } from "../../contexts/radarFilter.jsx";
 import { useCodeStation } from "../../contexts/codeStation.jsx";
 import { bounds, radius } from "../../constants/bounds.js";
 import { getRadarInformation } from "../../services/redemet.js";
-import { Phenomena } from "../../components/phenomena/Phenomena.jsx";
-import { useFilterTypeRadarContext } from "../../contexts/typeRadar.jsx";
-import PropTypes from "prop-types";
+import { Phenomena } from "../phenomena/Phenomena.jsx";
+import { useFilterTypeRadarContext } from "../../contexts/typeRadarContext.js";
+import {
+  RadarImageEntry,
+  RedemetImages,
+} from "../../interfaces/RadarImageSet.js";
+
+interface MapProps {
+  cangucuChecked: boolean;
+  santiagoChecked: boolean;
+  morroDaIgrejaChecked: boolean;
+  handlerSrc: boolean;
+  images: RadarImageEntry[];
+  currentImageIndex: number;
+}
 
 export const Map = ({
   cangucuChecked,
@@ -25,18 +37,18 @@ export const Map = ({
   handlerSrc,
   images,
   currentImageIndex,
-}) => {
+}: MapProps) => {
   const { typeRadar, radarLocalStorage } = useFilterTypeRadarContext();
   const [clicked, setClicked] = useState(false);
   const { setCodeStation } = useCodeStation();
   const { stationsVisible } = useStationsVisible();
-  const [morroDaIgreja, setMorroDaIgreja] = useState();
-  const [cangucu, setCangucu] = useState();
-  const [santiago, setSantiago] = useState();
+  const [morroDaIgreja, setMorroDaIgreja] = useState<string[]>([]);
+  const [cangucu, setCangucu] = useState<string[]>([]);
+  const [santiago, setSantiago] = useState<string[]>([]);
   const handleCloseModal = () => {
     setClicked(false);
   };
-  const [radiusRadar, setRadiusRadar] = useState();
+  const [radiusRadar, setRadiusRadar] = useState<number>(0);
   useEffect(() => {
     if (typeRadar !== "maxcappi") {
       setRadiusRadar(radius[1]);
@@ -53,39 +65,35 @@ export const Map = ({
     setCodeStation(id);
   };
 
+  //console.log(radarLocalStorage[typeRadar]);
   useEffect(() => {
-    const morroDaIgrejaLinks = [];
-    const cangucuLinks = [];
-    const santiagoLinks = [];
+    const morroDaIgrejaLinks: string[] = [];
+    const cangucuLinks: string[] = [];
+    const santiagoLinks: string[] = [];
 
-    radarLocalStorage[typeRadar].forEach((radar) => {
-      if (radar["morroDaIgreja"]) {
-        morroDaIgrejaLinks.push(radar["morroDaIgreja"]);
+    Object.values(radarLocalStorage[typeRadar]).forEach(
+      (radar: RadarImageEntry) => {
+        if (radar.mi) morroDaIgrejaLinks.push(radar.mi);
+        if (radar.cn) cangucuLinks.push(radar.cn);
+        if (radar.sg) santiagoLinks.push(radar.sg);
       }
-      if (radar["cangucu"]) {
-        cangucuLinks.push(radar["cangucu"]);
-      }
-      if (radar["santiago"]) {
-        santiagoLinks.push(radar["santiago"]);
-      }
-    });
-
+    );
     setMorroDaIgreja(morroDaIgrejaLinks);
     setCangucu(cangucuLinks);
     setSantiago(santiagoLinks);
   }, [radarLocalStorage, typeRadar]);
 
+  getRadarInformation();
   const inicialImage = JSON.parse(localStorage.getItem("redemet-images"));
+  //console.log("tó", inicialImage);
   // console.log("imagens atuais");
-  // console.log("cangucu:", inicialImage[typeRadar][23].cangucu);
-  // console.log("morro da igreja:", inicialImage[typeRadar][23].morroDaIgreja);
-  // console.log("santiago:", inicialImage[typeRadar][23].santiago);
+  //console.log(currentImageIndex);
 
   return (
     <>
       <MapContainer
         center={[-30, -49.471816]}
-        zoom={6.5}
+        zoom={6.4}
         scrollWheelZoom={false}
         style={{ width: "100vw", height: "100vh" }}
       >
@@ -1120,10 +1128,8 @@ export const Map = ({
                     : bounds.cangucuNotMaxCappi
                 }
                 url={
-                  handlerSrc
-                    ? images[typeRadar][currentImageIndex].cangucu
-                    : inicialImage[typeRadar][23].cangucu ??
-                      "../../../public/no-data.png"
+                  inicialImage[typeRadar]["cn"][currentImageIndex] ??
+                  "../../public/no-data1.png"
                 }
               />
             )}{" "}
@@ -1140,10 +1146,8 @@ export const Map = ({
                     : bounds.morroDaIgrejaNotMaxCappi
                 }
                 url={
-                  handlerSrc
-                    ? images[typeRadar][currentImageIndex].morroDaIgreja
-                    : inicialImage[typeRadar][23].morroDaIgreja ??
-                      "../../../public/no-data.png"
+                  inicialImage[typeRadar]["mi"][currentImageIndex] ??
+                  "../../public/no-data1.png"
                 }
               />
             )}
@@ -1159,10 +1163,8 @@ export const Map = ({
                     : bounds.santiagoNotMaxCappi
                 }
                 url={
-                  handlerSrc
-                    ? images[typeRadar][currentImageIndex].santiago
-                    : inicialImage[typeRadar][23].santiago ??
-                      "../../../public/no-data.png"
+                  inicialImage[typeRadar]["sg"][currentImageIndex] ??
+                  "../../public/no-data1.png"
                 }
               />
             )}{" "}
@@ -1173,13 +1175,4 @@ export const Map = ({
       <div>{clicked && <Phenomena handleCloseModal={handleCloseModal} />}</div>
     </>
   );
-};
-
-Map.propTypes = {
-  cangucuChecked: PropTypes.bool.isRequired,
-  santiagoChecked: PropTypes.bool.isRequired,
-  morroDaIgrejaChecked: PropTypes.bool.isRequired,
-  handlerSrc: PropTypes.bool.isRequired,
-  images: PropTypes.object.isRequired,
-  currentImageIndex: PropTypes.number.isRequired,
 };
