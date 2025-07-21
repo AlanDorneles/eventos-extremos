@@ -1,8 +1,6 @@
 .container {
   display: flex;
-  overflow: hidden;
   top: 80px;
-  position: fixed;
   width: 100%;
 }
 
@@ -41,4 +39,3 @@ iframe {
   width: 70%;
   margin: 0 auto;
 }
-

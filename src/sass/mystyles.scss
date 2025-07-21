@@ -1,25 +1,23 @@
-$orange-furg: #f8a400;
-$grey-furg: #222222;
-$red-furg:#c00a25;
-$grey-furg-40:#32323340;
+$primary: #0a3d66;
+$secondary: #37688c;
+$neutral: #e8e4e1;
+$secondary-40: #37688c40;
 
 // MUDANDO AS VARIÁVEIS PADRÕES DO BULMA
-@use "bulma/sass" with (   
-  $family-primary: '"Nunito", sans-serif',   
-  $grey-dark: $grey-furg,   
-  $grey-light: $red-furg,   
-  $primary: $orange-furg,   
-  $link: $red-furg,   
-  $control-border-width: 2px,   
-  $input-shadow: none, 
-  $navbar-height:4rem,
-  $navbar-item-img-max-height:3rem
+@use "bulma/sass" with (
+  $family-primary: '"Nunito", sans-serif',
+  $grey-dark: $secondary,
+  $grey-light: $neutral,
+  $primary: $primary,
+  $link: $neutral,
+  $control-border-width: 2px,
+  $input-shadow: none,
+  $navbar-height: 4rem,
+  $navbar-item-img-max-height: 3rem
 );
 
 //ADICIONANDO FONTE
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
-
-
 
 /*NA PACKAGE JSON FOI CRIADO DOIS SCRIPTS 
     "build-bulma": "sass --load-path=node_modules src/sass/mystyles.scss public/css/mystyles.css",

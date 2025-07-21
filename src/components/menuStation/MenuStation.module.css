@@ -41,11 +41,11 @@ input[type="checkbox"] {
     outline: none;
     cursor: pointer;
     margin-right: 8px;
-    border: 1px solid #F8A402;
+    border: 1px solid #37688C;
 }
 
 input[type="checkbox"]:checked {
-    background-color:#F8A402; /* Cor de fundo quando estiver marcado */
+    background-color:#0A3D66; /* Cor de fundo quando estiver marcado */
 }
 
 input[type="checkbox"]::before {
@@ -107,7 +107,7 @@ input[type='radio']:checked:after {
     height: 20px;
     border-radius: 20px;
     position: relative;
-    background-color: #ffa500;
+    background-color: #0A3D66;
     content: '';
     display: inline-block;
     visibility: visible;

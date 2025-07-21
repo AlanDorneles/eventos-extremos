@@ -1125,7 +1125,7 @@ export const Map = ({
                 }
                 url={
                   inicialImage[typeRadar]["cn"][currentImageIndex] ??
-                  "../../public/no-data1.png"
+                  "/no-data1.png"
                 }
               />
             )}{" "}
@@ -1143,7 +1143,7 @@ export const Map = ({
                 }
                 url={
                   inicialImage[typeRadar]["mi"][currentImageIndex] ??
-                  "../../public/no-data1.png"
+                  "/no-data1.png"
                 }
               />
             )}
@@ -1160,7 +1160,7 @@ export const Map = ({
                 }
                 url={
                   inicialImage[typeRadar]["sg"][currentImageIndex] ??
-                  "../../public/no-data1.png"
+                  "/no-data1.png"
                 }
               />
             )}{" "}

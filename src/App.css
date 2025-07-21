@@ -1,17 +1,15 @@
 #root {
   font-family: "Lato Regular", sans-serif;
-  min-height: 100vh;
 }
 
 body {
   padding: 0;
   margin: 0;
   min-height: 100vh;
-  max-height: 100vh;
 }
 
 hr {
-  background-color: #fddd8b !important;
+  background-color: #37688c !important;
 }
 label.radio {
   margin: 0 !important;
@@ -37,7 +35,7 @@ text.marker-text {
 
 .apexcharts-marker {
   background-color: black !important;
-  fill: #f8a402 !important;
+  fill: #0a3d66 !important;
   content: "a" !important;
   color: white !important;
 }

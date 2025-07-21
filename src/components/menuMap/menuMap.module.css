@@ -38,11 +38,12 @@ input[type="checkbox"] {
   outline: none;
   cursor: pointer;
   margin-right: 8px;
-  border: 1px solid #f8a402;
+  border: 1px solid #37688c;
+  background-color: #fff;
 }
 
 input[type="checkbox"]:checked {
-  background-color: #f8a402; /* Cor de fundo quando estiver marcado */
+  background-color: #0a3d66; /* Cor de fundo quando estiver marcado */
 }
 
 input[type="checkbox"]::before {
@@ -86,4 +87,3 @@ ul li {
   flex-direction: column;
   gap: 8px;
 }
-

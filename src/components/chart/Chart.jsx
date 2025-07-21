@@ -57,7 +57,7 @@ export const Graphic = () => {
     },
     stroke: {
       curve: "smooth",
-      colors: ["#F8A402"],
+      colors: ["#0a3d66"],
     },
     markers: {
       size: 8,
@@ -67,7 +67,7 @@ export const Graphic = () => {
 
   return (
     <div>
-      <ReactApexChart options={options} series={series} type="line" />
+      <ReactApexChart options={options} series={series} type={phenomena === "rain" ? "bar" : "line"} />
     </div>
   );
 };
