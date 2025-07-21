@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "build-bulma": "sass --load-path=node_modules src/sass/mystyles.scss public/css/mystyles.css",
     "start": "npm run build-bulma -- --watch",
-    "server": "node server.js"
+    "server": "node server.js",
+    "docker":"npm start & npm run dev"
   },
   "jest": {
     "transform": {

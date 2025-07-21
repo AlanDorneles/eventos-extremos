@@ -25,3 +25,7 @@ pastasWRF.json
 *.sln
 *.sw?
 node_modules
+
+
+#dockerfile
+frontend.tar
