@@ -3,6 +3,10 @@ import styles from "./styles/Boletins.module.css";
 const Boletins = () => {
   return (
     <div className={styles.boletimContainer}>
+      <p>
+        Nesta página estão os boletins sobre os impactos dos fenômenos que
+        atingiram o estado, com foco na cidade de Rio Grande
+      </p>
       <ul className={styles.hasDottedList}>
         <li>
           <a

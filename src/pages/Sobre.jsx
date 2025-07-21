@@ -83,6 +83,7 @@ const Sobre = () => {
               {/* <li>Windy - iFrame</li> */}
               <li>CPPMET - Imagens de satélite ( GOES-19 - CH 2 )</li>
               <li>CPTEC - Imagens de satélite ( GOES-19 - CH 16 )</li>
+              <li>Boletins - Comitê de Eventos Extremos (FURG)</li>
             </ul>
           </div>
 
