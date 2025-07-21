@@ -81,7 +81,7 @@ const Sobre = () => {
               <li>INMET - Dados de estações meteorológicas</li>
               <li>RedeMET - Imagens de Radar</li>
               {/* <li>Windy - iFrame</li> */}
-              <li>CPPMET - Imagens de satélite ( GOES-16 - CH 2 )</li>
+              <li>CPPMET - Imagens de satélite ( GOES-19 - CH 2 )</li>
               <li>CPTEC - Imagens de satélite ( GOES-19 - CH 16 )</li>
             </ul>
           </div>

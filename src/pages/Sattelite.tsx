@@ -14,7 +14,7 @@ export default function Satellite() {
   const { imageIndex } = useImageContext();
   const source = CPPMET ? "CPPMET" : "INPE";
   const [zoom, setZoom] = useState(false);
-  console.log(source, imageIndex);
+  
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -26,7 +26,7 @@ export default function Satellite() {
 
   const currentImageList = images[source] || [];
   const imageToDisplay = currentImageList[imageIndex + 1] || null;
-  //console.log(imageToDisplay);
+
 
   return (
     <div className={styles.container}>

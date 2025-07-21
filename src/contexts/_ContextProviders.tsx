@@ -8,11 +8,10 @@ import { FilterTypeRadarProvider } from "./typeRadarContext.js";
 import { RadarOrSateliteProvider } from "./RadarOrSatelite.jsx";
 import { ButtonSatProvider } from "./buttonSat";
 import { PhenomenaProvider } from "./Phenomena.jsx";
-import { ShowMenuConfigurationProvider } from "./showMenu.jsx";
 import { CheckedsProvider } from "./Checkeds.jsx";
 import { ImageProvider } from "./satImageUpdate.js";
 import { ScopeDaysProvider } from "./ScopeDays.jsx";
-import { WrfImageProvider } from "./WrfImage";
+
 
 interface CombinedProvidersProps {
   children: ReactNode;
@@ -22,10 +21,8 @@ export function CombinedProviders({ children }: CombinedProvidersProps) {
   return (
     <HourScopeProvider>
       <ScopeDaysProvider>
-        <WrfImageProvider>
           <CheckedsProvider>
             <ImageProvider>
-              <ShowMenuConfigurationProvider>
                 <ButtonSatProvider>
                   <RadarIsCheckedProvider>
                     <PreviousAndNextImageProvider>
@@ -42,11 +39,9 @@ export function CombinedProviders({ children }: CombinedProvidersProps) {
                       </StationsVisibleProvider>
                     </PreviousAndNextImageProvider>
                   </RadarIsCheckedProvider>
-                </ButtonSatProvider>
-              </ShowMenuConfigurationProvider>
+                </ButtonSatProvider>        
             </ImageProvider>
           </CheckedsProvider>
-        </WrfImageProvider>
       </ScopeDaysProvider>
     </HourScopeProvider>
   );

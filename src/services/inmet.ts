@@ -38,7 +38,7 @@ export async function DataINMETAPI(): Promise<INMETDataRaw> {
     const json: { data: INMETDataRaw } = await response.json();
 
     localStorage.setItem("dataStation", JSON.stringify(json.data));
-    //console.log("Dados INMET armazenados no localStorage:", json.data);
+    
 
     return json.data;
   } catch (error: unknown) {
@@ -47,7 +47,7 @@ export async function DataINMETAPI(): Promise<INMETDataRaw> {
     } else {
       console.error("Erro desconhecido:", error);
     }
-    return {}; // <- opcional: retorna objeto vazio como fallback
+    return {}; 
   }
 }
 

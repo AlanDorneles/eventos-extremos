@@ -65,7 +65,6 @@ export const Map = ({
     setCodeStation(id);
   };
 
-  //console.log(radarLocalStorage[typeRadar]);
   useEffect(() => {
     const morroDaIgrejaLinks: string[] = [];
     const cangucuLinks: string[] = [];
@@ -85,9 +84,6 @@ export const Map = ({
 
   getRadarInformation();
   const inicialImage = JSON.parse(localStorage.getItem("redemet-images"));
-  //console.log("tó", inicialImage);
-  // console.log("imagens atuais");
-  //console.log(currentImageIndex);
 
   return (
     <>

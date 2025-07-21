@@ -51,12 +51,7 @@ text.marker-text {
   background-color: black !important;
   fill: black;
 }
-/*.leaflet-layer,
-.leaflet-control-zoom-in,
-.leaflet-control-zoom-out,
-.leaflet-control-attribution {
-  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
-}*/
+
 .title:not(:last-child),
 .subtitle:not(:last-child) {
   margin-bottom: 0.5rem !important;
@@ -65,12 +60,3 @@ text.marker-text {
 .select.is-primary select {
   width: 100%;
 }
-/*#menu-configuration {
-  position: fixed;
-  z-index: 4000;
-  width: 20vw;
-  height: 100vh;
-  top: 0;
-  right: 0;
-  background-color: white;
-}*/

@@ -39,9 +39,7 @@ export async function DataCPTECAPI(): Promise<CPTECImage> {
     }
 
     const json: { data: CPTECImage } = await response.json();
-
     localStorage.setItem("CPTEC-Image", JSON.stringify(json.data));
-    //console.log("Dados INMET armazenados no localStorage:", json.data);
     return json.data;
 
   } catch (error: unknown) {

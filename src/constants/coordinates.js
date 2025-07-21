@@ -1,1 +1,0 @@
-export const rioGrande = [ -32.0350, -52.0986]

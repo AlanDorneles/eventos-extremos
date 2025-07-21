@@ -30,14 +30,9 @@ const SatelliteMenu: React.FC<
 
     let currentIndex =
       hour * stepsPerHour + Math.floor(minute / intervalMinutes);
-    //console.log("estado inicial", currentIndex);
     currentIndex = Math.min(maxIndex, currentIndex);
 
     setImageIndex(currentIndex);
-    /*console.log(
-      `[${source}] Índice atual da imagem (useEffect):`,
-      currentIndex
-    );*/
   }, [source, setImageIndex]);
 
   return (
@@ -81,7 +76,6 @@ const SatelliteMenu: React.FC<
               currentIndex = Math.min(maxIndex, currentIndex);
 
               const startIndex = Math.max(0, currentIndex - totalButtons + 1);
-              //console.log(startIndex);
 
               return Array.from({ length: totalButtons }, (_, i) => {
                 const index = startIndex + i;
