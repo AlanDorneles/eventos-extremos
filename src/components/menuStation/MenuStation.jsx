@@ -8,7 +8,7 @@ export const MenuStation = () => {
   const {setScopeDays} = useScopeDaysContext()
   const [activeTab, setActiveTab] = useState(1)
 
-  const handlePhenomena = () => {
+  const handlePhenomena = (event) => {
     const selectedValue = event.target.value;
     handleSelectChange(selectedValue);
   };
