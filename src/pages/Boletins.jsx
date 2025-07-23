@@ -18,7 +18,7 @@ const Boletins = () => {
               target="_blank"
               rel="lightbox noopener noreferrer"
             >
-              Boletim de Evento Extremo - 01 - 03/05
+              Boletim de Evento Extremo - 01 - 03/05/2024
             </a>
           </li>
           <li>
@@ -28,7 +28,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 02 - 04/05
+              Boletim de Evento Extremo - 02 - 04/05/2024
             </a>
           </li>
           <li>
@@ -38,7 +38,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 03 - 06/05
+              Boletim de Evento Extremo - 03 - 06/05/2024
             </a>
           </li>
           <li>
@@ -48,7 +48,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 04 - 07/05
+              Boletim de Evento Extremo - 04 - 07/05/2024
             </a>
           </li>
           <li>
@@ -58,7 +58,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 05 - 08/05
+              Boletim de Evento Extremo - 05 - 08/05/2024
             </a>
           </li>
           <li>
@@ -68,7 +68,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 06 - 09/05
+              Boletim de Evento Extremo - 06 - 09/05/2024
             </a>
           </li>
           <li>
@@ -78,7 +78,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 07 - 11/05
+              Boletim de Evento Extremo - 07 - 11/05/2024
             </a>
           </li>
           <li>
@@ -88,7 +88,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 08 - 13/05
+              Boletim de Evento Extremo - 08 - 13/05/2024
             </a>
           </li>
           <li>
@@ -98,7 +98,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 09 - 15/05
+              Boletim de Evento Extremo - 09 - 15/05/2024
             </a>
           </li>
           <li>
@@ -107,7 +107,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 10 - 16/05
+              Boletim de Evento Extremo - 10 - 16/05/2024
             </a>
           </li>
           <li>
@@ -116,7 +116,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 11 - 18/05
+              Boletim de Evento Extremo - 11 - 18/05/2024
             </a>
           </li>
           <li>
@@ -125,7 +125,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 12 - 19/05
+              Boletim de Evento Extremo - 12 - 19/05/2024
             </a>
           </li>
           <li>
@@ -134,7 +134,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 13 - 22/05
+              Boletim de Evento Extremo - 13 - 22/05/2024
             </a>
           </li>
           <li>
@@ -143,7 +143,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 14 - 23/05
+              Boletim de Evento Extremo - 14 - 23/05/2024
             </a>
           </li>
           <li>
@@ -152,7 +152,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 15 - 23/05
+              Boletim de Evento Extremo - 15 - 23/05/2024
             </a>
           </li>
           <li>
@@ -161,7 +161,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 16 - 24/05
+              Boletim de Evento Extremo - 16 - 24/05/2024
             </a>
           </li>
           <li>
@@ -170,7 +170,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 17 - 28/05
+              Boletim de Evento Extremo - 17 - 28/05/2024
             </a>
           </li>
           <li>
@@ -179,7 +179,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 18 - 30/05
+              Boletim de Evento Extremo - 18 - 30/05/2024
             </a>
           </li>
           <li>
@@ -188,7 +188,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 19 - 04/06
+              Boletim de Evento Extremo - 19 - 04/06/2024
             </a>
           </li>
           <li>
@@ -197,7 +197,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 20 - 05/06
+              Boletim de Evento Extremo - 20 - 05/06/2024
             </a>
           </li>
           
@@ -207,7 +207,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 21 - 11/06
+              Boletim de Evento Extremo - 21 - 11/06/2024
             </a>
           </li>
           <li>
@@ -216,7 +216,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 22 - 20/06
+              Boletim de Evento Extremo - 22 - 20/06/2024
             </a>
           </li>
           <li>
@@ -225,7 +225,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 23 - 26/06
+              Boletim de Evento Extremo - 23 - 26/06/2024
             </a>
           </li>
           <li>
@@ -234,7 +234,7 @@ const Boletins = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Boletim de Evento Extremo - 24 - 04/07
+              Boletim de Evento Extremo - 24 - 04/07/2024
             </a>
           </li>
         </ul>

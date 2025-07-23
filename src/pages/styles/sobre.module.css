@@ -7,6 +7,7 @@
   width: 70rem;
   height: 100%;
   margin: 5rem auto;
+  gap: 3rem;
 }
 
 .initText {
@@ -71,13 +72,6 @@ ul li {
   flex-direction: row;
 }
 
-ul li img {
-  height: 3.5rem;
-  width: 3.5rem;
-  border-radius: 50%;
-  margin-bottom: 2rem;
-}
-
 ul li p {
   margin-left: 1rem;
   align-items: center;
@@ -120,7 +114,30 @@ ul li p {
 /* Estilo geral da imagem */
 .img,
 .imgNotSquared {
-  max-width: 80%;
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
+}
+
+.img2 {
+  max-width: 60%;
+  max-height: 60%;
+  object-fit: contain;
+}
+.avatar56 {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%; /* opcional, se não usar is-rounded */
+}
+.imageList {
+  display: grid;
+  gap: 16px;
+}
+
+img3{
+   max-width: 80%;
   max-height: 80%;
   object-fit: contain;
+
 }
