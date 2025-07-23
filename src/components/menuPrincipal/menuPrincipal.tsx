@@ -3,7 +3,7 @@ const MenuPrincipal: React.FC = () => {
     <nav className={`navbar`} role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item ml-1" href="/">
-          <figure className="image is-64x64">
+          <figure className="image is-56x56">
             <img src="/LIAO1.png" alt="Logo" />
           </figure>
         </a>
