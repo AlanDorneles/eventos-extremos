@@ -58,3 +58,17 @@ text.marker-text {
 .select.is-primary select {
   width: 100%;
 }
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* altura da tela inteira */
+  width: 100vw; /* largura da tela inteira */
+  background-color: #fff; /* opcional: cor de fundo branca */
+}
+
+.loader-image {
+  width: 150px; /* ajuste o tamanho se quiser */
+  height: auto;
+}
