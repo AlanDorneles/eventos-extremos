@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-node_modules
+
 dist
 dist-ssr
 *.local
@@ -26,5 +26,9 @@ pastasWRF.json
 node_modules
 
 
+
 #dockerfile
 frontend.tar
+public/css/mystyles.css
+public/css/mystyles.css.map
+
