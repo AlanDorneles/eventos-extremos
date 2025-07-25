@@ -89,7 +89,7 @@ export const Map = ({
     <>
       <MapContainer
         center={[-30, -49.471816]}
-        zoom={6.4}
+        zoom={7}
         scrollWheelZoom={false}
         style={{ width: "100vw", height: "100vh" }}
       >
