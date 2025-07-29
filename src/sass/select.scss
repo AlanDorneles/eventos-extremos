@@ -1,0 +1,9 @@
+@use "./_variables.scss" as vars;
+
+.select {
+    border-color: vars.$primary;
+    ::after {
+        border: vars.$primary;
+        color: vars.$primary;
+    }
+}

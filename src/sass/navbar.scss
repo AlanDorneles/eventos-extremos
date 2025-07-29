@@ -1,19 +1,28 @@
-@import "mystyles.scss";
+// Importando suas variáveis e overrides personalizados
+@use "./_variables.scss" as vars;
+@use "bulma/sass/components/navbar";
 
-$navbar-background-color: white;
-$navbar-item-hover-color: $primary;
-$navbar-item-color: white; //outra cor (hsl(0, 0%, 29%) )
-$navbar-item-hover-background-color: #ffffff20;
-$navbar-height: 5rem;
-$navbar-item-img-max-height: 3.5rem;
+.navbar {
+  background-color: vars.$navbar-background-color;
+  display: flex;
+  align-items: center;
 
-// @import "../../node_modules/bulma/sass/utilities/_all.sass";
-@import "../../node_modules/bulma/sass/utilities/index";
-@import "../../node_modules/bulma/sass/base/index";
-@import "../../node_modules/bulma/sass/elements/button.scss";
-@import "../../node_modules/bulma/sass/elements/content.scss";
-@import "../../node_modules/bulma/sass/elements/title.scss";
-@import "../../node_modules/bulma/sass/form/index.scss";
-@import "../../node_modules/bulma/sass/components/navbar.scss";
-@import "../../node_modules/bulma/sass/layout/hero.scss";
-@import "../../node_modules/bulma/sass/layout/section.scss";
+  .navbar-item {
+    color: vars.$primary; // ou hsl(0, 0%, 29%)
+    display: flex;
+    align-items: center;
+    height:64px;
+
+    &:hover {
+      color: vars.$primary;
+      background-color: vars.$primary-10;
+      border-radius: 4px;
+    }
+
+    img {
+      max-height: 3.5rem;
+    }
+  }
+
+  height: 5rem;
+}

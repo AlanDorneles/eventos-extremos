@@ -48,18 +48,18 @@ export default function Home() {
 
   const renderLinkBasedOnPath = (pathname) => {
     switch (pathname) {
-      case "/produtos/satelite":
+      case "/satelite":
         return (
-          <Link to="/produtos/satelite">
+          <Link to="/satelite">
             <span className="icon is-small">
               <GiSattelite className={styles.Icon} />
             </span>
             <span>Satélite</span>
           </Link>
         );
-      case "/produtos/estacoes":
+      case "/estacoes":
         return (
-          <Link to="/produtos/estacoes">
+          <Link to="/estacoes">
             <span className="icon is-small">
               <RiBaseStationLine className={styles.Icon} />
             </span>
@@ -79,9 +79,9 @@ export default function Home() {
     location.pathname !== "/sobre";
 
   const dontHideItFrom =
-    location.pathname === "/produtos/estacoes" ||
-    location.pathname === "/produtos/radar" ||
-    location.pathname === "/produtos/satelite";
+    location.pathname === "/estacoes" ||
+    location.pathname === "/" ||
+    location.pathname === "/satelite";
 
   return (
     <>
@@ -94,23 +94,23 @@ export default function Home() {
         >
           <MenuMap selectImage={handleSelectImage} ref={containerRef} />
         </section>
-        {/*location.pathname !== "/produtos/wrf" &&*/}
+        {/*location.pathname !== "/wrf" &&*/}
         {hideItFrom &&
-          location.pathname !== "/produtos/radar" &&
-          location.pathname !== "/produtos/estacoes" &&
-          location.pathname !== "/produtos/satelite" && (
+          location.pathname !== "/" &&
+          location.pathname !== "/estacoes" &&
+          location.pathname !== "/satelite" && (
             <button className={styles.btnMenu}>
               {renderLinkBasedOnPath(location.pathname)}
             </button>
           )}
 
-        {location.pathname === "/produtos/satelite" && (
+        {location.pathname === "/satelite" && (
           <section className={`${isMenuVisible ? styles.centerSat : ""}`}>
             <Satellite />
           </section>
         )}
 
-        {location.pathname === "/produtos/radar" && (
+        {location.pathname === "/" && (
           <section className={styles.map}>
             <Map
               cangucuChecked={cangucuChecked}
@@ -123,7 +123,7 @@ export default function Home() {
           </section>
         )}
 
-        {location.pathname === "/produtos/estacoes" && <Estacao />}
+        {location.pathname === "/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
         {location.pathname === "/sobre" && <Sobre />}
       </main>

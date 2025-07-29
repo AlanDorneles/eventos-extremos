@@ -6,15 +6,13 @@
   "scripts": {
     "test": "jest",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp .htaccess dist/",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "build-bulma": "sass --load-path=node_modules src/sass/mystyles.scss public/css/mystyles.css",
     "start": "npm run build-bulma -- --watch",
     "server": "node server.js",
-    "docker":"npm start & npm run dev"
-
-
+    "docker": "npm start & npm run dev"
   },
   "jest": {
     "transform": {
@@ -29,7 +27,7 @@
     "apexcharts": "^5.3.1",
     "apexcharts-react": "^1.0.0",
     "axios": "^1.7.7",
-    "bulma": "^1.0.0",
+    "bulma": "^1.0.4",
     "chroma-js": "^2.4.2",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",
@@ -49,8 +47,7 @@
     "react-icons": "^4.12.0",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.20.1",
-    "react-toastify": "^10.0.5",
-    "sass": "^1.72.0"
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
@@ -69,9 +66,8 @@
     "jest": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
     "mkdirp": "^1.0.4",
-    "sass": "^1.69.5",
+    "sass": "^1.89.2",
     "ts-jest": "^29.1.4",
     "vite": "^7.0.6"
-
   }
 }

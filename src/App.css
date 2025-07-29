@@ -1,3 +1,6 @@
+:root{
+  --bulma-primary:#0a3d66;
+}
 #root {
   font-family: "Lato Regular", sans-serif;
 }
@@ -33,16 +36,6 @@ text.marker-text {
   border: 1px solid;
 }
 
-<<<<<<< HEAD
-.apexcharts-marker {
-  background-color: black !important;
-  fill: #0a3d66 !important;
-  content: "a" !important;
-  color: white !important;
-}
-=======
-
->>>>>>> ALTERAÇÕES DE CONFIGURAÇÕES APÓS TROCA DE VERSIONAMENTO (NODE, NPM, REACT-APEXCHARTS)
 #SvgjsCircle5961 {
   background-color: black !important;
   fill: black;
@@ -76,3 +69,6 @@ text.marker-text {
   width: 150px; /* ajuste o tamanho se quiser */
   height: auto;
 }
+ #nohover:hover{
+  background: transparent;
+ }

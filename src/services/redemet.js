@@ -1,33 +1,11 @@
-function setupWebSocket() {
-  const ws = new WebSocket("ws://localhost:8080");
+const API_URL = import.meta.env.VITE_API_URL
 
-  ws.onopen = () => {
-    console.log("Connected to WebSocket server");
-  };
 
-  ws.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    if (data.newCache && data.data) {
-      console.log(
-        `NOVO CACHE DISPONÍVEL PARA DADOS DE RADAR : ${new Date().getUTCHours()}:${new Date().getUTCMinutes()}`
-      );
-      updateDataFromAPI();
-      localStorage.setItem("redemet-images", JSON.stringify(data.data));
-    }
-  };
-
-  ws.onclose = () => {
-    console.log("Disconnected from WebSocket server");
-  };
-  return () => {
-    ws.close();
-  };
-}
 
 export const getRadarInformation = async () => {
   try {
     const response = await fetch(
-      `http://localhost:3000/get-images-redemet-free-scrapping`
+      `${API_URL}/get-images-redemet-free-scrapping`
     );
     if (response.ok) {
       const data = await response.json();
@@ -45,4 +23,4 @@ export const getRadarInformation = async () => {
 function updateDataFromAPI() {
   getRadarInformation();
 }
-setupWebSocket();
+

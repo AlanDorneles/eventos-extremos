@@ -1,29 +1,4 @@
-function setupWebSocket() {
-  const ws = new WebSocket("ws://localhost:8080");
-
-  ws.onopen = () => {
-    console.log("Connected to WebSocket server");
-  };
-
-  ws.onmessage = (event: MessageEvent) => {
-    const data = JSON.parse(event.data);
-    if (data.newCache) {
-      console.log(
-        `NOVO CACHE DISPONÍVEL PARA SATELITES: ${new Date().getUTCHours()}:${new Date().getUTCMinutes()}`
-      );
-      updateDataFromAPI();
-    }
-  };
-
-  ws.onclose = () => {
-    console.log("Disconnected from WebSocket server");
-  };
-  return () => {
-    ws.close();
-  };
-}
-
-setupWebSocket();
+const API_URL = import.meta.env.VITE_API_URL
 
 interface CPTECImage {
   INPE: string[];
@@ -32,7 +7,7 @@ interface CPTECImage {
 }
 export async function DataCPTECAPI(): Promise<CPTECImage> {
   try {
-    const response = await fetch("http://localhost:3000/cptec-images");
+    const response = await fetch(`${API_URL}/cptec-images`);
 
     if (!response.ok) {
       throw new Error("Não foi possível obter dados do INMET");

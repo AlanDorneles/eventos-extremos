@@ -14,11 +14,10 @@ export const Root: React.FC = () => {
         }
       >
         <Routes>
-          <Route path="/" element={<Navigate to="/produtos/radar" />} />
+          <Route path="/" element={<Home />} /> {/* REDIRECIONAMENTO */}
           <Route path="/sobre" element={<Home />} />
-          <Route path="/produtos/radar" element={<Home />} />
-          <Route path="/produtos/satelite" element={<Home />} />
-          <Route path="/produtos/estacoes" element={<Home />} />
+          <Route path="/satelite" element={<Home />} />
+          <Route path="/estacoes" element={<Home />} />
           <Route path="/boletins" element={<Home />} />
         </Routes>
       </Suspense>

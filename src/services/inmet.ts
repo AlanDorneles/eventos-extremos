@@ -1,35 +1,9 @@
 import { INMETDataRaw } from "../interfaces/Station";
-
-function setupWebSocket() {
-  const ws = new WebSocket("ws://localhost:8080");
-
-  ws.onopen = () => {
-    console.log("Connected to WebSocket server");
-  };
-
-  ws.onmessage = (event: MessageEvent) => {
-    const data = JSON.parse(event.data);
-    if (data.newCache) {
-      console.log(
-        `NOVO CACHE DISPONÍVEL PARA DADOS DE ESTAÇÕES : ${new Date().getUTCHours()}:${new Date().getUTCMinutes()}`
-      );
-      updateDataFromAPI();
-    }
-  };
-
-  ws.onclose = () => {
-    console.log("Disconnected from WebSocket server");
-  };
-  return () => {
-    ws.close();
-  };
-}
-
-setupWebSocket();
+const API_URL = import.meta.env.VITE_API_URL
 
 export async function DataINMETAPI(): Promise<INMETDataRaw> {
   try {
-    const response = await fetch("http://localhost:3000/get-data-inmet-free");
+    const response = await fetch(`${API_URL}/get-data-inmet-free`);
 
     if (!response.ok) {
       throw new Error("Não foi possível obter dados do INMET");

@@ -24,7 +24,7 @@ const MenuPrincipal: React.FC = () => {
 
       <div id="navbarBasicExample" className="navbar-menu ml-4">
         <div className="navbar-start">
-          <a className="navbar-item" href="/produtos/radar">
+          <a className="navbar-item" href="/radar">
             Produtos
           </a>
 
@@ -36,13 +36,13 @@ const MenuPrincipal: React.FC = () => {
             Sobre
           </a>
         </div>
-        <div className="navbar-item">
+        <div className="navbar-item" id="nohover">
           <p style={{ color: "#0a3d66" }}>
             <strong>LABORATÓRIO DE INTERAÇÃO ATMOSFERA-OCEANO</strong>
           </p>
         </div>
         <div className="navbar-end">
-          <div className="navbar-item">
+          <div className="navbar-item" id="nohover">
             <a
               className="navbar-item ml-1"
               href="https://www.furg.br"
