@@ -24,7 +24,7 @@ const MenuPrincipal: React.FC = () => {
 
       <div id="navbarBasicExample" className="navbar-menu ml-4">
         <div className="navbar-start">
-          <a className="navbar-item" href="/radar">
+          <a className="navbar-item" href="/">
             Produtos
           </a>
 

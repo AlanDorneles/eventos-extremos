@@ -1123,10 +1123,11 @@ export const Map = ({
                     ? bounds.cangucu
                     : bounds.cangucuNotMaxCappi
                 }
-                url={
-                  inicialImage[typeRadar]["cn"][currentImageIndex] ??
-                  "/no-data1.png"
-                }
+              url={
+  inicialImage[typeRadar]?.["cn"]?.[currentImageIndex]
+    ? `http://127.0.0.1:3000${inicialImage[typeRadar]["cn"][currentImageIndex]}`
+    : "/no-data1.png"
+}
               />
             )}{" "}
           </>
@@ -1142,9 +1143,10 @@ export const Map = ({
                     : bounds.morroDaIgrejaNotMaxCappi
                 }
                 url={
-                  inicialImage[typeRadar]["mi"][currentImageIndex] ??
-                  "/no-data1.png"
-                }
+  inicialImage[typeRadar]?.["mi"]?.[currentImageIndex]
+    ? `http://127.0.0.1:3000${inicialImage[typeRadar]["mi"][currentImageIndex]}`
+    : "/no-data1.png"
+}
               />
             )}
           </>
@@ -1159,9 +1161,10 @@ export const Map = ({
                     : bounds.santiagoNotMaxCappi
                 }
                 url={
-                  inicialImage[typeRadar]["sg"][currentImageIndex] ??
-                  "/no-data1.png"
-                }
+          inicialImage[typeRadar]?.["sg"]?.[currentImageIndex]
+            ? `http://127.0.0.1:3000${inicialImage[typeRadar]["sg"][currentImageIndex]}`
+            : "/no-data1.png"
+        }
               />
             )}{" "}
           </>

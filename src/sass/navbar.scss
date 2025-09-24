@@ -3,19 +3,16 @@
 @use "bulma/sass/components/navbar";
 
 .navbar {
-  background-color: vars.$navbar-background-color;
   display: flex;
   align-items: center;
 
   .navbar-item {
-    color: vars.$primary; // ou hsl(0, 0%, 29%)
     display: flex;
     align-items: center;
     height:64px;
 
     &:hover {
-      color: vars.$primary;
-      background-color: vars.$primary-10;
+      background-color: vars.$primary-20;
       border-radius: 4px;
     }
 
@@ -26,3 +23,18 @@
 
   height: 5rem;
 }
+
+@media (prefers-color-scheme: dark) {
+ .navbar {
+  display: flex;
+  align-items: center;
+
+  .navbar-item {
+    display: flex;
+    align-items: center;
+    height:64px;
+
+    &:hover {
+      background-color: vars.$inverse-primary;
+      border-radius: 4px;
+    }}}}

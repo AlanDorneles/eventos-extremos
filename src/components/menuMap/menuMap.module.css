@@ -27,14 +27,14 @@
   gap: 8px;
 }
 
-input[type="checkbox"] {
+/*input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  width: 20px; /* Ajuste o tamanho do checkbox */
-  height: 20px; /* Ajuste o tamanho do checkbox */
+  width: 20px;
+  height: 20px; 
   position: relative;
-  border-radius: 4px; /* Ajuste o raio das bordas */
+  border-radius: 4px; 
   outline: none;
   cursor: pointer;
   margin-right: 8px;
@@ -43,41 +43,40 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-  background-color: #0a3d66; /* Cor de fundo quando estiver marcado */
-}
+  background-color: #0a3d66;
 
 input[type="checkbox"]::before {
   content: "";
   display: block;
   position: absolute;
-  width: 10px; /* Tamanho do marcador */
-  height: 10px; /* Tamanho do marcador */
+  width: 10px; 
+  height: 10px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 2px; /* Ajuste o raio do marcador */
-  opacity: 0; /* Torna o marcador invisível por padrão */
-  content: "\2713"; /* Código unicode para o checkmark */
-  color: white; /* Cor do checkmark */
-  font-size: 14px; /* Tamanho do checkmark */
+  border-radius: 2px;
+  opacity: 0;
+  content: "\2713"; 
+  color: white;
+  font-size: 14px; 
   text-align: center;
-  line-height: 1; /* Alinha o checkmark verticalmente */
-  opacity: 1; /* Mantém o checkmark visível */
+  line-height: 1; 
+  opacity: 1; 
   margin: 0 0 4px 0;
 }
 
 input[type="checkbox"]:checked::before {
-  opacity: 1; /* Torna o marcador visível quando o checkbox está marcado */
+  opacity: 1; 
 }
 
-/* Estilos para o marcador de seleção padrão */
+
 input[type="checkbox"]::-moz-selection {
   background: transparent;
 }
 
 input[type="checkbox"]::selection {
   background: transparent;
-}
+}*/
 
 ul li {
   width: 100%;

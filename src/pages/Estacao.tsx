@@ -10,6 +10,7 @@ import { variablesPT } from "../components/chart/variablesPT";
 import stations from "../components/menuMap/listStations";
 import { useScopeDaysContext } from "../contexts/ScopeDays";
 import { ApexOptions } from "apexcharts";
+import { usePrefersDarkMode } from "../utils/ThemedChart";
 
 const Estacao: React.FC = () => {
   const { checkeds } = useCheckedsContext();
@@ -47,21 +48,25 @@ const Estacao: React.FC = () => {
     };
   });
 
+  const isDark = usePrefersDarkMode(); 
+
   const options: ApexOptions = {
+    
     title: {
       text: `${variablesPT[phenomena]}`,
       align: "center",
       style: {
         fontSize: "16px",
-        color: "#333",
-      },
+        color: isDark ? "#5dadefff":"#333333"
+        
+      }
     },
     chart: {
       id: "chart-line",
     },
 
     grid: {
-      show: true,
+      show: false,
     },
 
     xaxis: {

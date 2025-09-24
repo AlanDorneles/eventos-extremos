@@ -1,32 +1,16 @@
-// Fonte personalizada do Google Fonts (carregada via CSS padrão)
-// Importa o Bulma com overrides de variáveis via @use ... with
-@use "sass:color";
-@use "sass:math";
-
-// 1. Suas variáveis vêm primeiro
-@use "./variables" as *;
-
-// 2. Use os arquivos de Bulma **modularizados**
-@use "../../node_modules/bulma/sass/utilities/_index" as *;
-@use "../../node_modules/bulma/sass/base/_index" as *;
-@use "../../node_modules/bulma/sass/elements/button" as *;
-@use "../../node_modules/bulma/sass/elements/content" as *;
-@use "../../node_modules/bulma/sass/elements/title" as *;
-@use "../../node_modules/bulma/sass/form/_index" as *;
-@use "../../node_modules/bulma/sass/components/navbar" as *;
-@use "../../node_modules/bulma/sass/layout/hero" as *;
-@use "../../node_modules/bulma/sass/layout/section" as *;
-@use "bulma/bulma" with (
-  $primary: red
+@use "./variables" as vars;
+@use "bulma/sass/utilities" with (
+  $primary: vars.$primary,
+  $link: vars.$link,
 );
 
+@use "bulma/sass/base";
+@use "bulma/sass/elements";
+@use "bulma/sass/form";
+@use "bulma/sass/components";
+@use "bulma/sass/layout";
+
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
-
-
-
-
-
-
 
 /*NA PACKAGE JSON FOI CRIADO DOIS SCRIPTS 
     "build-bulma": "sass --load-path=node_modules src/sass/mystyles.scss public/css/mystyles.css",

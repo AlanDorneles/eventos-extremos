@@ -97,7 +97,7 @@ const SatelliteMenu: React.FC<
                   <button
                     key={index}
                     id={index.toString()}
-                    className="button is-small"
+                    className="button is-small is-primary is-outlined"
                     onClick={() => {
                       selectIndex(index);
                       setImageIndex(index);

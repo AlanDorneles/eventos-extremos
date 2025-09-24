@@ -80,7 +80,7 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
                       <button
                         key={index}
                         id={index.toString()}
-                        className="button is-small"
+                        className="button is-small is-primary is-outlined"
                         onClick={() => selectIndex(index)}
                         style={{ ...(isClicked && buttonStyle) }}
                       >
@@ -96,32 +96,34 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
       </div>
       <div className={styles.containerRadar}>
         <h6 className="title is-6">Radares</h6>
-        <label className="checkbox">
-          <input
-            type="checkbox"
-            checked={cangucuChecked}
-            onChange={(event) => handleCangucuChange(event.target.checked)}
-          />
-          Canguçu - RS
-        </label>
-        <label className="checkbox">
-          <input
-            type="checkbox"
-            checked={morroDaIgrejaChecked}
-            onChange={(event) =>
-              handleMorroDaIgrejaChange(event.target.checked)
-            }
-          />
-          Morro da Igreja - SC
-        </label>
-        <label className="checkbox">
-          <input
-            type="checkbox"
-            checked={santiagoChecked}
-            onChange={(event) => handleSantiagoChange(event.target.checked)}
-          />
-          Santiago - RS
-        </label>
+        <div className="checkboxes is-flex-direction-column">
+          <label className="checkbox">
+            <input
+              type="checkbox"
+              checked={cangucuChecked}
+              onChange={(event) => handleCangucuChange(event.target.checked)}
+            />
+            Canguçu - RS
+          </label>
+          <label className="checkbox">
+            <input
+              type="checkbox"
+              checked={morroDaIgrejaChecked}
+              onChange={(event) =>
+                handleMorroDaIgrejaChange(event.target.checked)
+              }
+            />
+            Morro da Igreja - SC
+          </label>
+          <label className="checkbox">
+            <input
+              type="checkbox"
+              checked={santiagoChecked}
+              onChange={(event) => handleSantiagoChange(event.target.checked)}
+            />
+            Santiago - RS
+          </label>
+        </div>
       </div>
       <div className={styles.containerRadar}>
         <h6 className="title is-6">Captação</h6>

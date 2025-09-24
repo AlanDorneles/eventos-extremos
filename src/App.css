@@ -1,16 +1,78 @@
+
 :root{
-  --bulma-primary:#0a3d66;
-}
-#root {
-  font-family: "Lato Regular", sans-serif;
+  /* #0a3d66 em HSL */
+  --bulma-primary-h: 207 !important;
+  --bulma-primary-s: 82% !important;
+  --bulma-primary-l: 22% !important;
+  --bulma-primary-invert-l: 100% !important;
+  --bulma-tabs-link-active-border-bottom-color:hsl(207, 82%, 22%) !important;
+  --bulma-link-text:hsl(207, 82%, 22%) !important;
+  
+ 
 }
 
 body {
   padding: 0;
   margin: 0;
   min-height: 100vh;
+  background-color: white; 
+
 }
 
+@media (prefers-color-scheme: light) {
+  input[type='radio']:checked:after , input[type="checkbox"]:checked {
+    background-color:hsl(207, 82%, 22%) ;
+    border:hsl(207, 82%, 22%)   ;
+
+   }
+  }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: transparent;
+    color: white;
+  }
+  input[type='radio']:checked:after , input[type="checkbox"]:checked {
+    background-color:hsl(207, 82%, 65%) ;
+    border:hsl(207, 82%, 65%)  ;
+
+   }
+   
+  :root{
+    --bulma-primary-h: 207 !important;
+    --bulma-primary-s: 82% !important;
+    --bulma-primary-l: 65% !important;  /* destaque agradável no escuro */
+    --bulma-primary-invert-l: 100% !important; /* texto claro em cima do primary */
+    /* alinhe link às mesmas coords (opcional) */
+    --bulma-link-h: var(--bulma-primary-h) !important;
+    --bulma-link-s: var(--bulma-primary-s) !important;
+    --bulma-link-l: var(--bulma-primary-l) !important;
+    --bulma-tabs-link-active-color: hsl(207,82%,65%) !important;
+    --bulma-tabs-link-active-border-bottom-color:hsl(207, 82%, 65%) !important;
+    --bulma-link-text:hsl(207, 82%, 65%) !important;
+   
+  }
+
+  *::-webkit-scrollbar {
+  width: 10px;           /* vertical */
+  height: 10px;          /* horizontal */
+}
+  html {
+  scrollbar-width: thin; /* auto | thin */
+  }
+  *::-webkit-scrollbar-thumb {
+    background: hsl(var(--bulma-primary-h), var(--bulma-primary-s), var(--bulma-primary-l));
+  }
+  html {
+    scrollbar-color:
+      hsl(var(--bulma-primary-h), var(--bulma-primary-s), var(--bulma-primary-l))
+      rgba(255, 255, 255, 0.06);
+  }}
+
+input[type="checkbox"]::before {
+  color: none;
+  content:"" !important
+}
 hr {
   background-color: #37688c !important;
 }
@@ -62,7 +124,7 @@ text.marker-text {
   align-items: center;
   height: 100vh; /* altura da tela inteira */
   width: 100vw; /* largura da tela inteira */
-  background-color: #fff; /* opcional: cor de fundo branca */
+
 }
 
 .loader-image {

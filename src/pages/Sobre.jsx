@@ -1,4 +1,5 @@
 import styles from "./styles/sobre.module.css";
+import {ThemedImage} from '../utils/ThemedImage'
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Sobre = () => {
@@ -46,19 +47,38 @@ const Sobre = () => {
           provenientes de satélites e dados gerados a partir de modelagem
           numérica.
         </p>
+
+      
+
         <div className="fixed-grid has-4-cols">
           <div className="grid">
             <div className="cell is-flex is-justify-content-center is-align-items-center">
-              <img className={styles.img} src="/FURG_COM_TEXTO1.png" alt="" />
+
+              <ThemedImage
+                lightSrc="/FURG_COM_TEXTO1.png"
+                darkSrc="/dark-mode/DARK_FURG_COM_TEXTO1.png"  
+                alt="FURG"
+                className={styles.img2}
+                />
             </div>
             <div className="cell is-flex is-justify-content-center is-align-items-center">
-              <img className={styles.img} src="/IO_COM_TEXTO.png" alt="" />
+              <ThemedImage
+                lightSrc="/IO_COM_TEXTO.png"
+                darkSrc="/dark-mode/DARK_IO_COM_TEXTO.png"   
+                alt="INSTITUTO DE OCEANOGRAFIA"
+                className={styles.img}
+                />
             </div>
             <div className="cell is-flex is-justify-content-center is-align-items-center">
-              <img className={styles.img} src="/NULOG.png" alt="" />
+             <ThemedImage
+                lightSrc="/NULOG.png"
+                darkSrc="/dark-mode/DARK_NULOG.png"   
+                alt="NUCLEO DE OCEANOGRAFIA GEOLOGICA"
+                className={styles.img}
+                />
             </div>
             <div className="cell is-flex is-justify-content-center is-align-items-center">
-              <img className={styles.img} src="/LIAO3.png" alt="" />
+              <img className={styles.img4} src="/LIAO3.png" alt="" />
             </div>
           </div>
         </div>
@@ -92,16 +112,36 @@ const Sobre = () => {
           >
             <div className="grid">
               <div className={styles.cell}>
-                <img className={styles.img} src="/cptec.jpeg" alt="" />
+                <ThemedImage
+                lightSrc="/cptec.jpeg"
+                darkSrc="/dark-mode/DARK_CPTEC.png"   
+                alt="CPTEC"
+                className={styles.img}
+                />
               </div>
               <div className={styles.cell}>
-                <img className={styles.img3} src="/inmet2.png" alt="" />
+               <ThemedImage
+                lightSrc="/inmet2.png"
+                darkSrc="/dark-mode/DARK_INMET.png" 
+                alt="INMET"
+                className={styles.img}
+                />
               </div>
               <div className={styles.cell}>
-                <img className={styles.img3} src="/redemet.png" alt="" />
+                 <ThemedImage
+                lightSrc="/redemet.png"
+                darkSrc="/dark-mode/DARK_REDEMET.png"   
+                alt="REDEMET"
+                className={styles.img}
+                />
               </div>
               <div className={styles.cell}>
-                <img className={styles.img2} src="/cppmet.png" alt="" />
+                 <ThemedImage
+                lightSrc="/cppmet.png"
+                darkSrc="/dark-mode/DARK_CPPMET.png"   
+                alt="FURG"
+                className={styles.img}
+                />
               </div>
             </div>
           </div>

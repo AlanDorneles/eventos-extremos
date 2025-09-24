@@ -4,6 +4,7 @@ import { useCodeStation } from "../../contexts/codeStation";
 import { usePhenomenaContext } from "../../contexts/Phenomena";
 import { variablesPT } from "./variablesPT";
 import { useScopeDaysContext } from "../../contexts/ScopeDays";
+import { usePrefersDarkMode } from "../../utils/ThemedChart";
 
 export const Graphic = () => {
   const { phenomena } = usePhenomenaContext();
@@ -14,6 +15,7 @@ export const Graphic = () => {
   const [trigger, setTrigger] = useState(false);
   const [nameVariable, setNameVariable] = useState("Pressão");
   const { scopeDays } = useScopeDaysContext()
+
 
   useEffect(() => {
     if (codeStation !== storageCodeStation) {
@@ -27,6 +29,8 @@ export const Graphic = () => {
     setNameVariable(variablesPT[phenomena]);
   }, [trigger, phenomena,codeStation,scopeDays]);
 
+
+const isDark = usePrefersDarkMode(); 
   const series = [
     {
       name: `${nameVariable}`,
@@ -36,12 +40,13 @@ export const Graphic = () => {
   ];
 
   const options = {
+     
     title: {
       text: `${nameVariable}`,
       align: "center", // ou 'left' ou 'right'
       style: {
         fontSize: "16px", // Tamanho da fonte
-        color: "#333", // Cor do texto do título
+        color: isDark ? "#5dadefff":"#333333", // Cor do texto do título
       },
     },
     chart: {
@@ -55,13 +60,17 @@ export const Graphic = () => {
       type: "string",
       tickAmount: 4,
     },
+    legend:{
+      show:true},
+  
     stroke: {
       curve: "smooth",
-      colors: ["#0a3d66"],
+      colors: ["#5dadefff"],
     },
     markers: {
-      size: 8,
+      size: 6,
       content: "A",
+      
     },
   };
 
