@@ -11,7 +11,7 @@ import styles from "./styles/Home.module.css";
 import Satellite from "./Sattelite";
 import Estacao from "./Estacao";
 import Sobre from "./Sobre.jsx";
-import Boletins from "./Boletins.jsx";
+import Boletins from './Boletins';
 import { Link } from "react-router-dom";
 import { GiSattelite } from "react-icons/gi";
 import { RiBaseStationLine } from "react-icons/ri";

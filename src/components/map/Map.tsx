@@ -173,7 +173,7 @@ export const Map = ({
               }}
             ></Marker>{" "}
             {/*URUGUAIANA */}
-            <Marker
+            {/*<Marker
               position={[-32.08, -52.17]}
               icon={iconStation}
               className="iconStation"
@@ -185,7 +185,7 @@ export const Map = ({
               }}
             ></Marker>
             {/* RIO GRANDE */}
-            <Marker
+            {/*<Marker
               position={[-32.53, -53.38]}
               icon={iconStation}
               className="iconStation"
@@ -257,7 +257,7 @@ export const Map = ({
               }}
             ></Marker> */}
             {/* HULHA NEGRA */}
-            <Marker
+            {/*<Marker
               position={[-31.35, -54.01]}
               icon={iconStation}
               className="iconStation"
@@ -413,7 +413,7 @@ export const Map = ({
               }}
             ></Marker> */}
             {/* CANGUÇU OLIVAL CAPOLIVO*/}
-            <Marker
+            {/*<Marker
               position={[-31.4, -52.7]}
               icon={iconStation}
               className="iconStation"
@@ -437,7 +437,7 @@ export const Map = ({
               }}
             ></Marker> */}
             {/* SÃO LOURENÇO DO SUL*/}
-            <Marker
+            {/*<Marker
               position={[-30.81, -51.83]}
               icon={iconStation}
               className="iconStation"
@@ -473,7 +473,7 @@ export const Map = ({
               }}
             ></Marker> */}
             {/* ENCRUZILHADA DO SUL*/}
-            <Marker
+            {/*<Marker
               position={[-30.55, -53.47]}
               icon={iconStation}
               className="iconStation"
@@ -569,7 +569,7 @@ export const Map = ({
               }}
             ></Marker> */}
             {/* CACHOEIRA DO SUL (CASA AZUL)*/}
-            <Marker
+            {/*<Marker
               position={[-29.87, -52.38]}
               icon={iconStation}
               className="iconStation"
@@ -869,7 +869,7 @@ export const Map = ({
               }}
             ></Marker> */}
             {/* SÃO FRANCISCO DE PAULA */}
-            <Marker
+            {/*<Marker
               position={[-29.37, -50.83]}
               icon={iconStation}
               className="iconStation"
@@ -881,7 +881,7 @@ export const Map = ({
               }}
             ></Marker>
             {/*CANELA  */}
-            <Marker
+            {/*<Marker
               position={[-29.67, -51.06]}
               icon={iconStation}
               className="iconStation"
@@ -1085,7 +1085,7 @@ export const Map = ({
               }}
             ></Marker> */}
             {/* MAQUINÉ */}
-            <Marker
+            {/*<Marker
               position={[-30.01, -50.14]}
               icon={iconStation}
               className="iconStation"
@@ -1124,9 +1124,7 @@ export const Map = ({
                     : bounds.cangucuNotMaxCappi
                 }
               url={
-  inicialImage[typeRadar]?.["cn"]?.[currentImageIndex]
-    ? `http://127.0.0.1:3000${inicialImage[typeRadar]["cn"][currentImageIndex]}`
-    : "/no-data1.png"
+  inicialImage[typeRadar]?.["cn"]?.[currentImageIndex] ?? "/no-data1.png"
 }
               />
             )}{" "}
@@ -1142,10 +1140,8 @@ export const Map = ({
                     ? bounds.morroDaIgreja
                     : bounds.morroDaIgrejaNotMaxCappi
                 }
-                url={
-  inicialImage[typeRadar]?.["mi"]?.[currentImageIndex]
-    ? `http://127.0.0.1:3000${inicialImage[typeRadar]["mi"][currentImageIndex]}`
-    : "/no-data1.png"
+                url={inicialImage[typeRadar]["mi"][currentImageIndex]
+    ?? "/no-data1.png"
 }
               />
             )}
@@ -1160,10 +1156,8 @@ export const Map = ({
                     ? bounds.santiago
                     : bounds.santiagoNotMaxCappi
                 }
-                url={
-          inicialImage[typeRadar]?.["sg"]?.[currentImageIndex]
-            ? `http://127.0.0.1:3000${inicialImage[typeRadar]["sg"][currentImageIndex]}`
-            : "/no-data1.png"
+                url={inicialImage[typeRadar]["sg"][currentImageIndex]
+           ?? "/no-data1.png"
         }
               />
             )}{" "}

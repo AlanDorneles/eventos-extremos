@@ -23,7 +23,7 @@ export const FilterTypeRadarProvider = ({
   const raw = localStorage.getItem("redemet-images");
   const parsed = raw
     ? (JSON.parse(raw) as RedemetImages)
-    : { "03km": [], "07km": [], "10km": [], maxcappi: [] };
+    : { "03km": [], "07km": [], "10km": [], "maxcappi": [] };
   const radarLocalStorage = parsed;
 
   const handleTypeRadar = (selectedValue: RadarProductKey) => {
