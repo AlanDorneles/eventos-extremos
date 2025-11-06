@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useWrfImages } from "../contexts/wrfImages";
+import styles from "./Wrf.module.css";
 
 const WrfPage: React.FC = () => {
   const { images, currentIndex, setCurrentIndex } = useWrfImages();
@@ -21,7 +22,7 @@ const WrfPage: React.FC = () => {
 
   if (images.length === 0) {
     return (
-      <div style={{ padding: 16 }}>
+      <div className={styles.wrfPage}>
         <h2>WRF</h2>
         Nenhuma imagem selecionada.
       </div>
@@ -29,16 +30,8 @@ const WrfPage: React.FC = () => {
   }
 
   return (
-    <div style={{ padding: 12 }}>
-      <div
-        style={{
-          display: "flex",
-          gap: 12,
-          alignItems: "center",
-          width: "70vw",
-          justifyContent: "center",
-        }}
-      >
+    <div className={styles.wrfPage}>
+      <div className={styles.controlsRow}>
         <button
           onClick={() =>
             setCurrentIndex((currentIndex - 1 + images.length) % images.length)
@@ -46,20 +39,11 @@ const WrfPage: React.FC = () => {
         >
           &lt;
         </button>
-
-        <div
-          style={{
-            width: 720,
-            height: 480,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <div className={styles.imageWrapper}>
           <img
             src={images[currentIndex]}
             alt={`WRF ${currentIndex + 1}`}
-            style={{ maxWidth: "100%", maxHeight: "100%" }}
+            className={styles.imgResponsive}
           />
         </div>
 
@@ -67,19 +51,8 @@ const WrfPage: React.FC = () => {
           &gt;
         </button>
       </div>
-
-      <div
-        style={{
-          display: "flex",
-          gap: 12,
-          alignItems: "center",
-          width: "70vw",
-          justifyContent: "center",
-          flexDirection: "column",
-          marginTop: 8,
-        }}
-      >
-        <button onClick={() => setPlaying((p) => !p)}>
+      <div className={styles.controlsColumn}>
+        <button className={styles.navButton} onClick={() => setPlaying((p) => !p)}>
           {playing ? "Pausar" : "Tocar"}
         </button>
 

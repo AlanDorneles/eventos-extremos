@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./menuMap.module.css";
 import { useWrfImages } from "../../contexts/wrfImages";
+// @ts-ignore: allow importing CSS without type declarations
+import "bulma/css/bulma.min.css";
 
 const IMG_EXT = ["png", "jpg", "jpeg", "gif", "webp"];
 
@@ -114,56 +116,57 @@ const WrfMenu: React.FC = () => {
       </div>
 
       {rawImages.length > 0 && (
-        <div style={{ marginTop: "10px" }}>
+        <>
           <label className="label">Intervalo de tempo:</label>
-          <select
-            className="select"
-            value={dayRange}
-            onChange={(e) => setDayRange(Number(e.target.value) as 1 | 2 | 3)}
-          >
-            <option value={1}>1 dia (24h)</option>
-            <option value={2}>2 dias (48h)</option>
-            <option value={3}>3 dias (completo)</option>
-          </select>
-        </div>
+          <div className="select is-primary">
+            <select
+              value={dayRange}
+              onChange={(e) => setDayRange(Number(e.target.value) as 1 | 2 | 3)}
+            >
+              <option value={1}>1 dia (24h)</option>
+              <option value={2}>2 dias (48h)</option>
+              <option value={3}>3 dias (completo)</option>
+            </select>
+          </div>
+        </>
       )}
 
-        {images.length > 0 && (
+      {images.length > 0 && (
         <div
-            style={{
+          style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, 60px)",
             gap: "8px",
             marginTop: "14px",
-            }}
+          }}
         >
-            {images.map((src, i) => {
+          {images.map((src, i) => {
             const hour = extractHour(src);
 
             const isActive = i === currentIndex;
 
             return (
-                <div
+              <div
                 key={i}
                 onClick={() => setCurrentIndex(i)}
                 style={{
-                    cursor: "pointer",
-                    padding: "6px 0",
-                    textAlign: "center",
-                    borderRadius: "6px",
-                    border: isActive ? "2px solid #3273dc" : "1px solid #ccc",
-                    background: isActive ? "#dbeafe" : "#f0f0f0",
-                    fontWeight: isActive ? "bold" : "normal",
-                    color: isActive ? "#1d4ed8" : "#000",
-                    transition: "0.2s",
+                  cursor: "pointer",
+                  padding: "6px 0",
+                  textAlign: "center",
+                  borderRadius: "6px",
+                  border: isActive ? "2px solid #3273dc" : "1px solid #ccc",
+                  background: isActive ? "#dbeafe" : "#f0f0f0",
+                  fontWeight: isActive ? "bold" : "normal",
+                  color: isActive ? "#1d4ed8" : "#000",
+                  transition: "0.2s",
                 }}
-                >
+              >
                 {hour}h
-                </div>
+              </div>
             );
-            })}
+          })}
         </div>
-        )}
+      )}
     </div>
   );
 };
