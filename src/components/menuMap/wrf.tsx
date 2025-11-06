@@ -141,37 +141,61 @@ const WrfMenu: React.FC = () => {
             </select>
           </div>
         </>
-      )}
+    )}
 
-      {images.length > 0 && (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, 60px)",
-            gap: "8px",
-            marginTop: "14px",
-          }}
-        >
-          {images.map((src, i) => {
-            const hour = extractHour(src);
+    {images.length > 0 && (
+      <div style={{ marginTop: "14px" }}>
+        {Array.from({ length: Math.ceil(images.length / 24) }).map((_, rowIdx) => {
+        const start = rowIdx * 24;
+        const end = Math.min(start + 24, images.length);
+        const slice = images.slice(start, end);
 
-            const isActive = i === currentIndex;
+        return (
+          <div key={rowIdx}>
+            <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, 60px)",
+              gap: "8px",
+            }}
+            >
+            {slice.map((src, i) => {
+              const idx = start + i;
+              const hour = extractHour(src);
+              const isActive = idx === currentIndex;
 
-            return (
-              <button
-                key={i}
+              return (
+                <button
+                key={idx}
                 type="button"
-                onClick={() => setCurrentIndex(i)}
+                onClick={() => setCurrentIndex(idx)}
                 className={
-                  "button is-small" + (isActive ? " is-primary" : " is-primary is-outlined")
+                  "button is-small" +
+                  (isActive ? " is-primary" : " is-primary is-outlined")
                 }
                 aria-pressed={isActive}
-              >
+                >
                 {hour}h
-              </button>
-            );
-          })}
-        </div>
+                </button>
+              );
+            })}
+            </div>
+
+            {/* separador entre grupos de 24 */}
+            {rowIdx < Math.ceil(images.length / 24) - 1 && (
+            <div
+              style={{
+                height: 1,
+                background: "rgba(0,0,0,0.12)",
+                margin: "12px 0",
+              }}
+              aria-hidden
+            />
+            )}
+          </div>
+        );
+        })}
+      </div>
       )}
     </div>
   );

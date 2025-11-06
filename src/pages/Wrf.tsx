@@ -31,32 +31,34 @@ const WrfPage: React.FC = () => {
 
   return (
     <div className={styles.wrfPage}>
-      <div className={styles.controlsRow}>
-        <button
-          className="button is-primary"
-          onClick={() =>
-            setCurrentIndex((currentIndex - 1 + images.length) % images.length)
-          }
-          aria-label="previous"
-        >
-          &lt;
-        </button>
-        <div className={styles.imageWrapper}>
-          <img
-            src={images[currentIndex]}
-            alt={`WRF ${currentIndex + 1}`}
-            className={styles.imgResponsive}
-          />
-        </div>
+	<div className={styles.controlsRow}>
+	  <button
+		className="button is-primary is-large"
+		onClick={() =>
+		setCurrentIndex((currentIndex - 1 + images.length) % images.length)
+		}
+		aria-label="previous"
+		style={{ fontSize: "0.75rem", padding: "0.75rem 1.25rem" }}
+	  >
+		❮
+	  </button>
+	  <div className={styles.imageWrapper}>
+		<img
+		src={images[currentIndex]}
+		alt={`WRF ${currentIndex + 1}`}
+		className={styles.imgResponsive}
+		/>
+	  </div>
 
-        <button
-          className="button is-primary"
-          onClick={() => setCurrentIndex((currentIndex + 1) % images.length)}
-          aria-label="next"
-        >
-          &gt;
-        </button>
-      </div>
+	  <button
+		className="button is-primary is-large"
+		onClick={() => setCurrentIndex((currentIndex + 1) % images.length)}
+		aria-label="next"
+		style={{ fontSize: "0.75rem", padding: "0.75rem 1.25rem" }}
+	  >
+		❯
+	  </button>
+	</div>
       <div className={styles.controlsColumn}>
 		<button
 			className={`button ${playing ? "is-danger" : "is-success"} ${styles.navButton}`}
