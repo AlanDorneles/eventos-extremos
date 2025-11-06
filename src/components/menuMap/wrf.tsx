@@ -1,115 +1,171 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./menuMap.module.css";
 import { useWrfImages } from "../../contexts/wrfImages";
 
 const IMG_EXT = ["png", "jpg", "jpeg", "gif", "webp"];
 
 function getYesterdayFolder(): string {
-    const d = new Date();
-    d.setDate(d.getDate() - 1);
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    return `${y}${m}${day}`;
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}${m}${day}`;
 }
 
 const WrfMenu: React.FC = () => {
-    const [selectedOption, setSelectedOption] =
-        useState<"none" | "precipitacao" | "vento_10m">("none");
+  const [selectedOption, setSelectedOption] =
+    useState<"none" | "precipitacao" | "vento_10m">("none");
 
-    const { setImages } = useWrfImages();
-    const [loading, setLoading] = useState(false);
+  const { images, setImages, currentIndex, setCurrentIndex } = useWrfImages();
 
-    const loadImagesFromFolder = async (type: "precipitacao" | "vento_10m") => {
-        const dateFolder = getYesterdayFolder();
-        const folder = `/wrf/${type}/${dateFolder}`;
+  const [rawImages, setRawImages] = useState<string[]>([]); // todas as imagens (3 dias)
+  const [dayRange, setDayRange] = useState<1 | 2 | 3>(1);   // select
 
-        console.log("%c[WRF MENU] =======================", "color: #33cc33");
-        console.log("%c[WRF MENU] Tipo selecionado:", "color: #33cc33", type);
-        console.log("%c[WRF MENU] Pasta de data:", "color: #33cc33", dateFolder);
-        console.log("%c[WRF MENU] Caminho completo:", "color: #33cc33", folder);
+  const [loading, setLoading] = useState(false);
 
-        setLoading(true);
+  const loadImagesFromFolder = async (type: "precipitacao" | "vento_10m") => {
+    setLoading(true);
 
-        try {
-            console.log("%c[WRF MENU] Fazendo fetch para:", "color: #1e90ff", `${folder}/index.json`);
-            const res = await fetch(`${folder}/index.json`);
+    const dateFolder = getYesterdayFolder();
+    const folder = `/wrf/${type}/${dateFolder}`;
 
-            console.log("%c[WRF MENU] resposta do fetch:", "color: #1e90ff", res.status, res.ok);
+    try {
+      const res = await fetch(`${folder}/index.json`);
+      if (!res.ok) throw new Error("index.json não encontrado");
 
-            if (!res.ok) throw new Error("index.json não encontrado");
+      const data = await res.json();
 
-            const data = await res.json();
-            console.log("%c[WRF MENU] Conteúdo do index.json:", "color: #1e90ff", data);
+      const urls = data.files
+        .filter((f: string) => {
+          const ext = f.split(".").pop()?.toLowerCase();
+          return ext && IMG_EXT.includes(ext);
+        })
+        .map((f: string) => `${folder}/${f}`);
 
-            const urls = data.files
-                .filter((f: string) => {
-                    const ext = f.split(".").pop()?.toLowerCase();
-                    const isValid = ext && IMG_EXT.includes(ext);
-                    console.log(`Arquivo detectado: ${f} | Extensão válida?`, isValid);
-                    return isValid;
-                })
-                .map((f: string) => {
-                    const finalPath = `${folder}/${f}`;
-                    console.log("➡️ URL final da imagem:", finalPath);
-                    return finalPath;
-                });
+      setRawImages(urls);        // salva todas
+      setDayRange(1);            // padrão: 1 dia
+      setCurrentIndex(0);
 
-            console.log("%c[WRF MENU] URLs finais enviadas ao contexto:", "color: #ffaa00", urls);
+    } catch (e) {
+      console.error("Erro carregando imagens:", e);
+      setRawImages([]);
+      setImages([]);
+      setCurrentIndex(0);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            setImages(urls);
-        } catch (e) {
-            console.error("%c[WRF MENU] Erro carregando imagens:", "color: red", e);
-            setImages([]);
-        } finally {
-            setLoading(false);
-        }
-    };
+  const toggleOption = (opt: "precipitacao" | "vento_10m") => {
+    const next = selectedOption === opt ? "none" : opt;
+    setSelectedOption(next);
 
-    const toggleOption = (opt: "precipitacao" | "vento_10m") => {
-        console.log("%c[WRF MENU] Checkbox clicado:", "color: purple", opt);
+    if (next === "none") {
+      setRawImages([]);
+      setImages([]);
+      setCurrentIndex(0);
+      return;
+    }
 
-        const next = selectedOption === opt ? "none" : opt;
-        console.log("%c[WRF MENU] Próxima opção selecionada:", "color: purple", next);
+    loadImagesFromFolder(next);
+  };
 
-        setSelectedOption(next);
+  useEffect(() => {
+    if (rawImages.length === 0) return;
 
-        if (next === "none") {
-            console.log("%c[WRF MENU] Nenhuma opção — limpando imagens.", "color: orange");
-            setImages([]);
-            return;
-        }
+    const limit = dayRange === 1 ? 24 : dayRange === 2 ? 48 : rawImages.length;
+    const cut = rawImages.slice(0, limit);
 
-        loadImagesFromFolder(next);
-    };
+    setImages(cut);
+    setCurrentIndex(0);
 
-    return (
-        <div className={styles.containerRadar}>
-            <h6 className="title is-6">WRF</h6>
+  }, [dayRange, rawImages, setImages, setCurrentIndex]);
 
-            <div className="field">
-                <label className="checkbox" style={{ display: "block", marginBottom: 6 }}>
-                    <input
-                        type="checkbox"
-                        checked={selectedOption === "precipitacao"}
-                        onChange={() => toggleOption("precipitacao")}
-                    />
-                    &nbsp;Precipitação acumulada
-                </label>
+  const extractHour = (file: string) => {
+    const match = file.match(/_(\d{2}):00:00/);
+    return match ? match[1] : "--";
+  };
 
-                <label className="checkbox" style={{ display: "block" }}>
-                    <input
-                        type="checkbox"
-                        checked={selectedOption === "vento_10m"}
-                        onChange={() => toggleOption("vento_10m")}
-                    />
-                    &nbsp;Vento a 10m
-                </label>
+  return (
+    <div className={styles.containerRadar}>
+      <h6 className="title is-6">WRF</h6>
 
-                {loading && <p>Carregando imagens...</p>}
-            </div>
+      <div className="field">
+        <label className="checkbox" style={{ display: "block", marginBottom: 6 }}>
+          <input
+            type="checkbox"
+            checked={selectedOption === "precipitacao"}
+            onChange={() => toggleOption("precipitacao")}
+          />
+          &nbsp;Precipitação acumulada
+        </label>
+
+        <label className="checkbox" style={{ display: "block" }}>
+          <input
+            type="checkbox"
+            checked={selectedOption === "vento_10m"}
+            onChange={() => toggleOption("vento_10m")}
+          />
+          &nbsp;Vento a 10m
+        </label>
+
+        {loading && <p>Carregando imagens...</p>}
+      </div>
+
+      {rawImages.length > 0 && (
+        <div style={{ marginTop: "10px" }}>
+          <label className="label">Intervalo de tempo:</label>
+          <select
+            className="select"
+            value={dayRange}
+            onChange={(e) => setDayRange(Number(e.target.value) as 1 | 2 | 3)}
+          >
+            <option value={1}>1 dia (24h)</option>
+            <option value={2}>2 dias (48h)</option>
+            <option value={3}>3 dias (completo)</option>
+          </select>
         </div>
-    );
+      )}
+
+        {images.length > 0 && (
+        <div
+            style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, 60px)",
+            gap: "8px",
+            marginTop: "14px",
+            }}
+        >
+            {images.map((src, i) => {
+            const hour = extractHour(src);
+
+            const isActive = i === currentIndex;
+
+            return (
+                <div
+                key={i}
+                onClick={() => setCurrentIndex(i)}
+                style={{
+                    cursor: "pointer",
+                    padding: "6px 0",
+                    textAlign: "center",
+                    borderRadius: "6px",
+                    border: isActive ? "2px solid #3273dc" : "1px solid #ccc",
+                    background: isActive ? "#dbeafe" : "#f0f0f0",
+                    fontWeight: isActive ? "bold" : "normal",
+                    color: isActive ? "#1d4ed8" : "#000",
+                    transition: "0.2s",
+                }}
+                >
+                {hour}h
+                </div>
+            );
+            })}
+        </div>
+        )}
+    </div>
+  );
 };
 
 export default WrfMenu;
