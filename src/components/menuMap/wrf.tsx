@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./menuMap.module.css";
 import { useWrfImages } from "../../contexts/wrfImages";
 // @ts-ignore: allow importing CSS without type declarations
@@ -17,7 +17,7 @@ function getYesterdayFolder(): string {
 
 const WrfMenu: React.FC = () => {
   const [selectedOption, setSelectedOption] =
-    useState<"none" | "precipitacao" | "vento_10m">("none");
+    useState<"none" | "precipitacao" | "vento_10m">("precipitacao");
 
   const { images, setImages, currentIndex, setCurrentIndex } = useWrfImages();
 
@@ -26,7 +26,7 @@ const WrfMenu: React.FC = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const loadImagesFromFolder = async (type: "precipitacao" | "vento_10m") => {
+  const loadImagesFromFolder = useCallback(async (type: "precipitacao" | "vento_10m") => {
     setLoading(true);
 
     const dateFolder = getYesterdayFolder();
@@ -57,7 +57,20 @@ const WrfMenu: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [setImages, setCurrentIndex]);
+
+  // When selectedOption changes, load or clear images accordingly.
+  useEffect(() => {
+    if (selectedOption === "none") {
+      setRawImages([]);
+      setImages([]);
+      setCurrentIndex(0);
+      return;
+    }
+
+    // load images for the selected option
+    loadImagesFromFolder(selectedOption);
+  }, [selectedOption, loadImagesFromFolder, setImages, setCurrentIndex]);
 
   const toggleOption = (opt: "precipitacao" | "vento_10m") => {
     const next = selectedOption === opt ? "none" : opt;
@@ -67,10 +80,9 @@ const WrfMenu: React.FC = () => {
       setRawImages([]);
       setImages([]);
       setCurrentIndex(0);
-      return;
     }
-
-    loadImagesFromFolder(next);
+    // Do not call loadImagesFromFolder here to avoid duplicate fetch:
+    // the useEffect above reacts to selectedOption changes and will load.
   };
 
   useEffect(() => {
@@ -151,7 +163,7 @@ const WrfMenu: React.FC = () => {
                 type="button"
                 onClick={() => setCurrentIndex(i)}
                 className={
-                  "button is-small" + (isActive ? " is-primary" : " is-light is-outlined")
+                  "button is-small" + (isActive ? " is-primary" : " is-primary is-outlined")
                 }
                 aria-pressed={isActive}
               >

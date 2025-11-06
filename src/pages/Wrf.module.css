@@ -1,5 +1,10 @@
 .wrfPage {
   padding: 16px;
+  height: 80vh;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .controlsRow {
