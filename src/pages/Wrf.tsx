@@ -33,9 +33,11 @@ const WrfPage: React.FC = () => {
     <div className={styles.wrfPage}>
       <div className={styles.controlsRow}>
         <button
+          className="button is-primary"
           onClick={() =>
             setCurrentIndex((currentIndex - 1 + images.length) % images.length)
           }
+          aria-label="previous"
         >
           &lt;
         </button>
@@ -47,14 +49,21 @@ const WrfPage: React.FC = () => {
           />
         </div>
 
-        <button onClick={() => setCurrentIndex((currentIndex + 1) % images.length)}>
+        <button
+          className="button is-primary"
+          onClick={() => setCurrentIndex((currentIndex + 1) % images.length)}
+          aria-label="next"
+        >
           &gt;
         </button>
       </div>
       <div className={styles.controlsColumn}>
-        <button className={styles.navButton} onClick={() => setPlaying((p) => !p)}>
-          {playing ? "Pausar" : "Tocar"}
-        </button>
+		<button
+			className={`button ${playing ? "is-danger" : "is-success"} ${styles.navButton}`}
+			onClick={() => setPlaying((p) => !p)}
+		>
+			{playing ? "Pausar" : "Tocar"}
+		</button>
 
         <small>
           {currentIndex + 1} / {images.length}

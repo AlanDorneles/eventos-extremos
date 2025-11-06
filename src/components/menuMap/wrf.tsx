@@ -146,23 +146,17 @@ const WrfMenu: React.FC = () => {
             const isActive = i === currentIndex;
 
             return (
-              <div
+              <button
                 key={i}
+                type="button"
                 onClick={() => setCurrentIndex(i)}
-                style={{
-                  cursor: "pointer",
-                  padding: "6px 0",
-                  textAlign: "center",
-                  borderRadius: "6px",
-                  border: isActive ? "2px solid #3273dc" : "1px solid #ccc",
-                  background: isActive ? "#dbeafe" : "#f0f0f0",
-                  fontWeight: isActive ? "bold" : "normal",
-                  color: isActive ? "#1d4ed8" : "#000",
-                  transition: "0.2s",
-                }}
+                className={
+                  "button is-small" + (isActive ? " is-primary" : " is-light is-outlined")
+                }
+                aria-pressed={isActive}
               >
                 {hour}h
-              </div>
+              </button>
             );
           })}
         </div>
