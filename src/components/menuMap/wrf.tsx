@@ -81,8 +81,6 @@ const WrfMenu: React.FC = () => {
       setImages([]);
       setCurrentIndex(0);
     }
-    // Do not call loadImagesFromFolder here to avoid duplicate fetch:
-    // the useEffect above reacts to selectedOption changes and will load.
   };
 
   useEffect(() => {
@@ -129,7 +127,18 @@ const WrfMenu: React.FC = () => {
 
       {rawImages.length > 0 && (
         <>
-          <label className="label">Intervalo de tempo:</label>
+          <div style={{ marginBottom: 8 }}>
+            <label className="label">Intervalo de tempo:</label>
+            {(() => {
+              const first = rawImages[0];
+              if (!first) return <span className="tag is-dark">Data da pasta: —</span>;
+              const m = first.match(/\/wrf\/[^/]+\/(\d{4})(\d{2})(\d{2})\//);
+              if (!m) return <span className="tag is-dark">Data da pasta: —</span>;
+              const [, y, mo, d] = m;
+              return <span className="tag is-dark">Data da pasta: {`${d}/${mo}/${y}`}</span>;
+            })()}
+          </div>
+
           <div className="select is-primary">
             <select
               value={dayRange}
