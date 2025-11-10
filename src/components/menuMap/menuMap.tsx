@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { GiSattelite, GiRadarSweep } from "react-icons/gi";
+import { GiSattelite, GiRadarSweep, GiAbstract002 } from "react-icons/gi";
 import { RiBaseStationLine } from "react-icons/ri";
 import RadarMenu from "./radar";
 import SatelliteMenu from "./satellite";
 import StationsMenu from "./stations";
+import WrfMenu from "./wrf";
 import stations, { Station } from "./listStations";
 import {
   useHourScope,
@@ -173,6 +174,18 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
                 <span>Estações</span>
               </Link>
             </li>
+
+            <li
+              className={`${selectedTab === "wrf" ? "is-active" : ""}`}
+              onClick={() => handleTabClick("wrf")}
+            >
+              <Link to="/wrf">
+                <span className="icon is-small">
+                  <GiAbstract002 className={styles.Icon} />
+                </span>
+                <span>WRF</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
@@ -223,6 +236,9 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
             buttonStyle={buttonStyle}
           />
         )}
+
+        {/* WRF */}
+        {selectedTab === "wrf" && <WrfMenu />}
       </div>
     </div>
   );
