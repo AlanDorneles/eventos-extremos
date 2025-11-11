@@ -18,6 +18,7 @@ export const Root: React.FC = () => {
           <Route path="/sobre" element={<Home />} />
           <Route path="/satelite" element={<Home />} />
           <Route path="/estacoes" element={<Home />} />
+          <Route path="/wrf" element={<Home />} />
           <Route path="/boletins" element={<Home />} />
         </Routes>
       </Suspense>

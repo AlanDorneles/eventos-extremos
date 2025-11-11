@@ -12,6 +12,7 @@ import Satellite from "./Sattelite";
 import Estacao from "./Estacao";
 import Sobre from "./Sobre.jsx";
 import Boletins from './Boletins';
+import WrfPage from "./Wrf";
 import { Link } from "react-router-dom";
 import { GiSattelite } from "react-icons/gi";
 import { RiBaseStationLine } from "react-icons/ri";
@@ -76,12 +77,14 @@ export default function Home() {
     location.pathname !== "/" &&
     location.pathname !== "/boletins" &&
     location.pathname !== "/profile" &&
-    location.pathname !== "/sobre";
+    location.pathname !== "/sobre" &&
+    location.pathname !== "/wrf";
 
   const dontHideItFrom =
     location.pathname === "/estacoes" ||
     location.pathname === "/" ||
-    location.pathname === "/satelite";
+    location.pathname === "/satelite" ||
+    location.pathname === "/wrf";
 
   return (
     <>
@@ -94,11 +97,11 @@ export default function Home() {
         >
           <MenuMap selectImage={handleSelectImage} ref={containerRef} />
         </section>
-        {/*location.pathname !== "/wrf" &&*/}
         {hideItFrom &&
           location.pathname !== "/" &&
           location.pathname !== "/estacoes" &&
-          location.pathname !== "/satelite" && (
+          location.pathname !== "/satelite" &&
+          location.pathname !== "/wrf" && (
             <button className={styles.btnMenu}>
               {renderLinkBasedOnPath(location.pathname)}
             </button>
@@ -126,6 +129,7 @@ export default function Home() {
         {location.pathname === "/estacoes" && <Estacao />}
         {location.pathname === "/boletins" && <Boletins />}
         {location.pathname === "/sobre" && <Sobre />}
+        {location.pathname === "/wrf" && <WrfPage />}
       </main>
     </>
   );

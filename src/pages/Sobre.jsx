@@ -9,12 +9,13 @@ const Sobre = () => {
     const name = formData.get("name");
     const email = formData.get("email");
     const message = formData.get("message");
+    const newlester = !!formData.get("newlester")
 
     try {
       const res = await fetch(`${API_URL}/send-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, newlester }),
       });
 
       if (res.ok) {
@@ -255,6 +256,14 @@ const Sobre = () => {
                 rows="8"
                 placeholder="Escreva sua mensagem"
               />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label class="checkbox" htmlFor="newlester">
+                <input type="checkbox" id="newlester"
+                name="newlester" />
+                    Receber atualizações no e-mail
+              </label>
             </div>
 
             <button className="button is-primary" type="submit">
