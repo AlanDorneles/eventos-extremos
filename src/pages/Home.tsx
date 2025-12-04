@@ -19,8 +19,9 @@ import { RiBaseStationLine } from "react-icons/ri";
 import MenuPrincipal from "../components/menuPrincipal/menuPrincipal";
 
 export default function Home() {
+  const lastIndex = JSON.parse(localStorage.getItem("redemet-images")).lastIndex
   const [handlerSrc, setHandlerSrc] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState<number>(23);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(lastIndex);
   const [images, setImages] = useState<RadarImageEntry[]>([]);
   const { cangucuChecked, morroDaIgrejaChecked, santiagoChecked } =
     UseRadarIsChecked();
