@@ -22,7 +22,7 @@ export const stations = [
   { id: "A828", name: "ERECHIM" },
   { id: "A854", name: "FREDERICO WESTPHALEN" },
   { id: "B826", name: "HERVAL" },
-  { id: "A873", name: "IBIRUBÁ" },
+  { id: "A883", name: "IBIRUBÁ" },
   { id: "A836", name: "JAGUARAO" },
   { id: "A844", name: "LAGOA VERMELHA" },
   { id: "B813", name: "MINAS DO LEÃO" },

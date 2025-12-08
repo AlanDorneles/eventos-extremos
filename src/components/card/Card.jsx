@@ -36,6 +36,8 @@ export const Card = () => {
   }, [trigger, codeStation]);
 
   const currentHour = new Date().getUTCHours();
+  const lastIndex = 168+currentHour-1;
+
 
   return (
     <div className={styles.container}>
@@ -46,56 +48,64 @@ export const Card = () => {
           </span>
           <span>
             <WiBarometer /> Pressão:{" "}
-            {data.pressure[data.pressure.length - currentHour] === null
+            {data.pressure[data.pressure[lastIndex]] === null
               ? "Sem dados"
-              : data.pressure[data.pressure.length - currentHour] + " hPa"}
+              : data.pressure[data.pressure[lastIndex]] + " hPa"}
           </span>
           <span>
             <WiThermometerExterior /> Temp. Miníma:{" "}
-            {data.tempMin[data.tempMin.length - currentHour] === null
+            {data.tempMin[data.tempMin[lastIndex]] === null
               ? "Sem dados"
-              : data.tempMin[data.tempMin.length - currentHour] + " ºC"}
+              : data.tempMin[data.tempMin[lastIndex]] + " ºC"}
           </span>
           <span>
             <WiThermometer /> Temp. Máxima:{" "}
-            {data.tempMax[data.tempMax.length - currentHour] === null
+            {data.tempMax[data.tempMax[lastIndex]] === null
               ? "Sem dados"
-              : data.tempMax[data.tempMax.length - currentHour] + " ºC"}
+              : data.tempMax[data.tempMax[lastIndex]] + " ºC"}
           </span>
           <span>
             <WiRainMix /> Chuva:{" "}
-            {data.rain[data.rain.length - currentHour] === null
+            {data.rain[data.rain[lastIndex]] === null
               ? "Sem dados"
-              : data.rain[data.rain.length - currentHour] + " mm"}
+              : data.rain[data.rain[lastIndex]] + " mm"}
           </span>
           <span>
             <WiHumidity /> Umidade:{" "}
-            {data.humidity[data.humidity.length - currentHour] === null
+            {data.humidity[data.humidity[lastIndex]] === null
               ? "Sem dados"
-              : data.humidity[data.humidity.length - currentHour] + "%"}
+              : data.humidity[data.humidity[lastIndex]] + "%"}
           </span>
           <span>
             <WiWindy /> Raj. Vento:{" "}
-            {data.windBurst[data.windBurst.length - currentHour] === null
+            {data.windBurst[data.windBurst[lastIndex]] === null
               ? "Sem dados"
-              : data.windBurst[data.windBurst.length - currentHour] + " m/s"}
+              : data.windBurst[data.windBurst[lastIndex]] + " m/s"}
           </span>
           <span>
             <WiStrongWind /> Veloc. Vento:{" "}
-            {data.windSpeed[data.windSpeed.length - currentHour] === null
+            {data.windSpeed[data.windSpeed[lastIndex]] === null
               ? "Sem dados"
-              : data.windSpeed[data.windSpeed.length - currentHour] + " m/s"}
+              : data.windSpeed[data.windSpeed[lastIndex]] + " m/s"}
           </span>
           <span>
             <WiWindDeg /> Direc. Vento:{" "}
-            {data.windDirection[data.windDirection.length - currentHour] ===
+            {data.windDirection[data.windDirection[lastIndex]] ===
             null
               ? "Sem dados"
-              : data.windDirection[data.windDirection.length - currentHour]}
+              : data.windDirection[data.windDirection[lastIndex]]}
+          </span>
+          <span>
+            <WiBarometer /> Pressão NMM:{" "}
+            {data.pressureSLP[data.pressureSLP[lastIndex]] === null
+              ? "Sem dados"
+              : data.pressureSLP[data.pressureSLP[lastIndex]] + " hPa"}
           </span>
           <span>
             <WiTime5 /> Hora: {data.hour[currentHour]} horas
           </span>
+
+
         </div>
       ) : (
         <p>Carregando dados...</p>

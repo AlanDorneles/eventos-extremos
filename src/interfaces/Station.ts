@@ -12,6 +12,7 @@ export interface StationData {
   degree: (string | null)[];
   data: string[];
   station: any;
+  pressureSLP: (string | null)[];
   }
   
   export interface INMETDataRaw {

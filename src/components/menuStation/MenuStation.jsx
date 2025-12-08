@@ -25,7 +25,7 @@ export const MenuStation = () => {
           <p>Parâmetro</p>
           <div className="select is-primary">
             <select onChange={handlePhenomena} value={phenomena}>
-              <option value={"pressure"}>Pressão</option>
+              <option value={"pressure"}>Pressão (hPa)</option>
               <option value={"rain"}>Precipitação Total (mm)</option>
               <option value={"tempMin"}>Temperatura Mínima (ºC)</option>
               <option value={"tempMax"}>Temperatura Máxima (ºC)</option>
@@ -33,6 +33,7 @@ export const MenuStation = () => {
               <option value={"degree"}>Direção do Vento (º)</option>
               <option value={"windSpeed"}>Velocidade do vento (m/s)</option>
               <option value={"windBurst"}>Rajada de vento (m/s)</option>
+              <option value={"pressureSLP"}>Pressão NMM (hPa)</option>
             </select>
           </div>
         </div>

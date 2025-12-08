@@ -6,6 +6,7 @@ export const variablesPT = {
     humidity:'Umidade',
     windBurst:'Rajada de Vento',
     windSpeed:'Velocidade do Vento',
-    degree:"Direção do vento"
+    degree:"Direção do vento",
+    pressureSLP:"Pressão ao nível do mar"
 
 }
