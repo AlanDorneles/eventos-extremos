@@ -1307,7 +1307,7 @@ export const Map = ({
   className="iconStation"
   eventHandlers={{
     click: () => {
-      handleClickMarker({ target: { options: { id: "A877" } } }),
+      handleClickMarker({ target: { options: { id: "A887" } } }),
       handleClickModal();
     },
   }}

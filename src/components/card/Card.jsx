@@ -26,7 +26,7 @@ export const Card = () => {
   }, [codeStation, storageCodeStation]);
 
   useEffect(() => {
-    const inmetData = JSON.parse(localStorage.getItem("dataStation"));
+    const inmetData = JSON.parse(localStorage.getItem("dataStation")) ;
 
     if (inmetData && typeof inmetData[codeStation] === "object") {
       setData(inmetData[codeStation]);

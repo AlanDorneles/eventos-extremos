@@ -19,7 +19,16 @@ import { RiBaseStationLine } from "react-icons/ri";
 import MenuPrincipal from "../components/menuPrincipal/menuPrincipal";
 
 export default function Home() {
-  const lastIndex = JSON.parse(localStorage.getItem("redemet-images")).lastIndex
+  const rawRedemet = localStorage.getItem("redemet-images") ?? "null";
+  let redemetData = null;
+  try {
+    redemetData = JSON.parse(rawRedemet); // pode ser null
+  } catch (e) {
+    console.error("Erro ao fazer parse de redemet-images:", e);
+    redemetData = null;
+  }
+
+  const lastIndex = redemetData?.lastIndex ?? 0;
   const [handlerSrc, setHandlerSrc] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(lastIndex);
   const [images, setImages] = useState<RadarImageEntry[]>([]);
