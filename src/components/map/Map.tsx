@@ -20,6 +20,7 @@ import {
   RadarImageEntry,
   RedemetImages,
 } from "../../interfaces/RadarImageSet.js";
+import indexToTimeLabel from "../../utils/IndexToHour.js";
 
 interface MapProps {
   cangucuChecked: boolean;
@@ -49,6 +50,7 @@ export const Map = ({
     setClicked(false);
   };
   const [radiusRadar, setRadiusRadar] = useState<number>(0);
+  const indexHour = indexToTimeLabel(currentImageIndex);
   useEffect(() => {
     if (typeRadar !== "maxcappi") {
       setRadiusRadar(radius[1]);
@@ -85,6 +87,8 @@ export const Map = ({
   getRadarInformation();
   const inicialImage = JSON.parse(localStorage.getItem("redemet-images"));
 
+
+
   return (
     <>
       <MapContainer
@@ -93,6 +97,18 @@ export const Map = ({
         scrollWheelZoom={false}
         style={{ width: "100vw", height: "100vh" }}
       >
+        <div className="map-chip" style={{
+    position: "fixed",
+    bottom: "20px",
+    right: "10px",           /* 50% da LARGURA do .map-wrapper */
+    zIndex: 1000,
+    background: "rgba(0,0,0,0.7)",
+    padding: "4px 10px",
+    borderRadius: "999px",
+    color: "white",
+  }}>
+          {"Hora da Imagem:"+indexHour}
+        </div>
         {/*<Rectangle bounds={ [
     [-29.15, -55.36],
     [-33.7, -50.05],
@@ -296,12 +312,12 @@ export const Map = ({
             ></Marker>
             {/* PARQUE ELDORADO */}
             <Marker
-              position={[-31.57, -51.67]}
+              position={[-31.57, -53.39]}
               icon={iconStation}
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A802" } } }),
+                  handleClickMarker({ target: { options: { id: "B823" } } }),
                     handleClickModal();
                 },
               }}
@@ -1207,6 +1223,201 @@ export const Map = ({
                 },
               }}
             ></Marker>
+            <Marker
+  position={[-30.808, -51.834]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "A838" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* CAMAQUÃ */}
+
+<Marker
+  position={[-29.685, -49.993]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "B932" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* CAPÃO CANOA */}
+
+<Marker
+  position={[-29.603, -53.673]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "A853" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* CRUZ ALTA */}
+
+<Marker
+  position={[-32.012, -53.403]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "B826" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* HERVAL */}
+
+<Marker
+  position={[-28.653, -53.111]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "A883" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* IBIRUBÁ */}
+
+<Marker
+  position={[-30.249, -50.509]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "B836" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* PALMARES DO SUL */}
+
+<Marker
+  position={[-31.802, -52.405]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "A887" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* PELOTAS */}
+
+<Marker
+  position={[-29.872, -52.381]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "A813" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* RIO PARDO */}
+
+<Marker
+  position={[-33.531, -53.35]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "B830" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* SANTA VITÓRIA DO PALMAR (CENTRO) */}
+
+<Marker
+  position={[-33.742, -53.372]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "A899" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* SANTA VITÓRIA DO PALMAR (CHUÍ) */}
+
+<Marker
+  position={[-29.816, -50.533]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "B839" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* SANTO ANTÔNIO DA PATRULHA */}
+
+<Marker
+  position={[-29.442, -50.56]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "B820" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* SÃO FRANCISCO DE PAULA */}
+
+<Marker
+  position={[-28.417, -54.962]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "A852" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* SÃO LUÍS GONZAGA */}
+
+<Marker
+  position={[-29.413, -49.803]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "B841" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* TORRES */}
+
+<Marker
+  position={[-29.089, -53.826]}
+  icon={iconStation}
+  className="iconStation"
+  eventHandlers={{
+    click: () => {
+      handleClickMarker({ target: { options: { id: "A886" } } }),
+      handleClickModal();
+    },
+  }}
+></Marker>
+{/* TUPANCIRETÃ */}
+
             {/* CAMBARA DO SUL */}
             {/* <Marker
               position={[-29.66, -50.21]}

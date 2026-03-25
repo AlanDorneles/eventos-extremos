@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import styles from "./cardsAll.module.css";
 import { useCodeStation } from "../../contexts/codeStation.jsx";
 import {
@@ -13,21 +13,47 @@ import {
   WiWindy,
 } from "react-icons/wi";
 
+// 1) Helpers: último índice válido e valor+hora
+function lastValidIndex(arr) {
+  if (!Array.isArray(arr)) return -1;
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (arr[i] != null) return i; // ignora null e undefined
+  }
+  return -1;
+}
+
+function lastValidValueAndHour(data, variable) {
+  const arr = data?.[variable];
+  const idx = lastValidIndex(arr);
+
+  if (idx === -1) return { idx: -1, value: null, hour: null };
+
+  return {
+    idx,
+    value: arr[idx],
+    hour: Array.isArray(data?.hour) ? data.hour[idx] : null,
+  };
+}
+
+// 2) Helper de renderização (evita repetir ternário)
+function renderValue(obj, suffix = "") {
+  return !obj || obj.idx === -1 ? "Sem dados" : `${obj.value}${suffix}`;
+}
+
 export const Card = () => {
-  const [data, setData] = useState(null); // Inicializa como null
+  const [data, setData] = useState(null);
   const { codeStation } = useCodeStation();
   const storageCodeStation = localStorage.getItem("codeStation");
   const [trigger, setTrigger] = useState(false);
 
   useEffect(() => {
     if (codeStation !== storageCodeStation) {
-      setTrigger((prevTrigger) => !prevTrigger);
+      setTrigger((prev) => !prev);
     }
   }, [codeStation, storageCodeStation]);
 
   useEffect(() => {
     const inmetData = JSON.parse(localStorage.getItem("dataStation"));
-
     if (inmetData && typeof inmetData[codeStation] === "object") {
       setData(inmetData[codeStation]);
     } else {
@@ -35,66 +61,80 @@ export const Card = () => {
     }
   }, [trigger, codeStation]);
 
-  const currentHour = new Date().getUTCHours();
+  // 3) Calcula “last” uma vez: custo O(192) por variável, apenas quando data muda
+  const last = useMemo(() => {
+    if (!data) return null;
+
+    const get = (variable) => lastValidValueAndHour(data, variable);
+
+    return {
+      pressure: get("pressure"),
+      tempMin: get("tempMin"),
+      tempMax: get("tempMax"),
+      rain: get("rain"),
+      humidity: get("humidity"),
+      windBurst: get("windBurst"),
+      windSpeed: get("windSpeed"),
+      windDirection: get("windDirection"),
+      pressureSLP: get("pressureSLP"),
+    };
+  }, [data]);
+
+  // 4) Se você quer mostrar “Hora” do último valor (ex.: pressão):
+  const lastHour = last?.pressure?.idx === -1 ? null : last?.pressure?.hour;
 
   return (
     <div className={styles.container}>
       {data ? (
         <div className={styles.card}>
           <span>
-            {codeStation} - {data.name[0]}
+            {codeStation} - {data?.name?.[0] ?? ""}
           </span>
+
           <span>
-            <WiBarometer /> Pressão:{" "}
-            {data.pressure[data.pressure.length - currentHour] === null
-              ? "Sem dados"
-              : data.pressure[data.pressure.length - currentHour] + " hPa"}
+            <WiBarometer /> Pressão: {renderValue(last?.pressure, " hPa")}
           </span>
+
           <span>
             <WiThermometerExterior /> Temp. Miníma:{" "}
-            {data.tempMin[data.tempMin.length - currentHour] === null
-              ? "Sem dados"
-              : data.tempMin[data.tempMin.length - currentHour] + " ºC"}
+            {renderValue(last?.tempMin, " ºC")}
           </span>
+
           <span>
             <WiThermometer /> Temp. Máxima:{" "}
-            {data.tempMax[data.tempMax.length - currentHour] === null
-              ? "Sem dados"
-              : data.tempMax[data.tempMax.length - currentHour] + " ºC"}
+            {renderValue(last?.tempMax, " ºC")}
           </span>
+
           <span>
-            <WiRainMix /> Chuva:{" "}
-            {data.rain[data.rain.length - currentHour] === null
-              ? "Sem dados"
-              : data.rain[data.rain.length - currentHour] + " mm"}
+            <WiRainMix /> Chuva: {renderValue(last?.rain, " mm")}
           </span>
+
           <span>
-            <WiHumidity /> Umidade:{" "}
-            {data.humidity[data.humidity.length - currentHour] === null
-              ? "Sem dados"
-              : data.humidity[data.humidity.length - currentHour] + "%"}
+            <WiHumidity /> Umidade: {renderValue(last?.humidity, "%")}
           </span>
+
           <span>
-            <WiWindy /> Raj. Vento:{" "}
-            {data.windBurst[data.windBurst.length - currentHour] === null
-              ? "Sem dados"
-              : data.windBurst[data.windBurst.length - currentHour] + " m/s"}
+            <WiWindy /> Raj. Vento: {renderValue(last?.windBurst, " m/s")}
           </span>
+
           <span>
-            <WiStrongWind /> Veloc. Vento:{" "}
-            {data.windSpeed[data.windSpeed.length - currentHour] === null
-              ? "Sem dados"
-              : data.windSpeed[data.windSpeed.length - currentHour] + " m/s"}
+            <WiStrongWind /> Veloc. Vento: {renderValue(last?.windSpeed, " m/s")}
           </span>
+
           <span>
             <WiWindDeg /> Direc. Vento:{" "}
-            {data.windDirection[data.windDirection.length - currentHour] ===
-            null
+            {last?.windDirection?.idx === -1
               ? "Sem dados"
-              : data.windDirection[data.windDirection.length - currentHour]}
+              : String(last?.windDirection?.value)}
           </span>
+
           <span>
-            <WiTime5 /> Hora: {data.hour[currentHour]} horas
+            <WiBarometer /> Pressão NMM:{" "}
+            {renderValue(last?.pressureSLP, " hPa")}
+          </span>
+
+          <span>
+            <WiTime5 /> Hora: {lastHour == null ? "Sem dados" : `${lastHour} horas`}
           </span>
         </div>
       ) : (

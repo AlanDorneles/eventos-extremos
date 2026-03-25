@@ -23,11 +23,27 @@ export const Graphic = () => {
     }
   }, [codeStation, storageCodeStation]);
   useEffect(() => {
-    const dataMeteorologic = JSON.parse(localStorage.getItem("dataStation"));
-    setVariable(dataMeteorologic[codeStation][phenomena].slice(-scopeDays));
-    setHour(dataMeteorologic[codeStation]['hour'].slice(-scopeDays));
+  const raw = localStorage.getItem("dataStation");
+  if (!raw) return; // nada no localStorage ainda
+
+  try {
+    const dataMeteorologic = JSON.parse(raw);
+    const station = dataMeteorologic?.[codeStation];
+
+    if (!station) return; // estação ainda não disponível
+
+    const serie = station?.[phenomena];
+    const hours = station?.hour;
+
+    if (!Array.isArray(serie) || !Array.isArray(hours)) return;
+
+    setVariable(serie.slice(-scopeDays));
+    setHour(hours.slice(-scopeDays));
     setNameVariable(variablesPT[phenomena]);
-  }, [trigger, phenomena,codeStation,scopeDays]);
+  } catch (err) {
+    console.error("Erro ao ler dataStation do localStorage", err);
+  }
+}, [trigger, phenomena, codeStation, scopeDays]);
 
 
 const isDark = usePrefersDarkMode(); 

@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    # Mapeamento alterado para evitar conflito com Redis local
+    ports:
+      - "16379:6379"
+
+  backend:
+    build:
+      context: ./eventos-extremos-backend
+      dockerfile: dockerfile
+    environment:
+      - PORT=3000
+      - REDIS_URL=redis://redis:6379
+      - WRF_BASE_PATH=/wrf-data
+      - NODE_ENV=development
+    # Mapeamento alterado para evitar conflito com backend local
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./eventos-extremos-backend:/app
+      # WRF data folder inside the compose environment (empty by default)
+      - wrf-data:/wrf-data
+    depends_on:
+      - redis
+
+  frontend:
+    build:
+      context: ./eventos-extremos
+      dockerfile: dockerfile
+    environment:
+      # exemplo: frontend pode usar esta variável para apontar para a API
+      # note que o backend está mapeado para 3002 no host (evita conflito com 3000)
+      - VITE_BACKEND_URL=http://host.docker.internal:3002/api
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./eventos-extremos:/app
+    depends_on:
+      - backend
+
+volumes:
+  redis-data:
+  wrf-data:
