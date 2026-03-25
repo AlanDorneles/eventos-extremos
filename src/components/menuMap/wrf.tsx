@@ -25,7 +25,7 @@ const WrfMenu: React.FC = () => {
 
   // Seleciona uma variável de forma consistente e dispara fetch
   const selectVar = useCallback(
-    (v: "VENTO_10M" | "PRECIPITACAO") => {
+    (v: "VENTO_10M" | "PRECIPITACAO" | "VENTO_LEVELS_200hPa" | "VENTO_LEVELS_500hPa" | "UMIDADE_2M") => {
       setEnabled(true);
       setVariable(v);
       setRangeHours(24);     // padrão: 24h ao trocar variável
@@ -68,9 +68,12 @@ const WrfMenu: React.FC = () => {
   // Deriva “checks” do estado global (Context), sem estado paralelo
   const checkedVento = enabled && variable === "VENTO_10M";
   const checkedPrecip = enabled && variable === "PRECIPITACAO";
+  const checkedVento200 = enabled && variable === "VENTO_LEVELS_200hPa";
+  const checkedVento500 = enabled && variable === "VENTO_LEVELS_500hPa";
+  const checkedUmidade2m = enabled && variable === "UMIDADE_2M";
 
   // Toggle: se clicar no que já está ativo, apenas “desabilita” (oculta)
-  const toggle = (target: "VENTO_10M" | "PRECIPITACAO") => {
+  const toggle = (target: "VENTO_10M" | "PRECIPITACAO" | "VENTO_LEVELS_200hPa" | "VENTO_LEVELS_500hPa" | "UMIDADE_2M") => {
     if (!enabled) {
       selectVar(target);
       return;
@@ -109,6 +112,36 @@ const WrfMenu: React.FC = () => {
             disabled={loading}
           />
           &nbsp;Precipitação acumulada
+        </label>
+
+        <label className="checkbox" style={{ display: "block", marginTop: 6 }}>
+          <input
+            type="checkbox"
+            checked={checkedVento200}
+            onChange={() => toggle("VENTO_LEVELS_200hPa")}
+            disabled={loading}
+          />
+          &nbsp;Vento a 200hPa
+        </label>
+
+        <label className="checkbox" style={{ display: "block", marginTop: 6 }}>
+          <input
+            type="checkbox"
+            checked={checkedVento500}
+            onChange={() => toggle("VENTO_LEVELS_500hPa")}
+            disabled={loading}
+          />
+          &nbsp;Vento a 500hPa
+        </label>
+
+	<label className="checkbox" style={{ display: "block", marginTop: 6 }}>
+          <input
+            type="checkbox"
+            checked={checkedUmidade2M}
+            onChange={() => toggle("UMIDADE_2M")}
+            disabled={loading}
+          />
+          &nbsp;Umidade a 2 metros
         </label>
 
         {loading && <p>Carregando imagens...</p>}

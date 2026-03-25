@@ -1,4 +1,4 @@
-export type WrfVar = "VENTO_10M" | "PRECIPITACAO";
+export type WrfVar = "VENTO_10M" | "PRECIPITACAO" | "VENTO_LEVELS_200HPA" | "VENTO_LEVELS_500HPA" | "UMIDADE_2M";
 
 type ApiResp = {
   data: any;

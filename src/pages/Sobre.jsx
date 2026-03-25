@@ -122,7 +122,7 @@ const Sobre = () => {
               </div>
               <div className={styles.cell}>
                <ThemedImage
-                lightSrc="/inmet2.png"
+                lightSrc="/inmet_logo.png"
                 darkSrc="/dark-mode/DARK_INMET.png" 
                 alt="INMET"
                 className={styles.img}
@@ -130,7 +130,7 @@ const Sobre = () => {
               </div>
               <div className={styles.cell}>
                  <ThemedImage
-                lightSrc="/redemet.png"
+                lightSrc="/redemet_logo.png"
                 darkSrc="/dark-mode/DARK_REDEMET.png"   
                 alt="REDEMET"
                 className={styles.img}
