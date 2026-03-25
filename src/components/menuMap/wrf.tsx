@@ -70,7 +70,7 @@ const WrfMenu: React.FC = () => {
   const checkedPrecip = enabled && variable === "PRECIPITACAO";
   const checkedVento200 = enabled && variable === "VENTO_LEVELS_200hPa";
   const checkedVento500 = enabled && variable === "VENTO_LEVELS_500hPa";
-  const checkedUmidade2m = enabled && variable === "UMIDADE_2M";
+  const checkedUmidade2M = enabled && variable === "UMIDADE_2M";
 
   // Toggle: se clicar no que já está ativo, apenas “desabilita” (oculta)
   const toggle = (target: "VENTO_10M" | "PRECIPITACAO" | "VENTO_LEVELS_200hPa" | "VENTO_LEVELS_500hPa" | "UMIDADE_2M") => {
