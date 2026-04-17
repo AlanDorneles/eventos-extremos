@@ -10,9 +10,10 @@ const teamMembers = [
     name: "Jaci Maria Bilhalva Saraiva",
     role: "Doutora em Ciências Atmosféricas",
     socials: {
-      linkedin: "https://www.linkedin.com/",
-      github: "https://github.com/",
-      lattes: "http://lattes.cnpq.br/",
+      linkedin: "https://www.linkedin.com/in/jaci-saraiva-a990552b",
+      lattes: "http://lattes.cnpq.br/7225442251603573",
+      researchgate: "https://www.researchgate.net/profile/Jaci-Saraiva-2",
+      googleScholar: "https://scholar.google.com/citations?user=JaciSaraiva",
     },
   },
   {
@@ -20,9 +21,9 @@ const teamMembers = [
     name: "Jeferson Machado Prietsch",
     role: "Doutor em Ciências Atmosféricas",
     socials: {
-      linkedin: "https://www.linkedin.com/",
-      github: "https://github.com/",
-      lattes: "http://lattes.cnpq.br/",
+      lattes: "http://lattes.cnpq.br/8790484877258054",
+      researchgate: "https://www.researchgate.net/profile/Jeferson-Machado",
+      googleScholar: "https://scholar.google.com.br/citations?hl=pt-BR&user=b1m4G04AAAAJ",
     },
   },
   {
@@ -30,59 +31,57 @@ const teamMembers = [
     name: "Ricardo Acosta Gotuzzo",
     role: "Doutor em Ciências Atmosféricas",
     socials: {
-      linkedin: "https://www.linkedin.com/",
-      github: "https://github.com/",
+      linkedin: "https://www.linkedin.com/in/ricardoacostagotuzzo",
+      github: "https://github.com/ricardoacosta",
       lattes: "http://lattes.cnpq.br/",
+      googleScholar: "https://scholar.google.com.br/citations?user=7InaTFUAAAAJ&hl=pt-BR&oi=ao",
     },
   },
   {
     id: "alan",
     name: "Alan Ricardo Drebes Dorneles",
-    role: "Analista de Sistemas",
+    role: "Analista de Sistemas ",
     socials: {
-      linkedin: "https://www.linkedin.com/",
+      linkedin: "https://www.linkedin.com/in/alan-dorneles",
       github: "https://github.com/AlanDorneles",
-      lattes: "http://lattes.cnpq.br/",
+      lattes: "http://lattes.cnpq.br/9086225102077634",
+      researchgate: "https://www.researchgate.net/profile/Alan-Dorneles",
     },
   },
   {
-    id: "pablo",
-    name: "Pablo Viana",
-    role: "Bolsista",
+    id: "Carol",
+    name: "Carol Viana",
+    role: "Graduanda em Sistemas de Informação",
     socials: {
-      linkedin: "https://www.linkedin.com/",
-      github: "https://github.com/",
-      lattes: "http://lattes.cnpq.br/",
+      github: "https://github.com/citrusgz",
     },
   },
   {
     id: "anna",
     name: "Anna Diniz Alexeff",
-    role: "Bolsista",
+    role: "Graduanda em Oceanografia",
     socials: {
-      linkedin: "https://www.linkedin.com/",
-      github: "https://github.com/",
-      lattes: "http://lattes.cnpq.br/",
+      linkedin: "https://www.linkedin.com/in/anna-alexeeff",
+      github: "https://github.com/annaalexeeff",
+      lattes: "http://lattes.cnpq.br/2477477884700296",
     },
   },
   {
     id: "gabrielly",
     name: "Gabrielly de Almeida Gomes",
-    role: "Bolsista",
+    role: "Graduanda em Oceanografia",
     socials: {
-      linkedin: "https://www.linkedin.com/",
-      github: "https://github.com/",
-      lattes: "http://lattes.cnpq.br/",
+
     },
   },
   {
     id: "larissa",
     name: "Larissa de Paula Miranda",
-    role: "Bolsista",
+    role: "Oceanológa",
     socials: {
-      linkedin: "https://www.linkedin.com/",
-      github: "https://github.com/",
-      lattes: "http://lattes.cnpq.br/",
+      linkedin: "https://www.linkedin.com/in/larissa-miranda-5984902a3/",
+      github: "https://github.com/Larissamiranda97",
+      lattes: "https://wwws.cnpq.br/cvlattesweb/PKG_MENU.menu?f_cod=330ED444EBAA87ED86BA2AD7F9E21823#",
     },
   },
 ];
@@ -243,6 +242,15 @@ const Sobre = () => {
               const hasLinkedin = hasHref(member.socials?.linkedin);
               const hasGithub = hasHref(member.socials?.github);
               const hasLattes = hasHref(member.socials?.lattes);
+              const hasResearchGate = hasHref(member.socials?.researchgate);
+              const hasGoogleScholar = hasHref(member.socials?.googleScholar);
+              const hasAnySocial =
+                hasLinkedin ||
+                hasGithub ||
+                hasResearchGate ||
+                hasGoogleScholar ||
+                hasLattes;
+
 
               return (
                 <li key={member.id}>
@@ -265,16 +273,20 @@ const Sobre = () => {
                           <FaGithub />
                         </a>
                       )}
-                      <a href="https://www.researchgate.net/" target="_blank" rel="noreferrer" aria-label="ResearchGate">
-                        <FaResearchgate />
-                      </a>
-                      <a href="https://scholar.google.com/" target="_blank" rel="noreferrer" aria-label="Google Scholar">
-                        <span
-                          className={styles.socialMaskIcon}
-                          style={{ maskImage: 'url(/google_scholar.svg)', WebkitMaskImage: 'url(/google_scholar.svg)' }}
-                          aria-hidden="true"
-                        />
-                      </a>
+                      {hasResearchGate && (
+                        <a href={member.socials.researchgate} target="_blank" rel="noreferrer" aria-label="ResearchGate">
+                          <FaResearchgate />
+                        </a>
+                      )}
+                      {hasGoogleScholar && (
+                        <a href={member.socials.googleScholar} target="_blank" rel="noreferrer" aria-label="Google Scholar">
+                          <span
+                            className={styles.socialMaskIcon}
+                            style={{ maskImage: 'url(/google_scholar.svg)', WebkitMaskImage: 'url(/google_scholar.svg)' }}
+                            aria-hidden="true"
+                          />
+                        </a>
+                      )}
                       {hasLattes && (
                         <a href={member.socials.lattes} target="_blank" rel="noreferrer" aria-label="Lattes">
                           <img src="/lattes.svg" alt="Lattes" className={styles.lattesIcon} />
@@ -283,18 +295,20 @@ const Sobre = () => {
                     </div>
 
                     <div className={styles.socialMobile}>
-                      <button
-                        className="button is-small is-primary is-outlined"
-                        type="button"
-                        aria-label="Abrir redes sociais"
-                        onClick={() =>
-                          setSocialsOpenFor((prev) => (prev === member.id ? null : member.id))
-                        }
-                      >
-                        <FaShareAlt />
-                      </button>
+                      {hasAnySocial && (
+                        <button
+                          className="button is-small is-primary is-outlined"
+                          type="button"
+                          aria-label="Abrir redes sociais"
+                          onClick={() =>
+                            setSocialsOpenFor((prev) => (prev === member.id ? null : member.id))
+                          }
+                        >
+                          <FaShareAlt />
+                        </button>
+                      )}
 
-                      {isOpen && (
+                      {isOpen && hasAnySocial && (
                         <div className={styles.socialMobileMenu}>
                           {hasLinkedin && (
                             <a href={member.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
@@ -306,16 +320,20 @@ const Sobre = () => {
                               <FaGithub />
                             </a>
                           )}
-                          <a href="https://www.researchgate.net/" target="_blank" rel="noreferrer" aria-label="ResearchGate">
-                            <FaResearchgate />
-                          </a>
-                          <a href="https://scholar.google.com/" target="_blank" rel="noreferrer" aria-label="Google Scholar">
-                            <span
-                              className={styles.socialMaskIcon}
-                              style={{ maskImage: 'url(/google_scholar.svg)', WebkitMaskImage: 'url(/google_scholar.svg)' }}
-                              aria-hidden="true"
-                            />
-                          </a>
+                          {hasResearchGate && (
+                            <a href={member.socials.researchgate} target="_blank" rel="noreferrer" aria-label="ResearchGate">
+                              <FaResearchgate />
+                            </a>
+                          )}
+                          {hasGoogleScholar && (
+                            <a href={member.socials.googleScholar} target="_blank" rel="noreferrer" aria-label="Google Scholar">
+                              <span
+                                className={styles.socialMaskIcon}
+                                style={{ maskImage: 'url(/google_scholar.svg)', WebkitMaskImage: 'url(/google_scholar.svg)' }}
+                                aria-hidden="true"
+                              />
+                            </a>
+                          )}
                           {hasLattes && (
                             <a href={member.socials.lattes} target="_blank" rel="noreferrer" aria-label="Lattes">
                               <img src="/lattes.svg" alt="Lattes" className={styles.lattesIcon} />
