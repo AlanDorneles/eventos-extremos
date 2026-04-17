@@ -4,15 +4,29 @@
   justify-content: center;
   align-items: center;
   max-width: 100%;
-  width: 70rem;
+  width: min(70rem, calc(100% - 1rem));
   height: 100%;
-  margin: 5rem auto;
+  margin: 1.5rem auto 5rem;
   gap: 3rem;
+  font-size: clamp(0.86rem, 0.8rem + 0.35vw, 1rem);
 }
 
 .initText {
-  font-size: 16px;
+  font-size: 1em;
   font-weight: 400;
+}
+
+.surfaceCard {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(10, 61, 102, 0.12);
+  border-radius: 16px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.initText :global(.title.is-6) {
+  font-size: clamp(0.92rem, 0.85rem + 0.35vw, 1.05rem);
 }
 
 .initText p {
@@ -20,7 +34,7 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: clamp(0.96rem, 0.9rem + 0.45vw, 1.15rem);
   font-weight: 500;
   margin-bottom: 1.5rem;
 }
@@ -41,13 +55,85 @@
 }
 
 .contact {
-  margin-top: 5rem;
+  margin-top: 2rem;
   width: 100%;
+}
+
+.contactFormSection {
+  width: 100%;
+}
+
+.dataSourcesRow {
+  gap: 1rem;
+}
+
+.dataOriginText {
+  text-align: left;
+}
+
+.sourceGrid {
+  width: fit-content;
+  margin: 0 auto;
+  --partner-cell-size: clamp(4.6rem, 6.5vw, 6.8rem);
+  display: flex;
+  justify-content: center;
+}
+
+.partnerCell {
+  border: 1px solid rgba(10, 61, 102, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(10, 61, 102, 0.08);
+  box-sizing: border-box;
+  padding: clamp(0.45rem, 0.35rem + 0.35vw, 0.8rem);
+  width: var(--partner-cell-size);
+  height: var(--partner-cell-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.partnerHeroGrid {
+  width: 100% !important;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  --partner-cell-size: clamp(5.4rem, 7.8vw, 8.6rem);
+}
+
+.partnerHeroGrid :global(.grid) {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(var(--partner-cell-size), var(--partner-cell-size)));
+  gap: 0.6rem;
+  justify-items: center;
+  align-items: center;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.sourceGrid :global(.grid) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(var(--partner-cell-size), var(--partner-cell-size)));
+  gap: 0.6rem;
+  justify-items: center;
+  align-items: center;
 }
 
 form {
   display: flex;
   flex-direction: column;
+}
+
+.container :global(.input),
+.container :global(.textarea),
+.container :global(.button) {
+  font-size: clamp(0.8rem, 0.75rem + 0.3vw, 0.92rem);
+}
+
+.container :global(.input),
+.container :global(.button) {
+  min-height: 2.2rem;
 }
 
 .formGroup {
@@ -67,23 +153,96 @@ form {
   border-radius: 8px;
 }
 
-ul li {
+.imageList li {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
-ul li p {
+.imageList li p {
   margin-left: 1rem;
   align-items: center;
   justify-content: center;
 }
 
+.memberInfoWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+  flex: 1;
+}
+
+.socialHub {
+  position: relative;
+  margin-left: 0.35rem;
+}
+
+.socialDesktop {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.socialDesktop a,
+.socialMobileMenu a {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 61, 102, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a3d66;
+  background: transparent;
+}
+
+.lattesIcon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.socialMaskIcon {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+}
+
+.socialMobile {
+  display: none;
+}
+
+.socialMobileMenu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  display: inline-flex;
+  gap: 0.35rem;
+  padding: 0.35rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(10, 61, 102, 0.16);
+  box-shadow: 0 6px 16px rgba(10, 61, 102, 0.14);
+  z-index: 2;
+}
+
 .researcher {
-  font-size: 20px;
+  font-size: clamp(0.9rem, 0.84rem + 0.35vw, 1.05rem);
 }
 
 .researcherAbout {
-  font-size: 12px;
+  font-size: clamp(0.72rem, 0.68rem + 0.2vw, 0.82rem);
   color: rgb(83, 83, 83);
 }
 
@@ -125,6 +284,11 @@ picture{
   object-fit: contain;
 }
 
+.sourceLogo {
+  max-width: 68%;
+  max-height: 68%;
+}
+
 .img2 {
   max-width: 50%;
   max-height: 60%;
@@ -152,4 +316,134 @@ picture{
   max-height: 80%;
   object-fit: contain;
 
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: calc(100% - 0.75rem);
+    margin-top: 0.5rem;
+    gap: 1.4rem;
+    font-size: clamp(0.82rem, 0.74rem + 0.9vw, 0.96rem);
+  }
+
+  .contact {
+    margin-top: 1.25rem;
+  }
+
+  .contactFormSection {
+    margin-top: 0;
+  }
+
+  .surfaceCard {
+    border-radius: 14px;
+    padding: 0.75rem;
+  }
+
+  .dataSourcesRow {
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .sourceGrid {
+    width: fit-content;
+    margin: 0 auto;
+    --partner-cell-size: clamp(5.1rem, 20vw, 6.6rem);
+    align-self: center;
+  }
+
+  .sourceGrid :global(.grid) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .partnerHeroGrid {
+    width: 100% !important;
+    --partner-cell-size: clamp(5.1rem, 20vw, 6.6rem);
+  }
+
+  .partnerHeroGrid :global(.grid) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(var(--partner-cell-size), var(--partner-cell-size)));
+    gap: 0.6rem;
+  }
+
+  .sourceGrid :global(.grid) {
+    grid-template-columns: repeat(2, minmax(var(--partner-cell-size), var(--partner-cell-size)));
+  }
+
+  .partnerCell {
+    border-radius: 12px;
+    border-color: rgba(10, 61, 102, 0.2);
+  }
+
+  .sourceLogo {
+    max-width: 64%;
+    max-height: 64%;
+  }
+
+  .memberInfoWrap {
+    max-width: calc(100% - 3rem);
+  }
+
+  .socialDesktop {
+    display: none;
+  }
+
+  .socialMobile {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .socialMobile :global(.button) {
+    min-height: 2rem;
+    width: 2rem;
+    padding: 0;
+  }
+
+  .column {
+    float: none;
+    width: 100%;
+  }
+
+  .line {
+    display: none;
+  }
+
+  .avatar56 {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .surfaceCard {
+    background: rgba(19, 26, 33, 0.88);
+    border-color: rgba(93, 173, 239, 0.28);
+  }
+
+  .researcherAbout {
+    color: #b6c5d3;
+  }
+
+  .partnerCell {
+    background: rgba(19, 26, 33, 0.9);
+    border-color: rgba(93, 173, 239, 0.28);
+    box-shadow: none;
+  }
+
+  .socialDesktop a,
+  .socialMobileMenu a {
+    border-color: rgba(93, 173, 239, 0.45);
+    color: #d9ecfa;
+    background: transparent;
+  }
+
+  .socialMobileMenu {
+    background: rgba(19, 26, 33, 0.98);
+    border-color: rgba(93, 173, 239, 0.28);
+    box-shadow: none;
+  }
 }

@@ -213,8 +213,8 @@ export default function BoletinsPanel() {
   }, [activeYear, q]);
 
   return (
-    <div className="container mb-3">
-      <article className="panel is-primary">
+    <div className={`container mb-3 ${styles.boletinsMobile}`}>
+      <article className={`panel is-primary ${styles.boletinsPanel}`}>
         <p className="panel-heading">Boletins de Evento Extremo</p>
 
         <p className="panel-tabs">
@@ -235,7 +235,7 @@ export default function BoletinsPanel() {
         <div className="panel-block">
           <p className="control has-icons-left" style={{ width: "100%" }}>
             <input
-              className="input is-primary"
+              className={`input is-primary ${styles.searchInput}`}
               type="text"
               placeholder="Buscar por número, data ou título…"
               value={q}

@@ -1,8 +1,96 @@
 import styles from "./styles/sobre.module.css";
 import {ThemedImage} from '../utils/ThemedImage'
+import { useState } from "react";
+import { FaLinkedinIn, FaGithub, FaShareAlt, FaResearchgate } from "react-icons/fa";
 const API_URL = import.meta.env.VITE_API_URL;
 
+const teamMembers = [
+  {
+    id: "jaci",
+    name: "Jaci Maria Bilhalva Saraiva",
+    role: "Doutora em Ciências Atmosféricas",
+    socials: {
+      linkedin: "https://www.linkedin.com/",
+      github: "https://github.com/",
+      lattes: "http://lattes.cnpq.br/",
+    },
+  },
+  {
+    id: "jeferson",
+    name: "Jeferson Machado Prietsch",
+    role: "Doutor em Ciências Atmosféricas",
+    socials: {
+      linkedin: "https://www.linkedin.com/",
+      github: "https://github.com/",
+      lattes: "http://lattes.cnpq.br/",
+    },
+  },
+  {
+    id: "ricardo",
+    name: "Ricardo Acosta Gotuzzo",
+    role: "Doutor em Ciências Atmosféricas",
+    socials: {
+      linkedin: "https://www.linkedin.com/",
+      github: "https://github.com/",
+      lattes: "http://lattes.cnpq.br/",
+    },
+  },
+  {
+    id: "alan",
+    name: "Alan Ricardo Drebes Dorneles",
+    role: "Analista de Sistemas",
+    socials: {
+      linkedin: "https://www.linkedin.com/",
+      github: "https://github.com/AlanDorneles",
+      lattes: "http://lattes.cnpq.br/",
+    },
+  },
+  {
+    id: "pablo",
+    name: "Pablo Viana",
+    role: "Bolsista",
+    socials: {
+      linkedin: "https://www.linkedin.com/",
+      github: "https://github.com/",
+      lattes: "http://lattes.cnpq.br/",
+    },
+  },
+  {
+    id: "anna",
+    name: "Anna Diniz Alexeff",
+    role: "Bolsista",
+    socials: {
+      linkedin: "https://www.linkedin.com/",
+      github: "https://github.com/",
+      lattes: "http://lattes.cnpq.br/",
+    },
+  },
+  {
+    id: "gabrielly",
+    name: "Gabrielly de Almeida Gomes",
+    role: "Bolsista",
+    socials: {
+      linkedin: "https://www.linkedin.com/",
+      github: "https://github.com/",
+      lattes: "http://lattes.cnpq.br/",
+    },
+  },
+  {
+    id: "larissa",
+    name: "Larissa de Paula Miranda",
+    role: "Bolsista",
+    socials: {
+      linkedin: "https://www.linkedin.com/",
+      github: "https://github.com/",
+      lattes: "http://lattes.cnpq.br/",
+    },
+  },
+];
+
 const Sobre = () => {
+  const [socialsOpenFor, setSocialsOpenFor] = useState(null);
+  const hasHref = (href) => typeof href === "string" && href.trim().length > 0;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -32,7 +120,7 @@ const Sobre = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.initText}>
+      <div className={`${styles.initText} ${styles.surfaceCard}`}>
         <h2 className="title is-6">
           O LABORATÓRIO DE INTERAÇÃO ATMOSFERA-OCEANO (LIAO)
         </h2>
@@ -51,9 +139,9 @@ const Sobre = () => {
 
       
 
-        <div className="fixed-grid has-4-cols">
+        <div className={styles.partnerHeroGrid}>
           <div className="grid">
-            <div className="cell is-flex is-justify-content-center is-align-items-center">
+            <div className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}>
 
               <ThemedImage
                 lightSrc="/FURG_COM_TEXTO1.png"
@@ -62,7 +150,7 @@ const Sobre = () => {
                 className={styles.img2}
                 />
             </div>
-            <div className="cell is-flex is-justify-content-center is-align-items-center">
+            <div className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}>
               <ThemedImage
                 lightSrc="/IO_COM_TEXTO.png"
                 darkSrc="/dark-mode/DARK_IO_COM_TEXTO.png"   
@@ -70,7 +158,7 @@ const Sobre = () => {
                 className={styles.img}
                 />
             </div>
-            <div className="cell is-flex is-justify-content-center is-align-items-center">
+            <div className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}>
              <ThemedImage
                 lightSrc="/NULOG.png"
                 darkSrc="/dark-mode/DARK_NULOG.png"   
@@ -78,13 +166,13 @@ const Sobre = () => {
                 className={styles.img}
                 />
             </div>
-            <div className="cell is-flex is-justify-content-center is-align-items-center">
+            <div className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}>
               <img className={styles.img4} src="/LIAO3.png" alt="" />
             </div>
           </div>
         </div>
       </div>
-      <div className={styles.initText}>
+      <div className={`${styles.initText} ${styles.surfaceCard}`}>
         <h2 className="title is-6">DADOS</h2>
 
         <p style={{ textAlign: "justify" }}>
@@ -95,8 +183,8 @@ const Sobre = () => {
           parte dos meteorologistas na criação de suas previsões.
         </p>
 
-        <div className="is-flex is-justify-content-space-evenly is-align-items-center	">
-          <div>
+        <div className={`is-flex is-justify-content-space-evenly is-align-items-center ${styles.dataSourcesRow}`}>
+          <div className={styles.dataOriginText}>
             <p>ORIGEM DOS DADOS:</p>
             <ul className={styles.hasDottedList}>
               <li>INMET - Dados de estações meteorológicas</li>
@@ -107,121 +195,145 @@ const Sobre = () => {
             </ul>
           </div>
 
-          <div
-            className="fixed-grid has-2-cols"
-            style={{ height: "20em", width: "20em" }}
-          >
+          <div className={styles.sourceGrid}>
             <div className="grid">
-              <div className={styles.cell}>
+              <div className={`${styles.cell} ${styles.partnerCell}`}>
                 <ThemedImage
                 lightSrc="/cptec.jpeg"
                 darkSrc="/dark-mode/DARK_CPTEC.png"   
                 alt="CPTEC"
-                className={styles.img}
+                className={`${styles.img} ${styles.sourceLogo}`}
                 />
               </div>
-              <div className={styles.cell}>
+              <div className={`${styles.cell} ${styles.partnerCell}`}>
                <ThemedImage
                 lightSrc="/inmet_logo.png"
                 darkSrc="/dark-mode/DARK_INMET.png" 
                 alt="INMET"
-                className={styles.img}
+                className={`${styles.img} ${styles.sourceLogo}`}
                 />
               </div>
-              <div className={styles.cell}>
+              <div className={`${styles.cell} ${styles.partnerCell}`}>
                  <ThemedImage
                 lightSrc="/redemet_logo.png"
-                darkSrc="/dark-mode/DARK_REDEMET.png"   
+                darkSrc="/redemet_logo.png"
                 alt="REDEMET"
-                className={styles.img}
+                className={`${styles.img} ${styles.sourceLogo}`}
                 />
               </div>
-              <div className={styles.cell}>
+              <div className={`${styles.cell} ${styles.partnerCell}`}>
                  <ThemedImage
                 lightSrc="/cppmet.png"
                 darkSrc="/dark-mode/DARK_CPPMET.png"   
                 alt="FURG"
-                className={styles.img}
+                className={`${styles.img} ${styles.sourceLogo}`}
                 />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className={styles.contact}>
-        <div className={`${styles.team} ${styles.column}`}>
+      <div className={`${styles.contact} ${styles.surfaceCard}`}>
+        <div className={styles.team}>
           <p className={styles.title}>Equipe</p>
 
           <ul className={styles.imageList}>
-            <li>
-              <img className={styles.avatar56} src="/LIAO1.png" />
+            {teamMembers.map((member) => {
+              const isOpen = socialsOpenFor === member.id;
+              const hasLinkedin = hasHref(member.socials?.linkedin);
+              const hasGithub = hasHref(member.socials?.github);
+              const hasLattes = hasHref(member.socials?.lattes);
 
-              <div>
-                <p className={styles.researcher}>Jaci Maria Bilhalva Saraiva</p>
-                <p className={styles.researcherAbout}>
-                  Doutora em Ciências Atmosféricas
-                </p>
-              </div>
-            </li>
-            <li>
-              <img className={styles.avatar56} src="/LIAO1.png" />
-              <div>
-                <p className={styles.researcher}>Jeferson Machado Prietsch</p>
-                <p className={styles.researcherAbout}>
-                  Doutor em Ciências Atmosféricas
-                </p>
-              </div>
-            </li>
-            <li>
-              <img className={styles.avatar56} src="/LIAO1.png" />
-              <div>
-                <p className={styles.researcher}>Ricardo Acosta Gotuzzo</p>
-                <p className={styles.researcherAbout}>
-                  Doutor em Ciências Atmosféricas
-                </p>
-              </div>
-            </li>
-            <li>
-              <img className={styles.avatar56} src="/LIAO1.png" />
-              <div>
-                <p className={styles.researcher}>
-                  Alan Ricardo Drebes Dorneles
-                </p>
-                <p className={styles.researcherAbout}>Analista de Sistemas</p>
-              </div>
-            </li>
-            <li>
-              <img className={styles.avatar56} src="/LIAO1.png" />
-              <div>
-                <p className={styles.researcher}>Pablo Viana</p>
-                <p className={styles.researcherAbout}>Bolsista</p>
-              </div>
-            </li>
-            <li>
-              <img className={styles.avatar56} src="/LIAO1.png" />
-              <div>
-                <p className={styles.researcher}>Anna Diniz Alexeff</p>
-                <p className={styles.researcherAbout}>Bolsista</p>
-              </div>
-            </li>
-            <li>
-              <img className={styles.avatar56} src="/LIAO1.png" />
-              <div>
-                <p className={styles.researcher}>Gabrielly de Almeida Gomes</p>
-                <p className={styles.researcherAbout}>Bolsista</p>
-              </div>
-            </li>
-            <li>
-              <img className={styles.avatar56} src="/LIAO1.png" />
-              <div>
-                <p className={styles.researcher}>Larissa de Paula Miranda </p>
-                <p className={styles.researcherAbout}>Bolsista</p>
-              </div>
-            </li>
+              return (
+                <li key={member.id}>
+                  <img className={styles.avatar56} src="/LIAO1.png" alt={member.name} />
+
+                  <div className={styles.memberInfoWrap}>
+                    <p className={styles.researcher}>{member.name}</p>
+                    <p className={styles.researcherAbout}>{member.role}</p>
+                  </div>
+
+                  <div className={styles.socialHub}>
+                    <div className={styles.socialDesktop}>
+                      {hasLinkedin && (
+                        <a href={member.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                          <FaLinkedinIn />
+                        </a>
+                      )}
+                      {hasGithub && (
+                        <a href={member.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                          <FaGithub />
+                        </a>
+                      )}
+                      <a href="https://www.researchgate.net/" target="_blank" rel="noreferrer" aria-label="ResearchGate">
+                        <FaResearchgate />
+                      </a>
+                      <a href="https://scholar.google.com/" target="_blank" rel="noreferrer" aria-label="Google Scholar">
+                        <span
+                          className={styles.socialMaskIcon}
+                          style={{ maskImage: 'url(/google_scholar.svg)', WebkitMaskImage: 'url(/google_scholar.svg)' }}
+                          aria-hidden="true"
+                        />
+                      </a>
+                      {hasLattes && (
+                        <a href={member.socials.lattes} target="_blank" rel="noreferrer" aria-label="Lattes">
+                          <img src="/lattes.svg" alt="Lattes" className={styles.lattesIcon} />
+                        </a>
+                      )}
+                    </div>
+
+                    <div className={styles.socialMobile}>
+                      <button
+                        className="button is-small is-primary is-outlined"
+                        type="button"
+                        aria-label="Abrir redes sociais"
+                        onClick={() =>
+                          setSocialsOpenFor((prev) => (prev === member.id ? null : member.id))
+                        }
+                      >
+                        <FaShareAlt />
+                      </button>
+
+                      {isOpen && (
+                        <div className={styles.socialMobileMenu}>
+                          {hasLinkedin && (
+                            <a href={member.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                              <FaLinkedinIn />
+                            </a>
+                          )}
+                          {hasGithub && (
+                            <a href={member.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                              <FaGithub />
+                            </a>
+                          )}
+                          <a href="https://www.researchgate.net/" target="_blank" rel="noreferrer" aria-label="ResearchGate">
+                            <FaResearchgate />
+                          </a>
+                          <a href="https://scholar.google.com/" target="_blank" rel="noreferrer" aria-label="Google Scholar">
+                            <span
+                              className={styles.socialMaskIcon}
+                              style={{ maskImage: 'url(/google_scholar.svg)', WebkitMaskImage: 'url(/google_scholar.svg)' }}
+                              aria-hidden="true"
+                            />
+                          </a>
+                          {hasLattes && (
+                            <a href={member.socials.lattes} target="_blank" rel="noreferrer" aria-label="Lattes">
+                              <img src="/lattes.svg" alt="Lattes" className={styles.lattesIcon} />
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
-        <div id="line" className={`${styles.line} ${styles.column}`} />
-        <div className={`${styles.mail} ${styles.column}`}>
+      </div>
+
+      <div className={`${styles.contactFormSection} ${styles.surfaceCard}`}>
+        <div className={styles.mail}>
           <p className={styles.title}>Nos envie uma mensagem</p>
 
           <form className={styles.form} onSubmit={handleSubmit}>
@@ -259,7 +371,7 @@ const Sobre = () => {
             </div>
 
             <div className={styles.formGroup}>
-              <label class="checkbox" htmlFor="newlester">
+              <label className="checkbox" htmlFor="newlester">
                 <input type="checkbox" id="newlester"
                 name="newlester" />
                     Receber atualizações no e-mail
