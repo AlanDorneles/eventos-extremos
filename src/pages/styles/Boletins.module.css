@@ -21,3 +21,65 @@
   position: absolute;
   left: -1rem;
 }
+
+.boletinsMobile {
+  width: min(70rem, calc(100% - 1rem));
+  font-size: clamp(0.86rem, 0.8rem + 0.35vw, 1rem);
+  margin-top: 1.5rem;
+}
+
+.boletinsPanel {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(10, 61, 102, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: none !important;
+}
+
+.boletinsMobile :global(.panel-heading) {
+  font-size: clamp(0.95rem, 0.88rem + 0.4vw, 1.08rem);
+  background: rgba(255, 255, 255, 0.92);
+  color: #0a3d66;
+  border-bottom: 1px solid rgba(10, 61, 102, 0.12);
+}
+
+.boletinsMobile :global(.panel-tabs a) {
+  font-size: clamp(0.76rem, 0.72rem + 0.3vw, 0.88rem);
+}
+
+.boletinsMobile :global(.panel-block) {
+  font-size: clamp(0.8rem, 0.76rem + 0.3vw, 0.93rem);
+  min-height: 2.2rem;
+}
+
+.searchInput {
+  font-size: clamp(0.8rem, 0.76rem + 0.25vw, 0.92rem);
+  min-height: 2.25rem;
+}
+
+@media (max-width: 900px) {
+  .boletinsMobile {
+    width: calc(100% - 0.75rem);
+    font-size: clamp(0.82rem, 0.74rem + 0.9vw, 0.96rem);
+    margin-top: 0.5rem;
+  }
+
+  .boletinsPanel {
+    margin-bottom: 0;
+    border-radius: 14px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .boletinsPanel {
+    background: rgba(19, 26, 33, 0.88);
+    border-color: rgba(93, 173, 239, 0.28);
+  }
+
+  .boletinsMobile :global(.panel-heading) {
+    background: rgba(19, 26, 33, 0.88);
+    color: #d9ecfa;
+    border-bottom-color: rgba(93, 173, 239, 0.28);
+  }
+}
