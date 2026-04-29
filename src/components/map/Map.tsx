@@ -16,21 +16,15 @@ import { bounds, radius } from "../../constants/bounds.js";
 import { getRadarInformation } from "../../services/redemet.js";
 import { Phenomena } from "../phenomena/Phenomena.jsx";
 import { useFilterTypeRadarContext } from "../../contexts/typeRadarContext.js";
+import styles from "./mapControls.module.css";
 import {
-  RadarImageEntry,
-  RedemetImages,
-} from "../../interfaces/RadarImageSet.js";
-import indexToTimeLabel from "../../utils/IndexToHour.js";
-
-interface MapProps {
-  cangucuChecked: boolean;
-  santiagoChecked: boolean;
-  morroDaIgrejaChecked: boolean;
-  handlerSrc: boolean;
-  images: RadarImageEntry[];
-  currentImageIndex: number;
-}
-
+  FaChevronLeft,
+  FaChevronRight,
+  FaPause,
+  FaPlay,
+  FaSlidersH,
+} from "react-icons/fa";
+import indexToTimeLabel from "../../utils/IndexToHour.tsx";
 export const Map = ({
   cangucuChecked,
   santiagoChecked,
@@ -38,6 +32,12 @@ export const Map = ({
   handlerSrc,
   images,
   currentImageIndex,
+  isPlaying,
+  onTogglePlaying,
+  onPreviousImage,
+  onNextImage,
+  playbackSpeedMs,
+  onPlaybackSpeedChange,
 }: MapProps) => {
   const { typeRadar, radarLocalStorage } = useFilterTypeRadarContext();
   const [clicked, setClicked] = useState(false);
@@ -46,69 +46,227 @@ export const Map = ({
   const [morroDaIgreja, setMorroDaIgreja] = useState<string[]>([]);
   const [cangucu, setCangucu] = useState<string[]>([]);
   const [santiago, setSantiago] = useState<string[]>([]);
-  const handleCloseModal = () => {
-    setClicked(false);
-  };
   const [radiusRadar, setRadiusRadar] = useState<number>(0);
-  const indexHour = indexToTimeLabel(currentImageIndex);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth <= 900 : false,
+  );
+  const [showMobileControls, setShowMobileControls] = useState(false);
+  const MIN_PLAYBACK_DELAY_MS = 300;
+  const MAX_PLAYBACK_DELAY_MS = 2000;
+  const sliderSpeedValue =
+    MIN_PLAYBACK_DELAY_MS + MAX_PLAYBACK_DELAY_MS - playbackSpeedMs;
+  const handleSpeedChange = (sliderValue: number) => {
+    const mappedDelay =
+      MIN_PLAYBACK_DELAY_MS + MAX_PLAYBACK_DELAY_MS - sliderValue;
+    onPlaybackSpeedChange(mappedDelay);
+  };
+  const normalizedImageIndex = ((currentImageIndex % 144) + 144) % 144;
+  const indexHour = indexToTimeLabel(normalizedImageIndex);
+
   useEffect(() => {
-    if (typeRadar !== "maxcappi") {
-      setRadiusRadar(radius[1]);
-    } else {
-      setRadiusRadar(radius[0]);
+    if (!isMobile) {
+      setShowMobileControls(false);
     }
-  }, [typeRadar]);
+  }, [isMobile]);
+
+  const stopOverlayEvent = (e: {
+    stopPropagation: () => void;
+    preventDefault: () => void;
+  }) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleClickMarker = (event: any) => {
+    const stationCode = event.target.options.id;
+    setCodeStation(stationCode);
+  };
 
   const handleClickModal = () => {
     setClicked(true);
   };
-  const handleClickMarker = (event) => {
-    const { id } = event.target.options;
-    setCodeStation(id);
+
+  const handleCloseModal = () => {
+    setClicked(false);
   };
 
-  useEffect(() => {
-    const morroDaIgrejaLinks: string[] = [];
-    const cangucuLinks: string[] = [];
-    const santiagoLinks: string[] = [];
-
-    Object.values(radarLocalStorage[typeRadar]).forEach(
-      (radar: RadarImageEntry) => {
-        if (radar.mi) morroDaIgrejaLinks.push(radar.mi);
-        if (radar.cn) cangucuLinks.push(radar.cn);
-        if (radar.sg) santiagoLinks.push(radar.sg);
-      }
-    );
-    setMorroDaIgreja(morroDaIgrejaLinks);
-    setCangucu(cangucuLinks);
-    setSantiago(santiagoLinks);
-  }, [radarLocalStorage, typeRadar]);
-
-  getRadarInformation();
-  const inicialImage = JSON.parse(localStorage.getItem("redemet-images"));
-
-
+  let inicialImage: RedemetImages | null = null;
+  try {
+    const raw = localStorage.getItem("redemet-images") ?? "null";
+    inicialImage = JSON.parse(raw);
+  } catch {
+    inicialImage = null;
+  }
 
   return (
     <>
       <MapContainer
         center={[-30, -49.471816]}
         zoom={6.2}
-        scrollWheelZoom={false}
-        style={{ width: "100vw", height: "100vh" }}
+        scrollWheelZoom={true}
+        style={{ width: "100%", height: "100vh" }}
       >
-        <div className="map-chip" style={{
-    position: "fixed",
-    bottom: "20px",
-    right: "10px",           /* 50% da LARGURA do .map-wrapper */
-    zIndex: 1000,
-    background: "rgba(0,0,0,0.7)",
-    padding: "4px 10px",
-    borderRadius: "999px",
-    color: "white",
-  }}>
-          {"Hora da Imagem:"+indexHour}
+        <div className={styles.mapChip + " mapControlsZ"}>
+          {"Hora da Imagem:" + indexHour}
+          {/* CONTROLES DESKTOP BLOQUEANDO EVENTOS DO MAPA */}
+          {!isMobile && (
+            <div
+              style={{
+                position: "fixed",
+                left: 0,
+                bottom: 0,
+                zIndex: 2000,
+                width: 180,
+                height: 160,
+                pointerEvents: "auto",
+              }}
+              onPointerDown={stopOverlayEvent}
+              onMouseDown={stopOverlayEvent}
+              onTouchStart={stopOverlayEvent}
+              onClick={stopOverlayEvent}
+            >
+              <div
+                className={styles.speedPanel + " mapControlsZ"}
+                style={{ pointerEvents: "none" }}
+              >
+                <label
+                  className={styles.speedLabel}
+                  style={{ pointerEvents: "none" }}
+                >
+                  Velocidade
+                </label>
+                <input
+                  type="range"
+                  min={MIN_PLAYBACK_DELAY_MS}
+                  max={MAX_PLAYBACK_DELAY_MS}
+                  step={100}
+                  value={sliderSpeedValue}
+                  onChange={(e) => handleSpeedChange(Number(e.target.value))}
+                  aria-label="Controle de velocidade do player"
+                  className={styles.speedRange}
+                  style={{ pointerEvents: "auto" }}
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onTouchStart={(e) => e.stopPropagation()}
+                  onWheel={(e) => e.stopPropagation()}
+                />
+              </div>
+              <div
+                className={styles.playerRow + " mapControlsZ"}
+                style={{ pointerEvents: "none" }}
+              >
+                <button
+                  type="button"
+                  className={styles.playerButton}
+                  onClick={onPreviousImage}
+                  aria-label="Imagem anterior"
+                  title="Anterior"
+                  style={{ pointerEvents: "auto" }}
+                >
+                  <FaChevronLeft size={11} />
+                </button>
+                <button
+                  type="button"
+                  className={styles.playerButtonMain}
+                  onClick={onTogglePlaying}
+                  aria-label={isPlaying ? "Pausar player" : "Iniciar player"}
+                  title={isPlaying ? "Pausar" : "Reproduzir"}
+                  style={{ pointerEvents: "auto" }}
+                >
+                  {isPlaying ? (
+                    <FaPause size={12} />
+                  ) : (
+                    <FaPlay size={12} className={styles.playIconAdjust} />
+                  )}
+                </button>
+                <button
+                  type="button"
+                  className={styles.playerButton}
+                  onClick={onNextImage}
+                  aria-label="Próxima imagem"
+                  title="Próxima"
+                  style={{ pointerEvents: "auto" }}
+                >
+                  <FaChevronRight size={11} />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
+        {isMobile && (
+          <>
+            <button
+              type="button"
+              className={styles.controlsHub + " mapControlsZ"}
+              onClick={() => setShowMobileControls((prev) => !prev)}
+              aria-label="Abrir controles de imagem"
+              title="Controles"
+              onPointerDown={stopOverlayEvent}
+              onMouseDown={stopOverlayEvent}
+              onTouchStart={stopOverlayEvent}
+            >
+              <FaSlidersH size={14} />
+            </button>
+
+            {showMobileControls && (
+              <div
+                className={styles.mobileControlsPanel + " mapControlsZ"}
+                onPointerDown={stopOverlayEvent}
+                onMouseDown={stopOverlayEvent}
+                onTouchStart={stopOverlayEvent}
+                onClick={stopOverlayEvent}
+              >
+                <label className={styles.speedLabel}>Velocidade</label>
+                <input
+                  type="range"
+                  min={MIN_PLAYBACK_DELAY_MS}
+                  max={MAX_PLAYBACK_DELAY_MS}
+                  step={100}
+                  value={sliderSpeedValue}
+                  onChange={(e) => handleSpeedChange(Number(e.target.value))}
+                  aria-label="Controle de velocidade do player"
+                  className={styles.speedRange}
+                />
+
+                <div className={styles.playerRowMobile}>
+                  <button
+                    type="button"
+                    className={styles.playerButton}
+                    onClick={onPreviousImage}
+                    aria-label="Imagem anterior"
+                    title="Anterior"
+                  >
+                    <FaChevronLeft size={11} />
+                  </button>
+
+                  <button
+                    type="button"
+                    className={styles.playerButtonMain}
+                    onClick={onTogglePlaying}
+                    aria-label={isPlaying ? "Pausar player" : "Iniciar player"}
+                    title={isPlaying ? "Pausar" : "Reproduzir"}
+                  >
+                    {isPlaying ? (
+                      <FaPause size={12} />
+                    ) : (
+                      <FaPlay size={12} className={styles.playIconAdjust} />
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    className={styles.playerButton}
+                    onClick={onNextImage}
+                    aria-label="Próxima imagem"
+                    title="Próxima"
+                  >
+                    <FaChevronRight size={11} />
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
+        )}
         {/*<Rectangle bounds={ [
     [-29.15, -55.36],
     [-33.7, -50.05],
@@ -195,8 +353,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A802" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A802" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -208,8 +366,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B828" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B828" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -220,8 +378,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B822" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B822" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -232,8 +390,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B808" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B808" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -244,8 +402,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B818" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B818" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -256,8 +414,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B817" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B817" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -268,8 +426,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B812" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B812" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -280,8 +438,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B813" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B813" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -292,8 +450,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B814" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B814" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -305,8 +463,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B810" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B810" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -317,8 +475,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B823" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B823" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -329,8 +487,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B819" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B819" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -341,8 +499,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B816" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B816" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -353,8 +511,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B829" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B829" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -365,8 +523,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B821" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B821" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -377,8 +535,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B809" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B809" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -390,8 +548,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B811" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B811" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -402,8 +560,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A836" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A836" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -474,8 +632,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A827" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A827" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -486,8 +644,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A881" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A881" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -546,8 +704,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A826" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A826" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -570,8 +728,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A832" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A832" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -630,8 +788,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A811" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A811" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -678,8 +836,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "V0612" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "V0612" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -726,8 +884,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A833" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A833" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -918,8 +1076,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A830" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A830" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -954,8 +1112,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A837" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A837" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -1002,8 +1160,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A894" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A894" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -1038,8 +1196,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A879" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A879" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -1050,8 +1208,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A884" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A884" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -1086,8 +1244,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A805" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A805" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -1122,8 +1280,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A854" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A854" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -1158,8 +1316,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A880" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A880" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -1194,8 +1352,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "B825" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "B825" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -1206,8 +1364,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A829" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A829" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -1218,205 +1376,205 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A897" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A897" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
             <Marker
-  position={[-30.808, -51.834]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "A838" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* CAMAQUÃ */}
+              position={[-30.808, -51.834]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "A838" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* CAMAQUÃ */}
 
-<Marker
-  position={[-29.685, -49.993]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "B932" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* CAPÃO CANOA */}
+            <Marker
+              position={[-29.685, -49.993]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "B932" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* CAPÃO CANOA */}
 
-<Marker
-  position={[-29.603, -53.673]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "A853" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* CRUZ ALTA */}
+            <Marker
+              position={[-29.603, -53.673]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "A853" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* CRUZ ALTA */}
 
-<Marker
-  position={[-32.012, -53.403]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "B826" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* HERVAL */}
+            <Marker
+              position={[-32.012, -53.403]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "B826" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* HERVAL */}
 
-<Marker
-  position={[-28.653, -53.111]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "A883" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* IBIRUBÁ */}
+            <Marker
+              position={[-28.653, -53.111]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "A883" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* IBIRUBÁ */}
 
-<Marker
-  position={[-30.249, -50.509]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "B836" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* PALMARES DO SUL */}
+            <Marker
+              position={[-30.249, -50.509]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "B836" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* PALMARES DO SUL */}
 
-<Marker
-  position={[-31.802, -52.405]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "A887" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* PELOTAS */}
+            <Marker
+              position={[-31.802, -52.405]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "A887" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* PELOTAS */}
 
-<Marker
-  position={[-29.872, -52.381]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "A813" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* RIO PARDO */}
+            <Marker
+              position={[-29.872, -52.381]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "A813" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* RIO PARDO */}
 
-<Marker
-  position={[-33.531, -53.35]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "B830" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* SANTA VITÓRIA DO PALMAR (CENTRO) */}
+            <Marker
+              position={[-33.531, -53.35]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "B830" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* SANTA VITÓRIA DO PALMAR (CENTRO) */}
 
-<Marker
-  position={[-33.742, -53.372]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "A899" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* SANTA VITÓRIA DO PALMAR (CHUÍ) */}
+            <Marker
+              position={[-33.742, -53.372]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "A899" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* SANTA VITÓRIA DO PALMAR (CHUÍ) */}
 
-<Marker
-  position={[-29.816, -50.533]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "B839" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* SANTO ANTÔNIO DA PATRULHA */}
+            <Marker
+              position={[-29.816, -50.533]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "B839" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* SANTO ANTÔNIO DA PATRULHA */}
 
-<Marker
-  position={[-29.442, -50.56]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "B820" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* SÃO FRANCISCO DE PAULA */}
+            <Marker
+              position={[-29.442, -50.56]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "B820" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* SÃO FRANCISCO DE PAULA */}
 
-<Marker
-  position={[-28.417, -54.962]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "A852" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* SÃO LUÍS GONZAGA */}
+            <Marker
+              position={[-28.417, -54.962]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "A852" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* SÃO LUÍS GONZAGA */}
 
-<Marker
-  position={[-29.413, -49.803]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "B841" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* TORRES */}
+            <Marker
+              position={[-29.413, -49.803]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "B841" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* TORRES */}
 
-<Marker
-  position={[-29.089, -53.826]}
-  icon={iconStation}
-  className="iconStation"
-  eventHandlers={{
-    click: () => {
-      handleClickMarker({ target: { options: { id: "A886" } } }),
-      handleClickModal();
-    },
-  }}
-></Marker>
-{/* TUPANCIRETÃ */}
+            <Marker
+              position={[-29.089, -53.826]}
+              icon={iconStation}
+              className="iconStation"
+              eventHandlers={{
+                click: () => {
+                  (handleClickMarker({ target: { options: { id: "A886" } } }),
+                    handleClickModal());
+                },
+              }}
+            ></Marker>
+            {/* TUPANCIRETÃ */}
 
             {/* CAMBARA DO SUL */}
             {/* <Marker
@@ -1437,8 +1595,8 @@ export const Map = ({
               className="iconStation"
               eventHandlers={{
                 click: () => {
-                  handleClickMarker({ target: { options: { id: "A834" } } }),
-                    handleClickModal();
+                  (handleClickMarker({ target: { options: { id: "A834" } } }),
+                    handleClickModal());
                 },
               }}
             ></Marker>
@@ -1470,7 +1628,8 @@ export const Map = ({
                     : bounds.cangucuNotMaxCappi
                 }
                 url={
-                  inicialImage[typeRadar]?.["cn"]?.[currentImageIndex] ?? "/no-data1.png"
+                  inicialImage?.[typeRadar]?.["cn"]?.[normalizedImageIndex] ??
+                  "/no-data1.png"
                 }
               />
             )}{" "}
@@ -1486,8 +1645,9 @@ export const Map = ({
                     ? bounds.morroDaIgreja
                     : bounds.morroDaIgrejaNotMaxCappi
                 }
-                url={inicialImage[typeRadar]["mi"][currentImageIndex]
-                  ?? "/no-data1.png"
+                url={
+                  inicialImage?.[typeRadar]?.["mi"]?.[normalizedImageIndex] ??
+                  "/no-data1.png"
                 }
               />
             )}
@@ -1502,8 +1662,9 @@ export const Map = ({
                     ? bounds.santiago
                     : bounds.santiagoNotMaxCappi
                 }
-                url={inicialImage[typeRadar]["sg"][currentImageIndex]
-                  ?? "/no-data1.png"
+                url={
+                  inicialImage?.[typeRadar]?.["sg"]?.[normalizedImageIndex] ??
+                  "/no-data1.png"
                 }
               />
             )}{" "}

@@ -2,7 +2,6 @@ import styles from "./styles/Boletins.module.css";
 import { useMemo, useState } from "react";
 import { Boletim } from "../types/Boletim";
 
-
 const boletins: Boletim[] = [
   // ===== 2025 =====
   {
@@ -182,34 +181,41 @@ export default function BoletinsPanel() {
   const [q, setQ] = useState("");
 
   const years = useMemo(
-    () => Array.from(new Set(boletins.map(b => b.year))).sort((a, b) => b - a) as (2025 | 2024)[],
-    []
+    () =>
+      Array.from(new Set(boletins.map((b) => b.year))).sort(
+        (a, b) => b - a,
+      ) as (2025 | 2024)[],
+    [],
   );
 
   const filtered = useMemo(() => {
     const qn = q.trim().toLowerCase();
-    return boletins
-      .filter(b => b.year === activeYear)
-      .filter(b => {
-        if (!qn) return true;
-        const texto = [
-          b.title ?? `Boletim de Evento Extremo - ${b.number} - ${b.dateBR}`,
-          b.number,
-          b.dateBR,
-        ].join(" ").toLowerCase();
-        return texto.includes(qn);
-      })
-      // ordena do mais novo para o mais antigo (pela data em BR — como fallback, ordena pelo número desc)
-      .sort((a, b) => {
-        // tenta ordenar por data (dd/mm/aaaa)
-        const [da, ma, ya] = a.dateBR.split("/").map(Number);
-        const [db, mb, yb] = b.dateBR.split("/").map(Number);
-        const ta = new Date(ya, ma - 1, da).getTime();
-        const tb = new Date(yb, mb - 1, db).getTime();
-        if (!Number.isNaN(tb - ta)) return tb - ta;
-        // fallback: número desc
-        return Number(b.number) - Number(a.number);
-      });
+    return (
+      boletins
+        .filter((b) => b.year === activeYear)
+        .filter((b) => {
+          if (!qn) return true;
+          const texto = [
+            b.title ?? `Boletim de Evento Extremo - ${b.number} - ${b.dateBR}`,
+            b.number,
+            b.dateBR,
+          ]
+            .join(" ")
+            .toLowerCase();
+          return texto.includes(qn);
+        })
+        // ordena do mais novo para o mais antigo (pela data em BR — como fallback, ordena pelo número desc)
+        .sort((a, b) => {
+          // tenta ordenar por data (dd/mm/aaaa)
+          const [da, ma, ya] = a.dateBR.split("/").map(Number);
+          const [db, mb, yb] = b.dateBR.split("/").map(Number);
+          const ta = new Date(ya, ma - 1, da).getTime();
+          const tb = new Date(yb, mb - 1, db).getTime();
+          if (!Number.isNaN(tb - ta)) return tb - ta;
+          // fallback: número desc
+          return Number(b.number) - Number(a.number);
+        })
+    );
   }, [activeYear, q]);
 
   return (
@@ -218,7 +224,7 @@ export default function BoletinsPanel() {
         <p className="panel-heading">Boletins de Evento Extremo</p>
 
         <p className="panel-tabs">
-          {years.map(y => (
+          {years.map((y) => (
             <a
               key={y}
               className={y === activeYear ? "is-active" : undefined}
@@ -239,7 +245,7 @@ export default function BoletinsPanel() {
               type="text"
               placeholder="Buscar por número, data ou título…"
               value={q}
-              onChange={e => setQ(e.target.value)}
+              onChange={(e) => setQ(e.target.value)}
             />
             <span className="icon is-left">
               <i className="fas fa-search" aria-hidden="true"></i>

@@ -1,69 +1,32 @@
+import { NavLink } from "react-router-dom";
+import { MdDashboard, MdArticle, MdInfo } from "react-icons/md";
+
+const navItems = [
+  { to: "/", label: "Produtos", icon: MdDashboard },
+  { to: "/boletins", label: "Boletins", icon: MdArticle },
+  { to: "/sobre", label: "Sobre", icon: MdInfo },
+];
+
 const MenuPrincipal: React.FC = () => {
   return (
-    <nav className={`navbar`} role="navigation" aria-label="main navigation">
-      <div className="navbar-brand">
-        <a className="navbar-item ml-1" href="/">
-          <figure className="image is-56x56">
-            <img src="/LIAO1.png" alt="Logo" />
-          </figure>
-        </a>
-
-        <a
-          role="button"
-          className="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" className="navbar-menu ml-4">
-        <div className="navbar-start">
-          <a className="navbar-item" href="/">
-            Produtos
-          </a>
-
-          <a className="navbar-item" href="/boletins">
-            Boletins
-          </a>
-
-          <a className="navbar-item" href="/sobre">
-            Sobre
-          </a>
-        </div>
-        <div className="navbar-item" id="nohover">
-          <p style={{ color: "#0a3d66" }}>
-            <strong>LABORATÓRIO DE INTERAÇÃO ATMOSFERA-OCEANO</strong>
-          </p>
-        </div>
-        <div className="navbar-end">
-          <div className="navbar-item" id="nohover">
-            <a
-              className="navbar-item ml-1"
-              href="https://www.furg.br"
-              target="_blank"
-            >
-              <figure className="image is-48x48">
-                <img src="/FURG_SEM_TEXTO.png" alt="Logo" />
-              </figure>
-            </a>
-            <a
-              className="navbar-item ml-1"
-              href="https://io.furg.br/"
-              target="_blank"
-            >
-              <figure className="image is-48x48">
-                <img src="/IO_SEM_TEXTO.png" alt="Logo" />
-              </figure>
-            </a>
-          </div>
-        </div>
-      </div>
+    <nav className="m3-bottom-nav" aria-label="Navegação principal">
+      {navItems.map((item) => {
+        const Icon = item.icon;
+        return (
+          <NavLink
+            key={`mobile-${item.to}`}
+            to={item.to}
+            className={({ isActive }) =>
+              `m3-bottom-item ${isActive ? "is-active" : ""}`
+            }
+          >
+            <span className="m3-bottom-indicator">
+              <Icon className="m3-bottom-icon" />
+            </span>
+            <span className="m3-bottom-label">{item.label}</span>
+          </NavLink>
+        );
+      })}
     </nav>
   );
 };

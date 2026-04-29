@@ -1,5 +1,4 @@
 import ReactApexChart from "react-apexcharts";
-import { useEffect, useState } from "react";
 import { useCodeStation } from "../../contexts/codeStation";
 import { usePhenomenaContext } from "../../contexts/Phenomena";
 import { variablesPT } from "./variablesPT";
@@ -8,49 +7,41 @@ import { usePrefersDarkMode } from "../../utils/ThemedChart";
 
 export const Graphic = () => {
   const { phenomena } = usePhenomenaContext();
-  const [variable, setVariable] = useState(null);
-  const [hour, setHour] = useState(null);
   const { codeStation } = useCodeStation();
-  const storageCodeStation = localStorage.getItem("codeStation");
-  const [trigger, setTrigger] = useState(false);
-  const [nameVariable, setNameVariable] = useState("Pressão");
-  const { scopeDays } = useScopeDaysContext()
+  const { scopeDays } = useScopeDaysContext();
+  const selectedCodeStation = codeStation || localStorage.getItem("codeStation");
 
-
-  useEffect(() => {
-    if (codeStation !== storageCodeStation) {
-      setTrigger((prevTrigger) => !prevTrigger);
-    }
-  }, [codeStation, storageCodeStation]);
-  useEffect(() => {
-  const raw = localStorage.getItem("dataStation");
-  if (!raw) return; // nada no localStorage ainda
-
+  let stationData = null;
   try {
-    const dataMeteorologic = JSON.parse(raw);
-    const station = dataMeteorologic?.[codeStation];
-
-    if (!station) return; // estação ainda não disponível
-
-    const serie = station?.[phenomena];
-    const hours = station?.hour;
-
-    if (!Array.isArray(serie) || !Array.isArray(hours)) return;
-
-    setVariable(serie.slice(-scopeDays));
-    setHour(hours.slice(-scopeDays));
-    setNameVariable(variablesPT[phenomena]);
+    const dataStation = JSON.parse(localStorage.getItem("dataStation") || "{}");
+    stationData = selectedCodeStation ? dataStation?.[selectedCodeStation] : null;
   } catch (err) {
-    console.error("Erro ao ler dataStation do localStorage", err);
+    console.error("Erro ao ler dataStation:", err);
   }
-}, [trigger, phenomena, codeStation, scopeDays]);
 
+  const nameVariable = variablesPT[phenomena] || "Dados";
+  const fullSerie = Array.isArray(stationData?.[phenomena]) ? stationData[phenomena] : [];
+  const fullHours = Array.isArray(stationData?.hour) ? stationData.hour : [];
+  const fullDates = Array.isArray(stationData?.data) ? stationData.data : [];
 
-const isDark = usePrefersDarkMode(); 
+  // Mesmo padrão da página Estações: startIndex = length - scopeDays
+  const length = Math.min(fullSerie.length, fullHours.length);
+  const startIndex = Math.max(length - scopeDays, 0);
+
+  const slicedData = fullHours.slice(startIndex, length).map((hour, index) => {
+    const dataIndex = startIndex + index;
+    const dateValue = fullDates[dataIndex] ?? "";
+    return {
+      x: dateValue ? `${dateValue} - ${hour}` : `${hour}`,
+      y: fullSerie[dataIndex],
+    };
+  });
+
+  const isDark = usePrefersDarkMode();
   const series = [
     {
       name: `${nameVariable}`,
-      data: variable,
+      data: slicedData,
       colors: ["#F8A402"],
     },
   ];
@@ -72,8 +63,7 @@ const isDark = usePrefersDarkMode();
       show: false,
     },
     xaxis: {
-      categories: hour,
-      type: "string",
+      type: "category",
       tickAmount: 4,
     },
     legend:{
@@ -84,15 +74,26 @@ const isDark = usePrefersDarkMode();
       colors: ["#5dadefff"],
     },
     markers: {
-      size: 6,
-      content: "A",
-      
+      size: 0,
     },
   };
 
+  if (!selectedCodeStation) {
+    return <div style={{ padding: "1rem" }}>Selecione uma estação.</div>;
+  }
+
+  if (!stationData || slicedData.length === 0) {
+    return <div style={{ padding: "1rem" }}>Sem dados para o período selecionado.</div>;
+  }
+
   return (
-    <div>
-      <ReactApexChart options={options} series={series} type={phenomena === "rain" ? "bar" : "line"} />
+    <div style={{ height: "100%", width: "100%" }}>
+      <ReactApexChart
+        options={options}
+        series={series}
+        type={phenomena === "rain" ? "bar" : "line"}
+        height="100%"
+      />
     </div>
   );
 };

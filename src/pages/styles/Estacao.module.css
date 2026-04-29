@@ -1,4 +1,52 @@
 .containerGraphic {
   width: 100%;
-  height: 480px;
+  height: calc(100vh - 120px);
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chartArea {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.legendBox {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(55, 104, 140, 0.25);
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(55, 104, 140, 0.08);
+}
+
+.legendSwatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  flex: 0 0 auto;
+}
+
+.legendLabel {
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .containerGraphic {
+    height: calc(100vh - 110px);
+    min-height: 480px;
+  }
 }

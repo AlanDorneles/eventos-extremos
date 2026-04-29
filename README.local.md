@@ -2,6 +2,36 @@
 
 Este arquivo descreve como levantar um ambiente local seguro para desenvolver e ajustar a plataforma.
 
+## Rodando localmente (sem Docker) — recomendado para começar a parte visual
+
+1) Backend (API + WebSocket)
+
+```bash
+cd /home/alanpablo/Área\ de\ Trabalho/PAGINA_LIAO/eventos-extremos-backend
+cp .env.example .env
+npm install
+npm run dev
+```
+
+2) Frontend (Vite)
+
+```bash
+cd /home/alanpablo/Área\ de\ Trabalho/PAGINA_LIAO/eventos-extremos
+cp .env.example .env.development
+npm install
+npm run dev
+```
+
+3) Acesso
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000/api
+- WebSocket: ws://localhost:3000/ws
+
+Observações:
+- O frontend lê `VITE_API_URL` e `VITE_WS_URL`.
+- O backend agora aceita CORS local por `CORS_ORIGINS`.
+- Para funcionalidade completa, configure `INMET_FREE_KEY` no arquivo `.env` do backend.
+
 Requisitos
 - Docker e docker-compose (ou Docker Desktop) instalados
 

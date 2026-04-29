@@ -1,0 +1,120 @@
+.mapChip {
+  position: fixed;
+  bottom: 20px;
+  left: 10px;
+  z-index: 3000;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #fff;
+  pointer-events: none;
+}
+
+ .speedPanel {
+  position: fixed;
+  bottom: 102px;
+  left: 10px;
+  z-index: 3001;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.64);
+  color: #fff;
+  pointer-events: auto;
+}
+
+.speedLabel {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.speedRange {
+  width: 118px;
+}
+
+ .playerRow {
+  position: fixed;
+  bottom: 58px;
+  left: 10px;
+  z-index: 3001;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.playerRowMobile {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.playerButton,
+.playerButtonMain,
+.controlsHub {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.playerButton,
+.controlsHub {
+  width: 34px;
+  height: 34px;
+}
+
+.playerButtonMain {
+  width: 36px;
+  height: 36px;
+}
+
+.playIconAdjust {
+  margin-left: 1px;
+}
+
+.controlsHub {
+  position: fixed;
+  bottom: 58px;
+  left: 10px;
+  z-index: 3002;
+}
+
+ .mobileControlsPanel {
+  position: fixed;
+  bottom: 100px;
+  left: 10px;
+  z-index: 3002;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+  .mapChip {
+    left: auto;
+    right: 10px;
+    /* Fica acima da navigation bar (80px) + 12px extra */
+    bottom: calc(80px + 12px);
+  }
+  .controlsHub {
+    /* Fica acima da navigation bar (80px) + 20px extra */
+    bottom: calc(80px + 20px);
+  }
+  .mobileControlsPanel {
+    /* Fica acima da navigation bar (80px) + 60px extra */
+    bottom: calc(80px + 60px);
+  }
+}

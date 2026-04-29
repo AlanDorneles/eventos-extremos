@@ -21,10 +21,11 @@ import styles from "./menuMap.module.css";
 import { useLocation } from "react-router-dom";
 
 interface MenuMapProps {
-  selectImage?: () => void;
+  selectImage?: (index: number) => void;
+  currentImageIndex?: number;
 }
 
-const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
+const MenuMap: React.FC<MenuMapProps> = ({ selectImage, currentImageIndex }) => {
   const { getHourScopeRadar, handleSelectChange } = useHourScope();
   const { getHourScopeSatelite, handleSelectSatelliteChange } =
     useHourScopeSatelite();
@@ -36,7 +37,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
     morroDaIgrejaChecked,
     santiagoChecked,
   } = UseRadarIsChecked();
-  const { setClickHoursIndexImage, indexImage } = UsePreviousAndNextImage();
+  const { setClickHoursIndexImage } = UsePreviousAndNextImage();
   const { setStationsVisible } = useStationsVisible();
   const { handleTypeRadar } = useFilterTypeRadarContext();
   const { handleTypeMecanism } = useRadarOrSatelite();
@@ -97,7 +98,6 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
     } else {
       setInitHour(initIndex);
     }
-    selectIndex(0);
   };
 
   const handleChangeSatellite = (
@@ -118,10 +118,17 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage }) => {
     setClickHoursIndexImage(index);
 
     if (selectImage) {
-      selectImage();
+      selectImage(index);
     }
-    setClickedButtonId(indexImage);
+    setClickedButtonId(index);
   };
+
+  useEffect(() => {
+    if (typeof currentImageIndex === "number") {
+      const normalizedIndex = ((currentImageIndex % 144) + 144) % 144;
+      setClickedButtonId(normalizedIndex);
+    }
+  }, [currentImageIndex]);
 
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;

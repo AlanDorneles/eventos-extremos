@@ -1,7 +1,12 @@
 import styles from "./styles/sobre.module.css";
-import {ThemedImage} from '../utils/ThemedImage'
+import { ThemedImage } from "../utils/ThemedImage";
 import { useState } from "react";
-import { FaLinkedinIn, FaGithub, FaShareAlt, FaResearchgate } from "react-icons/fa";
+import {
+  FaLinkedinIn,
+  FaGithub,
+  FaShareAlt,
+  FaResearchgate,
+} from "react-icons/fa";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const teamMembers = [
@@ -23,7 +28,8 @@ const teamMembers = [
     socials: {
       lattes: "http://lattes.cnpq.br/8790484877258054",
       researchgate: "https://www.researchgate.net/profile/Jeferson-Machado",
-      googleScholar: "https://scholar.google.com.br/citations?hl=pt-BR&user=b1m4G04AAAAJ",
+      googleScholar:
+        "https://scholar.google.com.br/citations?hl=pt-BR&user=b1m4G04AAAAJ",
     },
   },
   {
@@ -34,7 +40,8 @@ const teamMembers = [
       linkedin: "https://www.linkedin.com/in/ricardoacostagotuzzo",
       github: "https://github.com/ricardoacosta",
       lattes: "http://lattes.cnpq.br/",
-      googleScholar: "https://scholar.google.com.br/citations?user=7InaTFUAAAAJ&hl=pt-BR&oi=ao",
+      googleScholar:
+        "https://scholar.google.com.br/citations?user=7InaTFUAAAAJ&hl=pt-BR&oi=ao",
     },
   },
   {
@@ -70,9 +77,7 @@ const teamMembers = [
     id: "gabrielly",
     name: "Gabrielly de Almeida Gomes",
     role: "Graduanda em Oceanografia",
-    socials: {
-
-    },
+    socials: {},
   },
   {
     id: "larissa",
@@ -81,7 +86,8 @@ const teamMembers = [
     socials: {
       linkedin: "https://www.linkedin.com/in/larissa-miranda-5984902a3/",
       github: "https://github.com/Larissamiranda97",
-      lattes: "https://wwws.cnpq.br/cvlattesweb/PKG_MENU.menu?f_cod=330ED444EBAA87ED86BA2AD7F9E21823#",
+      lattes:
+        "https://wwws.cnpq.br/cvlattesweb/PKG_MENU.menu?f_cod=330ED444EBAA87ED86BA2AD7F9E21823#",
     },
   },
 ];
@@ -96,7 +102,7 @@ const Sobre = () => {
     const name = formData.get("name");
     const email = formData.get("email");
     const message = formData.get("message");
-    const newlester = !!formData.get("newlester")
+    const newlester = !!formData.get("newlester");
 
     try {
       const res = await fetch(`${API_URL}/send-email`, {
@@ -136,36 +142,41 @@ const Sobre = () => {
           numérica.
         </p>
 
-      
-
         <div className={styles.partnerHeroGrid}>
           <div className="grid">
-            <div className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}>
-
+            <div
+              className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}
+            >
               <ThemedImage
                 lightSrc="/FURG_COM_TEXTO1.png"
-                darkSrc="/dark-mode/DARK_FURG_COM_TEXTO1.png"  
+                darkSrc="/dark-mode/DARK_FURG_COM_TEXTO1.png"
                 alt="FURG"
                 className={styles.img2}
-                />
+              />
             </div>
-            <div className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}>
+            <div
+              className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}
+            >
               <ThemedImage
                 lightSrc="/IO_COM_TEXTO.png"
-                darkSrc="/dark-mode/DARK_IO_COM_TEXTO.png"   
+                darkSrc="/dark-mode/DARK_IO_COM_TEXTO.png"
                 alt="INSTITUTO DE OCEANOGRAFIA"
                 className={styles.img}
-                />
+              />
             </div>
-            <div className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}>
-             <ThemedImage
+            <div
+              className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}
+            >
+              <ThemedImage
                 lightSrc="/NULOG.png"
-                darkSrc="/dark-mode/DARK_NULOG.png"   
+                darkSrc="/dark-mode/DARK_NULOG.png"
                 alt="NUCLEO DE OCEANOGRAFIA GEOLOGICA"
                 className={styles.img}
-                />
+              />
             </div>
-            <div className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}>
+            <div
+              className={`cell is-flex is-justify-content-center is-align-items-center ${styles.partnerCell}`}
+            >
               <img className={styles.img4} src="/LIAO3.png" alt="" />
             </div>
           </div>
@@ -182,7 +193,9 @@ const Sobre = () => {
           parte dos meteorologistas na criação de suas previsões.
         </p>
 
-        <div className={`is-flex is-justify-content-space-evenly is-align-items-center ${styles.dataSourcesRow}`}>
+        <div
+          className={`is-flex is-justify-content-space-evenly is-align-items-center ${styles.dataSourcesRow}`}
+        >
           <div className={styles.dataOriginText}>
             <p>ORIGEM DOS DADOS:</p>
             <ul className={styles.hasDottedList}>
@@ -198,34 +211,34 @@ const Sobre = () => {
             <div className="grid">
               <div className={`${styles.cell} ${styles.partnerCell}`}>
                 <ThemedImage
-                lightSrc="/cptec.jpeg"
-                darkSrc="/dark-mode/DARK_CPTEC.png"   
-                alt="CPTEC"
-                className={`${styles.img} ${styles.sourceLogo}`}
+                  lightSrc="/cptec.jpeg"
+                  darkSrc="/dark-mode/DARK_CPTEC.png"
+                  alt="CPTEC"
+                  className={`${styles.img} ${styles.sourceLogo}`}
                 />
               </div>
               <div className={`${styles.cell} ${styles.partnerCell}`}>
-               <ThemedImage
-                lightSrc="/inmet_logo.png"
-                darkSrc="/dark-mode/DARK_INMET.png" 
-                alt="INMET"
-                className={`${styles.img} ${styles.sourceLogo}`}
+                <ThemedImage
+                  lightSrc="/inmet_logo.png"
+                  darkSrc="/dark-mode/DARK_INMET.png"
+                  alt="INMET"
+                  className={`${styles.img} ${styles.sourceLogo}`}
                 />
               </div>
               <div className={`${styles.cell} ${styles.partnerCell}`}>
-                 <ThemedImage
-                lightSrc="/redemet_logo.png"
-                darkSrc="/redemet_logo.png"
-                alt="REDEMET"
-                className={`${styles.img} ${styles.sourceLogo}`}
+                <ThemedImage
+                  lightSrc="/redemet_logo.png"
+                  darkSrc="/redemet_logo.png"
+                  alt="REDEMET"
+                  className={`${styles.img} ${styles.sourceLogo}`}
                 />
               </div>
               <div className={`${styles.cell} ${styles.partnerCell}`}>
-                 <ThemedImage
-                lightSrc="/cppmet.png"
-                darkSrc="/dark-mode/DARK_CPPMET.png"   
-                alt="FURG"
-                className={`${styles.img} ${styles.sourceLogo}`}
+                <ThemedImage
+                  lightSrc="/cppmet.png"
+                  darkSrc="/dark-mode/DARK_CPPMET.png"
+                  alt="FURG"
+                  className={`${styles.img} ${styles.sourceLogo}`}
                 />
               </div>
             </div>
@@ -251,10 +264,13 @@ const Sobre = () => {
                 hasGoogleScholar ||
                 hasLattes;
 
-
               return (
                 <li key={member.id}>
-                  <img className={styles.avatar56} src="/LIAO1.png" alt={member.name} />
+                  <img
+                    className={styles.avatar56}
+                    src="/LIAO1.png"
+                    alt={member.name}
+                  />
 
                   <div className={styles.memberInfoWrap}>
                     <p className={styles.researcher}>{member.name}</p>
@@ -264,32 +280,64 @@ const Sobre = () => {
                   <div className={styles.socialHub}>
                     <div className={styles.socialDesktop}>
                       {hasLinkedin && (
-                        <a href={member.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                        <a
+                          href={member.socials.linkedin}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="LinkedIn"
+                        >
                           <FaLinkedinIn />
                         </a>
                       )}
                       {hasGithub && (
-                        <a href={member.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                        <a
+                          href={member.socials.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="GitHub"
+                        >
                           <FaGithub />
                         </a>
                       )}
                       {hasResearchGate && (
-                        <a href={member.socials.researchgate} target="_blank" rel="noreferrer" aria-label="ResearchGate">
+                        <a
+                          href={member.socials.researchgate}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="ResearchGate"
+                        >
                           <FaResearchgate />
                         </a>
                       )}
                       {hasGoogleScholar && (
-                        <a href={member.socials.googleScholar} target="_blank" rel="noreferrer" aria-label="Google Scholar">
+                        <a
+                          href={member.socials.googleScholar}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="Google Scholar"
+                        >
                           <span
                             className={styles.socialMaskIcon}
-                            style={{ maskImage: 'url(/google_scholar.svg)', WebkitMaskImage: 'url(/google_scholar.svg)' }}
+                            style={{
+                              maskImage: "url(/google_scholar.svg)",
+                              WebkitMaskImage: "url(/google_scholar.svg)",
+                            }}
                             aria-hidden="true"
                           />
                         </a>
                       )}
                       {hasLattes && (
-                        <a href={member.socials.lattes} target="_blank" rel="noreferrer" aria-label="Lattes">
-                          <img src="/lattes.svg" alt="Lattes" className={styles.lattesIcon} />
+                        <a
+                          href={member.socials.lattes}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="Lattes"
+                        >
+                          <img
+                            src="/lattes.svg"
+                            alt="Lattes"
+                            className={styles.lattesIcon}
+                          />
                         </a>
                       )}
                     </div>
@@ -301,7 +349,9 @@ const Sobre = () => {
                           type="button"
                           aria-label="Abrir redes sociais"
                           onClick={() =>
-                            setSocialsOpenFor((prev) => (prev === member.id ? null : member.id))
+                            setSocialsOpenFor((prev) =>
+                              prev === member.id ? null : member.id,
+                            )
                           }
                         >
                           <FaShareAlt />
@@ -311,32 +361,64 @@ const Sobre = () => {
                       {isOpen && hasAnySocial && (
                         <div className={styles.socialMobileMenu}>
                           {hasLinkedin && (
-                            <a href={member.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                            <a
+                              href={member.socials.linkedin}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label="LinkedIn"
+                            >
                               <FaLinkedinIn />
                             </a>
                           )}
                           {hasGithub && (
-                            <a href={member.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                            <a
+                              href={member.socials.github}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label="GitHub"
+                            >
                               <FaGithub />
                             </a>
                           )}
                           {hasResearchGate && (
-                            <a href={member.socials.researchgate} target="_blank" rel="noreferrer" aria-label="ResearchGate">
+                            <a
+                              href={member.socials.researchgate}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label="ResearchGate"
+                            >
                               <FaResearchgate />
                             </a>
                           )}
                           {hasGoogleScholar && (
-                            <a href={member.socials.googleScholar} target="_blank" rel="noreferrer" aria-label="Google Scholar">
+                            <a
+                              href={member.socials.googleScholar}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label="Google Scholar"
+                            >
                               <span
                                 className={styles.socialMaskIcon}
-                                style={{ maskImage: 'url(/google_scholar.svg)', WebkitMaskImage: 'url(/google_scholar.svg)' }}
+                                style={{
+                                  maskImage: "url(/google_scholar.svg)",
+                                  WebkitMaskImage: "url(/google_scholar.svg)",
+                                }}
                                 aria-hidden="true"
                               />
                             </a>
                           )}
                           {hasLattes && (
-                            <a href={member.socials.lattes} target="_blank" rel="noreferrer" aria-label="Lattes">
-                              <img src="/lattes.svg" alt="Lattes" className={styles.lattesIcon} />
+                            <a
+                              href={member.socials.lattes}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label="Lattes"
+                            >
+                              <img
+                                src="/lattes.svg"
+                                alt="Lattes"
+                                className={styles.lattesIcon}
+                              />
                             </a>
                           )}
                         </div>
@@ -390,9 +472,8 @@ const Sobre = () => {
 
             <div className={styles.formGroup}>
               <label className="checkbox" htmlFor="newlester">
-                <input type="checkbox" id="newlester"
-                name="newlester" />
-                    Receber atualizações no e-mail
+                <input type="checkbox" id="newlester" name="newlester" />
+                Receber atualizações no e-mail
               </label>
             </div>
 

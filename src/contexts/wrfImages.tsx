@@ -43,7 +43,6 @@ export function WrfImagesProvider({ children }: { children: React.ReactNode }) {
         variable: target,
       });
 
-      console.log("Fetched WRF images:", list);
 
       // ✅ aplica o resultado no estado do context
       setImagesAll(list);

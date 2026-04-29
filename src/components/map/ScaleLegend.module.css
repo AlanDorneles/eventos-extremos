@@ -1,0 +1,137 @@
+.scaleLegend {
+  position: fixed;
+  left: 8px;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 3005;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.scaleBackground {
+  background: #ffffff90;
+  padding: 20px 32px 4px 4px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  display: inline-flex;
+  align-items: center;
+}
+
+.scaleBar {
+  position: relative;
+  width: 24px;
+  height: min(80vh, 400px);
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  border-radius: 4px;
+  /* Gradiente adaptado para vertical (top = -100°C, bottom = 100°C)
+     origem de cores fornecida com comentários para cada parada */
+  background: linear-gradient(
+    to bottom,
+    /* -100 to -90 */ #f3f9fb 0%,
+    #f3f9fb 5%,
+
+    /* -85, -80 */ #85208e 7.5%,
+    #cf68b9 10%,
+
+    /* -75, -70 */ #b2b8ba 12.5%,
+    #303538 15%,
+
+    /* -65, -60 */ #9e2024 17.5%,
+    #f14c22 20%,
+
+    /* -55, -50, -45 */ #f1e223 22.5%,
+    #86f923 25%,
+    #1be72a 27.5%,
+
+    /* -40 .. -20 */ #1b6864 30%,
+    #1a2b8a 32.5%,
+    #1b609a 35%,
+    #1ab8d6 37.5%,
+    #1bf9f8 40%,
+
+    /* -15 .. 0 */ #f3f9fb 42.5%,
+    #ecefef 45%,
+    #dae0e2 47.5%,
+    #cfd3d3 50%,
+
+    /* 5 .. 55 */ #c7c7c6 52.5%,
+    #babab9 55%,
+    #a1a6a8 57.5%,
+    #959b9d 60%,
+    #868c8e 62.5%,
+    #797f81 65%,
+    #6a7072 67.5%,
+    #5d6365 70%,
+    #4f5557 72.5%,
+    #404648 75%,
+    #33393b 77.5%,
+    #262c2e 80%,
+    #1a2022 82.5%,
+    #1a2022 100%
+  );
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  overflow: visible; /* permitir que rótulos apareçam fora da barra */
+}
+
+.scaleTicks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+  padding: 6px 0; /* pequeno padding para não colar nas bordas */
+}
+
+.tickRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 1px;
+}
+
+.tickLine {
+  width: 10px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.8);
+  flex: 0 0 auto;
+}
+
+.tickLabel {
+  font-size: 8px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.9);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  transform: translateX(8px);
+  margin-left: 6px;
+}
+
+.unitLabel {
+  position: absolute;
+  top: -18px;
+  right: -2px;
+  font-size: 8px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 900px) {
+  .scaleLegend {
+    left: 8px;
+    top: auto;
+    bottom: 35%;
+    transform: none;
+  }
+
+  .scaleBar {
+    height: 250px;
+    width: 20px;
+  }
+
+  .tickLabel {
+    font-size: 9px;
+  }
+}
