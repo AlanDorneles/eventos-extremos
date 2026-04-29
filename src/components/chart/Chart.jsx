@@ -9,18 +9,23 @@ export const Graphic = () => {
   const { phenomena } = usePhenomenaContext();
   const { codeStation } = useCodeStation();
   const { scopeDays } = useScopeDaysContext();
-  const selectedCodeStation = codeStation || localStorage.getItem("codeStation");
+  const selectedCodeStation =
+    codeStation || localStorage.getItem("codeStation");
 
   let stationData = null;
   try {
     const dataStation = JSON.parse(localStorage.getItem("dataStation") || "{}");
-    stationData = selectedCodeStation ? dataStation?.[selectedCodeStation] : null;
+    stationData = selectedCodeStation
+      ? dataStation?.[selectedCodeStation]
+      : null;
   } catch (err) {
     console.error("Erro ao ler dataStation:", err);
   }
 
   const nameVariable = variablesPT[phenomena] || "Dados";
-  const fullSerie = Array.isArray(stationData?.[phenomena]) ? stationData[phenomena] : [];
+  const fullSerie = Array.isArray(stationData?.[phenomena])
+    ? stationData[phenomena]
+    : [];
   const fullHours = Array.isArray(stationData?.hour) ? stationData.hour : [];
   const fullDates = Array.isArray(stationData?.data) ? stationData.data : [];
 
@@ -47,13 +52,12 @@ export const Graphic = () => {
   ];
 
   const options = {
-     
     title: {
       text: `${nameVariable}`,
       align: "center", // ou 'left' ou 'right'
       style: {
         fontSize: "16px", // Tamanho da fonte
-        color: isDark ? "#5dadefff":"#333333", // Cor do texto do título
+        color: isDark ? "#5dadefff" : "#333333", // Cor do texto do título
       },
     },
     chart: {
@@ -66,9 +70,10 @@ export const Graphic = () => {
       type: "category",
       tickAmount: 4,
     },
-    legend:{
-      show:true},
-  
+    legend: {
+      show: true,
+    },
+
     stroke: {
       curve: "smooth",
       colors: ["#5dadefff"],
@@ -83,7 +88,11 @@ export const Graphic = () => {
   }
 
   if (!stationData || slicedData.length === 0) {
-    return <div style={{ padding: "1rem" }}>Sem dados para o período selecionado.</div>;
+    return (
+      <div style={{ padding: "1rem" }}>
+        Sem dados para o período selecionado.
+      </div>
+    );
   }
 
   return (

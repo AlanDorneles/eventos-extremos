@@ -10,7 +10,7 @@
   pointer-events: none;
 }
 
- .speedPanel {
+.speedPanel {
   position: fixed;
   bottom: 102px;
   left: 10px;
@@ -34,7 +34,7 @@
   width: 118px;
 }
 
- .playerRow {
+.playerRow {
   position: fixed;
   bottom: 58px;
   left: 10px;
@@ -87,7 +87,7 @@
   z-index: 3002;
 }
 
- .mobileControlsPanel {
+.mobileControlsPanel {
   position: fixed;
   bottom: 100px;
   left: 10px;

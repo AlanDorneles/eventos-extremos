@@ -18,7 +18,7 @@ const Estacao: React.FC = () => {
   const { scopeDays } = useScopeDaysContext();
   const isDark = usePrefersDarkMode();
   const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth <= 900 : false
+    typeof window !== "undefined" ? window.innerWidth <= 900 : false,
   );
 
   useEffect(() => {
@@ -111,15 +111,14 @@ const Estacao: React.FC = () => {
 
   const options: ApexOptions = {
     colors: seriesColors,
-    
+
     title: {
       text: `${variablesPT[phenomena]}`,
       align: "center",
       style: {
         fontSize: "16px",
-        color: isDark ? "#5dadefff":"#333333"
-        
-      }
+        color: isDark ? "#5dadefff" : "#333333",
+      },
     },
     chart: {
       id: "chart-line",

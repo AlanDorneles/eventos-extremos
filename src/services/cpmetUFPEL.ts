@@ -1,9 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL;
 
 interface CPTECImage {
   INPE: string[];
   CPPMET: string[];
-
 }
 export async function DataCPTECAPI(): Promise<CPTECImage> {
   try {
@@ -16,7 +15,6 @@ export async function DataCPTECAPI(): Promise<CPTECImage> {
     const json: { data: CPTECImage } = await response.json();
     localStorage.setItem("CPTEC-Image", JSON.stringify(json.data));
     return json.data;
-
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("Erro ao encontrar imagens", error.message);

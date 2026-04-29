@@ -42,13 +42,18 @@ function renderValue(obj, suffix = "") {
 
 export const Card = () => {
   const { codeStation } = useCodeStation();
-  const selectedCodeStation = codeStation || localStorage.getItem("codeStation");
+  const selectedCodeStation =
+    codeStation || localStorage.getItem("codeStation");
 
   const data = useMemo(() => {
     try {
       const inmetData = JSON.parse(localStorage.getItem("dataStation") || "{}");
-      const stationData = selectedCodeStation ? inmetData?.[selectedCodeStation] : null;
-      return stationData && typeof stationData === "object" ? stationData : null;
+      const stationData = selectedCodeStation
+        ? inmetData?.[selectedCodeStation]
+        : null;
+      return stationData && typeof stationData === "object"
+        ? stationData
+        : null;
     } catch {
       return null;
     }
@@ -94,8 +99,7 @@ export const Card = () => {
           </span>
 
           <span>
-            <WiThermometer /> Temp. Máxima:{" "}
-            {renderValue(last?.tempMax, " ºC")}
+            <WiThermometer /> Temp. Máxima: {renderValue(last?.tempMax, " ºC")}
           </span>
 
           <span>
@@ -111,7 +115,8 @@ export const Card = () => {
           </span>
 
           <span>
-            <WiStrongWind /> Veloc. Vento: {renderValue(last?.windSpeed, " m/s")}
+            <WiStrongWind /> Veloc. Vento:{" "}
+            {renderValue(last?.windSpeed, " m/s")}
           </span>
 
           <span>
@@ -127,7 +132,8 @@ export const Card = () => {
           </span>
 
           <span>
-            <WiTime5 /> Hora: {lastHour == null ? "Sem dados" : `${lastHour} horas`}
+            <WiTime5 /> Hora:{" "}
+            {lastHour == null ? "Sem dados" : `${lastHour} horas`}
           </span>
         </div>
       ) : (

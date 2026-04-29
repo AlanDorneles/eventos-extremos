@@ -145,15 +145,15 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
           07km
         </label>
         <label className="radio">
-            <input
-              name="typeRadio"
-              type="radio"
-              value="05km"
-              checked={selectedOption === "05km"}
-              onChange={handleRadioButtonChange}
-            />
-            05km
-          </label>
+          <input
+            name="typeRadio"
+            type="radio"
+            value="05km"
+            checked={selectedOption === "05km"}
+            onChange={handleRadioButtonChange}
+          />
+          05km
+        </label>
         <label className="radio">
           <input
             name="typeRadio"

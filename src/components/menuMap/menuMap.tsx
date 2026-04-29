@@ -25,7 +25,10 @@ interface MenuMapProps {
   currentImageIndex?: number;
 }
 
-const MenuMap: React.FC<MenuMapProps> = ({ selectImage, currentImageIndex }) => {
+const MenuMap: React.FC<MenuMapProps> = ({
+  selectImage,
+  currentImageIndex,
+}) => {
   const { getHourScopeRadar, handleSelectChange } = useHourScope();
   const { getHourScopeSatelite, handleSelectSatelliteChange } =
     useHourScopeSatelite();
@@ -44,7 +47,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage, currentImageIndex }) => 
   const actualHour = new Date().getHours();
   const [initHour, setInitHour] = useState<number>(actualHour - 6);
   const [initHourSatellite, setInitHourSatellite] = useState<number>(
-    actualHour - 1
+    actualHour - 1,
   );
   const [clickedButtonId, setClickedButtonId] = useState<number | null>(null);
   const [checkeds, setCheckeds] = useState<{ [key: string]: boolean }>({});
@@ -60,7 +63,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage, currentImageIndex }) => 
   };
 
   const [selectedTab, setSelectTab] = useState<string>(
-    getTabFromPath(location.pathname)
+    getTabFromPath(location.pathname),
   );
   const [source, setSource] = useState<"CPPMET" | "INPE">("INPE");
 
@@ -72,7 +75,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage, currentImageIndex }) => 
   };
 
   const handleRadioButtonChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const { value } = event.target;
     setSelectedOption(value);
@@ -87,7 +90,6 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage, currentImageIndex }) => 
     setSelectTab(tab);
   };
 
-
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = parseInt(event.target.value, 10);
     handleSelectChange(selectedValue);
@@ -101,7 +103,7 @@ const MenuMap: React.FC<MenuMapProps> = ({ selectImage, currentImageIndex }) => 
   };
 
   const handleChangeSatellite = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const selectedValueSatellite = parseInt(event.target.value, 10);
     handleSelectSatelliteChange(selectedValueSatellite);

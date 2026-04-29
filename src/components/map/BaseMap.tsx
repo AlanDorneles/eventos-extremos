@@ -45,7 +45,7 @@ function ZoomListener({
 export const BaseMap = ({
   center,
   zoom,
-  
+
   children,
   showImageControls = true,
   currentImageIndex = 0,

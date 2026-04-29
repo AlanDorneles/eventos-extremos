@@ -1,17 +1,17 @@
 export function setupWebSocket() {
   const configuredUrl = import.meta.env.VITE_WS_URL;
   const apiUrl = import.meta.env.VITE_API_URL;
-  const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
+  const proto = window.location.protocol === "https:" ? "wss" : "ws";
 
   let wsUrl = configuredUrl;
 
-  if (wsUrl && wsUrl.startsWith('/')) {
+  if (wsUrl && wsUrl.startsWith("/")) {
     wsUrl = `${proto}://${window.location.host}${wsUrl}`;
   }
 
   if (!wsUrl && apiUrl) {
     // Ex.: http://localhost:3000/api -> ws://localhost:3000/ws
-    wsUrl = apiUrl.replace(/^http/i, 'ws').replace(/\/api\/?$/, '/ws');
+    wsUrl = apiUrl.replace(/^http/i, "ws").replace(/\/api\/?$/, "/ws");
   }
 
   if (!wsUrl) {
@@ -27,7 +27,7 @@ export function setupWebSocket() {
     socket = new WebSocket(wsUrl);
 
     socket.onopen = () => {
-      console.log('Connected to WS');
+      console.log("Connected to WS");
     };
 
     socket.onmessage = (_evt) => {
