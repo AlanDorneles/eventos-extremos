@@ -31,13 +31,11 @@ export async function getWrfImages(params: {
 
   const json: ApiResp = await res.json();
 
-  console.log("getWrfImages response:", json);
-
   const list = json.data.files.map(
     (f) => `${publicBase}${f}`,
   );
 
-  console.log("imageslist:", list);
+ 
 
   return { list, latestFolder: json.data.latestFolder, serverVar: json.variable };
 }

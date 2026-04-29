@@ -1,16 +1,16 @@
 .container {
-  display: flex;
+  display: block;
   width: 100%;
-}
-
-.menu_map {
-  width: 30%;
-  max-width: 30%;
-  min-width: 30%;
+  max-width: 100%;
+  overflow-x: hidden;
+  min-height: 100%;
 }
 
 .map {
-  width: 70%;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  position: relative;
 }
 
 .hidden {
@@ -18,7 +18,7 @@
 }
 
 iframe {
-  width: 100vw;
+  width: 100%;
   height: 92vh;
 }
 
@@ -35,6 +35,137 @@ iframe {
 
 .centerSat {
   display: block;
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
+}
+
+.hamburgerButton {
+  position: fixed;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 1250;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(10, 61, 102, 0.35);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0a3d66;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+.hamburgerButtonOpen {
+  background: transparent;
+  border: 2px solid #0a3d66;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.85),
+    0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+.menuDrawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 4000;
+  width: min(86vw, 360px);
+  height: 100vh;
+  background: #ffffff;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.22);
+  transition: transform 220ms ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.pinToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.45rem;
+  margin: 0.9rem 0.9rem 0.25rem 0.9rem;
+  color: #0a3d66;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.pinToggle input {
+  accent-color: #0a3d66;
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+.drawerClosed {
+  transform: translateX(105%);
+}
+
+.drawerBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1235;
+  border: none;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 900px) {
+  .container {
+    display: block;
+    padding-bottom: 88px;
+    min-height: 100%;
+  }
+
+  .map,
+  .centerSat {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 100%;
+  }
+
+  iframe {
+    height: calc(100vh - 88px);
+  }
+
+  .hamburgerButton {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .menuDrawer {
+    width: min(92vw, 340px);
+  }
+
+  .pinToggle {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .hamburgerButton {
+    background: rgba(19, 26, 33, 0.9);
+    color: #d9ecfa;
+    border-color: rgba(127, 199, 255, 0.45);
+  }
+
+  .hamburgerButtonOpen {
+    background: transparent;
+    border-color: #7fc7ff;
+    box-shadow:
+      0 0 0 1px rgba(19, 26, 33, 0.9),
+      0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .menuDrawer {
+    background: #131a21;
+  }
+
+  .pinToggle {
+    color: #d9ecfa;
+  }
+
+  .pinToggle input {
+    accent-color: #7fc7ff;
+  }
 }

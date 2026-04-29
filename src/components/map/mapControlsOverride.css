@@ -1,0 +1,12 @@
+.mapControlsZ {
+  z-index: 1600 !important;
+}
+
+@media (max-width: 900px) {
+  .mapChip,
+  .controlsHub,
+  .mobileControlsPanel {
+    z-index: 1600 !important;
+    /* Garante que fiquem acima do nav-bar */
+  }
+}

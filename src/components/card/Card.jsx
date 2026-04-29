@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import styles from "./cardsAll.module.css";
 import { useCodeStation } from "../../contexts/codeStation.jsx";
 import {
@@ -41,25 +41,23 @@ function renderValue(obj, suffix = "") {
 }
 
 export const Card = () => {
-  const [data, setData] = useState(null);
   const { codeStation } = useCodeStation();
-  const storageCodeStation = localStorage.getItem("codeStation");
-  const [trigger, setTrigger] = useState(false);
+  const selectedCodeStation =
+    codeStation || localStorage.getItem("codeStation");
 
-  useEffect(() => {
-    if (codeStation !== storageCodeStation) {
-      setTrigger((prev) => !prev);
+  const data = useMemo(() => {
+    try {
+      const inmetData = JSON.parse(localStorage.getItem("dataStation") || "{}");
+      const stationData = selectedCodeStation
+        ? inmetData?.[selectedCodeStation]
+        : null;
+      return stationData && typeof stationData === "object"
+        ? stationData
+        : null;
+    } catch {
+      return null;
     }
-  }, [codeStation, storageCodeStation]);
-
-  useEffect(() => {
-    const inmetData = JSON.parse(localStorage.getItem("dataStation"));
-    if (inmetData && typeof inmetData[codeStation] === "object") {
-      setData(inmetData[codeStation]);
-    } else {
-      setData(null);
-    }
-  }, [trigger, codeStation]);
+  }, [selectedCodeStation]);
 
   // 3) Calcula “last” uma vez: custo O(192) por variável, apenas quando data muda
   const last = useMemo(() => {
@@ -101,8 +99,7 @@ export const Card = () => {
           </span>
 
           <span>
-            <WiThermometer /> Temp. Máxima:{" "}
-            {renderValue(last?.tempMax, " ºC")}
+            <WiThermometer /> Temp. Máxima: {renderValue(last?.tempMax, " ºC")}
           </span>
 
           <span>
@@ -118,7 +115,8 @@ export const Card = () => {
           </span>
 
           <span>
-            <WiStrongWind /> Veloc. Vento: {renderValue(last?.windSpeed, " m/s")}
+            <WiStrongWind /> Veloc. Vento:{" "}
+            {renderValue(last?.windSpeed, " m/s")}
           </span>
 
           <span>
@@ -134,11 +132,12 @@ export const Card = () => {
           </span>
 
           <span>
-            <WiTime5 /> Hora: {lastHour == null ? "Sem dados" : `${lastHour} horas`}
+            <WiTime5 /> Hora:{" "}
+            {lastHour == null ? "Sem dados" : `${lastHour} horas`}
           </span>
         </div>
       ) : (
-        <p>Carregando dados...</p>
+        <p>Sem dados para a estação selecionada.</p>
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 //import { useHourScope } from "../../contexts/hourAnimation";
 import styles from "./menuMap.module.css";
 import { RadarMenuProps } from "../../interfaces/RadarMenu";
-import { addMinutes } from "date-fns";
+import indexToTimeLabel from "../../utils/IndexToHour";
 
 const RadarMenu: React.FC<RadarMenuProps> = ({
   getHourScopeRadar,
@@ -44,35 +44,20 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
               <div className="buttons" id="buttons">
                 {(() => {
                   const totalButtons = getHourScopeRadar * 6; // 6 imagens por hora
-                  const now = addMinutes(new Date(), 150); // ⏰ Adiciona 2h30min (UTC + 2h30)
-
-                  const currentHour = now.getHours();
-                  const currentMinute = now.getMinutes();
-
-                  // Índice da imagem mais recente
-                  let currentIndex =
-                    currentHour * 6 + Math.floor(currentMinute / 10);
-                  currentIndex = Math.min(143, currentIndex); // Máximo 144 imagens por dia (0–143)
-
-                  const startIndex = Math.max(
-                    0,
-                    currentIndex - totalButtons + 1
-                  );
+                  const nowUtc = new Date();
+                  const frontTrimButtons = 2; // -20 min à frente
+                  const currentUtcIndex =
+                    (nowUtc.getUTCHours() * 6 +
+                      Math.floor(nowUtc.getUTCMinutes() / 10)) %
+                    144;
+                  const adjustedCurrentIndex =
+                    (currentUtcIndex - frontTrimButtons + 144) % 144;
+                  const startIndex =
+                    (adjustedCurrentIndex - (totalButtons - 1) + 144) % 144;
 
                   return Array.from({ length: totalButtons }, (_, i) => {
-                    const index = startIndex + i;
-
-                    const hour = Math.floor(index / 6);
-                    const minute = (index % 6) * 10;
-
-                    // ⏱️ Exibe +10 minutos no botão (imagem prevista)
-                    const displayMinuteOffset = hour * 60 + minute + 10;
-                    const displayHour = Math.floor(displayMinuteOffset / 60);
-                    const displayMinute = displayMinuteOffset % 60;
-                    const displayTime = `${String(displayHour).padStart(
-                      2,
-                      "0"
-                    )}:${String(displayMinute).padStart(2, "0")}`;
+                    const index = (startIndex + i) % 144;
+                    const displayTime = indexToTimeLabel(index);
 
                     const isClicked = clickedButtonId === index;
 
@@ -80,7 +65,9 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
                       <button
                         key={index}
                         id={index.toString()}
-                        className="button is-small is-primary is-outlined"
+                        className={`button is-small is-primary${
+                          isClicked ? "" : " is-outlined"
+                        }`}
                         onClick={() => selectIndex(index)}
                         style={{ ...(isClicked && buttonStyle) }}
                       >
@@ -158,15 +145,15 @@ const RadarMenu: React.FC<RadarMenuProps> = ({
           07km
         </label>
         <label className="radio">
-            <input
-              name="typeRadio"
-              type="radio"
-              value="05km"
-              checked={selectedOption === "05km"}
-              onChange={handleRadioButtonChange}
-            />
-            05km
-          </label>
+          <input
+            name="typeRadio"
+            type="radio"
+            value="05km"
+            checked={selectedOption === "05km"}
+            onChange={handleRadioButtonChange}
+          />
+          05km
+        </label>
         <label className="radio">
           <input
             name="typeRadio"
