@@ -15,7 +15,17 @@ export async function getWrfImages(params: {
   variable: WrfVar;
   publicBase?: string;
 }) {
-  const { apiUrl, variable, publicBase = "https://liao.furg.br" } = params;
+  const { apiUrl, variable, publicBase } = params;
+  
+  // Determina a base pública dinamicamente
+  const baseUrl = publicBase || (() => {
+    // Se a página está em https://liao.furg.br → usa liao.furg.br
+    // Se a página está em http://200.132.216.84 → usa 200.132.216.84
+    if (typeof window !== "undefined") {
+      return `${window.location.protocol}//${window.location.host}`;
+    }
+    return "https://liao.furg.br"; // fallback
+  })();
 
   const res = await fetch(`${apiUrl}/get-wrf-images/${variable}`, {
     headers: { Accept: "application/json" },
@@ -32,10 +42,8 @@ export async function getWrfImages(params: {
   const json: ApiResp = await res.json();
 
   const list = json.data.files.map(
-    (f) => `${publicBase}${f}`,
+    (f) => `${baseUrl}${f}`,
   );
-
- 
 
   return { list, latestFolder: json.data.latestFolder, serverVar: json.variable };
 }

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useWrfImages } from "../contexts/wrfImages";
-import styles from "./Wrf.module.css";
+import { BaseMap } from "../components/map/BaseMap";
+import { ImageOverlay } from "react-leaflet";
+import type { LatLngBoundsExpression } from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 const WrfPage: React.FC = () => {
   const {
@@ -11,29 +14,29 @@ const WrfPage: React.FC = () => {
     loading,
     error,
     variable,
-    // se existir no seu context novo, prefira usar:
-    // imagesAll,
   } = useWrfImages();
 
   const [playing, setPlaying] = useState(true);
+  const [playbackSpeed, setPlaybackSpeed] = useState(500);
+
+  // Coordenadas do WRF (ajuste conforme sua cobertura)
+  const wrfBounds: LatLngBoundsExpression = [
+    [-35.5, -57.8],
+    [-27.0, -48.2],
+  ];
 
   /**
-   * 1) NÃO fazer fetch a cada mudança de variável aqui,
-   *    porque o menu lateral já dispara fetchWrfImages(v).
-   *    Só faz fetch ao montar se ainda não houver imagens.
+   * 1) Fazer fetch ao montar
    */
   useEffect(() => {
     if (visibleImages.length === 0 && !loading && !error) {
       fetchWrfImages(variable);
     }
-    // intencional: não colocar `variable` como dependência para evitar duplicar com o menu
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // apenas na montagem
+  }, []);
 
   /**
-   * 2) Garante índice válido quando a lista visível muda.
-   *    - se lista ficar vazia: volta para 0
-   *    - se índice estourar: ajusta para o último
+   * 2) Garante índice válido
    */
   useEffect(() => {
     if (visibleImages.length === 0) {
@@ -46,81 +49,77 @@ const WrfPage: React.FC = () => {
   }, [visibleImages.length, currentIndex, setCurrentIndex]);
 
   /**
-   * 3) Autoplay usando lista visível.
-   *    Se não há imagens, não roda.
+   * 3) Autoplay
    */
   useEffect(() => {
     if (!playing || visibleImages.length === 0) return;
 
     const t = setInterval(() => {
       setCurrentIndex((idx) => (idx + 1) % visibleImages.length);
-    }, 2000);
+    }, playbackSpeed);
 
     return () => clearInterval(t);
-  }, [playing, visibleImages.length, setCurrentIndex]);
+  }, [playing, visibleImages.length, setCurrentIndex, playbackSpeed]);
 
   const hasImages = visibleImages.length > 0;
+  const currentImage = hasImages ? visibleImages[currentIndex] : null;
 
   return (
-    <div className={styles.wrfPage}>
-      {loading && <div>Carregando imagens...</div>}
-      {error && <div style={{ color: "red" }}>Erro: {error}</div>}
+    <>
+      {loading && (
+        <div style={{ padding: "20px", textAlign: "center" }}>
+          <p>Carregando imagens WRF...</p>
+        </div>
+      )}
 
-      {!loading && !hasImages && !error && <div>Nenhuma imagem disponível.</div>}
+      {error && (
+        <div
+          style={{
+            padding: "20px",
+            textAlign: "center",
+            color: "red",
+            backgroundColor: "#fff3cd",
+          }}
+        >
+          <p>Erro: {error}</p>
+        </div>
+      )}
+
+      {!loading && !hasImages && !error && (
+        <div style={{ padding: "20px", textAlign: "center" }}>
+          <p>Nenhuma imagem WRF disponível. Selecione uma variável no menu lateral.</p>
+        </div>
+      )}
 
       {hasImages && (
-        <>
-          <div className={styles.controlsRow}>
-            <button
-              className="button is-primary is-large"
-              onClick={() =>
-                setCurrentIndex(
-                  (idx) => (idx - 1 + visibleImages.length) % visibleImages.length
-                )
-              }
-              aria-label="previous"
-              style={{ fontSize: "0.75rem", padding: "0.75rem 1.25rem" }}
-              disabled={visibleImages.length === 0}
-            >
-              ❮
-            </button>
-
-            <div className={styles.imageWrapper}>
-              <img
-                src={visibleImages[currentIndex]}
-                alt={`WRF ${currentIndex + 1}`}
-                className={styles.imgResponsive}
-                loading="lazy"
-              />
-            </div>
-
-            <button
-              className="button is-primary is-large"
-              onClick={() => setCurrentIndex((idx) => (idx + 1) % visibleImages.length)}
-              aria-label="next"
-              style={{ fontSize: "0.75rem", padding: "0.75rem 1.25rem" }}
-              disabled={visibleImages.length === 0}
-            >
-              ❯
-            </button>
-          </div>
-
-          <div className={styles.controlsColumn}>
-            <button
-              className={`button ${playing ? "is-danger" : "is-success"} ${styles.navButton}`}
-              onClick={() => setPlaying((p) => !p)}
-              disabled={visibleImages.length === 0}
-            >
-              {playing ? "Pausar" : "Continuar"}
-            </button>
-
-            <small>
-              {currentIndex + 1} / {visibleImages.length}
-            </small>
-          </div>
-        </>
+        <BaseMap
+          center={[-30.5, -52.5]}
+          zoom={7}
+          showImageControls={true}
+          currentImageIndex={currentIndex}
+          isPlaying={playing}
+          onTogglePlaying={() => setPlaying((p) => !p)}
+          onPreviousImage={() =>
+            setCurrentIndex(
+              (idx) => (idx - 1 + visibleImages.length) % visibleImages.length
+            )
+          }
+          onNextImage={() =>
+            setCurrentIndex((idx) => (idx + 1) % visibleImages.length)
+          }
+          playbackSpeedMs={playbackSpeed}
+          onPlaybackSpeedChange={(speed) => setPlaybackSpeed(speed)}
+          showMapChip={true}
+        >
+          {currentImage && (
+            <ImageOverlay
+              url={currentImage}
+              bounds={wrfBounds}
+            />
+          )}
+        </BaseMap>
       )}
-    </div>
+    </>
   );
 };
 
